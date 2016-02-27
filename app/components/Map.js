@@ -10,8 +10,8 @@ const MapComponent = ({viewport, update}) => {
     <div>
       <MapGL
         {...viewport}
-        width={window.innerWidth}
-        height={window.innerHeight}
+        width={window.innerWidth - 320}
+        height={window.innerHeight - 60}
         mapStyle={immutableStyle}
         onChangeViewport={update}
       />
@@ -20,7 +20,11 @@ const MapComponent = ({viewport, update}) => {
 };
 
 MapComponent.propTypes = {
-  viewport: PropTypes.Object
+  viewport: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number
+  }).isRequired
 };
 
 export default MapComponent;

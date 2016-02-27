@@ -1,14 +1,18 @@
-.container {
-  position: absolute;
-  top: 30%;
-  left: 10px;
-  text-align: center;
+.topBar {
+  height: 60px;
+  width: 100%;
 }
 
-.container h2 {
-  font-size: 5rem;
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
 
-.container a {
-  font-size: 1.4rem;
+.sideBar {
+  flex: 0 0 320px;
+}
+
+.mainMap {
+  flex: 1;
 }

@@ -1,9 +1,10 @@
 body {
   position: relative;
   color: white;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   margin: 0;
+  background-color: #333; 
   font-family: Arial, Helvetica, Helvetica Neue;
   overflow-y: hidden;
 }
