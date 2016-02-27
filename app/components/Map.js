@@ -5,7 +5,7 @@ import style from 'hsl-map-style';
 
 const immutableStyle = fromJS(style);
 
-const MapComponent = ({viewport, update}) => {
+const MapComponent = ({viewport, updateViewport}) => {
   return (
     <div>
       <MapGL
@@ -13,7 +13,7 @@ const MapComponent = ({viewport, update}) => {
         width={window.innerWidth - 320}
         height={window.innerHeight - 60}
         mapStyle={immutableStyle}
-        onChangeViewport={update}
+        onChangeViewport={updateViewport}
       />
     </div>
   );
