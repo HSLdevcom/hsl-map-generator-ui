@@ -1,24 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Map from '../containers/Map';
+import CenterSelector from '../containers/CenterSelector';
+import SizeSelector from '../containers/SizeSelector';
+import DpiSelector from '../containers/DpiSelector';
+import MapScaleSelector from '../containers/MapScaleSelector';
+import PixelScaleSelector from '../containers/PixelScaleSelector';
 import styles from './Home.css';
 
-
-export default class Home extends Component {
-  render() {
-    return (
-      <div>
-        <div className={styles.topBar}>
-          <h2>Karttageneraattori</h2>
-        </div>
-        <div className={styles.main}>
-          <div className={styles.sideBar}>
-            Näytä kartalla
-          </div>
-          <div className={styles.mainMap}>
-            <Map />
-          </div>
-        </div>
+const Home = () => (
+  <div>
+    <div className={styles.topBar}>
+      <div className={styles.logo}>
+        <h2>Karttageneraattori</h2>
       </div>
-    );
-  }
-}
+      <CenterSelector/>
+      <SizeSelector/>
+      <MapScaleSelector/>
+      <DpiSelector/>
+      <PixelScaleSelector/>
+    </div>
+    <div className={styles.main}>
+      <div className={styles.sideBar}>
+        Näytä kartalla
+      </div>
+      <div className={styles.mainMap}>
+        <Map/>
+      </div>
+    </div>
+  </div>
+);
+
+export default Home;

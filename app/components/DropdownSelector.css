@@ -1,0 +1,14 @@
+.selector {
+  height: 40px;
+  border-right: solid 1px #aaa;
+  flex: 1;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 0.6rem;
+}
+
+.value {
+  font-size: 1.2rem;
+}

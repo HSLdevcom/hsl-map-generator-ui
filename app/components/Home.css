@@ -1,6 +1,15 @@
 .topBar {
   height: 60px;
   width: 100%;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  flex: 0 0 320px;
+  height: 40px;
+  border-right: solid 1px #aaa;
 }
 
 .main {
@@ -11,6 +20,7 @@
 
 .sideBar {
   flex: 0 0 320px;
+  color: #aaa;
 }
 
 .mainMap {
