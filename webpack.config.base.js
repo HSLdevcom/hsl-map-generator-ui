@@ -21,7 +21,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    alias: {
+      'mapbox-gl$': 'mapbox-gl/dist/mapbox-gl-dev'
+    }
   },
   plugins: [
 

@@ -1,7 +1,7 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
-  "version": "0.8.0",
+  "name": "hsl-map-generator-ui",
+  "productName": "MapGenerator",
+  "version": "0.0.1",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "main.js",
   "scripts": {
@@ -22,16 +22,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
+    "url": "git+https://github.com/HSLdevcom/hsl-map-generator-ui.git"
   },
   "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "name": "Hannes Junnila",
+    "email": "hannes.junnila@gmail.com",
+    "url": "https://github.com/hannesj"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chentsulin/electron-react-boilerplate/issues"
+    "url": "https://github.com/HSLdevcom/hsl-map-generator-ui/issues"
   },
   "keywords": [
     "electron",
@@ -42,7 +42,7 @@
     "webpack",
     "react-hot"
   ],
-  "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/HSLdevcom/hsl-map-generator-ui#readme",
   "devDependencies": {
     "asar": "^0.9.0",
     "babel-core": "^6.3.26",
@@ -91,8 +91,11 @@
   "dependencies": {
     "electron-debug": "^0.5.1",
     "font-awesome": "^4.4.0",
+    "immutable": "^3.7.6",
+    "r-dom": "^2.1.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-map-gl": "^0.6.4",
     "react-redux": "^4.0.5",
     "react-router": "^2.0.0",
     "react-router-redux": "^3.0.0",
