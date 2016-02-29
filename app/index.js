@@ -4,9 +4,14 @@ import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import routes from './routes';
 import configureStore from './store/configureStore';
+import webfontloader from 'webfontloader';
 import './app.global.css';
 
 const store = configureStore();
+
+webfontloader.load({
+  google: { families: [ 'Nunito:700,400,300' ] }
+});
 
 render(
   <Provider store={store}>
