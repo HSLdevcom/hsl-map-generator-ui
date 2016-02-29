@@ -23,6 +23,7 @@ const DebugOverlay = ({viewport, width, height, mapSelection}) => (
     {...viewport}
     width={width}
     height={height}
+    project={() => {}}
     redraw={redraw(mapSelection)}
   />);
 
