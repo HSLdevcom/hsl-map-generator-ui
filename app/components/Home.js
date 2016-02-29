@@ -5,6 +5,7 @@ import SizeSelector from '../containers/SizeSelector';
 import DpiSelector from '../containers/DpiSelector';
 import MapScaleSelector from '../containers/MapScaleSelector';
 import PixelScaleSelector from '../containers/PixelScaleSelector';
+import LayerSelector from '../containers/LayerSelector';
 import styles from './Home.css';
 
 const Home = () => (
@@ -21,7 +22,10 @@ const Home = () => (
     </div>
     <div className={styles.main}>
       <div className={styles.sideBar}>
-        Näytä kartalla
+        <div className={styles.sideBarHeader}>
+          Näytä kartalla
+        </div>
+        <LayerSelector/>
       </div>
       <div className={styles.mainMap}>
         <Map/>

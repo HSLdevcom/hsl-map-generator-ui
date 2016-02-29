@@ -3,18 +3,14 @@ import MapGL from 'react-map-gl';
 import CenterMarker from '../containers/CenterMarker';
 import SelectionWindow from '../containers/SelectionWindow';
 import DebugOverlay from '../containers/DebugOverlay';
-import { fromJS } from 'immutable';
-import style from 'hsl-map-style';
 
-const immutableStyle = fromJS(style);
-
-const MapComponent = ({viewport, updateViewport}) => (
+const MapComponent = ({viewport, updateViewport, style}) => (
     <div>
       <MapGL
         {...viewport}
         width={window.innerWidth - 320}
         height={window.innerHeight - 60}
-        mapStyle={immutableStyle}
+        mapStyle={style}
         onChangeViewport={updateViewport}
       >
         <CenterMarker
