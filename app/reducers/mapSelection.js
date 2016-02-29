@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 
 const initialState = fromJS({
   center: [{location: [24.9, 60.2], id: 0}],
-  size: {width: 300, height: 300},
+  size: [300, 300],
   dpi: 300,
   mapScale: 10000,
   pixelScale: 1,
@@ -14,7 +14,7 @@ export default function mapSelection(state = initialState, action) {
   case UPDATE_CENTER:
     return state.setIn(['center', 0, 'location'], fromJS(action.center.location));
   case UPDATE_SIZE:
-    return state.set('size', action.size);
+    return state.set('size', fromJS(action.size));
   case UPDATE_DPI:
     return state.set('dpi', action.dpi);
   case UPDATE_MAP_SCALE:
