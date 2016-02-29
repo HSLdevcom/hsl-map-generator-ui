@@ -14,7 +14,7 @@ const redraw = (mapSelection) =>
   };
 
 
-const CenterMarker = ({viewport, width, height, mapSelection}) => (
+const SelectionWindow = ({viewport, width, height, mapSelection}) => (
   <CanvasOverlay
     {...viewport}
     width={width}
@@ -22,7 +22,7 @@ const CenterMarker = ({viewport, width, height, mapSelection}) => (
     redraw={redraw(mapSelection)}
   />);
 
-CenterMarker.propTypes = {
+SelectionWindow.propTypes = {
   viewport: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
@@ -30,4 +30,4 @@ CenterMarker.propTypes = {
   }).isRequired
 };
 
-export default CenterMarker;
+export default SelectionWindow;
