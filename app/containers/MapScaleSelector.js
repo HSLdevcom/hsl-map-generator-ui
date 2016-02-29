@@ -1,16 +1,18 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MapScaleSelector from '../components/MapScaleSelector';
-import * as MapSelectionActions from '../actions/mapSelection';
+import { updateMapScale } from '../actions/mapSelection';
+import { toggleTab } from '../actions/tabName';
 
 function mapStateToProps(state) {
   return {
-    mapScale: state.mapSelection.get('mapScale')
+    mapScale: state.mapSelection.get('mapScale'),
+    selected: state.tabName === 'mapScale'
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(MapSelectionActions, dispatch);
+  return bindActionCreators({updateMapScale, toggleTab: toggleTab('mapScale')}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapScaleSelector);
