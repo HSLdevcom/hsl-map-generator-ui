@@ -10,6 +10,36 @@ export const degLonPerM = degLat => DEG_LAT_PER_M * Math.abs(Math.cos(degToRad(d
 
 export const mmToM = mm => mm / 1000;
 
+export const dpiToDpm = dpi => dpi * 39.97;
+
+export const pixelScaleToTileScale = (pixelScale, dpi) => pixelScale * dpi / 72;
+
+export const calculateZoom = (center, size, mapScale, tileScale, sizePx) => Math.log2(Z0_RES / (size[1] * mapScale * tileScale / sizePx[1]) * Math.abs(Math.cos(degToRad(center[1]))));
+
+export const calculateSizePx = (size, dpm, tileScale, pixelScale) =>
+ [Math.round(size[0] * dpm / tileScale / pixelScale), Math.round(size[1] * dpm / tileScale / pixelScale)];
+
+
+export const mapSelectionToTileScale = (mapSelection) => pixelScaleToTileScale(
+  mapSelection.get('pixelScale'),
+  mapSelection.get('dpi')
+);
+
+export const mapSelectionToPixelSize = (mapSelection) => calculateSizePx(
+  mapSelection.get('size').toArray().map(mmToM),
+  dpiToDpm(mapSelection.get('dpi')),
+  mapSelectionToTileScale(mapSelection),
+  mapSelection.get('pixelScale')
+);
+
+export const mapSelectionToZoom = (mapSelection) => calculateZoom(
+  mapSelection.getIn(['center', 0, 'location']).toArray(),
+  mapSelection.get('size').toArray().map(mmToM),
+  mapSelection.get('mapScale'),
+  mapSelectionToTileScale(mapSelection),
+  mapSelectionToPixelSize(mapSelection)
+);
+
 export const mapSelectionToBbox = (mapSelection) => {
   const center = mapSelection.getIn(['center', 0, 'location']).toArray();
   const size = mapSelection.get('size').toArray().map(mmToM);
@@ -21,19 +51,3 @@ export const mapSelectionToBbox = (mapSelection) => {
                 [center[0] + (sizeDeg[0] / 2), center[1] + (sizeDeg[1] / 2)]];
   return bbox;
 };
-
-//
-// var dpm = dpi * 39.97
-// var tile_scale = display_scale * dpi / 72
-//
-//
-// var deg_lat_m = earth_circ_m / 360
-// var deg_lon_m = deg_lat_m * Math.abs(Math.cos(center.y))
-//
-// var size_px = {
-//   h: Math.round(size.h * dpm / tile_scale / display_scale),
-//   w: Math.round(size.w * dpm / tile_scale / display_scale)}
-//
-//
-//
-// var zoom = Math.log2(Z0_RES / (size.h * scale * tile_scale / size_px.h) * Math.abs(Math.cos(center.y)))

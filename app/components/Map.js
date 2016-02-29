@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import MapGL from 'react-map-gl';
 import CenterMarker from '../containers/CenterMarker';
 import SelectionWindow from '../containers/SelectionWindow';
+import DebugOverlay from '../containers/DebugOverlay';
 import { fromJS } from 'immutable';
 import style from 'hsl-map-style';
 
@@ -22,6 +23,11 @@ const MapComponent = ({viewport, updateViewport}) => (
           height={window.innerHeight - 60}
         />
         <SelectionWindow
+          viewport={viewport}
+          width={window.innerWidth - 320}
+          height={window.innerHeight - 60}
+        />
+        <DebugOverlay
           viewport={viewport}
           width={window.innerWidth - 320}
           height={window.innerHeight - 60}
