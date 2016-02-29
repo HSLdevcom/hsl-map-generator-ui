@@ -15,8 +15,8 @@ const Home = () => (
       </div>
       <CenterSelector/>
       <SizeSelector/>
-      <MapScaleSelector/>
       <DpiSelector/>
+      <MapScaleSelector/>
       <PixelScaleSelector/>
     </div>
     <div className={styles.main}>
