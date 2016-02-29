@@ -16,9 +16,10 @@ export const pixelScaleToTileScale = (pixelScale, dpi) => pixelScale * dpi / 72;
 
 export const calculateZoom = (center, size, mapScale, tileScale, sizePx) => Math.log2(Z0_RES / (size[1] * mapScale * tileScale / sizePx[1]) * Math.abs(Math.cos(degToRad(center[1]))));
 
-export const calculateSizePx = (size, dpm, tileScale, pixelScale) =>
- [Math.round(size[0] * dpm / tileScale / pixelScale), Math.round(size[1] * dpm / tileScale / pixelScale)];
+export const calculateSizePx = (size, dpm) =>
+ [Math.round(size[0] * dpm), Math.round(size[1] * dpm)];
 
+export const calculateScale1SizePx = (sizePx, tileScale) => sizePx.map((px) => (px / tileScale));
 
 export const mapSelectionToTileScale = (mapSelection) => pixelScaleToTileScale(
   mapSelection.get('pixelScale'),
@@ -27,9 +28,7 @@ export const mapSelectionToTileScale = (mapSelection) => pixelScaleToTileScale(
 
 export const mapSelectionToPixelSize = (mapSelection) => calculateSizePx(
   mapSelection.get('size').toArray().map(mmToM),
-  dpiToDpm(mapSelection.get('dpi')),
-  mapSelectionToTileScale(mapSelection),
-  mapSelection.get('pixelScale')
+  dpiToDpm(mapSelection.get('dpi'))
 );
 
 export const mapSelectionToZoom = (mapSelection) => calculateZoom(
