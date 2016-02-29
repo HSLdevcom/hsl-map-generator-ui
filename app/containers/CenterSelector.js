@@ -1,12 +1,11 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import DropdownSelector from '../components/DropdownSelector';
+import CenterSelector from '../components/CenterSelector';
 import * as MapSelectionActions from '../actions/mapSelection';
 
 function mapStateToProps(state) {
   return {
-    title: 'Sijainti',
-    value: state.mapSelection.getIn(['center', 0, 'location']).toArray().map(integer => integer.toFixed(5)).reverse().join(', ')
+    center: state.mapSelection.getIn(['center', 0, 'location'])
   };
 }
 
@@ -14,4 +13,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(MapSelectionActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropdownSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(CenterSelector);

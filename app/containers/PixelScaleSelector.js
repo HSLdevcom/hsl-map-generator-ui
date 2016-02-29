@@ -1,12 +1,11 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import DropdownSelector from '../components/DropdownSelector';
+import PixelScaleSelector from '../components/PixelScaleSelector';
 import * as MapSelectionActions from '../actions/mapSelection';
 
 function mapStateToProps(state) {
   return {
-    title: 'Tekstin skaalaus',
-    value: state.mapSelection.get('pixelScale')
+    pixelScale: state.mapSelection.get('pixelScale')
   };
 }
 
@@ -14,4 +13,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(MapSelectionActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropdownSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(PixelScaleSelector);

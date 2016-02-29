@@ -1,12 +1,11 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import DropdownSelector from '../components/DropdownSelector';
+import MapScaleSelector from '../components/MapScaleSelector';
 import * as MapSelectionActions from '../actions/mapSelection';
 
 function mapStateToProps(state) {
   return {
-    title: 'Mittakaava',
-    value: '1:' + state.mapSelection.get('mapScale')
+    mapScale: state.mapSelection.get('mapScale')
   };
 }
 
@@ -14,4 +13,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(MapSelectionActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropdownSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(MapScaleSelector);
