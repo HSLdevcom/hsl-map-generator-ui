@@ -11,7 +11,14 @@ const baseStyle = fromJS(style.base);
 function mapStateToProps(state) {
   return {
     viewport: state.viewport,
-    style: baseStyle.set('layers', fromJS(style.groups.background.layers))
+    style: baseStyle.set('layers', fromJS(
+      state
+      .layers
+      .concat()
+      .reverse()
+      .filter(layer => layer.enabled)
+      .reduce((prev, layer) => prev.concat(style.groups[layer.id].layers), [])))
+    // TODO: This is horrible and should be replaced with a propurr implementation
   };
 }
 

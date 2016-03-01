@@ -2,13 +2,15 @@ import { SWITCH_LAYER, TOGGLE_LAYER } from '../actions/layers';
 import update from 'react/lib/update';
 import style from 'hsl-map-style/style-generator';
 import { findIndex } from 'lodash';
+import { fromJS } from 'immutable';
 
 const initialState = [];
 
 Object.keys(style.groups).forEach(group => initialState[style.groups[group].index] = {
   id: group,
   enabled: style.groups[group].default,
-  text: style.groups[group].description
+  text: style.groups[group].description,
+  layers: fromJS(style.groups[group].layers)
 });
 
 initialState.reverse();
