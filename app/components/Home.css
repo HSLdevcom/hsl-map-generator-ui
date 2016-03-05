@@ -19,6 +19,9 @@
 
 .sideBar {
   flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #555;
   color: #aaa;
 }

@@ -6,6 +6,7 @@ import DpiSelector from '../containers/DpiSelector';
 import MapScaleSelector from '../containers/MapScaleSelector';
 import PixelScaleSelector from '../containers/PixelScaleSelector';
 import LayerSelector from '../containers/LayerSelector';
+import FileOperations from '../containers/FileOperations';
 import styles from './Home.css';
 
 const Home = () => (
@@ -26,6 +27,7 @@ const Home = () => (
           Näytä kartalla
         </div>
         <LayerSelector/>
+        <FileOperations/>
       </div>
       <div className={styles.mainMap}>
         <Map/>

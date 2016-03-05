@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Layer from './Layer';
 import { DragDropContext as dragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import styles from './LayerSelector.css';
 
 class LayerSelector extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class LayerSelector extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.container}>
         {this.props.layers.map((layer, index) => (
           <Layer
             key={layer.id}

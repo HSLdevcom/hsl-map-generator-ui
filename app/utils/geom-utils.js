@@ -2,7 +2,6 @@ export const EARTH_CIRC_M = 40075016.686;
 export const Z0_RES = EARTH_CIRC_M / 256;
 export const DEG_LAT_PER_M = EARTH_CIRC_M / 360;
 
-
 export const degToRad = deg => deg * Math.PI / 180;
 export const radToDeg = rad => rad * 180 / Math.PI;
 
@@ -18,8 +17,6 @@ export const calculateZoom = (center, size, mapScale, tileScale, sizePx) => Math
 
 export const calculateSizePx = (size, dpm) =>
  [Math.round(size[0] * dpm), Math.round(size[1] * dpm)];
-
-export const calculateScale1SizePx = (sizePx, tileScale) => sizePx.map((px) => (px / tileScale));
 
 export const mapSelectionToTileScale = (mapSelection) => pixelScaleToTileScale(
   mapSelection.get('pixelScale'),
