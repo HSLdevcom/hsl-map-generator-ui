@@ -1,16 +1,15 @@
 import { SWITCH_LAYER, TOGGLE_LAYER } from '../actions/layers';
+import { LOAD_STATE } from '../actions/FileOperations';
 import update from 'react/lib/update';
-import style from 'hsl-map-style/style-generator';
+import style from 'hsl-map-style/hsl-gl-map-with-stops-v8.json';
 import { findIndex } from 'lodash';
-import { fromJS } from 'immutable';
 
 const initialState = [];
 
-Object.keys(style.groups).forEach(group => initialState[style.groups[group].index] = {
+Object.keys(style.metadata['mapbox:groups']).forEach((group, index) => initialState[index] = {
   id: group,
-  enabled: style.groups[group].default,
-  text: style.groups[group].description,
-  layers: fromJS(style.groups[group].layers)
+  enabled: style.metadata['mapbox:groups'][group].default,
+  text: style.metadata['mapbox:groups'][group].name,
 });
 
 initialState.reverse();
@@ -29,6 +28,8 @@ export default function layers(state = initialState, action) {
     const index = findIndex(state, {id: action.layer});
     query[index] = {enabled: {$set: !state[index].enabled}};
     return update(state, query);
+  case LOAD_STATE:
+    return action.state.layers;
   default:
     return state;
   }

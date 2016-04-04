@@ -7,10 +7,12 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const crashReporter = electron.crashReporter;
 const shell = electron.shell;
+const ipcMain = electron.ipcMain;
 let menu;
 let template;
 let mainWindow = null;
 
+const imageGenerator = require('./src/imageGenerator');
 
 crashReporter.start();
 
@@ -241,3 +243,5 @@ app.on('ready', () => {
     mainWindow.setMenu(menu);
   }
 });
+
+ipcMain.on('generateImage', imageGenerator);

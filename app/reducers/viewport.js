@@ -1,4 +1,5 @@
 import { UPDATE_VIEWPORT } from '../actions/viewport';
+import { LOAD_STATE } from '../actions/FileOperations';
 
 const initialState = {
   latitude: 60.2,
@@ -12,6 +13,8 @@ export default function viewport(state = initialState, action) {
   switch (action.type) {
   case UPDATE_VIEWPORT:
     return Object.assign({}, state, action.viewport);
+  case LOAD_STATE:
+    return action.state.viewport;
   default:
     return state;
   }

@@ -2,10 +2,13 @@ import React from 'react';
 import Button from './Button';
 import styles from './FileOperations.css';
 
-const FileOperations = ({onGenerateImage}) => (
+const FileOperations = ({onGenerateImage, onSaveState, onLoadState}) => (
   <div className={styles.container}>
-    <Button style="dark">Lataa</Button>
-    <Button style="dark">Tallenna</Button>
+    <label>
+      <Button style="dark">Lataa</Button>
+      <input type="file" style={{display: 'none'}} onChange={onLoadState}/>
+    </label>
+    <Button onClick={onSaveState} style="dark">Tallenna</Button>
     <Button onClick={onGenerateImage}>Generoi PDF</Button>
   </div>
 );

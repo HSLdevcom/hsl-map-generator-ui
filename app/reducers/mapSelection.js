@@ -1,4 +1,5 @@
 import { UPDATE_CENTER, UPDATE_SIZE, UPDATE_DPI, UPDATE_MAP_SCALE, UPDATE_PIXEL_SCALE } from '../actions/mapSelection';
+import { LOAD_STATE } from '../actions/FileOperations';
 import { fromJS } from 'immutable';
 
 const initialState = fromJS({
@@ -21,6 +22,8 @@ export default function mapSelection(state = initialState, action) {
     return state.set('mapScale', action.mapScale);
   case UPDATE_PIXEL_SCALE:
     return state.set('pixelScale', action.pixelScale);
+  case LOAD_STATE:
+    return action.state.mapSelection;
   default:
     return state;
   }

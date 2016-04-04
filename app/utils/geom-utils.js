@@ -13,7 +13,8 @@ export const dpiToDpm = dpi => dpi * 39.97;
 
 export const pixelScaleToTileScale = (pixelScale, dpi) => pixelScale * dpi / 72;
 
-export const calculateZoom = (center, size, mapScale, tileScale, sizePx) => Math.log2(Z0_RES / (size[1] * mapScale * tileScale / sizePx[1]) * Math.abs(Math.cos(degToRad(center[1]))));
+export const calculateZoom = (center, size, mapScale, tileScale, sizePx) =>
+  Math.log2(Z0_RES / (size[1] * mapScale * tileScale / sizePx[1]) * Math.abs(Math.cos(degToRad(center[1]))));
 
 export const calculateSizePx = (size, dpm) =>
  [Math.round(size[0] * dpm), Math.round(size[1] * dpm)];

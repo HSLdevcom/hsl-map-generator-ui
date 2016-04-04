@@ -1,17 +1,36 @@
 import { connect } from 'react-redux';
 import FileOperations from '../components/FileOperations';
 import { ipcRenderer } from 'electron';
-import { toJSON } from 'transit-immutable-js';
+import { toJSON, fromJSON } from 'transit-immutable-js';
+import { styleFromLayers } from '../utils/map-utils';
+import { saveAs } from '../utils/FileSaver';
+import { loadState } from '../actions/FileOperations';
 
 function mapStateToProps(state) {
   return {
     state: state,
-    onGenerateImage: () => ipcRenderer.send('generateImage', toJSON(state.mapSelection))
+    onGenerateImage: () =>
+      ipcRenderer.send('generateImage', {
+        mapSelection: toJSON(state.mapSelection),
+        style: styleFromLayers(state.layers).toJS(),
+      }),
+    onSaveState: () =>
+      saveAs(new Blob([toJSON(state)], {type: 'application/json'}), 'map.json')
   };
 }
 
-ipcRenderer.on('imageGenerated', (event, arg) => {
-    console.log(arg)
+function mapDispatchToProps(dispatch) {
+  return {
+    onLoadState: (event) => {
+      const reader = new FileReader();
+      reader.onload = (progress) => dispatch(loadState(fromJSON(progress.target.result)));
+      reader.readAsText(event.target.files[0]);
+    }
+  };
+}
+
+ipcRenderer.on('imageGenerated', (event, {data}) => {
+  saveAs(new Blob([data], {type: 'image/png'}), 'map.png');
 });
 
-export default connect(mapStateToProps)(FileOperations);
+export default connect(mapStateToProps, mapDispatchToProps)(FileOperations);
