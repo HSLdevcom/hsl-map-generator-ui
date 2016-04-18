@@ -12,7 +12,7 @@ tileliveGl.registerProtocols(tilelive);
 module.exports = (event, opts) => {
   const mapSelection = transit.fromJSON(opts.mapSelection);
 
-  const glSource = {protocol: 'gl:', style: require('hsl-map-style/hsl-gl-map-with-stops-v8.json'), query: {scale: geomUtils.mapSelectionToTileScale(mapSelection)}};
+  const glSource = {protocol: 'gl:', style: opts.style, query: {scale: geomUtils.mapSelectionToTileScale(mapSelection)}};
 
   tilelive.load(glSource, (err, source) => {
     const scale = geomUtils.mapSelectionToTileScale(mapSelection);

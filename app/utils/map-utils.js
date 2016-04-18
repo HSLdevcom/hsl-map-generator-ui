@@ -9,11 +9,21 @@ export const baseStyle = fromJS(style, (key, value) => {
 
 export const styleFromLayers = (layers) => {
   return baseStyle.set('layers', baseStyle.get('layers').map((layer) => {
-    const layerState = find(layers, matchesProperty('id', layer.getIn(['metadata', 'mapbox:group'])));
-    if ( !layer.get('ref') && layerState && layerState.enabled === false) {
-      return layer.setIn(['layout', 'visibility'], 'none');
+    let newLayer = layer;
+
+    const layerState = find(layers, matchesProperty('id', newLayer.getIn(['metadata', 'mapbox:group'])));
+    if ( !newLayer.get('ref') && layerState && layerState.enabled === false) {
+      return newLayer.setIn(['layout', 'visibility'], 'none');
+    } else if ( !newLayer.get('ref') && layerState && layerState.enabled === true) {
+      newLayer = newLayer.setIn(['layout', 'visibility'], 'visible');
     }
-    return layer;
+    if ( !newLayer.get('ref') && layerState && layerState.filter) {
+      if (newLayer.get('filter')) {
+        return newLayer.set('filter', fromJS(['all', newLayer.get('filter'), layerState.filter]));
+      }
+      return newLayer.set('filter', layerState.filter);
+    }
+    return newLayer;
   }));
 };
 
