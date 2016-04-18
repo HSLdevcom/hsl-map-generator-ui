@@ -16,10 +16,16 @@
 
 ## Install
 
-Install dependencies.
+First, clone the repo via git:
 
 ```bash
-$ npm install
+git clone https://github.com/chentsulin/electron-react-boilerplate.git your-project-name
+```
+
+And then install dependencies.
+
+```bash
+$ cd your-project-name && npm install
 ```
 
 
@@ -32,7 +38,16 @@ $ npm run hot-server
 $ npm run start-hot
 ```
 
+or run two servers with one command
+
+```bash
+$ npm run dev
+```
+
 *Note: requires a node version >= 4 and an npm version >= 2.*
+
+
+## DevTools
 
 #### Toggle Chrome DevTools
 
@@ -47,6 +62,10 @@ $ npm run start-hot
 - All platforms: <kbd>Ctrl+H</kbd>
 
 *See [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more information.*
+
+#### Redux Devtools Window
+
+Now you can implement it using [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools) with a [remote monitor](https://github.com/zalmoxisus/remote-redux-devtools#remote-monitoring) by yourself.
 
 
 ## Externals
@@ -109,6 +128,11 @@ We add some module's `peerDependencies` to ignore option as default for applicat
 
 Please checkout [Building windows apps from non-windows platforms](https://github.com/maxogden/electron-packager#building-windows-apps-from-non-windows-platforms).
 
+## How hot-reloading works on Electron
+
+We use [webpack-target-electron-renderer](https://github.com/chentsulin/webpack-target-electron-renderer) to provide a build target for electron renderer process. Read more information [here](https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works).
+
+> Note: webpack >= 1.12.15 has built-in support for `electron-main` and `electron-renderer` targets.
 
 ## Native-like UI
 
@@ -119,6 +143,7 @@ If you want to have native-like User Interface (OS X El Capitan and Windows 10),
 
 - [C. T. Lin](https://github.com/chentsulin)
 - [Jhen-Jie Hong](https://github.com/jhen0409)
+
 
 ## License
 MIT © [C. T. Lin](https://github.com/chentsulin)

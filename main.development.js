@@ -1,13 +1,5 @@
-/* eslint strict: 0 */
-'use strict';
+import { app, BrowserWindow, Menu, crashReporter, shell, ipcMain } from 'electron';
 
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const crashReporter = electron.crashReporter;
-const shell = electron.shell;
-const ipcMain = electron.ipcMain;
 let menu;
 let template;
 let mainWindow = null;
@@ -27,13 +19,18 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({ width: 1024, height: 728 });
+  mainWindow = new BrowserWindow({
+    show: false,
+    width: 1024,
+    height: 728
+  });
 
-  if (process.env.HOT) {
-    mainWindow.loadURL(`file://${__dirname}/app/hot-dev-app.html`);
-  } else {
-    mainWindow.loadURL(`file://${__dirname}/app/app.html`);
-  }
+  mainWindow.loadURL(`file://${__dirname}/app/app.html`);
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;

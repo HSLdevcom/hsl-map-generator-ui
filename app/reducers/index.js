@@ -5,7 +5,6 @@ import mapSelection from './mapSelection';
 import tabName from './tabName';
 import viewport from './viewport';
 
-
 const rootReducer = combineReducers({
   layers,
   mapSelection,

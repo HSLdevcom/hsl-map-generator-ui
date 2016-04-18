@@ -1,9 +1,6 @@
-/* eslint strict: 0 */
-'use strict';
+import path from 'path';
 
-const path = require('path');
-
-module.exports = {
+export default {
   module: {
     loaders: [{
       test: /\.jsx?$/,
@@ -30,6 +27,7 @@ module.exports = {
 
   ],
   externals: [
-    // put your node 3rd party libraries which can't be built with webpack here (mysql, mongodb, and so on..)
+    // put your node 3rd party libraries which can't be built with webpack here
+    // (mysql, mongodb, and so on..)
   ]
 };
