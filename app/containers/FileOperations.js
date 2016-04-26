@@ -14,6 +14,10 @@ function mapStateToProps(state) {
         mapSelection: toJSON(state.mapSelection),
         style: styleFromLayers(state.layers).toJS(),
       }),
+    onGenerateStopLabels: () =>
+      ipcRenderer.send('generateStopLabels', {
+        mapSelection: toJSON(state.mapSelection),
+      }),
     onSaveState: () =>
       saveAs(new Blob([toJSON(state)], {type: 'application/json'}), 'map.json')
   };
@@ -31,6 +35,10 @@ function mapDispatchToProps(dispatch) {
 
 ipcRenderer.on('imageGenerated', (event, {data}) => {
   saveAs(new Blob([data], {type: 'image/png'}), 'map.png');
+});
+
+ipcRenderer.on('stopLabelsGenerated', (event, {data}) => {
+  saveAs(new Blob([data], {type: 'text/html'}), 'stops.html');
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileOperations);

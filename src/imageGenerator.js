@@ -1,4 +1,3 @@
-require('babel-register');
 const tilelive = require('tilelive');
 const tileliveGl = require('/Users/hannes/hsl-map-generator/tilelive-gl/');
 const geomUtils = require('../app/utils/geom-utils');
@@ -9,7 +8,7 @@ const LIMIT = 18000;
 
 tileliveGl.registerProtocols(tilelive);
 
-module.exports = (event, opts) => {
+module.exports = (callback, opts) => {
   const mapSelection = transit.fromJSON(opts.mapSelection);
 
   const glSource = {protocol: 'gl:', style: opts.style, query: {scale: geomUtils.mapSelectionToTileScale(mapSelection)}};
@@ -43,7 +42,7 @@ module.exports = (event, opts) => {
     }
 
     source.getStatic.bind(source)(options, (error, data) => {
-      event.sender.send('imageGenerated', {data: data, options: options});
+      callback({data: data, options: options});
     });
   });
 };

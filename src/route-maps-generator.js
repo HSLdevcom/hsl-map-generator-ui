@@ -3,6 +3,9 @@ import { fromJS } from 'immutable';
 import { readFileSync, writeFileSync } from 'fs';
 import request from 'requestretry';
 import { groupBy, flatMap, keyBy, findIndex } from 'lodash';
+import { DEG_LAT_PER_M, mmToM, degLonPerM, degToRad } from '../app/utils/geom-utils';
+import { styleFromLayers } from '../app/utils/map-utils';
+import imageGenerator from './imageGenerator';
 
 const query = `
   query trips{
@@ -26,25 +29,21 @@ const query = `
     }
   }`;
 
-
-// const tripQuery = id => `
-//   query shape{
-//     trip(id: "${id}") {
-//       geometry
-//     }
-//   }`;
-
-// const tripRequiest = (uri, gtfsId) => ({
-//   url: uri,
-//   body: tripQuery(gtfsId),
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/graphql'
-//   },
-//   fullResponse: false
-// });
-
 const uri = 'http://tulevatreitit.hsl.fi/otp/routers/helsinki/index/graphql';
+
+const boundsReducer = (previous, current) => ({
+  maxLat: previous.maxLat > current.lat ? previous.maxLat : current.lat,
+  minLat: previous.minLat < current.lat ? previous.minLat : current.lat,
+  maxLon: previous.maxLon > current.lon ? previous.maxLon : current.lon,
+  minLon: previous.minLon < current.lon ? previous.minLon : current.lon,
+});
+
+const minExtent = {
+  maxLat: -Infinity,
+  minLat: Infinity,
+  maxLon: -Infinity,
+  minLon: Infinity,
+};
 
 request({
   url: uri,
@@ -62,119 +61,114 @@ request({
   const shapes = groupBy(JSON.parse(body).data.trips, trip => trip.shapeId);
   // const shapeIds = Object.keys(shapes);
   const routes = groupBy(shapes, shape => shape[0].route.gtfsId);
-  Object.keys(routes).forEach(route => {
-    const baseFile = fromJSON(readFileSync('./map.json'));
 
-    const routeLayers = [
-      findIndex(baseFile.layers, layer => layer.text === 'Routes'),
-      findIndex(baseFile.layers, layer => layer.text === 'Routes-Alternative'),
-    ];
+  function renderRoute(route) {
+    return (callback) => {
+      const baseFile = fromJSON(readFileSync('./map.json'));
 
-    const stopLayers = [
-      findIndex(baseFile.layers, layer => layer.text === 'Stops'),
-      findIndex(baseFile.layers, layer => layer.text === 'Stops-Alternative'),
-    ];
+      const routeLayers = [
+        findIndex(baseFile.layers, layer => layer.text === 'Routes'),
+        findIndex(baseFile.layers, layer => layer.text === 'Routes-Alternative'),
+      ];
 
-    console.log(stopLayers)
+      const stopLayers = [
+        findIndex(baseFile.layers, layer => layer.text === 'Stops'),
+        findIndex(baseFile.layers, layer => layer.text === 'Stops-Alternative'),
+      ];
 
-    const routeFilters = [
-      [
-        '==',
-        'id',
-      ],
-      [
-        '==',
-        'id',
-      ],
-    ];
+      const routeFilters = [
+        [ '==', 'id' ],
+        [ '==', 'id' ],
+      ];
 
-    const stopFilters = [
-      [
-        'in',
-        'gtfsId',
-      ],
-      [
-        'in',
-        'gtfsId',
-      ],
-    ];
+      const stopFilters = [
+        [ 'in', 'gtfsId' ],
+        [ 'in', 'gtfsId' ],
+      ];
 
-    routes[route].forEach(pattern =>
-      routeFilters[parseInt(pattern[0].directionId, 10)].push(pattern[0].shapeId)
-    );
+      routes[route].forEach(pattern =>
+        routeFilters[parseInt(pattern[0].directionId, 10)].push(pattern[0].shapeId)
+      );
 
-    routes[route].forEach(pattern =>
-      pattern[0].stops.forEach(stop => stopFilters[parseInt(pattern[0].directionId, 10)].push(stop.gtfsId))
-    );
+      routes[route].forEach(pattern =>
+        pattern[0].stops.forEach(stop => stopFilters[parseInt(pattern[0].directionId, 10)].push(stop.gtfsId))
+      );
 
-    routeFilters.forEach((routeFilter, index) => {
-      if (routeFilter.length > 2) {
-        baseFile.layers[routeLayers[index]].filter = fromJS(routeFilter);
-        baseFile.layers[routeLayers[index]].enabled = true;
-      } else {
-        baseFile.layers[routeLayers[index]].enabled = false;
+      routeFilters.forEach((routeFilter, index) => {
+        if (routeFilter.length > 2) {
+          baseFile.layers[routeLayers[index]].filter = fromJS(routeFilter);
+          baseFile.layers[routeLayers[index]].enabled = true;
+        } else {
+          baseFile.layers[routeLayers[index]].enabled = false;
+        }
+      });
+
+      stopFilters.forEach((stopFilter, index) => {
+        if (stopFilter.length > 2) {
+          baseFile.layers[stopLayers[index]].filter = fromJS(stopFilter);
+          baseFile.layers[stopLayers[index]].enabled = true;
+        } else {
+          baseFile.layers[stopLayers[index]].enabled = false;
+        }
+      });
+
+      baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-citybikes')].enabled = false;
+      baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-park-and-ride')].enabled = false;
+
+      const bounds = flatMap(routes[route], pattern => pattern[0].stops.map(stop => stops[stop.gtfsId])).reduce(boundsReducer, minExtent);
+      const center = [(bounds.minLon + bounds.maxLon) / 2, (bounds.minLat + bounds.maxLat) / 2];
+      const sizeDeg = [bounds.maxLon - bounds.minLon, bounds.maxLat - bounds.minLat];
+      const sizeMM = sizeDeg[1] > sizeDeg[0] * Math.cos(degToRad(center[1])) ? [297, 390] : [390, 297];
+
+      const mapScale = Math.max(
+        sizeDeg[0] * degLonPerM(center[1]) / mmToM(sizeMM[0]),
+        sizeDeg[1] * DEG_LAT_PER_M / mmToM(sizeMM[1])
+      ) * 1.1;
+
+      baseFile.mapSelection = baseFile.mapSelection.set('size', fromJS(sizeMM));
+      baseFile.mapSelection = baseFile.mapSelection.setIn(['center', 0, 'location'], fromJS(center));
+      baseFile.mapSelection = baseFile.mapSelection.set('pixelScale', 0.5);
+      baseFile.mapSelection = baseFile.mapSelection.set('mapScale', mapScale);
+
+      writeFileSync(`./route-maps/${route}.json`, toJSON(baseFile));
+      imageGenerator(({data}) => {
+        writeFileSync(`./route-maps/${route}.png`, data);
+        callback(null, 'done');
+      }, {
+        mapSelection: toJSON(baseFile.mapSelection),
+        style: styleFromLayers(baseFile.layers).toJS(),
+      });
+    };
+  }
+
+  function* renderRoutes() {
+    const routeKeys = Object.keys(routes);
+    for (const route of routeKeys) {
+      if ({}.hasOwnProperty.call(routeKeys, route)) {
+        yield;
       }
-    });
+      console.log(`Rendering ${route}`);
+      yield renderRoute(route);
+    }
+  }
 
-    stopFilters.forEach((stopFilter, index) => {
-      if (stopFilter.length > 2) {
-        baseFile.layers[stopLayers[index]].filter = fromJS(stopFilter);
-        baseFile.layers[stopLayers[index]].enabled = true;
+  function runGenerator(fn) {
+    var next = function(err, arg) {
+      if (err) return it.throw(err);
+
+      var result = it.next(arg);
+      if (result.done) return;
+
+      if (typeof result.value === 'function') {
+        result.value(next);
       } else {
-        baseFile.layers[stopLayers[index]].enabled = false;
+        next(null, result.value);
       }
-    });
+    };
 
-    baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-citybikes')].enabled = false;
-    baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-park-and-ride')].enabled = false;
+    var it = fn();
+    return next();
+  }
 
-    const bounds = flatMap(routes[route], pattern => pattern[0].stops.map(stop => stops[stop.gtfsId])).reduce((previous, current) => ({
-      maxLat: previous.maxLat > current.lat ? previous.maxLat : current.lat,
-      minLat: previous.minLat < current.lat ? previous.minLat : current.lat,
-      maxLon: previous.maxLon > current.lon ? previous.maxLon : current.lon,
-      minLon: previous.minLon < current.lon ? previous.minLon : current.lon,
-    }), {
-      maxLat: -Infinity,
-      minLat: Infinity,
-      maxLon: -Infinity,
-      minLon: Infinity,
-    });
-
-    const center = [(bounds.minLon + bounds.maxLon) / 2, (bounds.minLat + bounds.maxLat) / 2];
-
-    const sizeDeg = [bounds.maxLon - bounds.minLon, bounds.maxLat - bounds.minLat];
-
-    const degToRad = deg => deg * Math.PI / 180;
-
-    const sizeMM = sizeDeg[1] > sizeDeg[0] * Math.cos(degToRad(center[1])) ? [297, 390] : [390, 297];
-
-    baseFile.mapSelection = baseFile.mapSelection.set('size', fromJS(sizeMM));
-
-    baseFile.mapSelection = baseFile.mapSelection.setIn(['center', 0, 'location'], fromJS(center));
-
-    baseFile.mapSelection = baseFile.mapSelection.set('pixelScale', 0.5);
-
-    const EARTH_CIRC_M = 40075016.686;
-    const DEG_LAT_PER_M = EARTH_CIRC_M / 360;
-    const M_TO_MM = 1000;
-    const degLonPerM = degLat => DEG_LAT_PER_M * Math.abs(Math.cos(degToRad(degLat)));
-
-    const mapScale = Math.max(
-      sizeDeg[0] * degLonPerM(center[1]) * M_TO_MM / sizeMM[0],
-      sizeDeg[1] * DEG_LAT_PER_M * M_TO_MM / sizeMM[1]
-    ) * 1.1;
-
-    baseFile.mapSelection = baseFile.mapSelection.set('mapScale', mapScale);
-
-    writeFileSync(`./route-maps/${route}.json`, toJSON(baseFile));
-  });
-
-  // const shapePromises = shapeIds.map(shapeId => request(tripRequiest(uri, shapes[shapeId][0].gtfsId)));
-  // Promise.all(shapePromises).then(geometries => {
-  //   zip(shapeIds, shapeIds.map(shapeId => shapes[shapeId][0].route), geometries).forEach(bundle => {
-
-  //   });
-  // }).catch((err) => {
-  //   console.log(err);
-  // });
+  runGenerator(renderRoutes);
 });

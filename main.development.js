@@ -5,6 +5,8 @@ let template;
 let mainWindow = null;
 
 const imageGenerator = require('./src/imageGenerator');
+const stopLabelGenerator = require('./src/stopLabelGenerator');
+
 
 crashReporter.start();
 
@@ -241,4 +243,5 @@ app.on('ready', () => {
   }
 });
 
-ipcMain.on('generateImage', imageGenerator);
+ipcMain.on('generateImage', (event, options) => imageGenerator((data) => event.sender.send('imageGenerated', data), options));
+ipcMain.on('generateStopLabels', (event, options) => stopLabelGenerator((data) => event.sender.send('stopLabelsGenerated', data), options));
