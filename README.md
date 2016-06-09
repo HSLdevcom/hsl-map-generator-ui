@@ -128,11 +128,29 @@ We add some module's `peerDependencies` to ignore option as default for applicat
 
 Please checkout [Building windows apps from non-windows platforms](https://github.com/maxogden/electron-packager#building-windows-apps-from-non-windows-platforms).
 
+## Dispatching redux actions from main process
+
+see discusses in [#118](https://github.com/chentsulin/electron-react-boilerplate/issues/118) and [#108](https://github.com/chentsulin/electron-react-boilerplate/issues/108)
+
 ## How hot-reloading works on Electron
 
 We use [webpack-target-electron-renderer](https://github.com/chentsulin/webpack-target-electron-renderer) to provide a build target for electron renderer process. Read more information [here](https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works).
 
 > Note: webpack >= 1.12.15 has built-in support for `electron-main` and `electron-renderer` targets.
+
+## How to keep the boilerplate updated
+
+If your application is a fork from this repo, you can add this repo to another git remote:
+
+```sh
+git remote add upstream https://github.com/chentsulin/electron-react-boilerplate.git
+```
+
+Then, use git to merge some latest commits:
+
+```sh
+git pull upstream master
+```
 
 ## Native-like UI
 
