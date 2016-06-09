@@ -1,6 +1,6 @@
 import { fromJS, Iterable } from 'immutable';
 import { find, matchesProperty } from 'lodash';
-import style from 'hsl-map-style/hsl-gl-map-with-stops-v8.json';
+import style from 'hsl-map-style/hsl-gl-map-with-stops-v9.json';
 
 export const baseStyle = fromJS(style, (key, value) => {
   const isIndexed = Iterable.isIndexed(value);
@@ -12,9 +12,9 @@ export const styleFromLayers = (layers, sources) => {
     let newLayer = layer;
     const layerState = find(layers, matchesProperty('id', newLayer.getIn(['metadata', 'mapbox:group'])));
 
-    if ( !newLayer.get('ref') && layerState && layerState.enabled === false) {
+    if (!newLayer.get('ref') && layerState && layerState.enabled === false) {
       return newLayer.setIn(['layout', 'visibility'], 'none');
-    } else if ( !newLayer.get('ref') && layerState && layerState.enabled === true) {
+    } else if (!newLayer.get('ref') && layerState && layerState.enabled === true) {
       newLayer = newLayer.setIn(['layout', 'visibility'], 'visible');
       if (layerState.source) {
         newLayer = newLayer.set('source', layerState.source);
