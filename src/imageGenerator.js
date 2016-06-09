@@ -1,5 +1,5 @@
 const tilelive = require('tilelive');
-const tileliveGl = require('/Users/hannes/hsl-map-generator/tilelive-gl/');
+const tileliveGl = require('tilelive-gl');
 const geomUtils = require('../app/utils/geom-utils');
 const transit = require('transit-immutable-js');
 // const viewportMercator = require('viewport-mercator-project');

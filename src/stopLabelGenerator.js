@@ -6,6 +6,8 @@ const pretty = require('html').prettyPrint;
 const request = require('requestretry');
 const geomUtils = require('../app/utils/geom-utils');
 const transit = require('transit-immutable-js');
+const { readFileSync } = require('fs');
+const { within } = require('turf');
 
 
 module.exports = (callback, opts) => {
@@ -41,8 +43,8 @@ module.exports = (callback, opts) => {
   }`;
 
   const compareRoute = (routea, routeb) => {
-    const partsA = (routea.route.shortName || '').match(/^[A-Za-z]?(0*)([0-9]*)/);
-    const partsB = (routeb.route.shortName || '').match(/^[A-Za-z]?(0*)([0-9]*)/);
+    const partsA = (routea.shortName || '').match(/^[A-Za-z]?(0*)([0-9]*)/);
+    const partsB = (routeb.shortName || '').match(/^[A-Za-z]?(0*)([0-9]*)/);
     if (partsA[1].length !== partsB[1].length) {
       if (partsA[1].length + partsA[2].length === 0) {
         return -1; // A is the one with no numbers at all, wins leading zero
@@ -53,8 +55,29 @@ module.exports = (callback, opts) => {
     }
     const numberA = parseInt(partsA[2] || '0', 10);
     const numberB = parseInt(partsB[2] || '0', 10);
-    return numberA - numberB || (routea.route.shortName || '').localeCompare(routeb.route.shortName || '') || (routea.route.longName ||
-      '').localeCompare(routeb.route.longName || '');
+    return numberA - numberB || (routea.shortName || '').localeCompare(routeb.shortName || '') || (routea.headsign ||
+      '').localeCompare(routeb.headsign || '');
+  };
+
+  const stops = JSON.parse(readFileSync('/Users/hannes/Downloads/out.json'));
+
+  const searchWithin = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            viewport.unproject([0, 0]),
+            viewport.unproject([0, height]),
+            viewport.unproject([width, height]),
+            viewport.unproject([width, 0])
+          ]]
+        }
+      }
+    ]
   };
 
   const viewportWidth = 2384;
@@ -88,8 +111,12 @@ module.exports = (callback, opts) => {
     },
     fullResponse: false
   }).then((body) => {
-    JSON.parse(body).data.stopsByBbox.forEach((stop) => {
-      if (stop.patterns.length === 0) {
+    within(stops, searchWithin).features.forEach((point) => {
+      const stop = point.properties;
+      stop.patterns.forEach(pattern => pattern.route = {shortName: pattern.name});
+      stop.lon = point.geometry.coordinates[0];
+      stop.lat = point.geometry.coordinates[1];
+      if (stop.patterns.length === 0 || stop.type === 'SUBWAY') {
         return;
       }
       const el = window.document.createElement('div');
@@ -104,28 +131,84 @@ module.exports = (callback, opts) => {
       el.style.paddingBottom = '8px';
       el.style.borderRadius = '5px';
       el.style.lineHeight = '0.85';
-      el.style.borderColor = 'rgb(0, 0, 0)';
+      el.style.borderColor = 'rgba(0, 0, 0, 0.3)';
       el.style.borderWidth = '1px';
       el.style.backgroundClip = 'padding-box';
       el.style.borderStyle = 'solid';
-      const name = window.document.createElement('span');
-      el.appendChild(name);
+      const header = window.document.createElement('div');
+      el.appendChild(header);
+      header.style.display = 'flex';
+      header.style.webkitFlexDirection = 'row';
+      if (stop.platform) {
+        const platformNumber = window.document.createElement('div');
+        header.appendChild(platformNumber);
+        platformNumber.style.color = '#333';
+        platformNumber.style.fontSize = 29 / textScale + 'pt';
+        platformNumber.style.fontFamily = 'GothamXNarrow-Medium';
+        platformNumber.style.letterSpacing = '0em';
+        platformNumber.textContent = stop.platform;
+        const platform = window.document.createElement('div');
+        header.appendChild(platform);
+        platform.style.webkitBoxFlex = '0';
+        platform.style.borderRight = 'solid 1px #333';
+        platform.style.marginRight = '0.5em';
+        platform.style.padding = '0 0.5em';
+        const platformFi = window.document.createElement('div');
+        platform.appendChild(platformFi);
+        platformFi.textContent = 'Lait.';
+        platformFi.style.color = '#333';
+        platformFi.style.fontSize = 13 / textScale + 'pt';
+        platformFi.style.fontFamily = 'GothamRounded-Medium';
+        platformFi.style.letterSpacing = '-0.025em';
+        platformFi.style.marginBottom = '0.2em';
+        const platformSv = window.document.createElement('div');
+        platform.appendChild(platformSv);
+        platformSv.textContent = 'Platt.';
+        platformSv.style.color = '#333';
+        platformSv.style.fontSize = 12 / textScale + 'pt';
+        platformSv.style.fontFamily = 'GothamRounded-Book';
+        platformSv.style.letterSpacing = '-0.025em';
+      }
+      const names = window.document.createElement('div');
+      header.appendChild(names);
+      names.style.webkitBoxFlex = '1';
+      const name = window.document.createElement('div');
+      names.appendChild(name);
       name.textContent = stop.name;
       name.style.color = '#333';
       name.style.fontSize = 13 / textScale + 'pt';
       name.style.fontFamily = 'GothamRounded-Medium';
       name.style.letterSpacing = '-0.025em';
-      el.innerHTML += '&nbsp;';
-      const code = window.document.createElement('span');
-      el.appendChild(code);
+      name.style.marginBottom = '0.2em';
+      name.style.whiteSpace = 'nowrap';
+      const nameSv = window.document.createElement('div');
+      names.appendChild(nameSv);
+      nameSv.textContent = stop.name_sv;
+      nameSv.style.color = '#333';
+      nameSv.style.fontSize = 12 / textScale + 'pt';
+      nameSv.style.fontFamily = 'GothamRounded-Book';
+      nameSv.style.letterSpacing = '-0.025em';
+      nameSv.style.whiteSpace = 'nowrap';
+      const code = window.document.createElement('div');
+      header.appendChild(code);
       code.style.color = '#333';
       code.style.fontSize = 9 / textScale + 'pt';
       code.style.fontFamily = 'GothamRounded-Medium';
       code.style.letterSpacing = '-0.025em';
+      code.style.borderColor = '#333';
+      code.style.borderWidth = '1px';
+      code.style.borderRadius = '3px';
+      code.style.borderStyle = 'solid';
+      code.style.padding = '2px 3px';
+      code.style.marginTop = '-2px';
+      code.style.webkitBoxFlex = '0';
+      code.style.webkitAlignSelf = 'flex-end';
+      code.style.height = '0.8em';
+      code.style.marginLeft = '0.5em';
       code.textContent = stop.code;
 
       const patterns = uniqBy(stop.patterns, pattern => pattern.route.shortName + pattern.headsign).sort(compareRoute);
-      if (patterns.length <= 5) {
+      if (patterns.length <= 999) {
         patterns.forEach((pattern, index) => {
           const container = window.document.createElement('div');
           el.appendChild(container);
@@ -134,17 +217,24 @@ module.exports = (callback, opts) => {
           const routeNumber = window.document.createElement('span');
           container.appendChild(routeNumber);
           routeNumber.style.color = '#007AC9';
-          routeNumber.style.fontSize = 14 / textScale + 'pt';
+          routeNumber.style.fontSize = 15 / textScale + 'pt';
           routeNumber.style.fontFamily = 'GothamXNarrow-Medium';
           routeNumber.style.letterSpacing = '0em';
-          routeNumber.textContent = pattern.route.shortName;
+          routeNumber.textContent = pattern.shortName;
           const routeText = window.document.createElement('span');
           container.appendChild(routeText);
           routeText.style.color = '#007AC9';
           routeText.style.fontSize = 11 / textScale + 'pt';
           routeText.style.fontFamily = 'GothamRounded-Medium';
           routeText.style.letterSpacing = '-0.025em';
-          routeText.textContent = ' → ' + pattern.headsign;
+          routeText.textContent = pattern.headsign + '\u00A0';
+          const routeTextSv = window.document.createElement('span');
+          container.appendChild(routeTextSv);
+          routeTextSv.style.color = '#007AC9';
+          routeTextSv.style.fontSize = 11 / textScale + 'pt';
+          routeTextSv.style.fontFamily = 'GothamRounded-Book';
+          routeTextSv.style.letterSpacing = '-0.025em';
+          routeTextSv.textContent = pattern.headsign_sv;
         });
       } else {
         const container = window.document.createElement('div');
@@ -159,11 +249,11 @@ module.exports = (callback, opts) => {
         patterns.forEach(pattern => {
           const routeNumber = window.document.createElement('span');
           container.appendChild(routeNumber);
-          routeNumber.textContent = pattern.route.shortName + ' ';
+          routeNumber.textContent = pattern.shortName + ' ';
         });
       }
     });
 
-    callback({data: pretty(bg.outerHTML)});
+    callback({data: pretty(bg.outerHTML.replace(/-webkit-box-/g, "").replace(/-webkit-/g, ""))});
   });
 };
