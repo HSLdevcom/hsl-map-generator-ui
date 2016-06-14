@@ -97,12 +97,17 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
+    "babel-preset-modern-node": "^2.1.0",
     "classnames": "^2.2.3",
     "css-modules-require-hook": "^4.0.0",
     "electron-debug": "^1.0.0",
     "font-awesome": "^4.6.3",
     "immutable": "^3.7.6",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^3.1.0",
+    "koa-router": "^7.0.1",
     "librsvg": "^0.6.3",
+    "mapbox-gl-native": "3.2.1",
     "postcss": "^5.0.21",
     "r-dom": "^2.1.0",
     "react": "^15.1.0",
@@ -120,10 +125,10 @@
     "replacestream": "^4.0.0",
     "source-map-support": "^0.4.0",
     "tilelive": "^5.12.1",
-    "tilelive-gl": "0.0.3",
+    "tilelive-gl": "git+https://github.com/hannesj/tilelive-gl.git",
     "transit-immutable-js": "^0.5.4",
     "transit-js": "^0.8.846",
-    "webfontloader": "^1.6.22",
+    "webfontloader": "^1.6.22"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",

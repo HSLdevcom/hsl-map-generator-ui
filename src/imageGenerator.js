@@ -11,7 +11,7 @@ tileliveGl.registerProtocols(tilelive);
 module.exports = (callback, opts) => {
   const mapSelection = transit.fromJSON(opts.mapSelection);
 
-  const glSource = {protocol: 'gl:', style: opts.style, query: {scale: geomUtils.mapSelectionToTileScale(mapSelection)}};
+  const glSource = { protocol: 'gl:', style: opts.style, query: { scale: geomUtils.mapSelectionToTileScale(mapSelection) } };
 
   tilelive.load(glSource, (err, source) => {
     const scale = geomUtils.mapSelectionToTileScale(mapSelection);
@@ -42,7 +42,7 @@ module.exports = (callback, opts) => {
     }
 
     source.getStatic.bind(source)(options, (error, data) => {
-      callback({data: data, options: options});
+      callback({ data: data, options: options });
     });
   });
 };

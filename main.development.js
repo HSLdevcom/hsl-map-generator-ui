@@ -1,11 +1,11 @@
-import { app, BrowserWindow, Menu, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, Menu, shell } from 'electron';
 
 let menu;
 let template;
 let mainWindow = null;
 
-const imageGenerator = require('./src/imageGenerator');
-const stopLabelGenerator = require('./src/stopLabelGenerator');
+// const imageGenerator = require('./src/imageGenerator');
+// const stopLabelGenerator = require('./src/stopLabelGenerator');
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')(); // eslint-disable-line global-require
@@ -240,5 +240,7 @@ app.on('ready', () => {
   }
 });
 
-ipcMain.on('generateImage', (event, options) => imageGenerator((data) => event.sender.send('imageGenerated', data), options));
-ipcMain.on('generateStopLabels', (event, options) => stopLabelGenerator((data) => event.sender.send('stopLabelsGenerated', data), options));
+// ipcMain.on('generateImage', (event, options) => imageGenerator((data) =>
+//   event.sender.send('imageGenerated', data), options));
+// ipcMain.on('generateStopLabels', (event, options) => stopLabelGenerator((data) =>
+//   event.sender.send('stopLabelsGenerated', data), options));
