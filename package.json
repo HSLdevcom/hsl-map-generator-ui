@@ -102,6 +102,7 @@
     "css-modules-require-hook": "^4.0.0",
     "electron-debug": "^1.0.0",
     "font-awesome": "^4.6.3",
+    "hsl-map-style": "git+https://github.com/HSLdevcom/hsl-map-style",
     "immutable": "^3.7.6",
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.1.0",
