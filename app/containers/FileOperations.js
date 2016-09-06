@@ -3,7 +3,7 @@ import FileOperations from '../components/FileOperations';
 // import { ipcRenderer } from 'electron';
 import { toJSON, fromJSON } from 'transit-immutable-js';
 import { styleFromLayers } from '../utils/map-utils';
-import { saveAs } from '../utils/FileSaver';
+import { saveAs } from 'file-saver';
 import { loadState } from '../actions/fileOperations';
 
 function mapStateToProps(state) {
