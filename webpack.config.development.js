@@ -16,7 +16,6 @@ const config = {
 
   output: {
     ...baseConfig.output,
-    publicPath: 'http://localhost:3000/dist/'
   },
 
   module: {
@@ -54,7 +53,6 @@ const config = {
     })
   ],
 
-  target: 'electron-renderer'
 };
 
 export default config;

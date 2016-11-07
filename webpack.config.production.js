@@ -11,8 +11,6 @@ const config = {
 
   output: {
     ...baseConfig.output,
-
-    publicPath: '../dist/'
   },
 
   module: {
@@ -57,7 +55,6 @@ const config = {
     new ExtractTextPlugin('style.css', { allChunks: true })
   ],
 
-  target: 'electron-renderer'
 };
 
 export default config;

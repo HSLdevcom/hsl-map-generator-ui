@@ -1,4 +1,5 @@
 import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   module: {
@@ -14,8 +15,8 @@ export default {
   },
   output: {
     path: path.join(__dirname, 'dist'),
+    publicPath: '/'
     filename: 'bundle.js',
-    libraryTarget: 'commonjs2'
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -25,7 +26,7 @@ export default {
     }
   },
   plugins: [
-
+    new HtmlWebpackPlugin({ template: 'index.ejs' })
   ],
   externals: [
   ]
