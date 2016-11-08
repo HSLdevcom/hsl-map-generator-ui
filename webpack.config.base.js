@@ -3,6 +3,13 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: "eslint-loader",
+        exclude: /node_modules/
+      }
+    ],  
     noParse: /json-schema\/lib\/validate\.js/,
     loaders: [{
       test: /\.jsx?$/,
