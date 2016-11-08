@@ -1,7 +1,7 @@
 import { SWITCH_LAYER, TOGGLE_LAYER } from '../actions/layers';
 import { LOAD_STATE } from '../actions/fileOperations';
 import update from 'react/lib/update';
-import style from 'hsl-map-style/hsl-gl-map-with-stops-v8.json';
+import style from 'hsl-map-style/hsl-gl-map-with-stops-v9.json';
 import { findIndex } from 'lodash';
 
 const initialState = [];

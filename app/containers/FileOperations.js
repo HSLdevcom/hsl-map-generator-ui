@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import FileOperations from '../components/FileOperations';
 // import { ipcRenderer } from 'electron';
 import { toJSON, fromJSON } from 'transit-immutable-js';
-import { styleFromLayers } from '../utils/map-utils';
+import { styleFromLayers } from 'hsl-map-generator-utils';
 import { saveAs } from 'file-saver';
 import { loadState } from '../actions/fileOperations';
 
@@ -19,7 +19,7 @@ function mapStateToProps(state) {
     //     mapSelection: toJSON(state.mapSelection),
     //   }),
     onGenerateImage: () =>
-      fetch('http://localhost:4000/generateImage', {
+      fetch('http://localhost:8000/generateImage', {
         method: 'POST',
         mode: 'cors',
         redirect: 'follow',
@@ -35,7 +35,7 @@ function mapStateToProps(state) {
       .then(response => response.blob())
       .then(blob => saveAs(blob, 'map.png')),
     onGenerateStopLabels: () =>
-      fetch('http://localhost:4000/generateStopLabels', {
+      fetch('http://localhost:8000/generateStopLabels', {
         method: 'POST',
         mode: 'cors',
         redirect: 'follow',

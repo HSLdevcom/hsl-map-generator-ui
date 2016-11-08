@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import CanvasOverlay from 'react-map-gl/src/overlays/canvas.react';
-import {mapSelectionToBbox} from '../utils/geom-utils';
+import {mapSelectionToBbox} from 'hsl-map-generator-utils';
 
 const redraw = (mapSelection) =>
   ({width, height, ctx, project}) => {
