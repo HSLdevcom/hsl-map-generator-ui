@@ -12,7 +12,8 @@
     "clean": "rimraf dist",
     "bundle": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.production.js",
     "build": "npm run clean && npm run bundle",
-    "start-dev": "cross-env NODE_ENV=development node -r babel-register server.js",
+    "start-dev": "cross-env NODE_ENV=development node -r babel-register server-dev.js",
+    "start-prod": "cross-env NODE_ENV=production node -r babel-register server.js",
     "start": "npm run start-dev"
   },
   "repository": {
