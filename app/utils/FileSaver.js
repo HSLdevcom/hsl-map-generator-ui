@@ -4,7 +4,7 @@
  *
  * By Eli Grey, http://eligrey.com
  * License: MIT
- *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+ *     See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
  */
 
 /*global self */
@@ -19,8 +19,8 @@ var saveAs = saveAs || (function(view) {
 		return;
 	}
 	var
-		  doc = view.document
-		  // only get URL when necessary in case Blob.js hasn"t overridden it yet
+		    doc = view.document
+		    // only get URL when necessary in case Blob.js hasn"t overridden it yet
 		, get_URL = function() {
 			return view.URL || view.webkitURL || view;
 		}
@@ -85,7 +85,7 @@ var saveAs = saveAs || (function(view) {
 			}
 			// First try a.download, then web filesystem, then object URLs
 			var
-				  filesaver = this
+				    filesaver = this
 				, type = blob.type
 				, blob_changed = false
 				, object_url
@@ -253,7 +253,7 @@ var saveAs = saveAs || (function(view) {
 
 	return saveAs;
 }(
-	   typeof self !== "undefined" && self
+	     typeof self !== "undefined" && self
 	|| typeof window !== "undefined" && window
 	|| this.content
 ));
@@ -262,9 +262,9 @@ var saveAs = saveAs || (function(view) {
 // with an attribute `content` that corresponds to the window
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports.saveAs = saveAs;
+    module.exports.saveAs = saveAs;
 } else if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-  define([], function() {
-    return saveAs;
-  });
+    define([], function() {
+        return saveAs;
+    });
 }

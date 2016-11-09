@@ -14,12 +14,12 @@ const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 
 webfontloader.load({
-  google: { families: ["Nunito:700,400,300"] }
+    google: { families: ["Nunito:700,400,300"] }
 });
 
 render(
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
-  </Provider>,
-  root
+    <Provider store={store}>
+        <Router history={history} routes={routes} />
+    </Provider>,
+    root
 );
