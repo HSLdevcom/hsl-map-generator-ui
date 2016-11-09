@@ -15,7 +15,7 @@ app
     });
 });
 
-const server = app.listen(PORT, "localhost", err => {
+const server = app.listen(PORT, "localhost", (err) => {
     if (err) {
         console.error(err);
         return;

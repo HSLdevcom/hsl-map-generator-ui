@@ -13,14 +13,14 @@ const PORT = 3000;
 const wdm = webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     stats: {
-        colors: true
-    }
+        colors: true,
+    },
 });
 
 app.use(wdm);
 app.use(webpackHotMiddleware(compiler));
 
-const server = app.listen(PORT, "localhost", err => {
+const server = app.listen(PORT, "localhost", (err) => {
     if (err) {
         console.error(err);
         return;

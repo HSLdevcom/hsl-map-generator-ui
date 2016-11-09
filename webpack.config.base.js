@@ -7,18 +7,18 @@ export default {
             {
                 test: /\.js$/,
                 loader: "eslint-loader",
-                exclude: /node_modules/
-            }
-        ],    
+                exclude: /node_modules/,
+            },
+        ],
         noParse: /json-schema\/lib\/validate\.js/,
         loaders: [{
             test: /\.jsx?$/,
             loaders: ["babel-loader"],
-            exclude: /node_modules/
+            exclude: /node_modules/,
         }, {
             test: /\.json$/,
-            loader: "json-loader"
-        }]
+            loader: "json-loader",
+        }],
     },
     output: {
         path: path.join(__dirname, "dist"),
@@ -29,12 +29,12 @@ export default {
         extensions: ["", ".js", ".jsx"],
         packageMains: ["webpack", "browser", "web", "browserify", ["jam", "main"], "main"],
         alias: {
-            "mapbox-gl$": "mapbox-gl/dist/mapbox-gl-dev"
-        }
+            "mapbox-gl$": "mapbox-gl/dist/mapbox-gl-dev",
+        },
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: "index.ejs" })
+        new HtmlWebpackPlugin({ template: "index.ejs" }),
     ],
     externals: [
-    ]
+    ],
 };

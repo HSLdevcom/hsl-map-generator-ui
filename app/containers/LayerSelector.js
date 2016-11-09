@@ -5,7 +5,7 @@ import * as LayerActions from "../actions/layers";
 
 function mapStateToProps(state) {
     return {
-        layers: state.layers
+        layers: state.layers,
     };
 }
 

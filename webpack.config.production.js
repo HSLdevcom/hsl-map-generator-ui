@@ -23,18 +23,18 @@ const config = {
                 test: /\.global\.css$/,
                 loader: ExtractTextPlugin.extract(
                     "style-loader",
-                    "css-loader"
-                )
+                    "css-loader",
+                ),
             },
 
             {
                 test: /^((?!\.global).)*\.css$/,
                 loader: ExtractTextPlugin.extract(
                     "style-loader",
-                    "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
-                )
-            }
-        ]
+                    "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
+                ),
+            },
+        ],
     },
 
     plugins: [
@@ -43,16 +43,16 @@ const config = {
         new webpack.DefinePlugin({
             __DEV__: false,
             "process.env": {
-                NODE_ENV: JSON.stringify("production")
-            }
+                NODE_ENV: JSON.stringify("production"),
+            },
         }),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 screw_ie8: true,
-                warnings: false
-            }
+                warnings: false,
+            },
         }),
-        new ExtractTextPlugin("style.css", { allChunks: true })
+        new ExtractTextPlugin("style.css", { allChunks: true }),
     ],
 
 };

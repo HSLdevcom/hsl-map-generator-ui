@@ -8,12 +8,12 @@ import { toggleTab } from "../actions/tabName";
 function mapStateToProps(state) {
     return {
         pixelScale: state.mapSelection.get("pixelScale"),
-        selected: state.tabName === "pixelScale"
+        selected: state.tabName === "pixelScale",
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({updatePixelScale, toggleTab: toggleTab("pixelScale")}, dispatch);
+    return bindActionCreators({ updatePixelScale, toggleTab: toggleTab("pixelScale") }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PixelScaleSelector);

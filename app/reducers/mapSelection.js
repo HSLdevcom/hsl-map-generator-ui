@@ -1,6 +1,6 @@
+import { fromJS } from "immutable";
 import { UPDATE_CENTER, UPDATE_SIZE, UPDATE_DPI, UPDATE_MAP_SCALE, UPDATE_PIXEL_SCALE } from "../actions/mapSelection";
 import { LOAD_STATE } from "../actions/fileOperations";
-import { fromJS } from "immutable";
 
 const initialState = fromJS({
     center: [{ location: [24.9, 60.2], id: 0 }],

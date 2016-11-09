@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     mapSelection,
     tabName,
     viewport,
-    routing
+    routing,
 });
 
 export default rootReducer;

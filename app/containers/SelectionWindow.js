@@ -3,7 +3,7 @@ import SelectionWindow from "../components/SelectionWindow";
 
 function mapStateToProps(state) {
     return {
-        mapSelection: state.mapSelection
+        mapSelection: state.mapSelection,
     };
 }
 

@@ -6,7 +6,7 @@ const initialState = {
     longitude: 24.9,
     zoom: 10,
     startDragLngLat: null,
-    isDragging: false
+    isDragging: false,
 };
 
 export default function viewport(state = initialState, action) {

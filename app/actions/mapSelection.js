@@ -7,34 +7,34 @@ export const UPDATE_PIXEL_SCALE = "UPDATE_PIXEL_SCALE";
 export function updateCenter(center) {
     return {
         type: UPDATE_CENTER,
-        center
+        center,
     };
 }
 
 export function updateSize(size) {
     return {
         type: UPDATE_SIZE,
-        size
+        size,
     };
 }
 
 export function updateDpi(dpi) {
     return {
         type: UPDATE_DPI,
-        dpi
+        dpi,
     };
 }
 
 export function updateMapScale(mapScale) {
     return {
         type: UPDATE_MAP_SCALE,
-        mapScale
+        mapScale,
     };
 }
 
 export function updatePixelScale(pixelScale) {
     return {
         type: UPDATE_PIXEL_SCALE,
-        pixelScale
+        pixelScale,
     };
 }

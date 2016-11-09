@@ -7,7 +7,7 @@ module.exports = {
     },
     extends: "airbnb",
     rules: {
-        "indent": ["error", 4],
+        "indent": ["error", 4, {"SwitchCase": 1}],
         "no-plusplus": ["off"],
         "quotes": ["error", "double", {"avoidEscape": true}],
         "react/prop-types": ["off"],

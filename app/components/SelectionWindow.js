@@ -1,9 +1,9 @@
 import React, { PropTypes } from "react";
 import CanvasOverlay from "react-map-gl/src/overlays/canvas.react";
-import {mapSelectionToBbox} from "hsl-map-generator-utils";
+import { mapSelectionToBbox } from "hsl-map-generator-utils";
 
-const redraw = (mapSelection) =>
-    ({width, height, ctx, project}) => {
+const redraw = mapSelection =>
+    ({ width, height, ctx, project }) => {
         const bbox = mapSelectionToBbox(mapSelection);
         const nw = project(bbox[0]);
         const se = project(bbox[1]);
@@ -14,7 +14,7 @@ const redraw = (mapSelection) =>
     };
 
 
-const SelectionWindow = ({viewport, width, height, mapSelection}) => (
+const SelectionWindow = ({ viewport, width, height, mapSelection }) => (
     <CanvasOverlay
         {...viewport}
         width={width}
@@ -26,8 +26,8 @@ SelectionWindow.propTypes = {
     viewport: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired
-    }).isRequired
+        zoom: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 export default SelectionWindow;

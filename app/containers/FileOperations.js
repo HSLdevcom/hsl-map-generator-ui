@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import FileOperations from "../components/FileOperations";
 // import { ipcRenderer } from "electron";
 import { toJSON, fromJSON } from "transit-immutable-js";
 import { styleFromLayers } from "hsl-map-generator-utils";
 import { saveAs } from "file-saver";
+import FileOperations from "../components/FileOperations";
 import { loadState } from "../actions/fileOperations";
 
 function mapStateToProps(state) {
@@ -50,7 +50,7 @@ function mapStateToProps(state) {
             .then(response => response.blob())
             .then(blob => saveAs(blob, "stops.html")),
         onSaveState: () =>
-            saveAs(new Blob([toJSON(state)], { type: "application/json" }), "map.json")
+            saveAs(new Blob([toJSON(state)], { type: "application/json" }), "map.json"),
     };
 }
 
@@ -58,9 +58,9 @@ function mapDispatchToProps(dispatch) {
     return {
         onLoadState: (event) => {
             const reader = new FileReader();
-            reader.onload = (progress) => dispatch(loadState(fromJSON(progress.target.result)));
+            reader.onload = progress => dispatch(loadState(fromJSON(progress.target.result)));
             reader.readAsText(event.target.files[0]);
-        }
+        },
     };
 }
 
