@@ -6,10 +6,12 @@ import { LOAD_STATE } from "../actions/fileOperations";
 
 const initialState = [];
 
-Object.keys(style.metadata["mapbox:groups"]).forEach((group, index) => initialState[index] = {
-    id: group,
-    enabled: style.metadata["mapbox:groups"][group].default,
-    text: style.metadata["mapbox:groups"][group].name,
+Object.keys(style.metadata["mapbox:groups"]).forEach((group, index) => {
+    initialState[index] = {
+        id: group,
+        enabled: style.metadata["mapbox:groups"][group].default,
+        text: style.metadata["mapbox:groups"][group].name,
+    };
 });
 
 initialState.reverse();
@@ -33,5 +35,5 @@ export default function layers(state = initialState, action) {
             return action.state.layers;
         default:
             return state;
-        }
+    }
 }
