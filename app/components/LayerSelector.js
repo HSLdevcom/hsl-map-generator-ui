@@ -34,13 +34,13 @@ class LayerSelector extends Component {
 }
 
 LayerSelector.propTypes = {
-    layers: PropTypes.array.isRequired,
+    layers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     switchLayer: PropTypes.func.isRequired,
     toggleLayer: PropTypes.func.isRequired,
 
     // Injected by React DnD:
-    isDragging: PropTypes.bool.isRequired,
-    connectDragSource: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
+    connectDragSource: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
 };
 
 export default dragDropContext(HTML5Backend)(LayerSelector);
