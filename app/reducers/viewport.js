@@ -1,5 +1,5 @@
-import { UPDATE_VIEWPORT } from '../actions/viewport';
-import { LOAD_STATE } from '../actions/fileOperations';
+import { UPDATE_VIEWPORT } from "../actions/viewport";
+import { LOAD_STATE } from "../actions/fileOperations";
 
 const initialState = {
   latitude: 60.2,

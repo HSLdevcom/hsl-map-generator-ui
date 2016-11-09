@@ -1,8 +1,8 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Map from '../components/Map';
-import * as ViewportActions from '../actions/viewport';
-import { styleFromLayers } from 'hsl-map-generator-utils';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import Map from "../components/Map";
+import * as ViewportActions from "../actions/viewport";
+import { styleFromLayers } from "hsl-map-generator-utils";
 
 function mapStateToProps(state) {
   return {

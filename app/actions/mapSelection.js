@@ -1,8 +1,8 @@
-export const UPDATE_CENTER = 'UPDATE_CENTER';
-export const UPDATE_SIZE = 'UPDATE_SIZE';
-export const UPDATE_DPI = 'UPDATE_DPI';
-export const UPDATE_MAP_SCALE = 'UPDATE_MAP_SCALE';
-export const UPDATE_PIXEL_SCALE = 'UPDATE_PIXEL_SCALE';
+export const UPDATE_CENTER = "UPDATE_CENTER";
+export const UPDATE_SIZE = "UPDATE_SIZE";
+export const UPDATE_DPI = "UPDATE_DPI";
+export const UPDATE_MAP_SCALE = "UPDATE_MAP_SCALE";
+export const UPDATE_PIXEL_SCALE = "UPDATE_PIXEL_SCALE";
 
 export function updateCenter(center) {
   return {

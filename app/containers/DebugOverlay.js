@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
-import DebugOverlay from '../components/DebugOverlay';
+import { connect } from "react-redux";
+import DebugOverlay from "../components/DebugOverlay";
 
 function mapStateToProps(state) {
   return {

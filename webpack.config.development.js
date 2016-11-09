@@ -1,17 +1,17 @@
 /* eslint max-len: 0 */
-import webpack from 'webpack';
-import baseConfig from './webpack.config.base';
+import webpack from "webpack";
+import baseConfig from "./webpack.config.base";
 
 const config = {
   ...baseConfig,
 
   debug: true,
 
-  devtool: 'cheap-module-eval-source-map',
+  devtool: "cheap-module-eval-source-map",
 
   entry: [
-    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-    './app/index'
+    "webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr",
+    "./app/index"
   ],
 
   output: {
@@ -26,16 +26,16 @@ const config = {
       {
         test: /\.global\.css$/,
         loaders: [
-          'style-loader',
-          'css-loader?sourceMap'
+          "style-loader",
+          "css-loader?sourceMap"
         ]
       },
 
       {
         test: /^((?!\.global).)*\.css$/,
         loaders: [
-          'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+          "style-loader",
+          "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
         ]
       }
     ]
@@ -47,8 +47,8 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true,
-      'process.env': {
-        NODE_ENV: JSON.stringify('development')
+      "process.env": {
+        NODE_ENV: JSON.stringify("development")
       }
     })
   ],

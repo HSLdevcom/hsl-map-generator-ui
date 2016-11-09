@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import Layer from './Layer';
-import { DragDropContext as dragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import styles from './LayerSelector.css';
+import React, { Component, PropTypes } from "react";
+import Layer from "./Layer";
+import { DragDropContext as dragDropContext } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
+import styles from "./LayerSelector.css";
 
 class LayerSelector extends Component {
   constructor(props) {

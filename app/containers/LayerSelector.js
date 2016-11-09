@@ -1,7 +1,7 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import LayerSelector from '../components/LayerSelector';
-import * as LayerActions from '../actions/layers';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import LayerSelector from "../components/LayerSelector";
+import * as LayerActions from "../actions/layers";
 
 function mapStateToProps(state) {
   return {

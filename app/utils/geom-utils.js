@@ -20,27 +20,27 @@ export const calculateSizePx = (size, dpm) =>
  [Math.round(size[0] * dpm), Math.round(size[1] * dpm)];
 
 export const mapSelectionToTileScale = (mapSelection) => pixelScaleToTileScale(
-  mapSelection.get('pixelScale'),
-  mapSelection.get('dpi')
+  mapSelection.get("pixelScale"),
+  mapSelection.get("dpi")
 );
 
 export const mapSelectionToPixelSize = (mapSelection) => calculateSizePx(
-  mapSelection.get('size').toArray().map(mmToM),
-  dpiToDpm(mapSelection.get('dpi'))
+  mapSelection.get("size").toArray().map(mmToM),
+  dpiToDpm(mapSelection.get("dpi"))
 );
 
 export const mapSelectionToZoom = (mapSelection) => calculateZoom(
-  mapSelection.getIn(['center', 0, 'location']).toArray(),
-  mapSelection.get('size').toArray().map(mmToM),
-  mapSelection.get('mapScale'),
+  mapSelection.getIn(["center", 0, "location"]).toArray(),
+  mapSelection.get("size").toArray().map(mmToM),
+  mapSelection.get("mapScale"),
   mapSelectionToTileScale(mapSelection),
   mapSelectionToPixelSize(mapSelection)
 );
 
 export const mapSelectionToBbox = (mapSelection) => {
-  const center = mapSelection.getIn(['center', 0, 'location']).toArray();
-  const size = mapSelection.get('size').toArray().map(mmToM);
-  const mapScale = mapSelection.get('mapScale');
+  const center = mapSelection.getIn(["center", 0, "location"]).toArray();
+  const size = mapSelection.get("size").toArray().map(mmToM);
+  const mapScale = mapSelection.get("mapScale");
 
   const sizeDeg = [size[0] * mapScale / degLonPerM(center[1]), size[1] * mapScale / DEG_LAT_PER_M];
 

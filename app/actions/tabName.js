@@ -1,4 +1,4 @@
-export const TOGGLE_TAB = 'TOGGLE_TAB';
+export const TOGGLE_TAB = "TOGGLE_TAB";
 
 export const toggleTab = (tabName) =>
   () => ({

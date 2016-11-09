@@ -1,11 +1,11 @@
-import React from 'react';
-import DropdownSelector from './DropdownSelector';
-import styles from './DropdownSelector.css';
+import React from "react";
+import DropdownSelector from "./DropdownSelector";
+import styles from "./DropdownSelector.css";
 
 const PixelScaleSelector = ({pixelScale, toggleTab, selected, updatePixelScale}) => (
   <DropdownSelector
     title="Tekstin skaalaus"
-    value={pixelScale + 'x'}
+    value={pixelScale + "x"}
     toggleTab={toggleTab}
     selected={selected}
   >

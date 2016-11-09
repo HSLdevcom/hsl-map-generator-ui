@@ -1,12 +1,12 @@
-import { toJSON, fromJSON } from 'transit-immutable-js';
-import { fromJS } from 'immutable';
-import { readFileSync, writeFileSync, createReadStream, createWriteStream, writeFile } from 'fs';
-import { groupBy, findIndex, find } from 'lodash';
-import { DEG_LAT_PER_M, mmToM, degLonPerM, degToRad } from '../app/utils/geom-utils';
-import { styleFromLayers } from '../app/utils/map-utils';
-import imageGenerator from './imageGenerator';
-import { Rsvg } from 'librsvg';
-import replacestream from 'replacestream';
+import { toJSON, fromJSON } from "transit-immutable-js";
+import { fromJS } from "immutable";
+import { readFileSync, writeFileSync, createReadStream, createWriteStream, writeFile } from "fs";
+import { groupBy, findIndex, find } from "lodash";
+import { DEG_LAT_PER_M, mmToM, degLonPerM, degToRad } from "../app/utils/geom-utils";
+import { styleFromLayers } from "../app/utils/map-utils";
+import imageGenerator from "./imageGenerator";
+import { Rsvg } from "librsvg";
+import replacestream from "replacestream";
 
 const boundsReducer = (previous, current) => ({
   maxLat: previous.maxLat > current[3] ? previous.maxLat : current[3],
@@ -22,46 +22,46 @@ const minExtent = {
   minLon: Infinity,
 };
 
-const DATE = '2016-08-15';
-const transform = 'transform="rotate(90) translate(85.039 0) scale(1.315) translate(0 -958.5)"';
+const DATE = "2016-08-15";
+const transform = "transform="rotate(90) translate(85.039 0) scale(1.315) translate(0 -958.5)"";
 
-const shapes = JSON.parse(readFileSync('./shapes2.geojson')).features;
-const stops = JSON.parse(readFileSync('./stops2.geojson')).features.map(stop => {
-  stop.properties.type = 'BUS'; // eslint-disable-line no-param-reassign
+const shapes = JSON.parse(readFileSync("./shapes2.geojson")).features;
+const stops = JSON.parse(readFileSync("./stops2.geojson")).features.map(stop => {
+  stop.properties.type = "BUS"; // eslint-disable-line no-param-reassign
   return stop;
 });
-const routeData = JSON.parse(readFileSync('./routes.json'));
+const routeData = JSON.parse(readFileSync("./routes.json"));
 
-const routes = groupBy(shapes, shape => shape.properties.shape_id.split('_')[0]);
+const routes = groupBy(shapes, shape => shape.properties.shape_id.split("_")[0]);
 const stopsByRoute = groupBy(stops, shape => shape.properties.route);
 
 function renderRoute(routeId) {
   return (callback) => {
-    const baseFile = fromJSON(readFileSync('./map.json'));
+    const baseFile = fromJSON(readFileSync("./map.json"));
 
     baseFile.sources = {};
 
     const routeLayers = [
-      findIndex(baseFile.layers, layer => layer.text === 'Routes'),
-      findIndex(baseFile.layers, layer => layer.text === 'Routes-Alternative'),
+      findIndex(baseFile.layers, layer => layer.text === "Routes"),
+      findIndex(baseFile.layers, layer => layer.text === "Routes-Alternative"),
     ];
 
     const stopLayers = [
-      findIndex(baseFile.layers, layer => layer.text === 'Stops'),
-      findIndex(baseFile.layers, layer => layer.text === 'Stops-Alternative'),
+      findIndex(baseFile.layers, layer => layer.text === "Stops"),
+      findIndex(baseFile.layers, layer => layer.text === "Stops-Alternative"),
     ];
 
     const route = routes[routeId];
 
-    const direction1 = find(route, ['properties.shape_id', `${routeId}_1`]);
-    const direction2 = find(route, ['properties.shape_id', `${routeId}_2`]);
+    const direction1 = find(route, ["properties.shape_id", `${routeId}_1`]);
+    const direction2 = find(route, ["properties.shape_id", `${routeId}_2`]);
 
     if (direction1) {
-      baseFile.sources.direction1 = { type: 'geojson', data: direction1 };
+      baseFile.sources.direction1 = { type: "geojson", data: direction1 };
     }
 
     if (direction2) {
-      baseFile.sources.direction2 = { type: 'geojson', data: direction2 };
+      baseFile.sources.direction2 = { type: "geojson", data: direction2 };
     }
 
     const stops1 = stopsByRoute[`${routeId}_1`];
@@ -69,15 +69,15 @@ function renderRoute(routeId) {
 
     if (stops1) {
       baseFile.sources.stops1 = {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: stops1 }
+        type: "geojson",
+        data: { type: "FeatureCollection", features: stops1 }
       };
     }
 
     if (stops2) {
       baseFile.sources.stops2 = {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: stops2 }
+        type: "geojson",
+        data: { type: "FeatureCollection", features: stops2 }
       };
     }
 
@@ -93,9 +93,9 @@ function renderRoute(routeId) {
       }
     });
 
-    baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-citybikes')]
+    baseFile.layers[findIndex(baseFile.layers, layer => layer.text === "POI-citybikes")]
       .enabled = false;
-    baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-park-and-ride')]
+    baseFile.layers[findIndex(baseFile.layers, layer => layer.text === "POI-park-and-ride")]
       .enabled = false;
 
     const bounds = route.map(shape => shape.bbox).reduce(boundsReducer, minExtent);
@@ -109,10 +109,10 @@ function renderRoute(routeId) {
       sizeDeg[1] * DEG_LAT_PER_M / mmToM(sizeMM[1])
     ) * 1.1;
 
-    baseFile.mapSelection = baseFile.mapSelection.set('size', fromJS(sizeMM));
-    baseFile.mapSelection = baseFile.mapSelection.setIn(['center', 0, 'location'], fromJS(center));
-    baseFile.mapSelection = baseFile.mapSelection.set('pixelScale', 0.6);
-    baseFile.mapSelection = baseFile.mapSelection.set('mapScale', mapScale);
+    baseFile.mapSelection = baseFile.mapSelection.set("size", fromJS(sizeMM));
+    baseFile.mapSelection = baseFile.mapSelection.setIn(["center", 0, "location"], fromJS(center));
+    baseFile.mapSelection = baseFile.mapSelection.set("pixelScale", 0.6);
+    baseFile.mapSelection = baseFile.mapSelection.set("mapScale", mapScale);
 
     // writeFileSync(`./route-maps/${routeId}_${DATE}.json`, toJSON(baseFile));
     // writeFileSync(
@@ -121,7 +121,7 @@ function renderRoute(routeId) {
     // );
     // imageGenerator(({ data }) => {
     //   writeFileSync(`./route-maps/${routeId}_${DATE}.png`, data);
-    //   callback(null, 'done');
+    //   callback(null, "done");
     // }, {
     //   mapSelection: toJSON(baseFile.mapSelection),
     //   style: styleFromLayers(baseFile.layers, baseFile.sources).toJS(),
@@ -129,19 +129,19 @@ function renderRoute(routeId) {
 
     const svgFile = createWriteStream(`./route-maps/${routeId}_${DATE}.svg`);
 
-    const stream = createReadStream('./hsl_kartta_kuljettajanohje_01.svg')
-      .pipe(replacestream('_FILENAME_', `file://${process.cwd()}/route-maps/${routeId}_${DATE}.png`))
-      .pipe(replacestream('_TRANSFORM_', portrait ? '' : transform))
-      .pipe(replacestream('_NUMERO_',
-        routeData[routeId] ? routeData[routeId].shortName : routeId.substring(1).replace(/^0*/g, '')
+    const stream = createReadStream("./hsl_kartta_kuljettajanohje_01.svg")
+      .pipe(replacestream("_FILENAME_", `file://${process.cwd()}/route-maps/${routeId}_${DATE}.png`))
+      .pipe(replacestream("_TRANSFORM_", portrait ? "" : transform))
+      .pipe(replacestream("_NUMERO_",
+        routeData[routeId] ? routeData[routeId].shortName : routeId.substring(1).replace(/^0*/g, "")
       ))
-      .pipe(replacestream('_LINJA_',
-        routeData[routeId] ? routeData[routeId].longName : ''
+      .pipe(replacestream("_LINJA_",
+        routeData[routeId] ? routeData[routeId].longName : ""
       ))
-      .pipe(replacestream('_DATE_', DATE))
+      .pipe(replacestream("_DATE_", DATE))
       .pipe(svgFile);
 
-    stream.on('finish', () => callback(null, 'done'));
+    stream.on("finish", () => callback(null, "done"));
   };
 }
 
@@ -163,7 +163,7 @@ function runGenerator(fn) {
     const result = it.next(arg);
     if (result.done) return;
 
-    if (typeof result.value === 'function') {
+    if (typeof result.value === "function") {
       result.value(next);
     } else {
       next(null, result.value);

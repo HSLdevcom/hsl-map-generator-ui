@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import DraggablePoints from 'react-map-gl/src/overlays/draggable-points.react';
+import React, { PropTypes } from "react";
+import DraggablePoints from "react-map-gl/src/overlays/draggable-points.react";
 
 const CenterMarker = ({viewport, width, height, center, updateCenter}) => (
   <DraggablePoints
@@ -10,8 +10,8 @@ const CenterMarker = ({viewport, width, height, center, updateCenter}) => (
     onUpdatePoint={updateCenter}
     renderPoint={point => (
       <g>
-      <circle key={point.id + 'innre'} r="4" style={{fill: '#D91153'}}/>
-      <circle key={point.id + 'outer'} r="7" strokeWidth="2" style={{stroke: '#D91153', fill: 'none'}}/>
+      <circle key={point.id + "innre"} r="4" style={{fill: "#D91153"}}/>
+      <circle key={point.id + "outer"} r="7" strokeWidth="2" style={{stroke: "#D91153", fill: "none"}}/>
       </g>
     )}
   />);

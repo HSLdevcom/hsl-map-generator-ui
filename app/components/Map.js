@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
-import MapGL from 'react-map-gl';
-import CenterMarker from '../containers/CenterMarker';
-import SelectionWindow from '../containers/SelectionWindow';
-import DebugOverlay from '../containers/DebugOverlay';
+import React, { PropTypes } from "react";
+import MapGL from "react-map-gl";
+import CenterMarker from "../containers/CenterMarker";
+import SelectionWindow from "../containers/SelectionWindow";
+import DebugOverlay from "../containers/DebugOverlay";
 
 const MapComponent = ({viewport, updateViewport, style}) => (
     <div>

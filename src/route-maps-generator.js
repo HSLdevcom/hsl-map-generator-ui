@@ -1,11 +1,11 @@
-import { toJSON, fromJSON } from 'transit-immutable-js';
-import { fromJS } from 'immutable';
-import { readFileSync, writeFileSync } from 'fs';
-import request from 'requestretry';
-import { groupBy, flatMap, keyBy, findIndex } from 'lodash';
-import { DEG_LAT_PER_M, mmToM, degLonPerM, degToRad } from '../app/utils/geom-utils';
-import { styleFromLayers } from '../app/utils/map-utils';
-import imageGenerator from './imageGenerator';
+import { toJSON, fromJSON } from "transit-immutable-js";
+import { fromJS } from "immutable";
+import { readFileSync, writeFileSync } from "fs";
+import request from "requestretry";
+import { groupBy, flatMap, keyBy, findIndex } from "lodash";
+import { DEG_LAT_PER_M, mmToM, degLonPerM, degToRad } from "../app/utils/geom-utils";
+import { styleFromLayers } from "../app/utils/map-utils";
+import imageGenerator from "./imageGenerator";
 
 const query = `
   query trips{
@@ -29,7 +29,7 @@ const query = `
     }
   }`;
 
-const uri = 'http://tulevatreitit.hsl.fi/otp/routers/helsinki/index/graphql';
+const uri = "http://tulevatreitit.hsl.fi/otp/routers/helsinki/index/graphql";
 
 const boundsReducer = (previous, current) => ({
   maxLat: previous.maxLat > current.lat ? previous.maxLat : current.lat,
@@ -50,9 +50,9 @@ request({
   body: query,
   maxAttempts: 120,
   retryDelay: 30000,
-  method: 'POST',
+  method: "POST",
   headers: {
-    'Content-Type': 'application/graphql'
+    "Content-Type": "application/graphql"
   },
   fullResponse: false
 })
@@ -64,26 +64,26 @@ request({
 
   function renderRoute(route) {
     return (callback) => {
-      const baseFile = fromJSON(readFileSync('./map.json'));
+      const baseFile = fromJSON(readFileSync("./map.json"));
 
       const routeLayers = [
-        findIndex(baseFile.layers, layer => layer.text === 'Routes'),
-        findIndex(baseFile.layers, layer => layer.text === 'Routes-Alternative'),
+        findIndex(baseFile.layers, layer => layer.text === "Routes"),
+        findIndex(baseFile.layers, layer => layer.text === "Routes-Alternative"),
       ];
 
       const stopLayers = [
-        findIndex(baseFile.layers, layer => layer.text === 'Stops'),
-        findIndex(baseFile.layers, layer => layer.text === 'Stops-Alternative'),
+        findIndex(baseFile.layers, layer => layer.text === "Stops"),
+        findIndex(baseFile.layers, layer => layer.text === "Stops-Alternative"),
       ];
 
       const routeFilters = [
-        [ '==', 'id' ],
-        [ '==', 'id' ],
+        [ "==", "id" ],
+        [ "==", "id" ],
       ];
 
       const stopFilters = [
-        [ 'in', 'gtfsId' ],
-        [ 'in', 'gtfsId' ],
+        [ "in", "gtfsId" ],
+        [ "in", "gtfsId" ],
       ];
 
       routes[route].forEach(pattern =>
@@ -112,8 +112,8 @@ request({
         }
       });
 
-      baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-citybikes')].enabled = false;
-      baseFile.layers[findIndex(baseFile.layers, layer => layer.text === 'POI-park-and-ride')].enabled = false;
+      baseFile.layers[findIndex(baseFile.layers, layer => layer.text === "POI-citybikes")].enabled = false;
+      baseFile.layers[findIndex(baseFile.layers, layer => layer.text === "POI-park-and-ride")].enabled = false;
 
       const bounds = flatMap(routes[route], pattern => pattern[0].stops.map(stop => stops[stop.gtfsId])).reduce(boundsReducer, minExtent);
       const center = [(bounds.minLon + bounds.maxLon) / 2, (bounds.minLat + bounds.maxLat) / 2];
@@ -125,15 +125,15 @@ request({
         sizeDeg[1] * DEG_LAT_PER_M / mmToM(sizeMM[1])
       ) * 1.1;
 
-      baseFile.mapSelection = baseFile.mapSelection.set('size', fromJS(sizeMM));
-      baseFile.mapSelection = baseFile.mapSelection.setIn(['center', 0, 'location'], fromJS(center));
-      baseFile.mapSelection = baseFile.mapSelection.set('pixelScale', 0.5);
-      baseFile.mapSelection = baseFile.mapSelection.set('mapScale', mapScale);
+      baseFile.mapSelection = baseFile.mapSelection.set("size", fromJS(sizeMM));
+      baseFile.mapSelection = baseFile.mapSelection.setIn(["center", 0, "location"], fromJS(center));
+      baseFile.mapSelection = baseFile.mapSelection.set("pixelScale", 0.5);
+      baseFile.mapSelection = baseFile.mapSelection.set("mapScale", mapScale);
 
       writeFileSync(`./route-maps/${route}.json`, toJSON(baseFile));
       imageGenerator(({data}) => {
         writeFileSync(`./route-maps/${route}.png`, data);
-        callback(null, 'done');
+        callback(null, "done");
       }, {
         mapSelection: toJSON(baseFile.mapSelection),
         style: styleFromLayers(baseFile.layers).toJS(),
@@ -159,7 +159,7 @@ request({
       var result = it.next(arg);
       if (result.done) return;
 
-      if (typeof result.value === 'function') {
+      if (typeof result.value === "function") {
         result.value(next);
       } else {
         next(null, result.value);

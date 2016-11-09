@@ -1,11 +1,11 @@
-import React from 'react';
-import DropdownSelector from './DropdownSelector';
-import styles from './DropdownSelector.css';
+import React from "react";
+import DropdownSelector from "./DropdownSelector";
+import styles from "./DropdownSelector.css";
 
 const CenterSelector = ({center, toggleTab, selected, updateCenter}) => (
   <DropdownSelector
     title="Sijainti"
-    value={center.toArray().map(integer => integer.toFixed(5)).reverse().join(', ')}
+    value={center.toArray().map(integer => integer.toFixed(5)).reverse().join(", ")}
     toggleTab={toggleTab}
     selected={selected}
   >

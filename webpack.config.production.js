@@ -1,13 +1,13 @@
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import baseConfig from './webpack.config.base';
+import webpack from "webpack";
+import ExtractTextPlugin from "extract-text-webpack-plugin";
+import baseConfig from "./webpack.config.base";
 
 const config = {
   ...baseConfig,
 
-  devtool: 'source-map',
+  devtool: "source-map",
 
-  entry: './app/index',
+  entry: "./app/index",
 
   output: {
     ...baseConfig.output,
@@ -22,16 +22,16 @@ const config = {
       {
         test: /\.global\.css$/,
         loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader'
+          "style-loader",
+          "css-loader"
         )
       },
 
       {
         test: /^((?!\.global).)*\.css$/,
         loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+          "style-loader",
+          "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
         )
       }
     ]
@@ -42,8 +42,8 @@ const config = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       __DEV__: false,
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -52,7 +52,7 @@ const config = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('style.css', { allChunks: true })
+    new ExtractTextPlugin("style.css", { allChunks: true })
   ],
 
 };

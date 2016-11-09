@@ -1,11 +1,11 @@
-import React from 'react';
-import DropdownSelector from './DropdownSelector';
-import styles from './DropdownSelector.css';
+import React from "react";
+import DropdownSelector from "./DropdownSelector";
+import styles from "./DropdownSelector.css";
 
 const SizeSelector = ({size, toggleTab, selected, updateSize}) => (
   <DropdownSelector
     title="Fyysinen koko"
-    value={size.toArray().join(' x ') + ' mm'}
+    value={size.toArray().join(" x ") + " mm"}
     toggleTab={toggleTab}
     selected={selected}
   >

@@ -1,6 +1,6 @@
-import React from 'react';
-import classnames from 'classnames';
-import styles from './DropdownSelector.css';
+import React from "react";
+import classnames from "classnames";
+import styles from "./DropdownSelector.css";
 
 const DropdownSelector = ({title, value, selected, toggleTab, children}) => (
   <div className={classnames(styles.component, selected && styles.selected)}>

@@ -1,15 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
-import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
+import React, { Component, PropTypes } from "react";
+import { findDOMNode } from "react-dom";
+import { DragSource as dragSource, DropTarget as dropTarget } from "react-dnd";
 
-const CARD = 'card';
+const CARD = "card";
 
 const style = {
-  margin: '0 1rem',
-  borderTop: '1px solid #666',
-  padding: '0.5rem 1rem',
-  cursor: 'move',
-  color: '#ddd',
+  margin: "0 1rem",
+  borderTop: "1px solid #666",
+  padding: "0.5rem 1rem",
+  cursor: "move",
+  color: "#ddd",
   fontWeight: 300
 };
 
@@ -27,7 +27,7 @@ const cardTarget = {
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
 
-    // Don't replace items with themselves
+    // Don"t replace items with themselves
     if (dragIndex === hoverIndex) {
       return;
     }
@@ -61,9 +61,9 @@ const cardTarget = {
     // Time to actually perform the action
     props.moveCard(dragIndex, hoverIndex);
 
-    // Note: we're mutating the monitor item here!
-    // Generally it's better to avoid mutations,
-    // but it's good here for the sake of performance
+    // Note: we"re mutating the monitor item here!
+    // Generally it"s better to avoid mutations,
+    // but it"s good here for the sake of performance
     // to avoid expensive index searches.
     monitor.getItem().index = hoverIndex;
   }

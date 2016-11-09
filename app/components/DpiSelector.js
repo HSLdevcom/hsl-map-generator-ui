@@ -1,11 +1,11 @@
-import React from 'react';
-import DropdownSelector from './DropdownSelector';
-import styles from './DropdownSelector.css';
+import React from "react";
+import DropdownSelector from "./DropdownSelector";
+import styles from "./DropdownSelector.css";
 
 const DpiSelector = ({dpi, toggleTab, selected, updateDpi}) => (
   <DropdownSelector
     title="Tarkkuus"
-    value={dpi + ' dpi'}
+    value={dpi + " dpi"}
     toggleTab={toggleTab}
     selected={selected}
   >
