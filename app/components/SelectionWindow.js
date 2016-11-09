@@ -7,10 +7,10 @@ const redraw = mapSelection =>
         const bbox = mapSelectionToBbox(mapSelection);
         const nw = project(bbox[0]);
         const se = project(bbox[1]);
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
-        ctx.fillRect(0, 0, width, height);
-        ctx.clearRect(nw[0], nw[1], se[0] - nw[0], se[1] - nw[1]);
+        ctx.clearRect(0, 0, width, height);  // eslint-disable-line no-param-reassign
+        ctx.fillStyle = "rgba(0, 0, 0, 0.4)"; // eslint-disable-line no-param-reassign
+        ctx.fillRect(0, 0, width, height); // eslint-disable-line no-param-reassign
+        ctx.clearRect(nw[0], nw[1], se[0] - nw[0], se[1] - nw[1]); // eslint-disable-line
     };
 
 
