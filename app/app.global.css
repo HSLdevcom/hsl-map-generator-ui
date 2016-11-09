@@ -33,3 +33,12 @@ a:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+button {
+    display:block;
+    font: inherit;
+    color: inherit;
+    background-color: inherit;
+    outline: none;
+    border: none;
+}

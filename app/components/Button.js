@@ -3,9 +3,9 @@ import classnames from "classnames";
 import styles from "./Button.css";
 
 const Button = ({ children, onClick, styleClass = "light" }) => (
-    <div className={classnames(styles.button, styles[styleClass])} onClick={onClick}>
+    <button className={classnames(styles.button, styles[styleClass])} onClick={onClick}>
         {children}
-    </div>
+    </button>
 );
 
 export default Button;

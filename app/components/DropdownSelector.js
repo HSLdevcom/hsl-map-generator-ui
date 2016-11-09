@@ -4,14 +4,14 @@ import styles from "./DropdownSelector.css";
 
 const DropdownSelector = ({ title, value, selected, toggleTab, children }) => (
     <div className={classnames(styles.component, selected && styles.selected)}>
-        <div className={styles.selector} onClick={toggleTab}>
+        <button className={styles.selector} onClick={toggleTab}>
             <div className={styles.title}>
                 {title}
             </div>
             <div className={styles.value}>
                 {value}
             </div>
-        </div>
+        </button>
         {selected ?
             <div className={classnames(styles.dropdownContainer, styles.selected)}>
                 {children}
