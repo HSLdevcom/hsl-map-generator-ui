@@ -1,13 +1,8 @@
 {
-  "presets": ["es2015-chrome-47", "stage-0", "react"],
+  "presets": ["es2015", "stage-0", "react"],
   "env": {
     "development": {
       "presets": ["react-hmre"]
-    },
-    "test": {
-      "plugins": [
-        ["webpack-loaders", { "config": "webpack.config.node.js", "verbose": false }]
-      ]
     }
   }
 }
