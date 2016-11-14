@@ -72,4 +72,4 @@ css-modules loader. e.g. `app.global.css`
 
 
 ## License
-MIT © [C. T. Lin](https://github.com/chentsulin)
+MIT © [HSL](https://github.com/HSLdevcom)
