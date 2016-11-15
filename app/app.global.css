@@ -1,35 +1,44 @@
 body {
-  position: relative;
-  color: #aaa;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  background-color: #333;
-  font-family: Nunito, Arial, Helvetica, Helvetica Neue, sans-serif;;
-  overflow-y: hidden;
+    position: relative;
+    color: #aaa;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: #333;
+    font-family: Nunito, Arial, Helvetica, Helvetica Neue, sans-serif;;
+    overflow-y: hidden;
 }
 
 h2 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 400;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 400;
 }
 
 p {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 li {
-  list-style: none;
+    list-style: none;
 }
 
 a {
-  opacity: .75;
-  text-decoration: none;
+    opacity: .75;
+    text-decoration: none;
 }
 
 a:hover {
-  opacity: 1;
-  text-decoration: none;
-  cursor: pointer;
+    opacity: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    display:block;
+    font: inherit;
+    color: inherit;
+    background-color: inherit;
+    outline: none;
+    border: none;
 }

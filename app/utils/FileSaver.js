@@ -4,7 +4,7 @@
  *
  * By Eli Grey, http://eligrey.com
  * License: MIT
- *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+ *     See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
  */
 
 /*global self */
@@ -19,8 +19,8 @@ var saveAs = saveAs || (function(view) {
 		return;
 	}
 	var
-		  doc = view.document
-		  // only get URL when necessary in case Blob.js hasn't overridden it yet
+		    doc = view.document
+		    // only get URL when necessary in case Blob.js hasn"t overridden it yet
 		, get_URL = function() {
 			return view.URL || view.webkitURL || view;
 		}
@@ -85,7 +85,7 @@ var saveAs = saveAs || (function(view) {
 			}
 			// First try a.download, then web filesystem, then object URLs
 			var
-				  filesaver = this
+				    filesaver = this
 				, type = blob.type
 				, blob_changed = false
 				, object_url
@@ -96,7 +96,7 @@ var saveAs = saveAs || (function(view) {
 				// on any filesys errors revert to saving with object URLs
 				, fs_error = function() {
 					if (target_view && is_safari && typeof FileReader !== "undefined") {
-						// Safari doesn't allow downloading of blob urls
+						// Safari doesn"t allow downloading of blob urls
 						var reader = new FileReader();
 						reader.onloadend = function() {
 							var base64Data = reader.result;
@@ -108,7 +108,7 @@ var saveAs = saveAs || (function(view) {
 						filesaver.readyState = filesaver.INIT;
 						return;
 					}
-					// don't create more object URLs than needed
+					// don"t create more object URLs than needed
 					if (blob_changed || !object_url) {
 						object_url = get_URL().createObjectURL(blob);
 					}
@@ -161,7 +161,7 @@ var saveAs = saveAs || (function(view) {
 				blob = slice.call(blob, 0, blob.size, force_saveable_type);
 				blob_changed = true;
 			}
-			// Since I can't be sure that the guessed media type will trigger a download
+			// Since I can"t be sure that the guessed media type will trigger a download
 			// in WebKit, I append .download to the filename.
 			// https://bugs.webkit.org/show_bug.cgi?id=65440
 			if (webkit_req_fs && name !== "download") {
@@ -253,7 +253,7 @@ var saveAs = saveAs || (function(view) {
 
 	return saveAs;
 }(
-	   typeof self !== "undefined" && self
+	     typeof self !== "undefined" && self
 	|| typeof window !== "undefined" && window
 	|| this.content
 ));
@@ -262,9 +262,9 @@ var saveAs = saveAs || (function(view) {
 // with an attribute `content` that corresponds to the window
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports.saveAs = saveAs;
+    module.exports.saveAs = saveAs;
 } else if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-  define([], function() {
-    return saveAs;
-  });
+    define([], function() {
+        return saveAs;
+    });
 }
