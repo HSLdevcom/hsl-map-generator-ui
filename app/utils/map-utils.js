@@ -12,7 +12,7 @@ export const styleFromLayers = (layers, sources) =>
         let newLayer = layer;
         const layerState = find(layers, matchesProperty("id", newLayer.getIn(["metadata", "mapbox:group"])));
 
-        if (!newLayer.get("ref") && layerState && layerState.enabled === false) {
+        if (!newLayer.get("ref") && layerState && !layerState.enabled) {
             return newLayer.setIn(["layout", "visibility"], "none");
         } else if (!newLayer.get("ref") && layerState && layerState.enabled === true) {
             newLayer = newLayer.setIn(["layout", "visibility"], "visible");
