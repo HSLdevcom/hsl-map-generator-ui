@@ -80,7 +80,6 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "file-saver": "^1.3.2",
-    "hsl-map-generator-utils": "git+https://github.com/HSLdevcom/hsl-map-generator-utils",
     "hsl-map-style": "git+https://github.com/HSLdevcom/hsl-map-style",
     "immutable": "^3.7.6",
     "librsvg": "^0.6.3",

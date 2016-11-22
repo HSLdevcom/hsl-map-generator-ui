@@ -1,6 +1,6 @@
 import React, { PropTypes } from "react";
 import HtmlOverlay from "react-map-gl/src/overlays/html.react";
-import { mapSelectionToZoom, mapSelectionToTileScale, mapSelectionToPixelSize } from "hsl-map-generator-utils";
+import { mapSelectionToZoom, mapSelectionToTileScale, mapSelectionToPixelSize } from "../utils/geom-utils";
 
 const redraw = mapSelection => () => (
     <div
