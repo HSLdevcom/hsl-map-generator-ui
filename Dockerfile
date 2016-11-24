@@ -6,12 +6,10 @@ ENV WORK /opt/mapgenerator
 RUN mkdir -p ${WORK}
 WORKDIR ${WORK}
 
-# Install app dependencies
-COPY package.json ${WORK}
-RUN npm install
-
-# Bundle app source
+# Install app dependencies and bundle app source
 COPY . ${WORK}
+RUN npm install
+RUN npm run build
 
 EXPOSE 4000
 
