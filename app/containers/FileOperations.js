@@ -19,7 +19,7 @@ function mapStateToProps(state) {
         //         mapSelection: toJSON(state.mapSelection),
         //     }),
         onGenerateImage: () =>
-            fetch("http://136.243.66.163/generateImage", {
+            fetch(`${process.env.API_URL}generateImage`, {
                 method: "POST",
                 mode: "cors",
                 redirect: "follow",
@@ -35,7 +35,7 @@ function mapStateToProps(state) {
             .then(response => response.blob())
             .then(blob => saveAs(blob, "map.png")),
         onGenerateStopLabels: () =>
-            fetch("http://136.243.66.163/generateStopLabels", {
+            fetch(`${process.env.API_URL}generateStopLabels`, {
                 method: "POST",
                 mode: "cors",
                 redirect: "follow",
