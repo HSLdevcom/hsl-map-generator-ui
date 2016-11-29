@@ -1,0 +1,8 @@
+.container div:first-child div:first-child {
+	border-width: 12px !important;
+	animation-duration: 1.2s !important;
+}
+
+.container button {
+	margin-left: 0px;
+}
