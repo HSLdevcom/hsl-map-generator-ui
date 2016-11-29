@@ -4,12 +4,14 @@ import layers from "./layers";
 import mapSelection from "./mapSelection";
 import tabName from "./tabName";
 import viewport from "./viewport";
+import apiRequests from "./apiRequests";
 
 const rootReducer = combineReducers({
     layers,
     mapSelection,
     tabName,
     viewport,
+    apiRequests,
     routing,
 });
 
