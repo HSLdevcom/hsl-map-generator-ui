@@ -7,8 +7,8 @@ import { generateImageRequest, generateImageSuccess, generateImageError, generat
 
 function mapStateToProps(state) {
     return {
-        onGenerateImage: () =>
-            generateImage(state),
+        onGenerateImage: (imageRequest, imageSuccess, imageError) =>
+            generateImage(state, imageRequest, imageSuccess, imageError),
         onGenerateStopLabels: () => generateStopLabels(state),
         onSaveState: () =>
             saveAs(new Blob([toJSON(state)], { type: "application/json" }), "map.json"),
