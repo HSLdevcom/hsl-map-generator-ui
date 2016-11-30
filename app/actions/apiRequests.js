@@ -27,7 +27,7 @@ export const generateImageCancel = () => ({
 
 export const generateImage = (state, imageRequest, imageSuccess, imageError) => {
     const cancelablePromise = new CancelablePromise((resolve) => {
-        resolve(fetch("http://localhost:8000/generateImage", {
+        resolve(fetch(`${process.env.API_URL}/generateImage`, {
             method: "POST",
             mode: "cors",
             redirect: "follow",
@@ -61,7 +61,7 @@ export const generateImage = (state, imageRequest, imageSuccess, imageError) => 
 };
 
 export const generateStopLabels = state =>
-    fetch("http://localhost:8000/generateStopLabels", {
+    fetch(`${process.env.API_URL}/generateStopLabels`, {
         method: "POST",
         mode: "cors",
         redirect: "follow",
