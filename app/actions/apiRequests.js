@@ -1,7 +1,7 @@
 import { toJSON } from "transit-immutable-js";
-import { styleFromLayers } from "hsl-map-generator-utils";
 import { saveAs } from "file-saver";
 import CancelablePromise from "cancelable-promise";
+import { styleFromLayers } from "../utils/map-utils";
 
 export const GENERATE_IMAGE_REQUEST = "GENERATE_IMAGE_REQUEST";
 export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
