@@ -7,12 +7,12 @@ export const baseStyle = fromJS(style, (key, value) => {
     return isIndexed ? value.toList() : value.toOrderedMap();
 });
 
-export const styleFromLayers = (layers, sources) => {
-    return baseStyle.mergeIn(["sources"], sources).set("layers", baseStyle.get("layers").map((layer) => {
+export const styleFromLayers = (layers, sources) =>
+    baseStyle.mergeIn(["sources"], sources).set("layers", baseStyle.get("layers").map((layer) => {
         let newLayer = layer;
         const layerState = find(layers, matchesProperty("id", newLayer.getIn(["metadata", "mapbox:group"])));
 
-        if (!newLayer.get("ref") && layerState && layerState.enabled === false) {
+        if (!newLayer.get("ref") && layerState && !layerState.enabled) {
             return newLayer.setIn(["layout", "visibility"], "none");
         } else if (!newLayer.get("ref") && layerState && layerState.enabled === true) {
             newLayer = newLayer.setIn(["layout", "visibility"], "visible");
@@ -28,13 +28,3 @@ export const styleFromLayers = (layers, sources) => {
         }
         return newLayer;
     }));
-};
-
-// .set("layers", fromJS(
-//     layers
-//     .concat()
-//     .reverse()
-//     .filter(layer => layer.enabled)
-//     .reduce((prev, layer) => prev.concat(style.groups[layer.id].layers), [])));
-
-// TODO: This is horrible and should be replaced with a propurr implementation

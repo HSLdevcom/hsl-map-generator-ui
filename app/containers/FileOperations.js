@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 // import { ipcRenderer } from "electron";
 import { toJSON, fromJSON } from "transit-immutable-js";
-import { styleFromLayers } from "hsl-map-generator-utils";
 import { saveAs } from "file-saver";
+import { styleFromLayers } from "../utils/map-utils";
 import FileOperations from "../components/FileOperations";
 import { loadState } from "../actions/fileOperations";
 
