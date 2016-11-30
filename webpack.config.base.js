@@ -22,7 +22,7 @@ export default {
     },
     output: {
         path: path.join(__dirname, "dist"),
-        publicPath: "/",
+        publicPath: "/kartta",
         filename: "bundle.js",
     },
     resolve: {

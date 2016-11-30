@@ -75,12 +75,17 @@ class Layer extends Component {
         const opacity = isDragging ? 0 : 1;
 
         return connectDragSource(connectDropTarget(
-            <div style={{ ...style, opacity }}>
-                <input
-                    checked={this.props.selected}
-                    type="checkbox" onChange={() => this.props.toggleLayer(this.props.id)}
-                />
-                {text}
+            <div>
+                <label htmlFor={`checkbox_${this.props.id}`}>
+                    <div style={{ ...style, opacity }}>
+                        <input
+                            id={`checkbox_${this.props.id}`}
+                            checked={this.props.selected}
+                            type="checkbox" onChange={() => this.props.toggleLayer(this.props.id)}
+                        />
+                        {text}
+                    </div>
+                </label>
             </div>,
         ));
     }
