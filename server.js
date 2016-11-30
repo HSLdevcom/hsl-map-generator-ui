@@ -4,7 +4,6 @@ import express from "express";
 import config from "./webpack.config.production";
 
 const app = express();
-const PORT = 4000;
 const staticPath = config.output.path;
 
 app
@@ -15,12 +14,12 @@ app
     });
 });
 
-const server = app.listen(PORT, "0.0.0.0", (err) => {
+const server = app.listen(process.env.PORT || 3000, "0.0.0.0", (err) => {
     if (err) {
         console.error(err);
         return;
     }
-    console.log(`Listening at port ${PORT}`);
+    console.log(`Listening at port ${process.env.PORT || 3000}`);
 });
 
 process.on("SIGTERM", () => {

@@ -41,9 +41,9 @@ const config = {
         ...baseConfig.plugins,
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.DefinePlugin({
-            __DEV__: false,
             "process.env": {
                 NODE_ENV: JSON.stringify("production"),
+                API_URL: JSON.stringify("http://136.243.66.163/"),
             },
         }),
         new webpack.optimize.UglifyJsPlugin({
