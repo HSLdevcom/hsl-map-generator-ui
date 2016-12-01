@@ -1,17 +1,21 @@
 import React from "react";
+import classnames from "classnames";
 import Button from "./Button";
 import styles from "./FileOperations.css";
+import buttonStyles from "./Button.css";
 
 const FileOperations = ({ onGenerateImage, generateImageRequest, generateImageSuccess,
-    generateImageError, onGenerateStopLabels, onSaveState, onLoadState }) => (
+    generateImageError, onGenerateStopLabels, onSaveState, onLoadState, loadState }) => (
         <div className={styles.container}>
             <label htmlFor="load_file_button">
-                <Button styleClass="darkWithBorder">Lataa</Button>
+                <div className={classnames(buttonStyles.button, buttonStyles.darkWithBorder)}>
+                    Lataa
+                </div>
                 <input
                     id="load_file_button"
                     type="file"
                     style={{ display: "none" }}
-                    onChange={onLoadState}
+                    onChange={event => onLoadState(event, loadState)}
                 />
             </label>
             <Button onClick={onSaveState} styleClass="darkWithBorder">Tallenna</Button>
