@@ -59,19 +59,3 @@ export const generateImage = (state, imageRequest, imageSuccess, imageError) => 
 
     return cancelablePromise;
 };
-
-export const generateStopLabels = state =>
-    fetch(`${process.env.API_URL}/generateStopLabels`, {
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-        headers: new Headers({
-            "Content-Type": "application/json",
-            backend: "mapgenerator",
-        }),
-        body: JSON.stringify({
-            mapSelection: toJSON(state.mapSelection),
-        }),
-    })
-    .then(response => response.blob())
-    .then(blob => saveAs(blob, "stops.html"));

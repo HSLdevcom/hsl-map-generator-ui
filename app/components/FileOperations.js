@@ -27,7 +27,6 @@ const FileOperations = ({ onGenerateImage, generateImageRequest, generateImageSu
                         generateImageError,
                 )}
             >Generoi Kartta</Button>
-            <Button onClick={onGenerateStopLabels}>Generoi Pysäkit</Button>
         </div>
 );
 
