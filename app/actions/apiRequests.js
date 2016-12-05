@@ -8,54 +8,37 @@ export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
 export const GENERATE_IMAGE_ERROR = "GENERATE_IMAGE_ERROR";
 export const GENERATE_IMAGE_CANCEL = " GENERATE_IMAGE_CANCEL";
 
-export const generateImageRequest = imagePromise => ({
-    type: GENERATE_IMAGE_REQUEST,
-    imagePromise,
-});
+export const generateImage = () =>
+    (dispatch, getState) => {
+        const state = getState();
+        const cancelablePromise = new CancelablePromise((resolve) => {
+            resolve(fetch(`${process.env.API_URL}/generateImage`, {
+                method: "POST",
+                mode: "cors",
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                }),
+                body: JSON.stringify({
+                    mapSelection: toJSON(state.mapSelection),
+                    style: styleFromLayers(state.layers).toJS(),
+                }),
+            }));
+        });
 
-export const generateImageSuccess = () => ({
-    type: GENERATE_IMAGE_SUCCESS,
-});
+        dispatch({ type: GENERATE_IMAGE_REQUEST, cancelablePromise });
 
-export const generateImageError = () => ({
-    type: GENERATE_IMAGE_ERROR,
-});
-
-export const generateImageCancel = () => ({
-    type: GENERATE_IMAGE_CANCEL,
-});
-
-export const generateImage = (state, imageRequest, imageSuccess, imageError) => {
-    const cancelablePromise = new CancelablePromise((resolve) => {
-        resolve(fetch(`${process.env.API_URL}/generateImage`, {
-            method: "POST",
-            mode: "cors",
-            redirect: "follow",
-            headers: new Headers({
-                "Content-Type": "application/json",
-                backend: "mapgenerator",
-            }),
-            body: JSON.stringify({
-                mapSelection: toJSON(state.mapSelection),
-                style: styleFromLayers(state.layers).toJS(),
-            }),
-        }));
-    });
-
-    imageRequest(cancelablePromise);
-
-    cancelablePromise.then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-            return response.blob().then(blob => saveAs(blob, "map.png")).then(imageSuccess());
-        }
-        const error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-    })
-    .catch((error) => {
-        console.log("Request failed ", error);
-        imageError();
-    });
-
-    return cancelablePromise;
-};
+        cancelablePromise.then((response) => {
+            if (response.status >= 200 && response.status < 300) {
+                return response.blob().then(blob => saveAs(blob, "map.png")).then(
+                    dispatch({ type: GENERATE_IMAGE_SUCCESS }),
+                );
+            }
+            const error = new Error(response.statusText);
+            error.response = response;
+            throw error;
+        })
+        .catch((error) => {
+            console.log("Request failed ", error);
+            dispatch({ type: GENERATE_IMAGE_ERROR });
+        });
+    };
