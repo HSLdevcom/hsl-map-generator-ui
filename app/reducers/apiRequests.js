@@ -9,7 +9,7 @@ export default function apiRequests(state = initialState, action) {
     switch (action.type) {
         case GENERATE_IMAGE_REQUEST:
             return {
-                imagePromise: action.imagePromise,
+                imagePromise: action.cancelablePromise,
                 requestCounter: state.requestCounter + 1,
                 isLoading: true,
             };

@@ -8,6 +8,12 @@ export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
 export const GENERATE_IMAGE_ERROR = "GENERATE_IMAGE_ERROR";
 export const GENERATE_IMAGE_CANCEL = " GENERATE_IMAGE_CANCEL";
 
+export const generateImageCancel = () =>
+    (dispatch, getState) => {
+        getState().apiRequests.imagePromise.cancel();
+        dispatch({ type: GENERATE_IMAGE_CANCEL });
+    };
+
 export const generateImage = () =>
     (dispatch, getState) => {
         const state = getState();

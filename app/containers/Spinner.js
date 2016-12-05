@@ -7,11 +7,6 @@ function mapStateToProps(state) {
     return {
         isLoading: state.apiRequests.isLoading,
         imagePromise: state.apiRequests.imagePromise,
-        onCancelRequest: (cancelablePromise, imageCancel) => {
-            imageCancel(cancelablePromise);
-            if (cancelablePromise) return cancelablePromise.cancel();
-            return null;
-        },
     };
 }
 
