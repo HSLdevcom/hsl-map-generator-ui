@@ -10,7 +10,9 @@ export const GENERATE_IMAGE_CANCEL = " GENERATE_IMAGE_CANCEL";
 
 export const generateImageCancel = () =>
     (dispatch, getState) => {
-        getState().apiRequests.imagePromise.cancel();
+        getState().apiRequests.imagePromises.forEach((promise) => {
+            promise.cancel();
+        });
         dispatch({ type: GENERATE_IMAGE_CANCEL });
     };
 

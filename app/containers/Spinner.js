@@ -6,7 +6,7 @@ import { generateImageCancel } from "../actions/apiRequests";
 function mapStateToProps(state) {
     return {
         isLoading: state.apiRequests.isLoading,
-        imagePromise: state.apiRequests.imagePromise,
+        imagePromises: state.apiRequests.imagePromises,
     };
 }
 
