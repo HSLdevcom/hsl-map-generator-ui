@@ -6,14 +6,14 @@ import { styleFromLayers } from "../utils/map-utils";
 export const GENERATE_IMAGE_REQUEST = "GENERATE_IMAGE_REQUEST";
 export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
 export const GENERATE_IMAGE_ERROR = "GENERATE_IMAGE_ERROR";
-export const GENERATE_IMAGE_CANCEL = " GENERATE_IMAGE_CANCEL";
+export const GENERATE_IMAGE_CANCEL_ALL = " GENERATE_IMAGE_CANCEL_ALL";
 
-export const generateImageCancel = () =>
+export const generateImageCancelAll = () =>
     (dispatch, getState) => {
         getState().apiRequests.imagePromises.forEach((promise) => {
             promise.cancel();
         });
-        dispatch({ type: GENERATE_IMAGE_CANCEL });
+        dispatch({ type: GENERATE_IMAGE_CANCEL_ALL });
     };
 
 export const generateImage = () =>

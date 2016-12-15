@@ -1,4 +1,4 @@
-import { GENERATE_IMAGE_REQUEST, GENERATE_IMAGE_CANCEL, GENERATE_IMAGE_SUCCESS, GENERATE_IMAGE_ERROR } from "../actions/apiRequests";
+import { GENERATE_IMAGE_REQUEST, GENERATE_IMAGE_CANCEL_ALL, GENERATE_IMAGE_SUCCESS, GENERATE_IMAGE_ERROR } from "../actions/apiRequests";
 
 const initialState = {
     isLoading: false,
@@ -30,7 +30,7 @@ export default function apiRequests(state = initialState, action) {
                 isLoading: openRequests > 0,
             };
         }
-        case GENERATE_IMAGE_CANCEL: {
+        case GENERATE_IMAGE_CANCEL_ALL: {
             return {
                 imagePromises: [],
                 requestCounter: 0,

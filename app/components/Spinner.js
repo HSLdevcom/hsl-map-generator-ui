@@ -20,7 +20,7 @@ const spinnerStyle = (containerWidth, containerHeight) => ({
     transform: "translate(-50%, -50%)",
 });
 
-const Spinner = ({ width, height, isLoading, generateImageCancel }) => (
+const Spinner = ({ width, height, isLoading, generateImageCancelAll }) => (
     <div>
         {isLoading ?
             <div>
@@ -32,7 +32,7 @@ const Spinner = ({ width, height, isLoading, generateImageCancel }) => (
                     <Loader color="lightgray" size="120px"/>
                     <Button
                         styleClass="lightWithBorder"
-                        onClick={generateImageCancel}
+                        onClick={generateImageCancelAll}
                     >Peruuta</Button>
                 </div>
             </div>
