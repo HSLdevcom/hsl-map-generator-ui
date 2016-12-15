@@ -46,7 +46,7 @@ export const generateImage = () =>
             throw error;
         })
         .catch((error) => {
-            console.log("Request failed ", error);
+            if (process.env.NODE_ENV === "development") console.error(error); // eslint-disable-line no-console
             dispatch({ type: GENERATE_IMAGE_ERROR });
         });
     };
