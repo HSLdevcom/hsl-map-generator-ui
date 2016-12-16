@@ -15,7 +15,12 @@
     background-color: #555;
 }
 
-.dark {
+.darkWithBorder {
     background-color: #333;
     border: solid 1px #555;
+}
+
+.lightWithBorder {
+    background-color: #555;
+    border: solid 1px #999;    
 }

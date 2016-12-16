@@ -33,5 +33,6 @@
 }
 
 .mainMap {
+    position:relative;
     flex: 1;
 }
