@@ -7,7 +7,7 @@ import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom } 
 export const GENERATE_IMAGE_REQUEST = "GENERATE_IMAGE_REQUEST";
 export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
 export const GENERATE_IMAGE_ERROR = "GENERATE_IMAGE_ERROR";
-export const GENERATE_IMAGE_CANCEL = " GENERATE_IMAGE_CANCEL";
+export const GENERATE_IMAGE_CANCEL_ALL = " GENERATE_IMAGE_CANCEL_ALL";
 
 const sourceFromTransit = (options) => {
     const mapSelection = transit.fromJSON(options.mapSelection);
@@ -32,10 +32,12 @@ const sourceFromTransit = (options) => {
     return { source: glSource, options: glOptions };
 };
 
-export const generateImageCancel = () =>
+export const generateImageCancelAll = () =>
     (dispatch, getState) => {
-        getState().apiRequests.imagePromise.cancel();
-        dispatch({ type: GENERATE_IMAGE_CANCEL });
+        getState().apiRequests.imagePromises.forEach((promise) => {
+            promise.cancel();
+        });
+        dispatch({ type: GENERATE_IMAGE_CANCEL_ALL });
     };
 
 export const generateImage = () =>
@@ -69,7 +71,7 @@ export const generateImage = () =>
             throw error;
         })
         .catch((error) => {
-            console.log("Request failed ", error);
+            if (process.env.NODE_ENV === "development") console.error(error); // eslint-disable-line no-console
             dispatch({ type: GENERATE_IMAGE_ERROR });
         });
     };
