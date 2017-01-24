@@ -98,6 +98,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "replacestream": "^4.0.0",
+    "transform-loader": "^0.2.3",
     "transit-immutable-js": "^0.5.4",
     "transit-js": "^0.8.846",
     "webfontloader": "^1.6.22"

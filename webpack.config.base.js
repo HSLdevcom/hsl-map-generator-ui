@@ -19,6 +19,12 @@ export default {
             test: /\.json$/,
             loader: "json-loader",
         }],
+        postLoaders: [{
+            test: /\.js$/,
+            loader: "transform?brfs",
+            include: path.join(__dirname, "node_modules", "hsl-map-style"),
+
+        }],
     },
     output: {
         path: path.join(__dirname, "dist"),
