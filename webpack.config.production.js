@@ -43,7 +43,8 @@ const config = {
         new webpack.DefinePlugin({
             "process.env": {
                 NODE_ENV: JSON.stringify("production"),
-                API_URL: JSON.stringify("http://136.243.66.163"),
+                API_URL: JSON.stringify(""),
+                GLYPHS_URL: JSON.stringify("http://136.243.66.163/"),
             },
         }),
         new webpack.optimize.UglifyJsPlugin({

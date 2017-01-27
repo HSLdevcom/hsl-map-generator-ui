@@ -5,6 +5,7 @@ import hslMapStyle from "hsl-map-style";
 const style = hslMapStyle.generateStyle({
     lang: ["fi", "sv"],
     extensions: ["icons", "stops"],
+    glyphsUrl: process.env.GLYPHS_URL,
 });
 
 export const baseStyle = fromJS(style, (key, value) => {
