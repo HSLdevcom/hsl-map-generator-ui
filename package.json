@@ -101,6 +101,7 @@
     "transform-loader": "^0.2.3",
     "transit-immutable-js": "^0.5.4",
     "transit-js": "^0.8.846",
+    "url-join": "^1.1.0",
     "webfontloader": "^1.6.22"
   },
   "devEngines": {
