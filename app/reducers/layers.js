@@ -8,7 +8,7 @@ const initialState = [];
 const style = hslMapStyle.generateStyle({
     lang: ["fi", "sv"],
     extensions: ["icons", "stops"],
-    glyphsUrl: process.env.GLYPHS_URL,
+    glyphsUrl: process.env.API_URL,
 });
 
 Object.keys(style.metadata["mapbox:groups"]).forEach((group, index) => {
