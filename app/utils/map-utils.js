@@ -1,6 +1,12 @@
 import { fromJS, Iterable } from "immutable";
 import { find, matchesProperty } from "lodash";
-import style from "hsl-map-style/hsl-gl-map-with-stops-v9.json";
+import hslMapStyle from "hsl-map-style";
+
+const style = hslMapStyle.generateStyle({
+    lang: ["fi", "sv"],
+    extensions: ["icons", "stops"],
+    glyphsUrl: process.env.API_URL,
+});
 
 export const baseStyle = fromJS(style, (key, value) => {
     const isIndexed = Iterable.isIndexed(value);

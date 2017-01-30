@@ -1,5 +1,7 @@
 import { saveAs } from "file-saver";
 import CancelablePromise from "cancelable-promise";
+import urljoin from "url-join";
+
 import { styleFromLayers } from "../utils/map-utils";
 import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom } from "../utils/geom-utils";
 
@@ -37,7 +39,7 @@ export const generateImage = () =>
         const state = getState();
 
         const cancelablePromise = new CancelablePromise((resolve) => {
-            resolve(fetch(`${process.env.API_URL}/generateImage`, {
+            resolve(fetch(urljoin(process.env.API_URL, "generateImage"), {
                 method: "POST",
                 mode: "cors",
                 headers: new Headers({

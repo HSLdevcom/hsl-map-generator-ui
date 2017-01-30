@@ -1,10 +1,15 @@
 import update from "react/lib/update";
-import style from "hsl-map-style/hsl-gl-map-with-stops-v9.json";
+import hslMapStyle from "hsl-map-style";
 import { findIndex } from "lodash";
 import { SWITCH_LAYER, TOGGLE_LAYER } from "../actions/layers";
 import { LOAD_STATE } from "../actions/fileOperations";
 
 const initialState = [];
+const style = hslMapStyle.generateStyle({
+    lang: ["fi", "sv"],
+    extensions: ["icons", "stops"],
+    glyphsUrl: process.env.API_URL,
+});
 
 Object.keys(style.metadata["mapbox:groups"]).forEach((group, index) => {
     initialState[index] = {
