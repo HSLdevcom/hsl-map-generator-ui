@@ -2,6 +2,7 @@ import { fromJS, Iterable } from "immutable";
 import { find, matchesProperty } from "lodash";
 import hslMapStyle from "hsl-map-style";
 
+const showLayerNameIds = ["1457010362398.355", "1452776685487.2012"];
 const style = hslMapStyle.generateStyle({
     lang: ["fi", "sv"],
     extensions: ["icons", "stops"],
@@ -19,6 +20,10 @@ export const styleFromLayers = (layers, sources) =>
         const layerState = find(layers, matchesProperty("id", newLayer.getIn(["metadata", "mapbox:group"])));
 
         if (!newLayer.get("ref") && layerState && !layerState.enabled) {
+            if (showLayerNameIds.includes(layerState.id)) {
+                if (newLayer.getIn(["layout", "icon-image"])) newLayer = newLayer.deleteIn(["layout", "icon-image"]);
+                return newLayer.setIn(["layout", "visibility"], "visible");
+            }
             return newLayer.setIn(["layout", "visibility"], "none");
         } else if (!newLayer.get("ref") && layerState && layerState.enabled === true) {
             newLayer = newLayer.setIn(["layout", "visibility"], "visible");
