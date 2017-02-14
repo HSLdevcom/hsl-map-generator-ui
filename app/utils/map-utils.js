@@ -2,6 +2,8 @@ import { fromJS, Iterable } from "immutable";
 import { find, matchesProperty } from "lodash";
 import hslMapStyle from "hsl-map-style";
 
+const noIconDisplayIds = ["1457010362398.355", "1452776685487.2012"];
+
 const style = hslMapStyle.generateStyle({
     lang: ["fi", "sv"],
     extensions: ["icons", "stops"],
@@ -43,6 +45,11 @@ export const styleFromLayers = (layers, sources) =>
                     return newLayer.set("filter", fromJS(["all", newLayer.get("filter"), layerState.filter]));
                 }
                 return newLayer.set("filter", layerState.filter);
+            }
+            // TODO: Replace once hsl-map-style is updated, and request correct style from there
+            if (noIconDisplayIds.includes(layerState.id)) {
+                if (newLayer.getIn(["layout", "icon-image"])) newLayer = newLayer.deleteIn(["layout", "icon-image"]);
+                if (newLayer.getIn(["layout", "text-offset"])) newLayer = newLayer.deleteIn(["layout", "text-offset"]);
             }
         }
         return newLayer;
