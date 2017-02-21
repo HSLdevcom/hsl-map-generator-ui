@@ -1,7 +1,5 @@
 FROM node:6
 
-ARG PORT=3000
-ENV PORT ${PORT}
 ENV WORK /opt/mapgenerator
 
 # Create app directory
@@ -16,7 +14,7 @@ RUN npm install
 COPY . ${WORK}
 RUN npm run build
 
-EXPOSE ${PORT}
+EXPOSE 3000
 
 CMD npm run start-prod
 

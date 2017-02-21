@@ -31,7 +31,7 @@ $ npm run start-prod
 Build and run in Docker container
 
 ```bash
-$ docker build --build-arg PORT=3000 -t hsl-map-generator-ui .
+$ docker build -t hsl-map-generator-ui .
 $ docker run -d -p 0.0.0.0:3000:3000 hsl-map-generator-ui
 ```
 
