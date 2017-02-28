@@ -1,6 +1,25 @@
 import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import { windowResize } from "../actions/windowEvents";
 
-export default class App extends Component {
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.onWindowResize = this.onWindowResize.bind(this);
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.onWindowResize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.onWindowResize);
+    }
+
+    onWindowResize() {
+        this.props.windowResize();
+    }
+
     render() {
         return (
             <div>
@@ -18,6 +37,8 @@ export default class App extends Component {
         );
     }
 }
+
+export default connect(null, { windowResize })(App);
 
 App.propTypes = {
     children: PropTypes.element.isRequired,

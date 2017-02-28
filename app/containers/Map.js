@@ -8,6 +8,8 @@ function mapStateToProps(state) {
     return {
         viewport: state.viewport,
         style: styleFromLayers(state.layers),
+        mapWidth: state.layout.mapWidth,
+        mapHeight: state.layout.mapHeight,
     };
 }
 

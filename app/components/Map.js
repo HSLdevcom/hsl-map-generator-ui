@@ -5,10 +5,7 @@ import SelectionWindow from "../containers/SelectionWindow";
 import DebugOverlay from "../containers/DebugOverlay";
 import Spinner from "../containers/Spinner";
 
-const mapWidth = window.innerWidth - 320;
-const mapHeight = window.innerHeight - 60;
-
-const MapComponent = ({ viewport, updateViewport, style }) => (
+const MapComponent = ({ viewport, updateViewport, style, mapWidth, mapHeight }) => (
     <div>
         <MapGL
             {...viewport}
