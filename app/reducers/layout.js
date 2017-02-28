@@ -5,7 +5,7 @@ const initialState = {
     mapHeight: window.innerHeight - 60,
 };
 
-export default function windowEvents(state = initialState, action) {
+export default function layout(state = initialState, action) {
     switch (action.type) {
         case WINDOW_RESIZE:
             return {

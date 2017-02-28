@@ -3,12 +3,23 @@ import { connect } from "react-redux";
 import { windowResize } from "../actions/windowEvents";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.onWindowResize = this.onWindowResize.bind(this);
+    }
+
     componentDidMount() {
-        window.addEventListener("resize", () => this.props.windowResize());
+        window.addEventListener("resize", this.onWindowResize);
     }
+
     componentWillUnmount() {
-        window.removeEventListener("resize");
+        window.removeEventListener("resize", this.onWindowResize);
     }
+
+    onWindowResize() {
+        this.props.windowResize();
+    }
+
     render() {
         return (
             <div>

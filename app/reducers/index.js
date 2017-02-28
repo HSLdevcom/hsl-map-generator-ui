@@ -5,7 +5,7 @@ import mapSelection from "./mapSelection";
 import tabName from "./tabName";
 import viewport from "./viewport";
 import apiRequests from "./apiRequests";
-import windowEvents from "./windowEvents";
+import layout from "./layout";
 
 const rootReducer = combineReducers({
     layers,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     viewport,
     apiRequests,
     routing,
-    windowEvents,
+    layout,
 });
 
 export default rootReducer;
