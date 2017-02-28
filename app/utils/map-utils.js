@@ -13,6 +13,19 @@ export const baseStyle = fromJS(style, (key, value) => {
     return isIndexed ? value.toList() : value.toOrderedMap();
 });
 
+export const layersFromStyle = () => {
+    const layers = [];
+    Object.keys(style.metadata["mapbox:groups"]).forEach((group, index) => {
+        layers[index] = {
+            id: group,
+            enabled: style.metadata["mapbox:groups"][group].default,
+            text: style.metadata["mapbox:groups"][group].name,
+        };
+    });
+    layers.reverse();
+    return layers;
+};
+
 export const styleFromLayers = (layers, sources) =>
     baseStyle.mergeIn(["sources"], sources).set("layers", baseStyle.get("layers").map((layer) => {
         let newLayer = layer;
