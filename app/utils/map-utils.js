@@ -28,11 +28,8 @@ export const layersFromStyle = () => {
 
 export const styleFromLayers = layers =>
     baseStyle.set("layers", baseStyle.get("layers").map((layer) => {
-        let newLayer = layer;
-        const layerState = find(layers, matchesProperty("id", newLayer.getIn(["metadata", "mapbox:group"])));
-
+        const layerState = find(layers, matchesProperty("id", layer.getIn(["metadata", "mapbox:group"])));
         if (layerState && !layerState.enabled) return null;
-
-        return newLayer;
+        return layer;
     })
     .filter(layer => !!layer));
