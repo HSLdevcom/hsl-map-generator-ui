@@ -23,12 +23,11 @@ export default {
             test: /\.js$/,
             loader: "transform?brfs",
             include: path.join(__dirname, "node_modules", "hsl-map-style"),
-
         }],
     },
     output: {
         path: path.join(__dirname, "dist"),
-        publicPath: "/kartta",
+        publicPath: "",
         filename: "bundle.js",
     },
     resolve: {
