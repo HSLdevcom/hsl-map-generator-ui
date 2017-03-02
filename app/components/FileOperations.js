@@ -4,7 +4,7 @@ import Button from "./Button";
 import styles from "./FileOperations.css";
 import buttonStyles from "./Button.css";
 
-const FileOperations = ({ generateImage, onSaveState, loadState }) => (
+const FileOperations = ({ generateImage, onSaveWorldFile, onSaveState, loadState }) => (
     <div className={styles.container}>
         <label htmlFor="load_file_button">
             <div className={classnames(buttonStyles.button, buttonStyles.darkWithBorder)}>
@@ -19,6 +19,7 @@ const FileOperations = ({ generateImage, onSaveState, loadState }) => (
         </label>
         <Button onClick={onSaveState} styleClass="darkWithBorder">Tallenna</Button>
         <Button onClick={generateImage}>Generoi Kartta</Button>
+        <Button onClick={onSaveWorldFile}>Generoi PGW</Button>
     </div>
 );
 

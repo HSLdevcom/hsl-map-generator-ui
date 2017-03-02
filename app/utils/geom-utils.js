@@ -1,3 +1,5 @@
+import proj4 from "proj4";
+
 export const EARTH_CIRC_M = 40075016.686;
 export const Z0_RES = EARTH_CIRC_M / 256;
 export const DEG_LAT_PER_M = EARTH_CIRC_M / 360;
@@ -52,3 +54,21 @@ export const mapSelectionToBbox = (mapSelection) => {
                                 [center[0] + (sizeDeg[0] / 2), center[1] + (sizeDeg[1] / 2)]];
     return bbox;
 };
+
+export const mapSelectionToWorldFile = (mapSelection) => {
+    const [widthInPixels, heightInPixels] = mapSelectionToPixelSize(mapSelection);
+
+    const boundingBox = mapSelectionToBbox(mapSelection);
+
+    const bottomLeft = proj4("EPSG:4326", "EPSG:3857", boundingBox[0]);
+    const topRight = proj4("EPSG:4326", "EPSG:3857", boundingBox[1]);
+
+    const widthOfPixel = (topRight[0] - bottomLeft[0]) / widthInPixels;
+    const heightOfPixel = (bottomLeft[1] - topRight[1]) / heightInPixels;
+
+    const centerOfLeftPixel = bottomLeft[0] + (widthOfPixel / 2);
+    const centerOfTopPixel = topRight[1] - (heightOfPixel / 2);
+
+    return `${widthOfPixel}\n0\n0\n${heightOfPixel}\n${centerOfLeftPixel}\n${centerOfTopPixel}\n`;
+};
+
