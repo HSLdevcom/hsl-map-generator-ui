@@ -56,15 +56,21 @@ export const generateImage = () =>
 
         cancelablePromise.then((response) => {
             if (response.status >= 200 && response.status < 300) {
-                return response.blob().then(blob => saveAs(blob, "map.png")).then(
-                    dispatch({ type: GENERATE_IMAGE_SUCCESS }),
-                );
+                return response.blob()
+                    .then((blob) => {
+                        const worldFile = response.headers.get("World-File").replace(/|/g, "\n");
+                        const worldFileBlob = new Blob([worldFile], { type: "text/plain" });
+                        saveAs(worldFileBlob, "map.pgw");
+                        saveAs(blob, "map.png");
+                    })
+                    .then(() => {
+                        dispatch({ type: GENERATE_IMAGE_SUCCESS });
+                    });
             }
             const error = new Error(response.statusText);
             error.response = response;
             throw error;
-        })
-        .catch((error) => {
+        }).catch((error) => {
             if (process.env.NODE_ENV === "development") console.error(error); // eslint-disable-line no-console
             dispatch({ type: GENERATE_IMAGE_ERROR });
         });
