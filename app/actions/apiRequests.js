@@ -1,5 +1,6 @@
 import { saveAs } from "file-saver";
 import CancelablePromise from "cancelable-promise";
+import moment from "moment";
 import urljoin from "url-join";
 
 import { styleFromLayers } from "../utils/map-utils";
@@ -58,10 +59,11 @@ export const generateImage = () =>
             if (response.status >= 200 && response.status < 300) {
                 return response.blob()
                     .then((blob) => {
-                        const worldFile = response.headers.get("World-File").replace(/|/g, "\n");
+                        const date = moment().format("YYYY-MM-DD-HH:mm:ss");
+                        const worldFile = response.headers.get("World-File").replace(/\|/g, "\n");
                         const worldFileBlob = new Blob([worldFile], { type: "text/plain" });
-                        saveAs(worldFileBlob, "map.pgw");
-                        saveAs(blob, "map.png");
+                        saveAs(worldFileBlob, `map-${date}.pgw`);
+                        saveAs(blob, `map-${date}.png`);
                     })
                     .then(() => {
                         dispatch({ type: GENERATE_IMAGE_SUCCESS });
