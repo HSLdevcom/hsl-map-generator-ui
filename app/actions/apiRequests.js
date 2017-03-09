@@ -11,6 +11,8 @@ export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
 export const GENERATE_IMAGE_ERROR = "GENERATE_IMAGE_ERROR";
 export const GENERATE_IMAGE_CANCEL_ALL = " GENERATE_IMAGE_CANCEL_ALL";
 
+let cancelablePromises = [];
+
 const createMapOptions = (mapSelection) => {
     const tileScale = mapSelectionToTileScale(mapSelection);
 
@@ -28,10 +30,9 @@ const createMapOptions = (mapSelection) => {
 };
 
 export const generateImageCancelAll = () =>
-    (dispatch, getState) => {
-        getState().apiRequests.imagePromises.forEach((promise) => {
-            promise.cancel();
-        });
+    (dispatch) => {
+        cancelablePromises.forEach(promise => promise.cancel());
+        cancelablePromises = [];
         dispatch({ type: GENERATE_IMAGE_CANCEL_ALL });
     };
 
@@ -53,8 +54,6 @@ export const generateImage = () =>
             }));
         });
 
-        dispatch({ type: GENERATE_IMAGE_REQUEST, cancelablePromise });
-
         cancelablePromise.then((response) => {
             if (response.status >= 200 && response.status < 300) {
                 return response.blob()
@@ -64,8 +63,10 @@ export const generateImage = () =>
                         const worldFileBlob = new Blob([worldFile], { type: "text/plain" });
                         saveAs(worldFileBlob, `map-${date}.pgw`);
                         saveAs(blob, `map-${date}.png`);
-                    })
-                    .then(() => {
+                    }).then(() => {
+                        cancelablePromises = cancelablePromises.filter(
+                            val => val !== cancelablePromise,
+                        );
                         dispatch({ type: GENERATE_IMAGE_SUCCESS });
                     });
             }
@@ -74,6 +75,10 @@ export const generateImage = () =>
             throw error;
         }).catch((error) => {
             if (process.env.NODE_ENV === "development") console.error(error); // eslint-disable-line no-console
+            cancelablePromises = cancelablePromises.filter(val => val !== cancelablePromise);
             dispatch({ type: GENERATE_IMAGE_ERROR });
         });
+
+        cancelablePromises = [...cancelablePromises, cancelablePromise];
+        dispatch({ type: GENERATE_IMAGE_REQUEST });
     };
