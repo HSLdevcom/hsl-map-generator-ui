@@ -1,5 +1,6 @@
 import { saveAs } from "file-saver";
 import CancelablePromise from "cancelable-promise";
+import moment from "moment";
 import urljoin from "url-join";
 
 import { styleFromLayers } from "../utils/map-utils";
@@ -54,15 +55,24 @@ export const generateImage = () =>
         });
 
         cancelablePromise.then((response) => {
-            if (response.status < 200 || response.status >= 300) {
-                const error = new Error(response.statusText);
-                error.response = response;
-                throw error;
+            if (response.status >= 200 && response.status < 300) {
+                return response.blob()
+                    .then((blob) => {
+                        const date = moment().format("YYYY-MM-DD-HH:mm:ss");
+                        const worldFile = response.headers.get("World-File").replace(/\|/g, "\n");
+                        const worldFileBlob = new Blob([worldFile], { type: "text/plain" });
+                        saveAs(worldFileBlob, `map-${date}.pgw`);
+                        saveAs(blob, `map-${date}.png`);
+                    }).then(() => {
+                        cancelablePromises = cancelablePromises.filter(
+                            val => val !== cancelablePromise,
+                        );
+                        dispatch({ type: GENERATE_IMAGE_SUCCESS });
+                    });
             }
-            return response.blob().then(blob => saveAs(blob, "map.png")).then(() => {
-                cancelablePromises = cancelablePromises.filter(val => val !== cancelablePromise);
-                dispatch({ type: GENERATE_IMAGE_SUCCESS });
-            });
+            const error = new Error(response.statusText);
+            error.response = response;
+            throw error;
         }).catch((error) => {
             if (process.env.NODE_ENV === "development") console.error(error); // eslint-disable-line no-console
             cancelablePromises = cancelablePromises.filter(val => val !== cancelablePromise);

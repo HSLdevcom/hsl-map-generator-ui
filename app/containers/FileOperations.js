@@ -8,8 +8,9 @@ import { loadState } from "../actions/fileOperations";
 
 function mapStateToProps(state) {
     return {
-        onSaveState: () =>
-            saveAs(new Blob([toJSON(state)], { type: "application/json" }), "map.json"),
+        onSaveState: () => {
+            saveAs(new Blob([toJSON(state)], { type: "application/json" }), "map.json");
+        },
     };
 }
 
