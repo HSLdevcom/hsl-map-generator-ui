@@ -6,16 +6,10 @@ import FileOperations from "../components/FileOperations";
 import { generateImage } from "../actions/apiRequests";
 import { loadState } from "../actions/fileOperations";
 
-import { mapSelectionToWorldFile } from "../utils/geom-utils";
-
 function mapStateToProps(state) {
     return {
         onSaveState: () => {
             saveAs(new Blob([toJSON(state)], { type: "application/json" }), "map.json");
-        },
-        onSaveWorldFile: () => {
-            const worldFile = mapSelectionToWorldFile(state.mapSelection);
-            saveAs(new Blob([worldFile], { type: "text/plain" }), "map.pgw");
         },
     };
 }
