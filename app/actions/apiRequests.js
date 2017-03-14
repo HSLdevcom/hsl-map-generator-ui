@@ -9,7 +9,7 @@ import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom } 
 export const GENERATE_IMAGE_REQUEST = "GENERATE_IMAGE_REQUEST";
 export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
 export const GENERATE_IMAGE_ERROR = "GENERATE_IMAGE_ERROR";
-export const GENERATE_IMAGE_CANCEL_ALL = " GENERATE_IMAGE_CANCEL_ALL";
+export const GENERATE_IMAGE_CANCEL_ALL = "GENERATE_IMAGE_CANCEL_ALL";
 
 let cancelablePromises = [];
 
@@ -59,10 +59,12 @@ export const generateImage = () =>
                 return response.blob()
                     .then((blob) => {
                         const date = moment().format("YYYY-MM-DD-HH:mm:ss");
-                        const worldFile = response.headers.get("World-File").replace(/\|/g, "\n");
-                        const worldFileBlob = new Blob([worldFile], { type: "text/plain" });
-                        saveAs(worldFileBlob, `map-${date}.pgw`);
                         saveAs(blob, `map-${date}.png`);
+                        if (state.settings.saveWorldFile) {
+                            const worldFile = response.headers.get("World-File").replace(/\|/g, "\n");
+                            const worldFileBlob = new Blob([worldFile], { type: "text/plain" });
+                            saveAs(worldFileBlob, `map-${date}.pgw`);
+                        }
                     }).then(() => {
                         cancelablePromises = cancelablePromises.filter(
                             val => val !== cancelablePromise,
