@@ -2,7 +2,7 @@
   "name": "hsl-map-generator-ui",
   "productName": "MapGenerator",
   "version": "0.0.1",
-  "description": "Map Generator application based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "Map Generator application based on React, Webpack, React Hot Loader for rapid application development",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
@@ -31,7 +31,6 @@
   },
   "keywords": [
     "react",
-    "react-router",
     "flux",
     "webpack",
     "react-hot"
@@ -94,9 +93,8 @@
     "react-dom": "^15.1.0",
     "react-map-gl": "^0.6.8",
     "react-redux": "^4.4.5",
-    "react-router": "^2.4.1",
-    "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
+    "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.1.0",
     "replacestream": "^4.0.0",
     "transform-loader": "^0.2.3",

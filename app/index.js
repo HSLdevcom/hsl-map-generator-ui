@@ -1,17 +1,16 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { Router, hashHistory } from "react-router";
-import { syncHistoryWithStore } from "react-router-redux";
 import webfontloader from "webfontloader";
-import routes from "./routes";
+
+import App from "./containers/App";
+import Home from "./components/Home";
 import configureStore from "./store/configureStore";
 import "./app.global.css";
 
 const root = document.body.appendChild(document.createElement("div"));
 
 const store = configureStore();
-const history = syncHistoryWithStore(hashHistory, store);
 
 webfontloader.load({
     google: { families: ["Nunito:700,400,300"] },
@@ -19,7 +18,9 @@ webfontloader.load({
 
 render(
     <Provider store={store}>
-        <Router history={history} routes={routes}/>
+        <App>
+            <Home/>
+        </App>
     </Provider>,
     root,
 );
