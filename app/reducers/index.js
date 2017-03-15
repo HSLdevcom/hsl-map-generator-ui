@@ -14,7 +14,6 @@ const rootReducer = combineReducers({
     tabName,
     viewport,
     apiRequests,
-    routing,
     layout,
 });
 
