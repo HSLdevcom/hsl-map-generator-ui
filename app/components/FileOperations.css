@@ -1,4 +1,14 @@
 .container {
-    background-color: #333;
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+    justify-content: flex-start;
     padding: 1.5em;
+    background-color: #333;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em;
 }

@@ -4,7 +4,7 @@
     border-radius: 1.25em;
     font-weight: 300;
     color: #fff;
-    margin: 0.5em;
+    margin: 0.2em 0;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
@@ -22,5 +22,5 @@
 
 .lightWithBorder {
     background-color: #555;
-    border: solid 1px #999;    
+    border: solid 1px #999;
 }

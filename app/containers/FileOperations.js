@@ -4,10 +4,12 @@ import { saveAs } from "file-saver";
 import { toJSON } from "transit-immutable-js";
 import FileOperations from "../components/FileOperations";
 import { generateImage } from "../actions/apiRequests";
+import { toggleSaveWorldFile } from "../actions/settings";
 import { loadState } from "../actions/fileOperations";
 
 function mapStateToProps(state) {
     return {
+        ...state.settings,
         onSaveState: () => {
             saveAs(new Blob([toJSON(state)], { type: "application/json" }), "map.json");
         },
@@ -16,6 +18,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
+        toggleSaveWorldFile,
         generateImage,
         loadState,
     }, dispatch);
