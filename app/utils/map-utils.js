@@ -4,8 +4,8 @@ import hslMapStyle from "hsl-map-style";
 
 const style = hslMapStyle.generateStyle({
     lang: ["fi", "sv"],
-    extensions: ["icons", "stops"],
     glyphsUrl: process.env.API_URL,
+    extensions: ["icons", "stops", "routes", "citybikes", "driver_instructions"],
 });
 
 export const baseStyle = fromJS(style, (key, value) => {
