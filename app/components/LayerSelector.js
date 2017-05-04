@@ -10,7 +10,7 @@ function LayerSelector(props) {
                     key={layer.id}
                     id={layer.id}
                     index={index}
-                    text={layer.text}
+                    text={layer.description}
                     selected={layer.enabled}
                     toggleLayer={props.toggleLayer}
                 />

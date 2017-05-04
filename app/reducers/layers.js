@@ -15,7 +15,7 @@ export default function layers(state = initialState, action) {
             return update(state, query);
         }
         case LOAD_STATE:
-            return action.state.layers;
+            return action.state.version >= 2 ? action.state.layers : state;
         default:
             return state;
     }
