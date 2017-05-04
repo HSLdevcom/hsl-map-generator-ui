@@ -88,8 +88,6 @@
     "moment": "^2.17.1",
     "r-dom": "^2.1.0",
     "react": "^15.1.0",
-    "react-dnd": "^2.1.2",
-    "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.1.0",
     "react-map-gl": "^0.6.8",
     "react-redux": "^4.4.5",
