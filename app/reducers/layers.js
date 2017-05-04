@@ -1,6 +1,6 @@
 import update from "react/lib/update";
 import { findIndex } from "lodash";
-import { SWITCH_LAYER, TOGGLE_LAYER } from "../actions/layers";
+import { TOGGLE_LAYER } from "../actions/layers";
 import { LOAD_STATE } from "../actions/fileOperations";
 import { layersFromStyle } from "../utils/map-utils";
 
@@ -8,13 +8,6 @@ const initialState = layersFromStyle();
 
 export default function layers(state = initialState, action) {
     switch (action.type) {
-        case SWITCH_LAYER:
-            return update(state, {
-                $splice: [
-                [action.oldLayer, 1],
-                [action.newLayer, 0, state[action.oldLayer]],
-                ],
-            });
         case TOGGLE_LAYER: {
             const query = {};
             const index = findIndex(state, { id: action.layer });
