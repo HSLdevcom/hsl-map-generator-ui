@@ -44,7 +44,7 @@ $ docker run -d -p 0.0.0.0:3000:3000 hsl-map-generator-ui
 
 *Note: requires a node version >= 4 and an npm version >= 2.*
 
-Uses REST APIs from [hsl-map-generator-server](https://github.com/HSLdevcom/hsl-map-generator-server) (localhost:8000).
+Uses REST APIs from [hsl-map-generator-server](https://github.com/HSLdevcom/hsl-map-generator-server) (kartat.hsl.fi).
 
 ## License
 MIT © [HSL](https://github.com/HSLdevcom)
