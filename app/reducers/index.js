@@ -8,6 +8,7 @@ import apiRequests from "./apiRequests";
 import layout from "./layout";
 
 const rootReducer = combineReducers({
+    version: () => 2,
     settings,
     layers,
     mapSelection,
