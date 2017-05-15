@@ -5,7 +5,10 @@ import hslMapStyle from "hsl-map-style";
 const components = hslMapStyle.components;
 
 export const layersFromStyle = () => components.map(component => ({
-    id: component.id, enabled: component.enabled, description: component.description,
+    id: component.id,
+    enabled: component.enabled,
+    description: component.description,
+    dependencies: component.dependencies,
 }));
 
 const mapLayers = (layers) => {
@@ -17,7 +20,6 @@ const mapLayers = (layers) => {
 export const styleFromLayers = memoize(layers =>
     fromJS(
         hslMapStyle.generateStyle({
-            lang: ["fi", "sv"],
             glyphsUrl: process.env.API_URL,
             components: mapLayers(layers),
         }),
