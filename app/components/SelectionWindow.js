@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import CanvasOverlay from "react-map-gl/src/overlays/canvas.react";
+import CanvasOverlay from "react-map-gl/dist/overlays/canvas.react";
 import { mapSelectionToBbox } from "../utils/geom-utils";
 
 const redraw = mapSelection =>

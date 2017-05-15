@@ -10,12 +10,29 @@ export default function layers(state = initialState, action) {
     switch (action.type) {
         case TOGGLE_LAYER: {
             const query = {};
-            const index = findIndex(state, { id: action.layer });
-            query[index] = { enabled: { $set: !state[index].enabled } };
+            const indexToToggle = findIndex(state, { id: action.layer });
+            const layerToToggle = state[indexToToggle];
+
+            query[indexToToggle] = { enabled: { $set: !layerToToggle.enabled } };
+
+            if (!layerToToggle.enabled && layerToToggle.dependencies) {
+                layerToToggle.dependencies.forEach((id) => {
+                    const index = findIndex(state, { id });
+                    query[index] = { enabled: { $set: true } };
+                });
+            }
+            if (layerToToggle.enabled) {
+                state.forEach((layer, index) => {
+                    if (!layer.enabled || !layer.dependencies) return;
+                    if (layer.dependencies.some(id => id === layerToToggle.id)) {
+                        query[index] = { enabled: { $set: false } };
+                    }
+                });
+            }
             return update(state, query);
         }
         case LOAD_STATE:
-            return action.state.version >= 2 ? action.state.layers : state;
+            return action.state.version >= 3 ? action.state.layers : state;
         default:
             return state;
     }
