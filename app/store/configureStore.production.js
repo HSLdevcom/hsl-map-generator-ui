@@ -4,12 +4,16 @@ import thunk from "redux-thunk";
 import localStorage from "redux-localstorage";
 
 import rootReducer from "../reducers";
+import versionReducer from "../reducers/version";
 
 const localStorageEnhancer = localStorage(
-    ["viewport", "mapSelection", "layers", "settings"],
+    ["version", "viewport", "mapSelection", "layers", "settings"],
     {
         serialize: state => toJSON(state),
-        deserialize: state => fromJSON(state),
+        deserialize: (stateJSON) => {
+            const state = fromJSON(stateJSON);
+            return (state && state.version === versionReducer()) ? state : null;
+        },
     },
 );
 
