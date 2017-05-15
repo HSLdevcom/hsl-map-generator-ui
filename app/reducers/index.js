@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import version from "./version";
 import settings from "./settings";
 import layers from "./layers";
 import mapSelection from "./mapSelection";
@@ -8,7 +9,7 @@ import apiRequests from "./apiRequests";
 import layout from "./layout";
 
 const rootReducer = combineReducers({
-    version: () => 3,
+    version,
     settings,
     layers,
     mapSelection,
