@@ -14,7 +14,10 @@ export default {
         loaders: [{
             test: /\.jsx?$/,
             loaders: ["babel-loader"],
-            exclude: /node_modules/,
+            include: [
+                path.resolve(__dirname, "app"),
+                path.resolve(__dirname, "node_modules/mapbox-gl/js"),
+            ],
         }, {
             test: /\.json$/,
             loader: "json-loader",
@@ -34,7 +37,7 @@ export default {
         extensions: ["", ".js", ".jsx"],
         packageMains: ["webpack", "browser", "web", "browserify", ["jam", "main"], "main"],
         alias: {
-            "mapbox-gl$": "mapbox-gl/dist/mapbox-gl-dev",
+            "mapbox-gl$": "mapbox-gl/dist/mapbox-gl",
         },
     },
     plugins: [
