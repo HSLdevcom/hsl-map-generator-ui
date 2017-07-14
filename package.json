@@ -81,7 +81,7 @@
     "classnames": "^2.2.3",
     "file-saver": "^1.3.2",
     "halogen": "^0.2.0",
-    "hsl-map-style": "github:hsldevcom/hsl-map-style#e1ed3f952907cc12e5be393bc2813caa26049350",
+    "hsl-map-style": "github:hsldevcom/hsl-map-style#593a73752aae88ecd99aed9baa27db1d5b9c91e1",
     "immutable": "^3.7.6",
     "lodash": "^4.16.6",
     "moment": "^2.17.1",
