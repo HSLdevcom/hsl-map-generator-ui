@@ -31,8 +31,15 @@ export default function layers(state = initialState, action) {
             }
             return update(state, query);
         }
-        case LOAD_STATE:
-            return action.state.version >= 3 ? action.state.layers : state;
+        case LOAD_STATE: {
+            if (action.state.version < 3) {
+                return state;
+            }
+            return state.map((layer) => {
+                const layerToLoad = action.state.layers.find(({ id }) => id === layer.id);
+                return { ...layer, enabled: !!layerToLoad && layerToLoad.enabled };
+            });
+        }
         default:
             return state;
     }
