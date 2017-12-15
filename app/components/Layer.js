@@ -1,19 +1,12 @@
 import React, { PropTypes } from "react";
 
-const style = {
-    margin: "0 1rem",
-    borderTop: "1px solid #666",
-    padding: "0.5rem 1rem",
-    color: "#ddd",
-    fontWeight: 300,
-    opacity: 1,
-};
+import styles from "./Layer.css";
 
 function Layer(props) {
     return (
-        <div>
+        <div className={styles.root}>
             <label htmlFor={`checkbox_${props.id}`}>
-                <div style={style}>
+                <div className={styles.checkbox}>
                     <input
                         id={`checkbox_${props.id}`}
                         checked={props.selected}
@@ -30,7 +23,6 @@ Layer.propTypes = {
     id: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
     text: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired,
-    toggleLayer: PropTypes.func.isRequired,
 };
 
 export default Layer;

@@ -7,7 +7,7 @@ import * as ViewportActions from "../actions/viewport";
 function mapStateToProps(state) {
     return {
         viewport: state.viewport,
-        style: styleFromLayers(state.layers),
+        style: styleFromLayers(state.layers, state.settings.date),
         mapWidth: state.layout.mapWidth,
         mapHeight: state.layout.mapHeight,
     };
