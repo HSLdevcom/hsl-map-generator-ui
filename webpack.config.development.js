@@ -24,7 +24,7 @@ const config = {
             ...baseConfig.module.loaders,
 
             {
-                test: /\.global\.css$/,
+                test: /(node_modules.+|\.global)\.css$/,
                 loaders: [
                     "style-loader",
                     "css-loader?sourceMap",
@@ -32,7 +32,7 @@ const config = {
             },
 
             {
-                test: /^((?!\.global).)*\.css$/,
+                test: /^((?!(node_modules|\.global)).)*\.css$/,
                 loaders: [
                     "style-loader",
                     "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",

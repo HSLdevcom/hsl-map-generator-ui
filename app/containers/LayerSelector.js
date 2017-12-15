@@ -1,16 +1,19 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import LayerSelector from "../components/LayerSelector";
-import * as LayerActions from "../actions/layers";
+
+import { toggleLayer } from "../actions/layers";
+import { changeDate } from "../actions/settings";
 
 function mapStateToProps(state) {
     return {
         layers: state.layers,
+        date: state.settings.date,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(LayerActions, dispatch);
+    return bindActionCreators({ toggleLayer, changeDate }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LayerSelector);

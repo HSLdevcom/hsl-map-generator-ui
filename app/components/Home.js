@@ -23,9 +23,6 @@ const Home = () => (
         </div>
         <div className={styles.main}>
             <div className={styles.sideBar}>
-                <div className={styles.sideBarHeader}>
-                    Näytä kartalla
-                </div>
                 <LayerSelector/>
                 <FileOperations/>
             </div>

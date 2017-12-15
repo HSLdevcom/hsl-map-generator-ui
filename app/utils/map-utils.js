@@ -1,8 +1,9 @@
 import { fromJS, Iterable } from "immutable";
-import { memoize } from "lodash";
+import memoize from "memoizee";
 import hslMapStyle from "hsl-map-style";
 
 const components = hslMapStyle.components;
+const sourcesWithDate = ["stops", "routes"];
 
 export const layersFromStyle = () => components.map(component => ({
     id: component.id,
@@ -17,14 +18,21 @@ const mapLayers = (layers) => {
     return ret;
 };
 
-export const styleFromLayers = memoize(layers =>
-    fromJS(
-        hslMapStyle.generateStyle({
-            glyphsUrl: process.env.API_URL,
-            components: mapLayers(layers),
-        }),
+export const styleFromLayers = memoize((layers, date) => {
+    const style = hslMapStyle.generateStyle({
+        glyphsUrl: process.env.API_URL,
+        components: mapLayers(layers),
+    });
+    sourcesWithDate.forEach((key) => {
+        if (style.sources[key] && style.sources[key].url) {
+            style.sources[key].url += `?date=${date}`;
+        }
+    });
+    return fromJS(
+        style,
         (key, value) => {
             const isIndexed = Iterable.isIndexed(value);
             return isIndexed ? value.toList() : value.toOrderedMap();
         },
-    ));
+    );
+});

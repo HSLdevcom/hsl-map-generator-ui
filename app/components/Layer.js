@@ -1,26 +1,17 @@
 import React, { PropTypes } from "react";
 
-const style = {
-    margin: "0 1rem",
-    borderTop: "1px solid #666",
-    padding: "0.5rem 1rem",
-    color: "#ddd",
-    fontWeight: 300,
-    opacity: 1,
-};
+import styles from "./Layer.css";
 
 function Layer(props) {
     return (
-        <div>
+        <div className={styles.container}>
             <label htmlFor={`checkbox_${props.id}`}>
-                <div style={style}>
-                    <input
-                        id={`checkbox_${props.id}`}
-                        checked={props.selected}
-                        type="checkbox" onChange={() => props.toggleLayer(props.id)}
-                    />
-                    {props.text}
-                </div>
+                <input
+                    id={`checkbox_${props.id}`}
+                    checked={props.selected}
+                    type="checkbox" onChange={() => props.toggleLayer(props.id)}
+                />
+                {props.text}
             </label>
         </div>
     );
