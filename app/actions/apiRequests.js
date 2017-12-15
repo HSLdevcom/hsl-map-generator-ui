@@ -49,7 +49,7 @@ export const generateImage = () =>
                 }),
                 body: JSON.stringify({
                     options: createMapOptions(state.mapSelection),
-                    style: styleFromLayers(state.layers).toJS(),
+                    style: styleFromLayers(state.layers, state.settings.date).toJS(),
                 }),
             }));
         });
