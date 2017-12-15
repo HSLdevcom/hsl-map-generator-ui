@@ -32,7 +32,7 @@ function LayerSelector(props) {
 }
 
 LayerSelector.propTypes = {
-    layers: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+    layers: PropTypes.arrayOf(PropTypes.object).isRequired,
     toggleLayer: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
     date: PropTypes.string,
     changeDate: PropTypes.func.isRequired,
