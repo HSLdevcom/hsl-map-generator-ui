@@ -1,6 +1,7 @@
-import webpack from "webpack";
-import ExtractTextPlugin from "extract-text-webpack-plugin";
-import baseConfig from "./webpack.config.base";
+/* eslint-disable import/no-extraneous-dependencies */
+const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const baseConfig = require("./webpack.config.base");
 
 const config = {
     ...baseConfig,
@@ -57,4 +58,4 @@ const config = {
 
 };
 
-export default config;
+module.exports = config;

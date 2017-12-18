@@ -1,7 +1,9 @@
-import path from "path";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+/* eslint-disable no-console, import/no-extraneous-dependencies */
 
-export default {
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const config = {
     module: {
         preLoaders: [
             {
@@ -46,3 +48,5 @@ export default {
     externals: [
     ],
 };
+
+module.exports = config;
