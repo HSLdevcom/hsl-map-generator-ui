@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:8
 
 ENV WORK /opt/mapgenerator
 
@@ -18,4 +18,3 @@ RUN npm run build
 EXPOSE 3000
 
 CMD npm run start-prod
-
