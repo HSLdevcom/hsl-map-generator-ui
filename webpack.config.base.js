@@ -39,6 +39,10 @@ export default {
         alias: {
             "mapbox-gl$": "mapbox-gl/dist/mapbox-gl",
         },
+        fallback: path.join(__dirname, "node_modules"),
+    },
+    resolveLoader: {
+        fallback: path.join(__dirname, "node_modules"),
     },
     plugins: [
         new HtmlWebpackPlugin({ template: "index.ejs" }),
