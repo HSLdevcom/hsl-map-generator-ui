@@ -12,37 +12,34 @@ git clone https://github.com/HSLdevcom/hsl-map-generator-ui
 Install dependencies
 
 ```bash
-$ cd hsl-map-generator-ui && npm install
+$ cd hsl-map-generator-ui && yarn install
 ```
-
 
 ## Run
 
 ### Start in development mode
 
 ```bash
-$ npm start
+$ yarn start
 ```
 Runs at http://localhost:3000/
-
 
 ### Build and run in production mode without Docker
 
 ```bash
-$ npm run build
-$ npm run start-prod
+$ yarn build
+$ yarn serve
 ```
 Runs at http://localhost:3000/
 
-
-Build and run in Docker container
+### Build and run in Docker container
 
 ```bash
 $ docker build -t hsl-map-generator-ui .
-$ docker run -d -p 0.0.0.0:3000:3000 hsl-map-generator-ui
+$ docker run -d -p 3000:3000 hsl-map-generator-ui
 ```
 
-*Note: requires a node version >= 4 and an npm version >= 2.*
+*Note: requires a node version >= 8.6.0
 
 Uses REST APIs from [hsl-map-generator-server](https://github.com/HSLdevcom/hsl-map-generator-server) (kartat.hsl.fi).
 

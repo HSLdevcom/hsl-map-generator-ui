@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:8
 
 ENV WORK /opt/mapgenerator
 
@@ -13,9 +13,8 @@ RUN yarn install
 
 # Bundle app source
 COPY . ${WORK}
-RUN npm run build
+RUN yarn build
 
 EXPOSE 3000
 
-CMD npm run start-prod
-
+CMD yarn serve

@@ -1,15 +1,10 @@
-import path from "path";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+/* eslint-disable no-console, import/no-extraneous-dependencies */
 
-export default {
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const config = {
     module: {
-        preLoaders: [
-            {
-                test: /\.js$/,
-                loader: "eslint-loader",
-                exclude: /node_modules/,
-            },
-        ],
         noParse: /json-schema\/lib\/validate\.js/,
         loaders: [{
             test: /\.jsx?$/,
@@ -50,3 +45,5 @@ export default {
     externals: [
     ],
 };
+
+module.exports = config;
