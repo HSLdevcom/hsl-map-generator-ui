@@ -48,8 +48,8 @@ const config = {
         new webpack.DefinePlugin({
             "process.env": {
                 NODE_ENV: JSON.stringify("development"),
-                API_URL: JSON.stringify("http://kartat.hsl.fi/"),
-                GLYPH_URL: JSON.stringify("http://kartat.hsl.fi/"),
+                API_URL: JSON.stringify("https://kartat.hsldev.com/"),
+                GLYPH_URL: JSON.stringify("https://kartat.hsldev.com/"),
             },
         }),
     ],

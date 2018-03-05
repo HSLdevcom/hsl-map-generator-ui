@@ -80,7 +80,7 @@
     "classnames": "^2.2.3",
     "file-saver": "^1.3.2",
     "halogen": "^0.2.0",
-    "hsl-map-style": "github:hsldevcom/hsl-map-style#d640b1f7656df1e594dbb0c897de4d877ed588fb",
+    "hsl-map-style": "github:hsldevcom/hsl-map-style#d53dc884676bbd40c933d46946eac10140152057",
     "immutable": "^3.7.6",
     "lodash": "^4.16.6",
     "memoizee": "^0.4.11",
