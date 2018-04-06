@@ -8,6 +8,8 @@ import tabName from "./tabName";
 import viewport from "./viewport";
 import apiRequests from "./apiRequests";
 import layout from "./layout";
+import publisherRequests from "./publisherRequests";
+import routeMapConfiguration from "./routeMapConfiguration";
 
 const rootReducer = combineReducers({
     version,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
     viewport,
     apiRequests,
     layout,
+    publisherRequests,
+    routeMapConfiguration,
 });
 
 export default rootReducer;

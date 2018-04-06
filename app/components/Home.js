@@ -5,8 +5,7 @@ import SizeSelector from "../containers/SizeSelector";
 import DpiSelector from "../containers/DpiSelector";
 import MapScaleSelector from "../containers/MapScaleSelector";
 import PixelScaleSelector from "../containers/PixelScaleSelector";
-import LayerSelector from "../containers/LayerSelector";
-import FileOperations from "../containers/FileOperations";
+import SideBar from "../containers/SideBar";
 import ModeSelector from "../containers/ModeSelector";
 import styles from "./Home.css";
 
@@ -21,10 +20,7 @@ const Home = () => (
             <PixelScaleSelector/>
         </div>
         <div className={styles.main}>
-            <div className={styles.sideBar}>
-                <LayerSelector/>
-                <FileOperations/>
-            </div>
+            <SideBar/>
             <div className={styles.mainMap}>
                 <Map/>
             </div>
