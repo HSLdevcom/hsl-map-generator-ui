@@ -3,8 +3,7 @@ import CancelablePromise from "cancelable-promise";
 import moment from "moment";
 import urljoin from "url-join";
 
-import { styleFromLayers } from "../utils/map-utils";
-import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom } from "../utils/geom-utils";
+import { styleFromLayers, createMapOptions } from "../utils/map-utils";
 
 export const GENERATE_IMAGE_REQUEST = "GENERATE_IMAGE_REQUEST";
 export const GENERATE_IMAGE_SUCCESS = "GENERATE_IMAGE_SUCCESS";
@@ -13,21 +12,6 @@ export const GENERATE_IMAGE_CANCEL_ALL = "GENERATE_IMAGE_CANCEL_ALL";
 
 let cancelablePromises = [];
 
-const createMapOptions = (mapSelection) => {
-    const tileScale = mapSelectionToTileScale(mapSelection);
-
-    const glOptions = {
-        center: mapSelection.getIn(["center", 0, "location"]).toArray(),
-        width: Math.round(mapSelectionToPixelSize(mapSelection)[0] / tileScale),
-        height: Math.round(mapSelectionToPixelSize(mapSelection)[1] / tileScale),
-        zoom: mapSelectionToZoom(mapSelection) - 1,
-        scale: tileScale,
-        pitch: 0,
-        bearing: 0,
-    };
-
-    return glOptions;
-};
 
 export const generateImageCancelAll = () =>
     (dispatch) => {

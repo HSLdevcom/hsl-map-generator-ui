@@ -4,6 +4,7 @@ import Modes from "../enums/Modes";
 import LayerSelector from "../containers/LayerSelector";
 import FileOperations from "../containers/FileOperations";
 import BuildSelector from "../containers/BuildSelector";
+import RouteMapConfigurator from "../containers/RouteMapConfigurator";
 
 const SideBar = ({ currentMode }) => (
     <div className={styles.sideBar}>
@@ -13,6 +14,7 @@ const SideBar = ({ currentMode }) => (
         ]}
         { currentMode === Modes.ROUTEMAP && [
             <BuildSelector key="BuildSelector"/>,
+            <RouteMapConfigurator key="RouteMapConfigurator"/>,
         ]}
     </div>
 );

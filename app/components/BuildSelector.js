@@ -32,6 +32,7 @@ export default class BuildSelector extends Component {
                         <option key={build.id} value={build.id}>{build.title}</option>
                     ))}
                 </select>
+                <button>Uusi lista</button>
             </div>
         );
     }

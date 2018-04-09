@@ -1,6 +1,8 @@
 import { fromJS, Iterable } from "immutable";
 import memoize from "memoizee";
 import hslMapStyle from "hsl-map-style";
+import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom } from "./geom-utils";
+
 
 const components = hslMapStyle.components;
 const sourcesWithDate = ["stops", "routes"];
@@ -36,3 +38,19 @@ export const styleFromLayers = memoize((layers, date) => {
         },
     );
 });
+
+export const createMapOptions = (mapSelection) => {
+    const tileScale = mapSelectionToTileScale(mapSelection);
+
+    const glOptions = {
+        center: mapSelection.getIn(["center", 0, "location"]).toArray(),
+        width: Math.round(mapSelectionToPixelSize(mapSelection)[0] / tileScale),
+        height: Math.round(mapSelectionToPixelSize(mapSelection)[1] / tileScale),
+        zoom: mapSelectionToZoom(mapSelection) - 1,
+        scale: tileScale,
+        pitch: 0,
+        bearing: 0,
+    };
+
+    return glOptions;
+};
