@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { generateRouteMapAction } from "../actions/publisherRequests";
 import RouteMapConfigurator from "../components/RouteMapConfigurator";
 
-function mapStateToProps() {
+function mapStateToProps(state) {
     return {
-        // buildId: state.routeMapConfiguration.get("buildId"),
+        documents: state.routeMapConfiguration.get("documents"),
     };
 }
 

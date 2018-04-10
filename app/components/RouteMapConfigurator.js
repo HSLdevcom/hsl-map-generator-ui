@@ -1,9 +1,10 @@
 import React from "react";
+import Button from "./Button";
 // import style from "./RouteMapConfigurator.css";
 
 const RouteMapConfigurator = ({ generateRouteMap }) => (
     <div>
-        <button onClick={generateRouteMap}>Generoi</button>
+        <Button styleClass="lightWithBorder" onClick={generateRouteMap}>Generoi</Button>
     </div>
 );
 

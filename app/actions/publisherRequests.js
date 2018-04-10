@@ -1,7 +1,7 @@
 import {
   // getStops,
   getBuilds,
-  // getBuild,
+  getBuild,
   // addBuild,
   // updateBuild,
   // removeBuild,
@@ -18,6 +18,9 @@ export const GET_BUILDS_ERROR = "GET_BUILDS_ERROR";
 export const GENERATE_ROUTEMAP_REQUEST = "GENERATE_ROUTEMAP_REQUEST";
 export const GENERATE_ROUTEMAP_SUCCESS = "GENERATE_ROUTEMAP_SUCCESS";
 export const GENERATE_ROUTEMAP_ERROR = "GENERATE_ROUTEMAP_ERROR";
+export const GET_BUILD_REQUEST = "GET_BUILD_REQUEST";
+export const GET_BUILD_SUCCESS = "GET_BUILD_SUCCESS";
+export const GET_BUILD_ERROR = "GET_BUILD_ERROR";
 
 const fetchDispatcher = ({ action, onFetching, onSuccess, onError }) => {
     action.then((response) => {
@@ -59,5 +62,15 @@ export const generateRouteMapAction = () =>
             onFetching: () => dispatch({ type: GENERATE_ROUTEMAP_REQUEST }),
             onSuccess: data => dispatch({ type: GENERATE_ROUTEMAP_SUCCESS, data }),
             onError: () => dispatch({ type: GENERATE_ROUTEMAP_ERROR }),
+        });
+    };
+
+export const fetchBuild = id =>
+    (dispatch) => {
+        fetchDispatcher({
+            action: getBuild({ id }),
+            onFetching: () => dispatch({ type: GET_BUILD_REQUEST }),
+            onSuccess: data => dispatch({ type: GET_BUILD_SUCCESS, data }),
+            onError: () => dispatch({ type: GET_BUILD_ERROR }),
         });
     };

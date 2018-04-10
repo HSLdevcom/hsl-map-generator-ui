@@ -28,7 +28,7 @@ function getBuilds() {
 }
 
 function getBuild({ id }) {
-    return getJson(`builds/${id}`);
+    return getJson(`builds/ROUTEMAP/${id}`);
 }
 
 function addBuild({ title }) {
