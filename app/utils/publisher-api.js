@@ -32,7 +32,7 @@ function getBuild({ id }) {
 }
 
 function addBuild({ title }) {
-    return postJson("builds", { title });
+    return postJson("builds", { title, type: "ROUTEMAP" });
 }
 
 function updateBuild({ id, status }) {

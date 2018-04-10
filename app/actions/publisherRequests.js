@@ -2,7 +2,7 @@ import {
   // getStops,
   getBuilds,
   getBuild,
-  // addBuild,
+  addBuild,
   // updateBuild,
   // removeBuild,
   addPosters,
@@ -21,6 +21,9 @@ export const GENERATE_ROUTEMAP_ERROR = "GENERATE_ROUTEMAP_ERROR";
 export const GET_BUILD_REQUEST = "GET_BUILD_REQUEST";
 export const GET_BUILD_SUCCESS = "GET_BUILD_SUCCESS";
 export const GET_BUILD_ERROR = "GET_BUILD_ERROR";
+export const ADD_BUILD_REQUEST = "ADD_BUILD_REQUEST";
+export const ADD_BUILD_SUCCESS = "ADD_BUILD_SUCCESS";
+export const ADD_BUILD_ERROR = "ADD_BUILD_ERROR";
 
 const fetchDispatcher = ({ action, onFetching, onSuccess, onError }) => {
     action.then((response) => {
@@ -72,5 +75,18 @@ export const fetchBuild = id =>
             onFetching: () => dispatch({ type: GET_BUILD_REQUEST }),
             onSuccess: data => dispatch({ type: GET_BUILD_SUCCESS, data }),
             onError: () => dispatch({ type: GET_BUILD_ERROR }),
+        });
+    };
+
+export const addList = title =>
+    (dispatch) => {
+        fetchDispatcher({
+            action: addBuild({ title }),
+            onFetching: () => dispatch({ type: ADD_BUILD_REQUEST }),
+            onSuccess: () => {
+                dispatch({ type: ADD_BUILD_SUCCESS });
+                getBuildsAction()(dispatch);
+            },
+            onError: () => dispatch({ type: ADD_BUILD_ERROR }),
         });
     };

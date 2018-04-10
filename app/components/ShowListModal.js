@@ -10,7 +10,6 @@ export default class ShowListModal extends Component {
     }
 
     componentWillReceiveProps() {
-        console.log("fetching");
         /* this.props.fetchBuild(
             this.props.buildId,
         ); */

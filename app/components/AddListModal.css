@@ -1,0 +1,9 @@
+.input{
+  height: 25px;
+  font-size: 1.1rem;
+  color: black;
+  flex: 0 1 100px;
+  font-weight: 300;
+  border: solid 1px #ddd;
+  border-radius: 3px;
+}

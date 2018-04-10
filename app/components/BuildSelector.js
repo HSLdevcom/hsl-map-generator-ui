@@ -3,6 +3,7 @@ import { ModalContainer, ModalDialog } from "react-modal-dialog";
 import Button from "./Button";
 import styles from "./BuildSelector.css";
 import ShowListModal from "../containers/ShowListModal";
+import AddListModal from "../containers/AddListModal";
 
 export default class BuildSelector extends Component {
     constructor() {
@@ -66,8 +67,7 @@ export default class BuildSelector extends Component {
                     { this.state.showingNewList &&
                         <ModalContainer onClose={this.hideNewListModal}>
                             <ModalDialog onClose={this.hideNewListModal}>
-                                <h1>Dialog Content</h1>
-                                <p>More Content. Anything goes here</p>
+                                <AddListModal/>
                             </ModalDialog>
                         </ModalContainer>
                     }
