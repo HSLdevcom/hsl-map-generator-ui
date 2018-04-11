@@ -3,7 +3,14 @@ import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
 import DayPicker from "./DayPicker";
 
-const RouteMapConfigurator = ({ generateRouteMap, build, date, setDate, setPosterName, posterName }) => {
+const RouteMapConfigurator = ({
+    generateRouteMap,
+    build,
+    date,
+    setDate,
+    setPosterName,
+    posterName,
+}) => {
     let input = null;
 
     return (

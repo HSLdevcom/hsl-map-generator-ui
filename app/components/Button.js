@@ -7,7 +7,7 @@ const Button = ({ children, onClick, styleClass = "light", disabled = false }) =
     if (disabled) classes = classnames(styles.button, styles[styleClass], styles.disabled);
     else classes = classnames(styles.button, styles[styleClass]);
     return (
-        <button className={classes} onClick={onClick}>
+        <button className={classes} onClick={e => !disabled && onClick(e)}>
             {children}
         </button>
     );

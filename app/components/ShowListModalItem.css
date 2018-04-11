@@ -24,3 +24,27 @@
 .itemName {
   font-weight: 600;
 }
+
+.buttons button {
+  height: 30px;
+  line-height: 30px;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+.log {
+  width: 500px;
+}
+
+.log p {
+  font-size: 14px;
+}
+
+.pill {
+  border-radius: 10px;
+  padding: 0px 16px;
+  font-size: 10px;
+  margin-left: 10px;
+  margin-bottom: 19px;
+  box-shadow: 0px 0px 1px black;
+}
