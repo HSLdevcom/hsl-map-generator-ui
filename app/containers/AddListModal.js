@@ -4,9 +4,10 @@ import { bindActionCreators } from "redux";
 import { addList } from "../actions/publisherRequests";
 import AddListModal from "../components/AddListModal";
 
-function mapStateToProps() {
+function mapStateToProps(state) {
     return {
-
+        isLoading: state.routeMapConfiguration.addBuildIsLoading,
+        error: state.routeMapConfiguration.addBuildErrorMessage,
     };
 }
 

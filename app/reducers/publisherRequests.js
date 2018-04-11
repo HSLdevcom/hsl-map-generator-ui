@@ -5,6 +5,9 @@ import {
     GET_BUILD_REQUEST,
     GET_BUILD_SUCCESS,
     GET_BUILD_ERROR,
+    ADD_BUILD_REQUEST,
+    ADD_BUILD_SUCCESS,
+    ADD_BUILD_ERROR,
 } from "../actions/publisherRequests";
 
 const initialState = {
@@ -15,6 +18,8 @@ const initialState = {
     buildDataIsLoading: false,
     buildData: null,
     buildDataError: false,
+    addBuildIsLoading: false,
+    addBuildErrorMessage: "",
 };
 
 export default function publisherRequests(state = initialState, action) {
@@ -63,6 +68,27 @@ export default function publisherRequests(state = initialState, action) {
                 buildDataIsLoading: false,
                 buildData: null,
                 buildDataError: true,
+            };
+        }
+        case ADD_BUILD_REQUEST: {
+            return {
+                ...state,
+                addBuildIsLoading: true,
+                addBuildErrorMessage: "",
+            };
+        }
+        case ADD_BUILD_SUCCESS: {
+            return {
+                ...state,
+                addBuildIsLoading: false,
+                addBuildErrorMessage: "",
+            };
+        }
+        case ADD_BUILD_ERROR: {
+            return {
+                ...state,
+                addBuildIsLoading: false,
+                addBuildErrorMessage: action.data,
             };
         }
         default: {

@@ -3,7 +3,7 @@ import { SET_BUILD, SET_DATE } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
     build: null,
-    date: new Date()
+    date: new Date(),
 });
 
 export default function routeMapConfiguration(state = initialState, action) {

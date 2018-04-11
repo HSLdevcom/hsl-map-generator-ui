@@ -86,7 +86,7 @@ export default class BuildSelector extends Component {
                     { this.state.showingNewList &&
                         <ModalContainer onClose={this.hideNewListModal}>
                             <ModalDialog onClose={this.hideNewListModal}>
-                                <AddListModal/>
+                                <AddListModal hide={this.hideNewListModal}/>
                             </ModalDialog>
                         </ModalContainer>
                     }

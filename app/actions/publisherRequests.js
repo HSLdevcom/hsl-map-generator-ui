@@ -32,7 +32,7 @@ const fetchDispatcher = ({ action, onFetching, onSuccess, onError }) => {
         }
         return response.json()
             .then(data => onSuccess(data))
-            .catch(() => onError());
+            .catch(err => onError(err));
     });
     return onFetching();
 };
@@ -78,7 +78,7 @@ export const fetchBuild = id =>
         });
     };
 
-export const addList = title =>
+export const addList = (title, successCallback) =>
     (dispatch) => {
         fetchDispatcher({
             action: addBuild({ title }),
@@ -86,7 +86,8 @@ export const addList = title =>
             onSuccess: () => {
                 dispatch({ type: ADD_BUILD_SUCCESS });
                 getBuildsAction()(dispatch);
+                successCallback();
             },
-            onError: () => dispatch({ type: ADD_BUILD_ERROR }),
+            onError: err => dispatch({ type: ADD_BUILD_ERROR, data: err }),
         });
     };
