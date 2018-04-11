@@ -7,7 +7,6 @@ import BuildSelector from "../components/BuildSelector";
 
 function mapStateToProps(state) {
     return {
-        buildId: state.routeMapConfiguration.get("buildId"),
         builds: state.publisherRequests.builds,
         loading: state.publisherRequests.buildsAreLoading,
         isInitialized: state.publisherRequests.buildIsInitialized,

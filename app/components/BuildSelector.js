@@ -12,11 +12,13 @@ export default class BuildSelector extends Component {
         this.state = {
             showingNewList: false,
             showingShowList: false,
+            buildId: null,
         };
         this.showNewListModal = this.showNewListModal.bind(this);
         this.hideNewListModal = this.hideNewListModal.bind(this);
         this.showShowListModal = this.showShowListModal.bind(this);
         this.hideShowListModal = this.hideShowListModal.bind(this);
+        this.useBuildId = this.useBuildId.bind(this);
     }
 
     componentWillMount() {
@@ -26,7 +28,17 @@ export default class BuildSelector extends Component {
     }
 
     setBuild(event) {
-        this.props.setBuild(event.target.value);
+        this.setState({
+            buildId: event.target.value,
+        });
+    }
+
+    useBuildId() {
+        if (this.state.buildId) {
+            this.props.setBuild(
+                this.props.builds.find(build => build.id === this.state.buildId),
+            );
+        }
     }
 
     showNewListModal() {
@@ -61,6 +73,13 @@ export default class BuildSelector extends Component {
                     ))}
                 </select>
                 <div className={styles.buttonContainer}>
+                    <Button
+                        styleClass="lightWithBorder"
+                        disabled={!this.state.buildId}
+                        onClick={this.useBuildId}
+                    >
+                        Käytä tämä lista
+                    </Button>
                     <Button styleClass="lightWithBorder" onClick={this.showNewListModal}>
                         Uusi lista
                     </Button>
@@ -71,7 +90,11 @@ export default class BuildSelector extends Component {
                             </ModalDialog>
                         </ModalContainer>
                     }
-                    <Button styleClass="lightWithBorder" onClick={this.showShowListModal}>
+                    <Button
+                        styleClass="lightWithBorder"
+                        disabled={!this.state.buildId}
+                        onClick={this.showShowListModal}
+                    >
                         Näytä lista
                     </Button>
                     { this.state.showingShowList &&

@@ -1,0 +1,25 @@
+.title {
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.header {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.container {
+  font-weight: 200;
+  padding: 20px;
+}
+
+.value {
+  text-align: center;
+}
+
+input {
+  text-align: center;
+}
