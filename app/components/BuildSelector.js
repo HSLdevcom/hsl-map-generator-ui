@@ -100,7 +100,7 @@ export default class BuildSelector extends Component {
                     { this.state.showingShowList &&
                         <ModalContainer onClose={this.hideShowListModal}>
                             <ModalDialog onClose={this.hideShowListModal}>
-                                <ShowListModal buildId={this.props.buildId}/>
+                                <ShowListModal buildId={this.state.buildId}/>
                             </ModalDialog>
                         </ModalContainer>
                     }

@@ -53,12 +53,13 @@ export const generateRouteMapAction = () =>
         const { routeMapConfiguration, mapSelection } = state;
         const props = {
             mapOptions: createMapOptions(mapSelection),
-            date: "2018-04-09",
+            date: routeMapConfiguration.get("date"),
+            name: routeMapConfiguration.get("posterName"),
         };
 
         fetchDispatcher({
             action: addPosters({
-                buildId: routeMapConfiguration.get("buildId"),
+                buildId: routeMapConfiguration.get("build").id,
                 component: "RouteMap",
                 props: [props],
             }),

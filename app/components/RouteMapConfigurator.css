@@ -22,4 +22,20 @@
 
 input {
   text-align: center;
+  padding: 5px 10px;
+  font-size: 15px;
+  font-family: Nunito, Arial, Helvetica, "Helvetica Neue", sans-serif;
+  font-weight: 200;
+  color: rgb(221, 221, 221);
+  background: rgb(85, 85, 85);
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid rgb(102, 102, 102);
+  border-left: none;
+  border-image: initial;
+  outline-width: 0px;
+}
+
+.element {
+  margin-bottom: 5px;
 }
