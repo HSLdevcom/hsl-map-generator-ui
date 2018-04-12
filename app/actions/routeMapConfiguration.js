@@ -19,6 +19,6 @@ export function setDate(date) {
 export function setPosterName(name) {
     return {
         type: SET_POSTER_NAME,
-        data: name
+        data: name,
     };
 }

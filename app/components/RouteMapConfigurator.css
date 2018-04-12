@@ -16,6 +16,10 @@
   padding: 20px;
 }
 
+.container input {
+  text-align: center;
+}
+
 .value {
   text-align: center;
 }

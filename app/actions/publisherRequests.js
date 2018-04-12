@@ -15,15 +15,13 @@ import { createMapOptions } from "../utils/map-utils";
 export const GET_BUILDS_REQUEST = "GET_BUILDS_REQUEST";
 export const GET_BUILDS_SUCCESS = "GET_BUILDS_SUCCESS";
 export const GET_BUILDS_ERROR = "GET_BUILDS_ERROR";
-export const GENERATE_ROUTEMAP_REQUEST = "GENERATE_ROUTEMAP_REQUEST";
-export const GENERATE_ROUTEMAP_SUCCESS = "GENERATE_ROUTEMAP_SUCCESS";
-export const GENERATE_ROUTEMAP_ERROR = "GENERATE_ROUTEMAP_ERROR";
 export const GET_BUILD_REQUEST = "GET_BUILD_REQUEST";
 export const GET_BUILD_SUCCESS = "GET_BUILD_SUCCESS";
 export const GET_BUILD_ERROR = "GET_BUILD_ERROR";
 export const ADD_BUILD_REQUEST = "ADD_BUILD_REQUEST";
 export const ADD_BUILD_SUCCESS = "ADD_BUILD_SUCCESS";
 export const ADD_BUILD_ERROR = "ADD_BUILD_ERROR";
+export const ADD_BUILD_RESET = "ADD_BUILD_RESET";
 
 const fetchDispatcher = ({ action, onFetching, onSuccess, onError }) => {
     action.then((response) => {
@@ -47,7 +45,7 @@ export const getBuildsAction = () =>
         });
     };
 
-export const generateRouteMapAction = () =>
+export const generateRouteMapAction = (onSending, onSuccess, onError) =>
     (dispatch, getState) => {
         const state = getState();
         const { routeMapConfiguration, mapSelection } = state;
@@ -63,9 +61,9 @@ export const generateRouteMapAction = () =>
                 component: "RouteMap",
                 props: [props],
             }),
-            onFetching: () => dispatch({ type: GENERATE_ROUTEMAP_REQUEST }),
-            onSuccess: data => dispatch({ type: GENERATE_ROUTEMAP_SUCCESS, data }),
-            onError: () => dispatch({ type: GENERATE_ROUTEMAP_ERROR }),
+            onFetching: () => onSending(),
+            onSuccess: () => onSuccess(),
+            onError: () => onError(),
         });
     };
 

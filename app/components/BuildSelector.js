@@ -69,7 +69,12 @@ export default class BuildSelector extends Component {
                 >
                     <option disabled selected value="empty"> -- Valitse listan -- </option>
                     { this.props.builds.map(build => (
-                        <option key={build.id} value={build.id}>{build.title}</option>
+                        <option
+                            key={build.id}
+                            value={build.id}
+                            selected={this.state.buildId === build.id}
+                        >
+                            {build.title}</option>
                     ))}
                 </select>
                 <div className={styles.buttonContainer}>
