@@ -44,8 +44,9 @@ const ShowListModalItem = ({ item, openLogId, openLog, closeLog }) => (
                         <div className={styles.log}>
                             <h3>Log</h3>
                             {
+
                                 item.events.map(event => (
-                                    <p>{event.message}</p>
+                                    <p key={event.createdAt}>{event.message}</p>
                                 ))
                             }
                         </div>

@@ -67,13 +67,13 @@ export const generateRouteMapAction = (onSending, onSuccess, onError) =>
         });
     };
 
-export const fetchBuild = id =>
+export const fetchBuild = (id, suppressInfo = false) =>
     (dispatch) => {
         fetchDispatcher({
             action: getBuild({ id }),
-            onFetching: () => dispatch({ type: GET_BUILD_REQUEST }),
+            onFetching: () => !suppressInfo && dispatch({ type: GET_BUILD_REQUEST }),
             onSuccess: data => dispatch({ type: GET_BUILD_SUCCESS, data }),
-            onError: () => dispatch({ type: GET_BUILD_ERROR }),
+            onError: () => !suppressInfo && dispatch({ type: GET_BUILD_ERROR }),
         });
     };
 

@@ -11,6 +11,19 @@ class ShowListModal extends Component {
         };
         this.openLog = this.openLog.bind(this);
         this.closeLog = this.closeLog.bind(this);
+        this.update = this.update.bind(this);
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(this.update, 2500);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    update() {
+        this.props.fetchBuild(this.props.buildId, true);
     }
 
     openLog(id) {
