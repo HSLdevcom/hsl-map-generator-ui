@@ -1,7 +1,7 @@
 import { fromJS, Iterable } from "immutable";
 import memoize from "memoizee";
 import hslMapStyle from "hsl-map-style";
-import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom } from "./geom-utils";
+import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom, mapSelectionToMeterPerPixelRatio } from "./geom-utils";
 
 
 const components = hslMapStyle.components;
@@ -50,6 +50,7 @@ export const createMapOptions = (mapSelection) => {
         scale: tileScale,
         pitch: 0,
         bearing: 0,
+        meterPerPxRatio: mapSelectionToMeterPerPixelRatio(mapSelection),
     };
 
     return glOptions;

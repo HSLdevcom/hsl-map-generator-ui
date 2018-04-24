@@ -52,3 +52,11 @@ export const mapSelectionToBbox = (mapSelection) => {
                                 [center[0] + (sizeDeg[0] / 2), center[1] + (sizeDeg[1] / 2)]];
     return bbox;
 };
+
+export const mapSelectionToMeterPerPixelRatio = (mapSelection) => {
+    const pixelSize = mapSelectionToPixelSize(mapSelection);
+    const tileScale = mapSelectionToTileScale(mapSelection);
+    const widthInPixels = Math.round(pixelSize[0] / tileScale);
+    const widthIRLMeters = mmToM(mapSelection.get("size").toArray()[0]) * mapSelection.get("mapScale");
+    return Math.round(widthIRLMeters / widthInPixels);
+};
