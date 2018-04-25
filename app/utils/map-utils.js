@@ -1,7 +1,12 @@
 import { fromJS, Iterable } from "immutable";
 import memoize from "memoizee";
 import hslMapStyle from "hsl-map-style";
-import { mapSelectionToTileScale, mapSelectionToPixelSize, mapSelectionToZoom, mapSelectionToMeterPerPixelRatio } from "./geom-utils";
+import {
+    mapSelectionToTileScale,
+    mapSelectionToPixelSize,
+    mapSelectionToZoom,
+    mapSelectionToMeterPerPixelRatio,
+} from "./geom-utils";
 
 
 const components = hslMapStyle.components;
@@ -42,7 +47,7 @@ export const styleFromLayers = memoize((layers, date) => {
 export const createMapOptions = (mapSelection) => {
     const tileScale = mapSelectionToTileScale(mapSelection);
 
-    const glOptions = {
+    return {
         center: mapSelection.getIn(["center", 0, "location"]).toArray(),
         width: Math.round(mapSelectionToPixelSize(mapSelection)[0] / tileScale),
         height: Math.round(mapSelectionToPixelSize(mapSelection)[1] / tileScale),
@@ -52,6 +57,20 @@ export const createMapOptions = (mapSelection) => {
         bearing: 0,
         meterPerPxRatio: mapSelectionToMeterPerPixelRatio(mapSelection),
     };
-
-    return glOptions;
 };
+
+export const createConfigurationOptions = configuration => ({
+    date: configuration.get("date"),
+    name: configuration.get("posterName"),
+    showScale: configuration.get("showScale"),
+    scaleLength: configuration.get("scaleLength"),
+    maxAnchorLength: configuration.get("maxAnchorLineLength"),
+    clusterDifferentPointsDistance: configuration.get("clusterDifferentRoutePointsDistance"),
+    clusterSamePointsDistance: configuration.get("clusterSameRoutePointsDistance"),
+    pointMinDistanceFromTerminus: configuration.get("pointMinDistanceFromTerminus"),
+    intermediatePointFontSize: configuration.get("intermediatePointFontSize"),
+    intermediatePointWidth: configuration.get("intermediatePointWidth"),
+    terminusFontSize: configuration.get("terminusFontSize"),
+    terminusWidth: configuration.get("terminusWidth"),
+    stationFontSize: configuration.get("stationFontSize"),
+});

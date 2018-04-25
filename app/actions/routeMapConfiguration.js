@@ -7,6 +7,12 @@ export const SET_MAX_ANCHOR_LINE_LENGTH = "SET_MAX_ANCHOR_LINE_LENGTH";
 export const SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE = "SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE";
 export const SET_CLUSTER_SAME_ROUTE_POINTS_DISTANCE = "SET_CLUSTER_SAME_ROUTE_POINTS_DISTANCE";
 export const SET_POINT_MIN_DISTANCE_FROM_TERMINUS = "SET_POINT_MIN_DISTANCE_FROM_TERMINUS";
+export const SET_INTERMEDIATE_POINT_FONT_SIZE = "SET_INTERMEDIATE_POINT_FONT_SIZE";
+export const SET_INTERMEDIATE_POINT_MAX_WIDTH = "SET_INTERMEDIATE_POINT_MAX_WIDTH";
+export const SET_TERMINUS_FONT_SIZE = "SET_TERMINUS_FONT_SIZE";
+export const SET_TERMINUS_MAX_WIDTH = "SET_TERMINUS_MAX_WIDTH";
+export const SET_STATION_NAME_FONT_SIZE = "SET_STATION_NAME_FONT_SIZE";
+
 
 export function setBuild(id) {
     return {
@@ -68,5 +74,40 @@ export function setPointMinDistanceFromTerminus(length) {
     return {
         type: SET_POINT_MIN_DISTANCE_FROM_TERMINUS,
         data: length,
+    };
+}
+
+export function setIntermediatePointFontSize(size) {
+    return {
+        type: SET_INTERMEDIATE_POINT_FONT_SIZE,
+        data: size,
+    };
+}
+
+export function setIntermediatePointMaxWidth(width) {
+    return {
+        type: SET_INTERMEDIATE_POINT_MAX_WIDTH,
+        data: width,
+    };
+}
+
+export function setTerminusFontSize(size) {
+    return {
+        type: SET_TERMINUS_FONT_SIZE,
+        data: size,
+    };
+}
+
+export function setTerminusMaxWidth(width) {
+    return {
+        type: SET_TERMINUS_MAX_WIDTH,
+        data: width,
+    };
+}
+
+export function setStationNameFontSize(size) {
+    return {
+        type: SET_STATION_NAME_FONT_SIZE,
+        data: size,
     };
 }

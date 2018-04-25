@@ -10,7 +10,7 @@ import {
   // downloadPoster,
   // downloadBuild
 } from "../utils/publisher-api";
-import { createMapOptions } from "../utils/map-utils";
+import { createMapOptions, createConfigurationOptions } from "../utils/map-utils";
 
 export const GET_BUILDS_REQUEST = "GET_BUILDS_REQUEST";
 export const GET_BUILDS_SUCCESS = "GET_BUILDS_SUCCESS";
@@ -51,8 +51,7 @@ export const generateRouteMapAction = (onSending, onSuccess, onError) =>
         const { routeMapConfiguration, mapSelection } = state;
         const props = {
             mapOptions: createMapOptions(mapSelection),
-            date: routeMapConfiguration.get("date"),
-            name: routeMapConfiguration.get("posterName"),
+            configuration: createConfigurationOptions(routeMapConfiguration),
         };
 
         fetchDispatcher({

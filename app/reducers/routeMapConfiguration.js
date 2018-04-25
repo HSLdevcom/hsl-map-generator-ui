@@ -10,6 +10,11 @@ import {
     SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE,
     SET_CLUSTER_SAME_ROUTE_POINTS_DISTANCE,
     SET_POINT_MIN_DISTANCE_FROM_TERMINUS,
+    SET_INTERMEDIATE_POINT_FONT_SIZE,
+    SET_INTERMEDIATE_POINT_MAX_WIDTH,
+    SET_TERMINUS_FONT_SIZE,
+    SET_TERMINUS_MAX_WIDTH,
+    SET_STATION_NAME_FONT_SIZE,
 } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
@@ -22,6 +27,11 @@ const initialState = fromJS({
     clusterDifferentRoutePointsDistance: 20,
     clusterSameRoutePointsDistance: 1000,
     pointMinDistanceFromTerminus: 100,
+    intermediatePointFontSize: 10,
+    intermediatePointWidth: 75,
+    terminusFontSize: 14,
+    terminusWidth: 120,
+    stationFontSize: 16,
 });
 
 export default function routeMapConfiguration(state = initialState, action) {
@@ -44,6 +54,16 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("clusterSameRoutePointsDistance", action.data);
         case SET_POINT_MIN_DISTANCE_FROM_TERMINUS:
             return state.set("pointMinDistanceFromTerminus", action.data);
+        case SET_INTERMEDIATE_POINT_FONT_SIZE:
+            return state.set("intermediatePointFontSize", action.data);
+        case SET_INTERMEDIATE_POINT_MAX_WIDTH:
+            return state.set("intermediatePointWidth", action.data);
+        case SET_TERMINUS_FONT_SIZE:
+            return state.set("terminusFontSize", action.data);
+        case SET_TERMINUS_MAX_WIDTH:
+            return state.set("terminusWidth", action.data);
+        case SET_STATION_NAME_FONT_SIZE:
+            return state.set("stationFontSize", action.data);
         default:
             return state;
     }
