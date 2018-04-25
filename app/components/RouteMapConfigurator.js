@@ -4,6 +4,7 @@ import { ModalContainer, ModalDialog } from "react-modal-dialog";
 import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
 import DayPicker from "./DayPicker";
+import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
@@ -11,10 +12,25 @@ export default class RouteMapConfigurator extends Component {
         this.state = {
             sent: false,
             success: false,
+            advancedSettingsOpen: false,
             error: "",
         };
         this.generate = this.generate.bind(this);
         this.closeDone = this.closeDone.bind(this);
+        this.openAdvancedSettings = this.openAdvancedSettings.bind(this);
+        this.closeAdvancedSettings = this.closeAdvancedSettings.bind(this);
+    }
+
+    openAdvancedSettings() {
+        this.setState({
+            advancedSettingsOpen: true,
+        });
+    }
+
+    closeAdvancedSettings() {
+        this.setState({
+            advancedSettingsOpen: false,
+        });
     }
 
     closeDone() {
@@ -80,6 +96,19 @@ export default class RouteMapConfigurator extends Component {
                         </div>
                     </div>
                 </div>
+                <Button
+                    styleClass="lightWithBorder"
+                    onClick={this.openAdvancedSettings}
+                >
+                    Avaa lisäasetukset
+                </Button>
+                { this.state.advancedSettingsOpen &&
+                    <ModalContainer onClose={this.closeAdvancedSettings}>
+                        <ModalDialog onClose={this.closeAdvancedSettings}>
+                            <AdvancedRouteMapOptions/>
+                        </ModalDialog>
+                    </ModalContainer>
+                }
                 <Button
                     styleClass="lightWithBorder"
                     disabled={!build || !build.id || !posterName}

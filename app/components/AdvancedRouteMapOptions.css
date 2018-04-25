@@ -1,0 +1,41 @@
+.container {
+  font-weight: 200;
+  padding: 20px;
+  width: 400px;
+}
+
+.element {
+  margin-bottom: 15px;
+}
+
+.title {
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 14px;
+}
+
+.checkbox {
+  margin: 0 auto;
+  display: block;
+}
+
+.input {
+  text-align: center;
+  padding: 5px 10px;
+  font-size: 15px;
+  font-family: Nunito, Arial, Helvetica, "Helvetica Neue", sans-serif;
+  font-weight: 200;
+  color: #555;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid rgb(102, 102, 102);
+  border-left: none;
+  border-image: initial;
+  outline-width: 0px;
+  width: 100%;
+}
