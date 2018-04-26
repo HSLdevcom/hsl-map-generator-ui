@@ -19,8 +19,8 @@ const ShowListModalItem = ({ item, openLogId, openLog, closeLog }) => (
     <div className={styles.container}>
         <div className={styles.text}>
             <span className={styles.itemName}>
-                {item.props.name && item.props.name}
-                {!item.props.name && "- Nimetön -"}
+                {item.props.configuration.name && item.props.configuration.name}
+                {!item.props.configuration.name && "- Nimetön -"}
             </span>
             <span
                 className={styles.pill}
@@ -29,7 +29,7 @@ const ShowListModalItem = ({ item, openLogId, openLog, closeLog }) => (
             <br/>
             Lisätty: {moment(item.createdAt).format("D.M.YYYY HH:mm")}
             <br/>
-            Kohde päivämäärä: {moment(item.props.date).format("D.M.YYYY")}
+            Kohde päivämäärä: {moment(item.props.configuration.date).format("D.M.YYYY")}
         </div>
         <div className={styles.buttons}>
             <Button onClick={() => downloadPoster({ id: item.id })} disabled={item.status !== "READY"}>
