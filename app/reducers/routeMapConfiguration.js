@@ -23,7 +23,7 @@ const initialState = fromJS({
     posterName: "",
     showScale: true,
     scaleLength: 1000,
-    maxAnchorLineLength: 250,
+    maxAnchorLineLength: 60,
     clusterDifferentRoutePointsDistance: 20,
     clusterSameRoutePointsDistance: 1000,
     pointMinDistanceFromTerminus: 100,

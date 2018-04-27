@@ -41,7 +41,7 @@ const AdvancedRouteMapOptions = (props) => {
                 </div>
             </div>
             <div className={style.element}>
-                <div className={style.title}>Max anchor length (meters)</div>
+                <div className={style.title}>Max anchor length (px)</div>
                 <div className={style.subtitle}>
                     Only affects intermediate labels,
                     labels are automatically removed if the necessary
@@ -54,7 +54,7 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.maxAnchorLineLength}
                         type="number"
                         onChange={() => props.setMaxAnchorLineLength(anchorLength.value)}
-                        placeholder="Max anchor length (meters)"
+                        placeholder="Max anchor length (px)"
                     />
                 </div>
             </div>
