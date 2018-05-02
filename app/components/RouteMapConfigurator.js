@@ -92,6 +92,7 @@ export default class RouteMapConfigurator extends Component {
                             <DayPicker
                                 value={date}
                                 onChange={value => setDate(value)}
+                                disabled
                             />
                         </div>
                     </div>

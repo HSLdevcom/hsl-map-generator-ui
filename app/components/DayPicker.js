@@ -19,6 +19,11 @@ const style = {
     outlineWidth: 0,
 };
 
+const disabledStyle = {
+    ...style,
+    color: "#878585",
+};
+
 const dayPickerProps = {
     firstDayOfWeek: 1,
     weekdaysShort: ["Su", "Ma", "Ti", "Ke", "To", "Pe", "La"],
@@ -28,19 +33,34 @@ const dayPickerProps = {
 
 const DayPicker = props => (
     <div className={styles.container}>
-        <DayPickerInput
-            inputProps={{ style }}
-            format={displayFormat}
-            value={moment(props.value, valueFormat).format(displayFormat)}
-            dayPickerProps={dayPickerProps}
-            onDayChange={date => props.onChange(moment(date).format(valueFormat))}
-        />
+        { props.disabled &&
+            <input
+                style={disabledStyle}
+                value={moment(props.value, valueFormat).format(displayFormat)}
+                disabled
+            />
+        }
+        {
+            !props.disabled &&
+            <DayPickerInput
+                inputProps={{ style }}
+                format={displayFormat}
+                value={moment(props.value, valueFormat).format(displayFormat)}
+                dayPickerProps={dayPickerProps}
+                onDayChange={date => props.onChange(moment(date).format(valueFormat))}
+            />
+        }
     </div>
 );
+
+DayPicker.defaultProps = {
+    disabled: false,
+};
 
 DayPicker.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
 };
 
 export default DayPicker;

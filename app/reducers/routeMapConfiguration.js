@@ -19,7 +19,7 @@ import {
 
 const initialState = fromJS({
     build: null,
-    date: moment().format("YYYY-MM-DD"),
+    date: moment("2018-08-21").format("YYYY-MM-DD"),
     posterName: "",
     showScale: true,
     scaleLength: 1000,
