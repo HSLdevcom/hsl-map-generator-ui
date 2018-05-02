@@ -74,6 +74,7 @@ const AdvancedRouteMapOptions = (props) => {
                         onChange={() =>
                             props.setClusterDifferentRoutePointsDistance(clusterDifferent.value)}
                         placeholder="Cluster points within radius (meters)"
+                        disabled
                     />
                 </div>
             </div>
@@ -92,6 +93,7 @@ const AdvancedRouteMapOptions = (props) => {
                         onChange={() =>
                             props.setClusterSameRoutePointsDistance(clusterSame.value)}
                         placeholder="Cluster identical points within radius (meters)"
+                        disabled
                     />
                 </div>
             </div>
@@ -114,6 +116,7 @@ const AdvancedRouteMapOptions = (props) => {
                         onChange={() =>
                             props.setPointMinDistanceFromTerminus(terminusRadius.value)}
                         placeholder="Minimum distance for intermediate from terminus (meters)"
+                        disabled
                     />
                 </div>
             </div>

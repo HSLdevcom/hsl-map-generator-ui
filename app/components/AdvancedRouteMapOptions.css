@@ -39,3 +39,7 @@
   outline-width: 0px;
   width: 100%;
 }
+
+.input[disabled] {
+  background-color: #e4e4e4;
+}
