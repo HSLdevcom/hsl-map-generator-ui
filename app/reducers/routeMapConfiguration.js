@@ -27,11 +27,11 @@ const initialState = fromJS({
     clusterDifferentRoutePointsDistance: 20,
     clusterSameRoutePointsDistance: 1000,
     pointMinDistanceFromTerminus: 100,
-    intermediatePointFontSize: 10,
-    intermediatePointWidth: 75,
-    terminusFontSize: 14,
-    terminusWidth: 120,
-    stationFontSize: 16,
+    intermediatePointFontSize: 9,
+    intermediatePointWidth: 50,
+    terminusFontSize: 13,
+    terminusWidth: 100,
+    stationFontSize: 14,
 });
 
 export default function routeMapConfiguration(state = initialState, action) {
