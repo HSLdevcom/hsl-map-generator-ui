@@ -19,6 +19,19 @@ export default class RouteMapConfigurator extends Component {
         this.closeDone = this.closeDone.bind(this);
         this.openAdvancedSettings = this.openAdvancedSettings.bind(this);
         this.closeAdvancedSettings = this.closeAdvancedSettings.bind(this);
+        this.toggleOnlyNearBuses = this.toggleOnlyNearBuses.bind(this);
+
+        this.routesLayer = this.props.layers.find(layer => layer.id === "routes");
+        this.regularRoutesLayer = this.props.layers.find(layer => layer.id === "regular_routes");
+        this.nearBusRoutesLayer = this.props.layers.find(layer => layer.id === "near_bus_routes");
+        this.setDefaultLayers();
+    }
+
+    setDefaultLayers() {
+        if (this.routesLayer.enabled) this.props.toggleLayer(this.routesLayer.id);
+        if (!this.regularRoutesLayer.enabled) this.props.toggleLayer(this.regularRoutesLayer.id);
+        if (this.nearBusRoutesLayer.enabled) this.props.toggleLayer(this.nearBusRoutesLayer.id);
+        if (this.props.showOnlyNearBuses) this.props.toggleOnlyNearBuses();
     }
 
     openAdvancedSettings() {
@@ -37,6 +50,12 @@ export default class RouteMapConfigurator extends Component {
         this.setState({
             sent: false,
         });
+    }
+
+    toggleOnlyNearBuses() {
+        this.props.toggleLayer(this.regularRoutesLayer.id);
+        this.props.toggleLayer(this.nearBusRoutesLayer.id);
+        this.props.toggleOnlyNearBuses();
     }
 
     generate() {
@@ -83,6 +102,17 @@ export default class RouteMapConfigurator extends Component {
                                 value={posterName}
                                 onChange={() => setPosterName(input.value)}
                                 placeholder="nimi/tunnus"
+                            />
+                        </div>
+                    </div>
+                    <div className={style.element}>
+                        <div className={style.title}>Vain lähibussit</div>
+                        <div className={style.value}>
+                            <input
+                                className={style.checkbox}
+                                type="checkbox"
+                                onChange={this.toggleOnlyNearBuses}
+                                value={this.props.showOnlyNearBuses}
                             />
                         </div>
                     </div>

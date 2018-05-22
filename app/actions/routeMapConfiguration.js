@@ -12,6 +12,7 @@ export const SET_INTERMEDIATE_POINT_MAX_WIDTH = "SET_INTERMEDIATE_POINT_MAX_WIDT
 export const SET_TERMINUS_FONT_SIZE = "SET_TERMINUS_FONT_SIZE";
 export const SET_TERMINUS_MAX_WIDTH = "SET_TERMINUS_MAX_WIDTH";
 export const SET_STATION_NAME_FONT_SIZE = "SET_STATION_NAME_FONT_SIZE";
+export const TOGGLE_ONLY_NEAR_BUSES = "TOGGLE_ONLY_NEAR_BUSES";
 
 
 export function setBuild(id) {
@@ -109,5 +110,11 @@ export function setStationNameFontSize(size) {
     return {
         type: SET_STATION_NAME_FONT_SIZE,
         data: size,
+    };
+}
+
+export function toggleOnlyNearBuses() {
+    return {
+        type: TOGGLE_ONLY_NEAR_BUSES,
     };
 }

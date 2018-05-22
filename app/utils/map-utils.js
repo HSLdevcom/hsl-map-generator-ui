@@ -73,4 +73,5 @@ export const createConfigurationOptions = configuration => ({
     terminusFontSize: configuration.get("terminusFontSize"),
     terminusWidth: configuration.get("terminusWidth"),
     stationFontSize: configuration.get("stationFontSize"),
+    nearBuses: configuration.get("onlyNearBuses"),
 });

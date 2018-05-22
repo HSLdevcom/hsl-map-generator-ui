@@ -15,6 +15,7 @@ import {
     SET_TERMINUS_FONT_SIZE,
     SET_TERMINUS_MAX_WIDTH,
     SET_STATION_NAME_FONT_SIZE,
+    TOGGLE_ONLY_NEAR_BUSES,
 } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
@@ -32,6 +33,7 @@ const initialState = fromJS({
     terminusFontSize: 13,
     terminusWidth: 100,
     stationFontSize: 14,
+    onlyNearBuses: false,
 });
 
 export default function routeMapConfiguration(state = initialState, action) {
@@ -64,6 +66,8 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("terminusWidth", action.data);
         case SET_STATION_NAME_FONT_SIZE:
             return state.set("stationFontSize", action.data);
+        case TOGGLE_ONLY_NEAR_BUSES:
+            return state.set("onlyNearBuses", !state.get("onlyNearBuses"));
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:4002";
+const API_URL = "http://dev-kartat.hsldev.com/julkaisin-api/";
 
 function getJson(path) {
     return fetch(`${API_URL}/${path}`);
