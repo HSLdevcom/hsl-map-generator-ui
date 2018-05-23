@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import {
-    setShowScale,
+    setScaleFontSize,
     setScaleLength,
     setMaxAnchorLineLength,
     setClusterDifferentRoutePointsDistance,
@@ -18,7 +18,7 @@ import AdvancedRouteMapOptions from "../components/AdvancedRouteMapOptions";
 
 function mapStateToProps(state) {
     return {
-        showScale: state.routeMapConfiguration.get("showScale"),
+        scaleFontSize: state.routeMapConfiguration.get("scaleFontSize"),
         scaleLength: state.routeMapConfiguration.get("scaleLength"),
         maxAnchorLineLength: state.routeMapConfiguration.get("maxAnchorLineLength"),
         clusterDifferentRoutePointsDistance: state.routeMapConfiguration.get("clusterDifferentRoutePointsDistance"),
@@ -34,7 +34,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        setShowScale,
+        setScaleFontSize,
         setScaleLength,
         setMaxAnchorLineLength,
         setClusterDifferentRoutePointsDistance,

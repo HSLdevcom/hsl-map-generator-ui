@@ -4,7 +4,7 @@ import {
     SET_BUILD,
     SET_DATE,
     SET_POSTER_NAME,
-    SET_SHOW_SCALE,
+    SET_SCALE_FONT_SIZE,
     SET_SCALE_LENGTH,
     SET_MAX_ANCHOR_LINE_LENGTH,
     SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE,
@@ -22,8 +22,8 @@ const initialState = fromJS({
     build: null,
     date: moment("2018-08-21").format("YYYY-MM-DD"),
     posterName: "",
-    showScale: true,
-    scaleLength: 1000,
+    scaleLength: 200,
+    scaleFontSize: 12,
     maxAnchorLineLength: 60,
     clusterDifferentRoutePointsDistance: 20,
     clusterSameRoutePointsDistance: 1000,
@@ -31,7 +31,7 @@ const initialState = fromJS({
     intermediatePointFontSize: 9,
     intermediatePointWidth: 50,
     terminusFontSize: 13,
-    terminusWidth: 100,
+    terminusWidth: 120,
     stationFontSize: 14,
     onlyNearBuses: false,
 });
@@ -44,10 +44,10 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("date", action.data);
         case SET_POSTER_NAME:
             return state.set("posterName", action.data);
-        case SET_SHOW_SCALE:
-            return state.set("showScale", action.data);
         case SET_SCALE_LENGTH:
             return state.set("scaleLength", action.data);
+        case SET_SCALE_FONT_SIZE:
+            return state.set("scaleFontSize", action.data);
         case SET_MAX_ANCHOR_LINE_LENGTH:
             return state.set("maxAnchorLineLength", action.data);
         case SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE:

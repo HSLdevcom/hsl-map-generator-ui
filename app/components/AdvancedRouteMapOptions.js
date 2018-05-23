@@ -12,31 +12,36 @@ const AdvancedRouteMapOptions = (props) => {
     let terminusFontSize;
     let terminusWidth;
     let stationFontSize;
+    let scaleFontSize;
 
     return (
         <div className={style.container}>
             <h1 className={style.header}>Lisäasetukset</h1>
             <div className={style.element}>
-                <div className={style.title}>Show scale</div>
+                <div className={style.title}>Scale font size (px)</div>
                 <div className={style.value}>
                     <input
-                        className={style.checkbox}
-                        type="checkbox"
-                        onChange={() => props.setShowScale(!props.showScale)}
-                        defaultChecked={props.showScale}
+                        ref={(el) => { (scaleFontSize) = el; }}
+                        className={style.input}
+                        value={props.scaleFontSize}
+                        type="number"
+                        onChange={() => props.setScaleFontSize(
+                            parseInt(scaleFontSize.value, 10))}
+                        placeholder="Scale font size (px)"
                     />
                 </div>
             </div>
             <div className={style.element}>
-                <div className={style.title}>Scale length (meters)</div>
+                <div className={style.title}>Scale length (px)</div>
                 <div className={style.value}>
                     <input
                         ref={(el) => { (scaleLength) = el; }}
                         className={style.input}
                         value={props.scaleLength}
                         type="number"
-                        onChange={() => props.setScaleLength(scaleLength.value)}
-                        placeholder="Scale length (meters)"
+                        onChange={() => props.setScaleLength(
+                            parseInt(scaleLength.value, 10))}
+                        placeholder="Scale length (px)"
                     />
                 </div>
             </div>
@@ -53,7 +58,8 @@ const AdvancedRouteMapOptions = (props) => {
                         className={style.input}
                         value={props.maxAnchorLineLength}
                         type="number"
-                        onChange={() => props.setMaxAnchorLineLength(anchorLength.value)}
+                        onChange={() => props.setMaxAnchorLineLength(
+                            parseInt(anchorLength.value, 10))}
                         placeholder="Max anchor length (px)"
                     />
                 </div>
@@ -72,7 +78,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.clusterDifferentRoutePointsDistance}
                         type="number"
                         onChange={() =>
-                            props.setClusterDifferentRoutePointsDistance(clusterDifferent.value)}
+                            props.setClusterDifferentRoutePointsDistance(
+                                parseInt(clusterDifferent.value, 10))}
                         placeholder="Cluster points within radius (meters)"
                         disabled
                     />
@@ -91,7 +98,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.clusterSameRoutePointsDistance}
                         type="number"
                         onChange={() =>
-                            props.setClusterSameRoutePointsDistance(clusterSame.value)}
+                            props.setClusterSameRoutePointsDistance(
+                                parseInt(clusterSame.value, 10))}
                         placeholder="Cluster identical points within radius (meters)"
                         disabled
                     />
@@ -114,7 +122,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.pointMinDistanceFromTerminus}
                         type="number"
                         onChange={() =>
-                            props.setPointMinDistanceFromTerminus(terminusRadius.value)}
+                            props.setPointMinDistanceFromTerminus(
+                                parseInt(terminusRadius.value, 10))}
                         placeholder="Minimum distance for intermediate from terminus (meters)"
                         disabled
                     />
@@ -131,7 +140,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.intermediatePointFontSize}
                         type="number"
                         onChange={() =>
-                            props.setIntermediatePointFontSize(intermediateFontSize.value)}
+                            props.setIntermediatePointFontSize(
+                                parseInt(intermediateFontSize.value, 10))}
                         placeholder="Intermediate point font size (px)"
                     />
                 </div>
@@ -147,7 +157,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.intermediatePointWidth}
                         type="number"
                         onChange={() =>
-                            props.setIntermediatePointMaxWidth(intermediateWidth.value)}
+                            props.setIntermediatePointMaxWidth(
+                                parseInt(intermediateWidth.value, 10))}
                         placeholder="Intermediate label box max width (px)"
                     />
                 </div>
@@ -163,7 +174,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.terminusFontSize}
                         type="number"
                         onChange={() =>
-                            props.setTerminusFontSize(terminusFontSize.value)}
+                            props.setTerminusFontSize(
+                                parseInt(terminusFontSize.value, 10))}
                         placeholder="Terminus font size (px)"
                     />
                 </div>
@@ -179,7 +191,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.terminusWidth}
                         type="number"
                         onChange={() =>
-                            props.setTerminusMaxWidth(terminusWidth.value)}
+                            props.setTerminusMaxWidth(
+                                parseInt(terminusWidth.value, 10))}
                         placeholder="Terminus box max width (px)"
                     />
                 </div>
@@ -195,7 +208,8 @@ const AdvancedRouteMapOptions = (props) => {
                         value={props.stationFontSize}
                         type="number"
                         onChange={() =>
-                            props.setStationNameFontSize(stationFontSize.value)}
+                            props.setStationNameFontSize(
+                                parseInt(stationFontSize.value, 10))}
                         placeholder="Station name font size (px)"
                     />
                 </div>
@@ -205,13 +219,13 @@ const AdvancedRouteMapOptions = (props) => {
 };
 
 AdvancedRouteMapOptions.propTypes = {
-    showScale: PropTypes.bool.isRequired,
+    scaleFontSize: PropTypes.number.isRequired,
     scaleLength: PropTypes.number.isRequired,
     maxAnchorLineLength: PropTypes.number.isRequired,
     clusterDifferentRoutePointsDistance: PropTypes.number.isRequired,
     clusterSameRoutePointsDistance: PropTypes.number.isRequired,
     pointMinDistanceFromTerminus: PropTypes.number.isRequired,
-    setShowScale: PropTypes.func.isRequired,
+    setScaleFontSize: PropTypes.func.isRequired,
     setScaleLength: PropTypes.func.isRequired,
     setMaxAnchorLineLength: PropTypes.func.isRequired,
     setClusterDifferentRoutePointsDistance: PropTypes.func.isRequired,

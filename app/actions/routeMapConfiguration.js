@@ -1,7 +1,7 @@
 export const SET_BUILD = "SET_BUILD";
 export const SET_DATE = "SET_DATE";
 export const SET_POSTER_NAME = "SET_POSTER_NAME";
-export const SET_SHOW_SCALE = "SET_SHOW_SCALE";
+export const SET_SCALE_FONT_SIZE = "SET_SCALE_FONT_SIZE";
 export const SET_SCALE_LENGTH = "SET_SCALE_LENGTH";
 export const SET_MAX_ANCHOR_LINE_LENGTH = "SET_MAX_ANCHOR_LINE_LENGTH";
 export const SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE = "SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE";
@@ -36,9 +36,9 @@ export function setPosterName(name) {
     };
 }
 
-export function setShowScale(value) {
+export function setScaleFontSize(value) {
     return {
-        type: SET_SHOW_SCALE,
+        type: SET_SCALE_FONT_SIZE,
         data: value,
     };
 }

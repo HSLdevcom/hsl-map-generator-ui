@@ -62,7 +62,7 @@ export const createMapOptions = (mapSelection) => {
 export const createConfigurationOptions = configuration => ({
     date: configuration.get("date"),
     name: configuration.get("posterName"),
-    showScale: configuration.get("showScale"),
+    scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
     maxAnchorLength: configuration.get("maxAnchorLineLength"),
     clusterDifferentPointsDistance: configuration.get("clusterDifferentRoutePointsDistance"),
