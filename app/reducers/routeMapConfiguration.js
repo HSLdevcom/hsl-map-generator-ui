@@ -20,7 +20,7 @@ import {
 
 const initialState = fromJS({
     build: null,
-    date: moment("2018-08-21").format("YYYY-MM-DD"),
+    date: moment("2018-09-01").format("YYYY-MM-DD"),
     posterName: "",
     scaleLength: 200,
     scaleFontSize: 12,
@@ -31,8 +31,8 @@ const initialState = fromJS({
     intermediatePointFontSize: 9,
     intermediatePointWidth: 50,
     terminusFontSize: 13,
-    terminusWidth: 120,
-    stationFontSize: 14,
+    terminusWidth: 165,
+    stationFontSize: 12,
     onlyNearBuses: false,
 });
 
