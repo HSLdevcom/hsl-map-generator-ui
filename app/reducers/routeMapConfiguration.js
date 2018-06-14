@@ -31,7 +31,7 @@ const initialState = fromJS({
     intermediatePointFontSize: 9,
     intermediatePointWidth: 50,
     terminusFontSize: 13,
-    terminusWidth: 165,
+    terminusWidth: 170,
     stationFontSize: 12,
     onlyNearBuses: false,
 });
