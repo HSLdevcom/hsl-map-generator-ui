@@ -10,7 +10,7 @@ import FileOperations from "../containers/FileOperations";
 import styles from "./Home.css";
 
 const Home = () => (
-    <div>
+    <div className={styles.container}>
         <div className={styles.topBar}>
             <div className={styles.logo}>
                 <h2>Karttageneraattori</h2>
@@ -23,8 +23,10 @@ const Home = () => (
         </div>
         <div className={styles.main}>
             <div className={styles.sideBar}>
-                <LayerSelector/>
-                <FileOperations/>
+                <div className={styles.sideBarContent}>
+                    <LayerSelector/>
+                    <FileOperations/>
+                </div>
             </div>
             <div className={styles.mainMap}>
                 <Map/>

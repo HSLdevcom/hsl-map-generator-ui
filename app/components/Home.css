@@ -22,11 +22,20 @@
 
 .sideBar {
     flex: 0 0 320px;
+    background: #555;
+    color: #aaa;
+    overflow-y: scroll;
+}
+
+.sideBarContent {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #555;
-    color: #aaa;
+    min-height: 100%;
+}
+
+.container {
+    height: 100vh;
 }
 
 .mainMap {
