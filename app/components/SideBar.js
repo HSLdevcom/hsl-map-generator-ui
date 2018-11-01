@@ -5,6 +5,7 @@ import LayerSelector from "../containers/LayerSelector";
 import FileOperations from "../containers/FileOperations";
 import BuildSelector from "../containers/BuildSelector";
 import RouteMapConfigurator from "../containers/RouteMapConfigurator";
+import PointBuildTrigger from "../containers/PointBuildTrigger";
 
 const SideBar = ({ currentMode }) => (
     <div className={styles.sideBar}>
@@ -13,6 +14,7 @@ const SideBar = ({ currentMode }) => (
             <FileOperations key="FileOperations"/>,
         ]}
         { currentMode === Modes.ROUTEMAP && [
+            <PointBuildTrigger key="PointBuildTrigger"/>,
             <BuildSelector key="BuildSelector"/>,
             <RouteMapConfigurator key="RouteMapConfigurator"/>,
         ]}
