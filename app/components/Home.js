@@ -10,7 +10,7 @@ import ModeSelector from "../containers/ModeSelector";
 import styles from "./Home.css";
 
 const Home = () => (
-    <div>
+    <div className={styles.container}>
         <div className={styles.topBar}>
             <ModeSelector/>
             <CenterSelector/>
@@ -20,7 +20,11 @@ const Home = () => (
             <PixelScaleSelector/>
         </div>
         <div className={styles.main}>
-            <SideBar/>
+            <div className={styles.sideBar}>
+                <div className={styles.sideBarContent}>
+                    <SideBar/>
+                </div>
+            </div>
             <div className={styles.mainMap}>
                 <Map/>
             </div>
