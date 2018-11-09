@@ -9,6 +9,8 @@ import {
   // removePoster,
   // downloadPoster,
   // downloadBuild
+  getPointConfig,
+  setPointConfig,
 } from "../utils/publisher-api";
 import { createMapOptions, createConfigurationOptions } from "../utils/map-utils";
 
@@ -22,6 +24,12 @@ export const ADD_BUILD_REQUEST = "ADD_BUILD_REQUEST";
 export const ADD_BUILD_SUCCESS = "ADD_BUILD_SUCCESS";
 export const ADD_BUILD_ERROR = "ADD_BUILD_ERROR";
 export const ADD_BUILD_RESET = "ADD_BUILD_RESET";
+export const GET_POINT_CONFIG = "GET_POINT_CONFIG";
+export const GET_POINT_CONFIG_SUCCESS = "GET_POINT_CONFIG_SUCCESS";
+export const GET_POINT_CONFIG_ERROR = "GET_POINT_CONFIG_ERROR";
+export const SET_POINT_CONFIG = "SET_POINT_CONFIG";
+export const SET_POINT_CONFIG_SUCCESS = "SET_POINT_CONFIG_SUCCESS";
+export const SET_POINT_CONFIG_ERROR = "SET_POINT_CONFIG_ERROR";
 
 const fetchDispatcher = ({ action, onFetching, onSuccess, onError }) => {
     action.then((response) => {
@@ -87,5 +95,25 @@ export const addList = (title, successCallback) =>
                 successCallback();
             },
             onError: err => dispatch({ type: ADD_BUILD_ERROR, data: err }),
+        });
+    };
+
+export const fetchConfig = () =>
+    (dispatch) => {
+        fetchDispatcher({
+            action: getPointConfig(),
+            onFetching: () => dispatch({ type: GET_POINT_CONFIG }),
+            onSuccess: data => dispatch({ type: GET_BUILD_SUCCESS, data }),
+            onError: err => dispatch({ type: ADD_BUILD_ERROR, data: err }),
+        });
+    };
+
+export const setConfig = targetDate =>
+    (dispatch) => {
+        fetchDispatcher({
+            action: setPointConfig(targetDate),
+            onFetching: () => dispatch({ type: SET_POINT_CONFIG }),
+            onSuccess: data => dispatch({ type: SET_POINT_CONFIG_SUCCESS, data }),
+            onError: err => dispatch({ type: SET_POINT_CONFIG_ERROR, data: err }),
         });
     };

@@ -13,6 +13,7 @@ function mapStateToProps(state) {
         layers: state.layers,
         posterName: state.routeMapConfiguration.get("posterName"),
         showOnlyNearBuses: state.routeMapConfiguration.get("onlyNearBuses"),
+        config: state.publisherRequests.buildData,
     };
 }
 

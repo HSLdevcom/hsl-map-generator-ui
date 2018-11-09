@@ -1,5 +1,4 @@
 export const SET_BUILD = "SET_BUILD";
-export const SET_DATE = "SET_DATE";
 export const SET_POSTER_NAME = "SET_POSTER_NAME";
 export const SET_SCALE_FONT_SIZE = "SET_SCALE_FONT_SIZE";
 export const SET_SCALE_LENGTH = "SET_SCALE_LENGTH";
@@ -19,13 +18,6 @@ export function setBuild(id) {
     return {
         type: SET_BUILD,
         data: id,
-    };
-}
-
-export function setDate(date) {
-    return {
-        type: SET_DATE,
-        data: date,
     };
 }
 

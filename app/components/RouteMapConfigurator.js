@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { ModalContainer, ModalDialog } from "react-modal-dialog";
-
+import moment from "moment";
 import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
 import DayPicker from "./DayPicker";
 import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
+import { PointStatus } from "../reducers/publisherRequests";
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
@@ -76,8 +77,6 @@ export default class RouteMapConfigurator extends Component {
         let input = null;
         const {
             build,
-            date,
-            setDate,
             setPosterName,
             posterName,
         } = this.props;
@@ -119,11 +118,12 @@ export default class RouteMapConfigurator extends Component {
                     <div className={style.element}>
                         <div className={style.title}>Päivämäärä</div>
                         <div className={style.value}>
-                            <DayPicker
-                                value={date}
-                                onChange={value => setDate(value)}
-                                disabled
-                            />
+                            { this.props.config &&
+                                <DayPicker
+                                    value={moment(this.props.config.target_date)}
+                                    disabled
+                                />
+                            }
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,13 @@ export default class RouteMapConfigurator extends Component {
                 }
                 <Button
                     styleClass="lightWithBorder"
-                    disabled={!build || !build.id || !posterName}
+                    disabled={
+                        !build ||
+                        !build.id ||
+                        !posterName ||
+                        !this.props.config ||
+                        this.props.config.status !== PointStatus.DONE
+                    }
                     onClick={this.generate}
                 >
                     Generoi

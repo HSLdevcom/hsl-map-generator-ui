@@ -8,6 +8,12 @@ import {
     ADD_BUILD_REQUEST,
     ADD_BUILD_SUCCESS,
     ADD_BUILD_ERROR,
+    GET_POINT_CONFIG,
+    GET_POINT_CONFIG_ERROR,
+    GET_POINT_CONFIG_SUCCESS,
+    SET_POINT_CONFIG,
+    SET_POINT_CONFIG_ERROR,
+    SET_POINT_CONFIG_SUCCESS,
 } from "../actions/publisherRequests";
 
 const initialState = {
@@ -20,7 +26,16 @@ const initialState = {
     buildDataError: false,
     addBuildIsLoading: false,
     addBuildErrorMessage: "",
+    pointConfigLoading: false,
+    pointConfig: null,
+    pointConfigErrorMessage: "",
 };
+
+export const PointStatus = Object.freeze({
+    PENDING: "PENDING",
+    DONE: "READY",
+    ERROR: "ERROR",
+});
 
 export default function publisherRequests(state = initialState, action) {
     switch (action.type) {
@@ -89,6 +104,54 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 addBuildIsLoading: false,
                 addBuildErrorMessage: action.data,
+            };
+        }
+        case GET_POINT_CONFIG: {
+            return {
+                ...state,
+                pointConfigLoading: true,
+                pointConfig: null,
+                pointConfigErrorMessage: "",
+            };
+        }
+        case GET_POINT_CONFIG_SUCCESS: {
+            return {
+                ...state,
+                pointConfigLoading: false,
+                pointConfig: action.data,
+                pointConfigErrorMessage: "",
+            };
+        }
+        case GET_POINT_CONFIG_ERROR: {
+            return {
+                ...state,
+                pointConfigLoading: false,
+                pointConfig: null,
+                pointConfigErrorMessage: action.data,
+            };
+        }
+        case SET_POINT_CONFIG: {
+            return {
+                ...state,
+                pointConfigLoading: true,
+                pointConfig: null,
+                pointConfigErrorMessage: "",
+            };
+        }
+        case SET_POINT_CONFIG_SUCCESS: {
+            return {
+                ...state,
+                pointConfigLoading: false,
+                pointConfig: action.data,
+                pointConfigErrorMessage: "",
+            };
+        }
+        case SET_POINT_CONFIG_ERROR: {
+            return {
+                ...state,
+                pointConfigLoading: false,
+                pointConfig: null,
+                pointConfigErrorMessage: action.data,
             };
         }
         default: {

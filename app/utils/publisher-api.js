@@ -59,6 +59,14 @@ function downloadBuild({ id }) {
     window.open(`${API_URL}/downloadBuild/${id}`, "_blank");
 }
 
+function getPointConfig() {
+    return getJson("config");
+}
+
+function setPointConfig(targetDate) {
+    return postJson(`import?targetDate=${encodeURIComponent(targetDate.format("YYYY-MM-DD"))}`);
+}
+
 export {
     getStops,
     getBuilds,
@@ -70,4 +78,6 @@ export {
     removePoster,
     downloadPoster,
     downloadBuild,
+    getPointConfig,
+    setPointConfig,
 };
