@@ -6,9 +6,15 @@ import FileOperations from "../containers/FileOperations";
 import BuildSelector from "../containers/BuildSelector";
 import RouteMapConfigurator from "../containers/RouteMapConfigurator";
 import PointBuildTrigger from "../containers/PointBuildTrigger";
+import Button from "./Button";
 
-const SideBar = ({ currentMode }) => (
+const SideBar = ({ currentMode, toggleMode }) => (
     <div className={styles.sideBar}>
+        <div className={styles.modeSelector}>
+            <Button onClick={toggleMode} styleClass="lightWithBorder">
+                Siirrä { currentMode === Modes.MAP ? "Linjakarttageneraatoriin" : "Karttageneratoriin"}
+            </Button>
+        </div>
         { currentMode === Modes.MAP && [
             <LayerSelector key="LayerSelector"/>,
             <FileOperations key="FileOperations"/>,

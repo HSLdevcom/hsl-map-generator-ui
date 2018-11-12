@@ -1,4 +1,7 @@
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { toggleMode } from "../actions/modeSelection";
+
 import SideBar from "../components/SideBar";
 
 function mapStateToProps(state) {
@@ -7,4 +10,8 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(SideBar);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ toggleMode }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

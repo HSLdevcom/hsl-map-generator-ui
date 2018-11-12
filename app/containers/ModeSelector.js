@@ -1,7 +1,5 @@
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ModeSelector from "../components/ModeSelector";
-import { toggleMode } from "../actions/modeSelection";
 
 function mapStateToProps(state) {
     return {
@@ -9,8 +7,5 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ toggleMode }, dispatch);
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModeSelector);
+export default connect(mapStateToProps)(ModeSelector);

@@ -5,3 +5,15 @@
   display: flex;
   flex-direction: column;
 }
+
+.modeSelector {
+  padding: 10px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #717171;
+}
+
+.modeSelector > button {
+  width: 100%;
+  cursor: pointer;
+}
