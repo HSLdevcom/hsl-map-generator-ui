@@ -12,7 +12,7 @@ const SideBar = ({ currentMode, toggleMode }) => (
     <div className={styles.sideBar}>
         <div className={styles.modeSelector}>
             <Button onClick={toggleMode} styleClass="lightWithBorder">
-                Siirrä { currentMode === Modes.MAP ? "Linjakarttageneraatoriin" : "Karttageneratoriin"}
+                Siirry { currentMode === Modes.MAP ? "Linjakarttageneraatoriin" : "Karttageneratoriin"}
             </Button>
         </div>
         { currentMode === Modes.MAP && [
