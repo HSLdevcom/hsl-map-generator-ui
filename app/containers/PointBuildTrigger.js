@@ -6,7 +6,7 @@ import PointBuildTrigger from "../components/PointBuildTrigger";
 
 function mapStateToProps(state) {
     return {
-        config: state.publisherRequests.buildData,
+        config: state.publisherRequests.pointConfig,
     };
 }
 

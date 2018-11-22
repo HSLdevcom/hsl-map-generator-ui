@@ -19,7 +19,8 @@ export default class RouteMapConfigurator extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(this.update, 2500);
+        this.update(false);
+        this.interval = setInterval(() => this.update(true), 2500);
     }
 
     componentWillUnmount() {
@@ -37,8 +38,8 @@ export default class RouteMapConfigurator extends Component {
     }
 
 
-    update() {
-        this.props.fetchConfig();
+    update(supressInfo) {
+        this.props.fetchConfig(supressInfo);
     }
 
     isDisabled() {

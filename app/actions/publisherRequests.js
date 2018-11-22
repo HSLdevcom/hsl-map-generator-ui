@@ -98,13 +98,13 @@ export const addList = (title, successCallback) =>
         });
     };
 
-export const fetchConfig = () =>
+export const fetchConfig = (suppressInfo = false) =>
     (dispatch) => {
         fetchDispatcher({
             action: getPointConfig(),
-            onFetching: () => dispatch({ type: GET_POINT_CONFIG }),
-            onSuccess: data => dispatch({ type: GET_BUILD_SUCCESS, data }),
-            onError: err => dispatch({ type: ADD_BUILD_ERROR, data: err }),
+            onFetching: () => !suppressInfo && dispatch({ type: GET_POINT_CONFIG }),
+            onSuccess: data => dispatch({ type: GET_POINT_CONFIG_SUCCESS, data }),
+            onError: err => !suppressInfo && dispatch({ type: GET_POINT_CONFIG_ERROR, data: err }),
         });
     };
 
