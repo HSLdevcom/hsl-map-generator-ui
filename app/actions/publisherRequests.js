@@ -56,10 +56,13 @@ export const getBuildsAction = () =>
 export const generateRouteMapAction = (onSending, onSuccess, onError) =>
     (dispatch, getState) => {
         const state = getState();
-        const { routeMapConfiguration, mapSelection } = state;
+        const { routeMapConfiguration, mapSelection, publisherRequests } = state;
         const props = {
             mapOptions: createMapOptions(mapSelection),
-            configuration: createConfigurationOptions(routeMapConfiguration),
+            configuration: createConfigurationOptions(
+                routeMapConfiguration,
+                publisherRequests.pointConfig,
+            ),
         };
 
         fetchDispatcher({

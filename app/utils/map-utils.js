@@ -1,5 +1,6 @@
 import { fromJS, Iterable } from "immutable";
 import memoize from "memoizee";
+import moment from "moment"
 import hslMapStyle from "hsl-map-style";
 import {
     mapSelectionToTileScale,
@@ -59,8 +60,8 @@ export const createMapOptions = (mapSelection) => {
     };
 };
 
-export const createConfigurationOptions = configuration => ({
-    date: configuration.get("date"),
+export const createConfigurationOptions = (configuration, pointConfig) => ({
+    date: moment(pointConfig.target_date).format("YYYY-MM-DD"),
     name: configuration.get("posterName"),
     scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
