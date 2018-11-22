@@ -1,4 +1,5 @@
 const API_URL = "http://dev-kartat.hsldev.com/routemap-api/";
+// const API_URL = "http://localhost:4000";
 
 function getJson(path) {
     return fetch(`${API_URL}/${path}`);
@@ -24,15 +25,15 @@ function getStops() {
 }
 
 function getBuilds() {
-    return getJson("builds/ROUTEMAP");
+    return getJson("builds");
 }
 
 function getBuild({ id }) {
-    return getJson(`builds/ROUTEMAP/${id}`);
+    return getJson(`builds/${id}`);
 }
 
 function addBuild({ title }) {
-    return postJson("builds", { title, type: "ROUTEMAP" });
+    return postJson("builds", { title });
 }
 
 function updateBuild({ id, status }) {
@@ -64,7 +65,11 @@ function getPointConfig() {
 }
 
 function setPointConfig(targetDate) {
-    return postJson(`import?targetDate=${encodeURIComponent(targetDate.format("YYYY-MM-DD"))}`);
+    return postJson(
+        `import?targetDate=${encodeURIComponent(
+            targetDate.format("YYYY-MM-DD"),
+        )}`,
+    );
 }
 
 export {
