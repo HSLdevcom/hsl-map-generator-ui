@@ -83,7 +83,7 @@ export default class BuildSelector extends Component {
                         disabled={!this.state.buildId}
                         onClick={this.useBuildId}
                     >
-                        Käytä tämä lista
+                        Käytä tätä listaa
                     </Button>
                     <Button styleClass="lightWithBorder" onClick={this.showNewListModal}>
                         Uusi lista
