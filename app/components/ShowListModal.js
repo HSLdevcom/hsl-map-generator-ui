@@ -35,7 +35,7 @@ class ShowListModal extends Component {
     }
 
     render() {
-        if (!this.props.loading && this.props.build) {
+        if (!this.props.loading && this.props.build && this.props.build.posters) {
             const readyPosters = this.props.build.posters.filter(poster => poster.status === "READY");
             const pendingPosters = this.props.build.posters.filter(poster => poster.status === "PENDING");
             const otherPosters = this.props.build.posters
