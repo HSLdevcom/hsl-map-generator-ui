@@ -146,8 +146,8 @@ export default class RouteMapConfigurator extends Component {
                         !build ||
                         !build.id ||
                         !posterName ||
-                        !this.props.config ||
-                        this.props.config.status !== PointStatus.DONE
+                        !this.props.pointConfig ||
+                        this.props.pointConfig.status !== PointStatus.DONE
                     }
                     onClick={this.generate}
                 >
