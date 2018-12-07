@@ -1,6 +1,6 @@
 import { fromJS, Iterable } from "immutable";
 import memoize from "memoizee";
-import moment from "moment"
+import moment from "moment";
 import hslMapStyle from "hsl-map-style";
 import {
     mapSelectionToTileScale,
