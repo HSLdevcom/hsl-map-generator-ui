@@ -5,16 +5,14 @@ import SizeSelector from "../containers/SizeSelector";
 import DpiSelector from "../containers/DpiSelector";
 import MapScaleSelector from "../containers/MapScaleSelector";
 import PixelScaleSelector from "../containers/PixelScaleSelector";
-import LayerSelector from "../containers/LayerSelector";
-import FileOperations from "../containers/FileOperations";
+import SideBar from "../containers/SideBar";
+import ModeSelector from "../containers/ModeSelector";
 import styles from "./Home.css";
 
 const Home = () => (
     <div className={styles.container}>
         <div className={styles.topBar}>
-            <div className={styles.logo}>
-                <h2>Karttageneraattori</h2>
-            </div>
+            <ModeSelector/>
             <CenterSelector/>
             <SizeSelector/>
             <DpiSelector/>
@@ -24,8 +22,7 @@ const Home = () => (
         <div className={styles.main}>
             <div className={styles.sideBar}>
                 <div className={styles.sideBarContent}>
-                    <LayerSelector/>
-                    <FileOperations/>
+                    <SideBar/>
                 </div>
             </div>
             <div className={styles.mainMap}>

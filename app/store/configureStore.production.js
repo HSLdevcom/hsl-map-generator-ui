@@ -7,7 +7,7 @@ import rootReducer from "../reducers";
 import versionReducer from "../reducers/version";
 
 const localStorageEnhancer = localStorage(
-    ["version", "viewport", "mapSelection", "layers", "settings"],
+    ["version", "viewport", "mapSelection", "settings"],
     {
         serialize: state => toJSON(state),
         deserialize: (stateJSON) => {

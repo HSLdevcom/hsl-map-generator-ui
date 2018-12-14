@@ -6,14 +6,6 @@
     align-items: center;
 }
 
-.logo {
-    flex: 0 0 320px;
-    display: flex;
-    align-items: center;
-    height: 40px;
-    padding: 0 20px;
-}
-
 .main {
     height: 100%;
     width: 100%;

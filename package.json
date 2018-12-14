@@ -90,6 +90,7 @@
     "react-day-picker": "^7.0.5",
     "react-dom": "^15.1.0",
     "react-map-gl": "^2.0.2",
+    "react-modal-dialog": "^4.0.7",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-localstorage": "^0.4.1",

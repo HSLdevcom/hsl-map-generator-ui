@@ -24,3 +24,8 @@
     background-color: #555;
     border: solid 1px #999;
 }
+
+.disabled {
+    cursor: default;
+    color: #8c8c8c;
+}
