@@ -1,4 +1,4 @@
-const API_URL = "http://kartat.hsl.fi/routemap-api/";
+const API_URL = "https://kartat.hsl.fi/routemap-api/";
 
 function getJson(path) {
     return fetch(`${API_URL}/${path}`);
