@@ -1,4 +1,4 @@
-const API_URL = "https://kartat.hsl.fi/routemap-api/";
+const API_URL = process.env.API_URL;
 
 function getJson(path) {
     return fetch(`${API_URL}/${path}`);
