@@ -11,7 +11,9 @@
     "lint": "eslint app",
     "clean": "rimraf dist",
     "bundle": "cross-env NODE_ENV=production webpack --config webpack.config.production.js",
+    "bundle:dev": "cross-env NODE_ENV=development webpack --config webpack.config.development.js",
     "build": "yarn clean && yarn lint && yarn bundle",
+    "build:dev": "yarn clean && yarn lint && yarn bundle:dev",
     "start": "cross-env NODE_ENV=development node server.js",
     "serve": "serve --port=3000 dist"
   },

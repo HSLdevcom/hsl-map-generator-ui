@@ -13,7 +13,7 @@ RUN yarn install
 
 # Bundle app source
 COPY . ${WORK}
-RUN yarn build
+RUN yarn build:dev
 
 EXPOSE 3000
 
