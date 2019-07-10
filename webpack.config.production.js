@@ -47,7 +47,7 @@ const config = {
             "process.env": {
                 NODE_ENV: JSON.stringify("production"),
                 API_URL: JSON.stringify("https://kartat.hsl.fi/routemap-api"),
-                GLYPH_URL: JSON.stringify("https://kartat.hsl.fi"),
+                GLYPH_URL: JSON.stringify("https://kartat.hsl.fi/"),
             },
         }),
         new webpack.optimize.UglifyJsPlugin({
