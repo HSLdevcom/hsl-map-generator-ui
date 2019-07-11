@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
 
@@ -7,7 +7,7 @@ class ShowListModal extends Component {
         super();
         props.fetchBuild(props.buildId);
         this.state = {
-            openLogId: null,
+            openLogId: null
         };
         this.openLog = this.openLog.bind(this);
         this.closeLog = this.closeLog.bind(this);
@@ -27,25 +27,35 @@ class ShowListModal extends Component {
     }
 
     openLog(id) {
-        this.setState({ openLogId: id });
+        this.setState({openLogId: id});
     }
 
     closeLog() {
-        this.setState({ openLogId: null });
+        this.setState({openLogId: null});
     }
 
     render() {
-        if (!this.props.loading && this.props.build && this.props.build.posters) {
-            const readyPosters = this.props.build.posters.filter(poster => poster.status === "READY");
-            const pendingPosters = this.props.build.posters.filter(poster => poster.status === "PENDING");
-            const otherPosters = this.props.build.posters
-                .filter(poster => poster.status !== "READY" && poster.status !== "PENDING");
+        if (
+            !this.props.loading &&
+            this.props.build &&
+            this.props.build.posters
+        ) {
+            const readyPosters = this.props.build.posters.filter(
+                (poster) => poster.status === "READY"
+            );
+            const pendingPosters = this.props.build.posters.filter(
+                (poster) => poster.status === "PENDING"
+            );
+            const otherPosters = this.props.build.posters.filter(
+                (poster) =>
+                    poster.status !== "READY" && poster.status !== "PENDING"
+            );
             return (
                 <div className={styles.container}>
                     <h1>{this.props.build.title}</h1>
                     <h3>Valmiina</h3>
                     <div>
-                        {readyPosters.map(poster => (
+                        {readyPosters.map((poster) => (
                             <ShowListModalItem
                                 item={poster}
                                 openLog={this.openLog}
@@ -57,7 +67,7 @@ class ShowListModal extends Component {
                     </div>
                     <h3>Rakentamassa</h3>
                     <div>
-                        {pendingPosters.map(poster => (
+                        {pendingPosters.map((poster) => (
                             <ShowListModalItem
                                 item={poster}
                                 openLog={this.openLog}
@@ -69,7 +79,7 @@ class ShowListModal extends Component {
                     </div>
                     <h3>Muut</h3>
                     <div>
-                        {otherPosters.map(poster => (
+                        {otherPosters.map((poster) => (
                             <ShowListModalItem
                                 item={poster}
                                 openLog={this.openLog}
@@ -82,11 +92,7 @@ class ShowListModal extends Component {
                 </div>
             );
         }
-        return (
-            <div className={styles.container}>
-                Loading..
-            </div>
-        );
+        return <div className={styles.container}>Loading..</div>;
     }
 }
 

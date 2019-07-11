@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import moment from "moment";
 import classNames from "classnames";
 import DayPicker from "./DayPicker";
 import Button from "./Button";
 import s from "./pointBuildTrigger.css";
-import { PointStatus } from "../reducers/publisherRequests";
+import {PointStatus} from "../reducers/publisherRequests";
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date(),
+            date: new Date()
         };
 
         this.update = this.update.bind(this);
@@ -29,7 +29,7 @@ export default class RouteMapConfigurator extends Component {
 
     setPointDate(date) {
         this.setState({
-            date,
+            date
         });
     }
 
@@ -37,14 +37,12 @@ export default class RouteMapConfigurator extends Component {
         this.props.setConfig(moment(this.state.date));
     }
 
-
     update(supressInfo) {
         this.props.fetchConfig(supressInfo);
     }
 
     isDisabled() {
-        return !this.props.config ||
-            this.props.config.status === "PENDING";
+        return !this.props.config || this.props.config.status === "PENDING";
     }
 
     render() {
@@ -52,15 +50,15 @@ export default class RouteMapConfigurator extends Component {
         let statusText = "Hakee";
         if (this.props.config) {
             switch (this.props.config.status) {
-                case (PointStatus.DONE):
+                case PointStatus.DONE:
                     statusColor = "green";
                     statusText = "Käytettävissä";
                     break;
-                case (PointStatus.PENDING):
+                case PointStatus.PENDING:
                     statusColor = "yellow";
                     statusText = "Päivitys käynnissä";
                     break;
-                case (PointStatus.ERROR):
+                case PointStatus.ERROR:
                     statusColor = "red";
                     statusText = "Virhe";
                     break;
@@ -73,16 +71,27 @@ export default class RouteMapConfigurator extends Component {
             <div className={s.container}>
                 <div className={s.header}>
                     Poikkileikkauspäivä
-                    { this.props.config &&
-                        <div>Päivitetty {moment(this.props.config.updated_at).format("DD.MM.YYYY")}</div>
-                    }
+                    {this.props.config && (
+                        <div>
+                            Päivitetty{" "}
+                            {moment(this.props.config.updated_at).format(
+                                "DD.MM.YYYY"
+                            )}
+                        </div>
+                    )}
                 </div>
                 <div className={s.statusbar}>
-                    <div className={s.status} style={{ backgroundColor: statusColor }}>
+                    <div
+                        className={s.status}
+                        style={{backgroundColor: statusColor}}>
                         {statusText}
                     </div>
                     <div>
-                        {this.props.config ? moment(this.props.config.target_date).format("DD.MM.YYYY") : ""}
+                        {this.props.config
+                            ? moment(this.props.config.target_date).format(
+                                  "DD.MM.YYYY"
+                              )
+                            : ""}
                     </div>
                 </div>
                 <div className={classNames(s.header, s.marginTop)}>
@@ -90,15 +99,14 @@ export default class RouteMapConfigurator extends Component {
                 </div>
                 <div className={s.content}>
                     <DayPicker
-                        value={this.state.date}
-                        onChange={value => this.setPointDate(value)}
+                        value={moment(this.state.date).format("DD.MM.YYYY")}
+                        onChange={(value) => this.setPointDate(value)}
                         disabled={this.isDisabled()}
                     />
                     <Button
                         styleClass="lightWithBorder"
                         onClick={this.sendDate}
-                        disabled={this.isDisabled()}
-                    >
+                        disabled={this.isDisabled()}>
                         Päivitä
                     </Button>
                 </div>

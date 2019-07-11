@@ -4,20 +4,26 @@ import Button from "./Button";
 import styles from "./FileOperations.css";
 import buttonStyles from "./Button.css";
 
-const FileOperations = props => (
+const FileOperations = (props) => (
     <div className={styles.container}>
         <label htmlFor="load_file_button">
-            <div className={classnames(buttonStyles.button, buttonStyles.darkWithBorder)}>
+            <div
+                className={classnames(
+                    buttonStyles.button,
+                    buttonStyles.darkWithBorder
+                )}>
                 Lataa
             </div>
             <input
                 id="load_file_button"
                 type="file"
-                style={{ display: "none" }}
+                style={{display: "none"}}
                 onChange={props.loadState}
             />
         </label>
-        <Button onClick={props.onSaveState} styleClass="darkWithBorder">Tallenna</Button>
+        <Button onClick={props.onSaveState} styleClass="darkWithBorder">
+            Tallenna
+        </Button>
         <Button onClick={props.generateImage}>Generoi Kartta</Button>
         <div className={styles.row}>
             <label htmlFor="checkbox_saveWorldFile">
@@ -29,8 +35,6 @@ const FileOperations = props => (
                 />
                 <span>Tallenna georeferenssi</span>
             </label>
-
-
         </div>
     </div>
 );

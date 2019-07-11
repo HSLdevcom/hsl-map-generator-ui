@@ -2,22 +2,23 @@ import React from "react";
 import classnames from "classnames";
 import styles from "./DropdownSelector.css";
 
-const DropdownSelector = ({ title, value, selected, toggleTab, children }) => (
+const DropdownSelector = ({title, value, selected, toggleTab, children}) => (
     <div className={classnames(styles.component, selected && styles.selected)}>
         <button className={styles.selector} onClick={toggleTab}>
-            <div className={styles.title}>
-                {title}
-            </div>
-            <div className={styles.value}>
-                {value}
-            </div>
+            <div className={styles.title}>{title}</div>
+            <div className={styles.value}>{value}</div>
         </button>
-        {selected ?
-            <div className={classnames(styles.dropdownContainer, styles.selected)}>
+        {selected ? (
+            <div
+                className={classnames(
+                    styles.dropdownContainer,
+                    styles.selected
+                )}>
                 {children}
             </div>
-        : false
-        }
+        ) : (
+            false
+        )}
     </div>
 );
 

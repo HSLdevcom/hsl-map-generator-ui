@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
-import { windowResize } from "../actions/windowEvents";
+import React, {Component, PropTypes} from "react";
+import {connect} from "react-redux";
+import {windowResize} from "../actions/windowEvents";
 
 class App extends Component {
     constructor(props) {
@@ -24,22 +24,23 @@ class App extends Component {
         return (
             <div>
                 {this.props.children}
-                {
-                    (() => {
-                        if (process.env.NODE_ENV !== "production") {
-                            const DevTools = require("./DevTools").default; // eslint-disable-line global-require
-                            return <DevTools/>;
-                        }
-                        return null;
-                    })()
-                }
+                {(() => {
+                    if (process.env.NODE_ENV !== "production") {
+                        const DevTools = require("./DevTools").default; // eslint-disable-line global-require
+                        return <DevTools />;
+                    }
+                    return null;
+                })()}
             </div>
         );
     }
 }
 
-export default connect(null, { windowResize })(App);
+export default connect(
+    null,
+    {windowResize}
+)(App);
 
 App.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.element.isRequired
 };

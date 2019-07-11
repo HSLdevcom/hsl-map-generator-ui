@@ -5,7 +5,7 @@ body {
     width: 100%;
     margin: 0;
     background-color: #333;
-    font-family: Nunito, Arial, Helvetica, Helvetica Neue, sans-serif;;
+    font-family: Nunito, Arial, Helvetica, Helvetica Neue, sans-serif;
     overflow-y: hidden;
 }
 
@@ -24,7 +24,7 @@ li {
 }
 
 a {
-    opacity: .75;
+    opacity: 0.75;
     text-decoration: none;
 }
 
@@ -35,7 +35,7 @@ a:hover {
 }
 
 button {
-    display:block;
+    display: block;
     font: inherit;
     color: inherit;
     background-color: inherit;

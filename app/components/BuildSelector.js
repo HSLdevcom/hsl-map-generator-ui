@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { ModalContainer, ModalDialog } from "react-modal-dialog";
+import React, {Component} from "react";
+import {ModalContainer, ModalDialog} from "react-modal-dialog";
 import Button from "./Button";
 import styles from "./BuildSelector.css";
 import ShowListModal from "../containers/ShowListModal";
@@ -12,7 +12,7 @@ export default class BuildSelector extends Component {
         this.state = {
             showingNewList: false,
             showingShowList: false,
-            buildId: null,
+            buildId: null
         };
         this.showNewListModal = this.showNewListModal.bind(this);
         this.hideNewListModal = this.hideNewListModal.bind(this);
@@ -29,86 +29,86 @@ export default class BuildSelector extends Component {
 
     setBuild(event) {
         this.setState({
-            buildId: event.target.value,
+            buildId: event.target.value
         });
     }
 
     useBuildId() {
         if (this.state.buildId) {
             this.props.setBuild(
-                this.props.builds.find(build => build.id === this.state.buildId),
+                this.props.builds.find(
+                    (build) => build.id === this.state.buildId
+                )
             );
         }
     }
 
     showNewListModal() {
-        this.setState({ showingNewList: true });
+        this.setState({showingNewList: true});
     }
 
     hideNewListModal() {
-        this.setState({ showingNewList: false });
+        this.setState({showingNewList: false});
     }
 
     showShowListModal() {
-        this.setState({ showingShowList: true });
+        this.setState({showingShowList: true});
     }
 
     hideShowListModal() {
-        this.setState({ showingShowList: false });
+        this.setState({showingShowList: false});
     }
 
     render() {
         return (
             <div className={styles.container}>
-                <div className={styles.title}>
-                    Valitse lista
-                </div>
+                <div className={styles.title}>Valitse lista</div>
                 <select
                     className={styles.buildSelect}
                     onChange={this.setBuild}
-                >
-                    <option disabled selected value="empty"> -- Valitse listan -- </option>
-                    { this.props.builds.map(build => (
-                        <option
-                            key={build.id}
-                            value={build.id}
-                            selected={this.state.buildId === build.id}
-                        >
-                            {build.title}</option>
+                    value={this.state.buildId || ""}>
+                    <option disabled value="empty">
+                        {" "}
+                        -- Valitse listan --{" "}
+                    </option>
+                    {this.props.builds.map((build) => (
+                        <option key={build.id} value={build.id}>
+                            {build.title}
+                        </option>
                     ))}
                 </select>
                 <div className={styles.buttonContainer}>
                     <Button
                         styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
-                        onClick={this.useBuildId}
-                    >
+                        onClick={this.useBuildId}>
                         Käytä tätä listaa
                     </Button>
-                    <Button styleClass="lightWithBorder" onClick={this.showNewListModal}>
+                    <Button
+                        styleClass="lightWithBorder"
+                        onClick={this.showNewListModal}>
                         Uusi lista
                     </Button>
-                    { this.state.showingNewList &&
+                    {this.state.showingNewList && (
                         <ModalContainer onClose={this.hideNewListModal}>
                             <ModalDialog onClose={this.hideNewListModal}>
-                                <AddListModal hide={this.hideNewListModal}/>
+                                <AddListModal hide={this.hideNewListModal} />
                             </ModalDialog>
                         </ModalContainer>
-                    }
+                    )}
                     <Button
                         styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
-                        onClick={this.showShowListModal}
-                    >
+                        onClick={this.showShowListModal}>
                         Näytä lista
                     </Button>
-                    { this.state.showingShowList &&
+                    {this.state.showingShowList && (
                         <ModalContainer onClose={this.hideShowListModal}>
                             <ModalDialog onClose={this.hideShowListModal}>
-                                <ShowListModal buildId={this.state.buildId}/>
+                                <ShowListModal buildId={this.state.buildId} />
                             </ModalDialog>
                         </ModalContainer>
-                    }
+                    )}
                 </div>
             </div>
         );

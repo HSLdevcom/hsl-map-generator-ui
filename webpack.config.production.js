@@ -13,7 +13,7 @@ const config = {
     entry: "./app/index",
 
     output: {
-        ...baseConfig.output,
+        ...baseConfig.output
     },
 
     module: {
@@ -24,20 +24,17 @@ const config = {
 
             {
                 test: /(node_modules.+|\.global)\.css$/,
-                loader: ExtractTextPlugin.extract(
-                    "style-loader",
-                    "css-loader",
-                ),
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
             },
 
             {
                 test: /^((?!(node_modules|\.global)).)*\.css$/,
                 loader: ExtractTextPlugin.extract(
                     "style-loader",
-                    "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
-                ),
-            },
-        ],
+                    "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
+                )
+            }
+        ]
     },
 
     plugins: [
@@ -47,18 +44,17 @@ const config = {
             "process.env": {
                 NODE_ENV: JSON.stringify("production"),
                 API_URL: JSON.stringify("https://kartat.hsl.fi/routemap-api"),
-                GLYPH_URL: JSON.stringify("https://kartat.hsl.fi/"),
-            },
+                GLYPH_URL: JSON.stringify("https://kartat.hsl.fi/")
+            }
         }),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 screw_ie8: true,
-                warnings: false,
-            },
+                warnings: false
+            }
         }),
-        new ExtractTextPlugin("style.css", { allChunks: true }),
-    ],
-
+        new ExtractTextPlugin("style.css", {allChunks: true})
+    ]
 };
 
 module.exports = config;

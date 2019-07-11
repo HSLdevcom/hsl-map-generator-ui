@@ -1,19 +1,28 @@
-import { fromJS } from "immutable";
-import { UPDATE_CENTER, UPDATE_SIZE, UPDATE_DPI, UPDATE_MAP_SCALE, UPDATE_PIXEL_SCALE } from "../actions/mapSelection";
-import { LOAD_STATE } from "../actions/fileOperations";
+import {fromJS} from "immutable";
+import {
+    UPDATE_CENTER,
+    UPDATE_SIZE,
+    UPDATE_DPI,
+    UPDATE_MAP_SCALE,
+    UPDATE_PIXEL_SCALE
+} from "../actions/mapSelection";
+import {LOAD_STATE} from "../actions/fileOperations";
 
 const initialState = fromJS({
-    center: [{ location: [24.9, 60.2], id: 0 }],
+    center: [{location: [24.9, 60.2], id: 0}],
     size: [300, 300],
     dpi: 300,
     mapScale: 10000,
-    pixelScale: 1,
+    pixelScale: 1
 });
 
 export default function mapSelection(state = initialState, action) {
     switch (action.type) {
         case UPDATE_CENTER:
-            return state.setIn(["center", 0, "location"], fromJS(action.center.location));
+            return state.setIn(
+                ["center", 0, "location"],
+                fromJS(action.center.location)
+            );
         case UPDATE_SIZE:
             return state.set("size", fromJS(action.size));
         case UPDATE_DPI:

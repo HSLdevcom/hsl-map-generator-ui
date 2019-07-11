@@ -1,0 +1,6 @@
+{
+	"arrowParens": "always",
+	"semi": true,
+	"bracketSpacing": false,
+	"jsxBracketSameLine": true
+}

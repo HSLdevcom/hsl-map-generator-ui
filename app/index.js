@@ -1,6 +1,6 @@
 import React from "react";
-import { render } from "react-dom";
-import { Provider } from "react-redux";
+import {render} from "react-dom";
+import {Provider} from "react-redux";
 import webfontloader from "webfontloader";
 
 import App from "./containers/App";
@@ -13,14 +13,14 @@ const root = document.body.appendChild(document.createElement("div"));
 const store = configureStore();
 
 webfontloader.load({
-    google: { families: ["Nunito:700,400,300"] },
+    google: {families: ["Nunito:700,400,300"]}
 });
 
 render(
     <Provider store={store}>
         <App>
-            <Home/>
+            <Home />
         </App>
     </Provider>,
-    root,
+    root
 );

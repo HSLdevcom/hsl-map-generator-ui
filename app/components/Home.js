@@ -12,21 +12,21 @@ import styles from "./Home.css";
 const Home = () => (
     <div className={styles.container}>
         <div className={styles.topBar}>
-            <ModeSelector/>
-            <CenterSelector/>
-            <SizeSelector/>
-            <DpiSelector/>
-            <MapScaleSelector/>
-            <PixelScaleSelector/>
+            <ModeSelector />
+            <CenterSelector />
+            <SizeSelector />
+            <DpiSelector />
+            <MapScaleSelector />
+            <PixelScaleSelector />
         </div>
         <div className={styles.main}>
             <div className={styles.sideBar}>
                 <div className={styles.sideBarContent}>
-                    <SideBar/>
+                    <SideBar />
                 </div>
             </div>
             <div className={styles.mainMap}>
-                <Map/>
+                <Map />
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
 import moment from "moment";
-import { TOGGLE_SAVE_WORLD_FILE, CHANGE_DATE } from "../actions/settings";
+import {TOGGLE_SAVE_WORLD_FILE, CHANGE_DATE} from "../actions/settings";
 
 const initialState = {
     saveWorldFile: false,
-    date: moment().format("YYYY-MM-DD"),
+    date: moment().format("YYYY-MM-DD")
 };
 
 export default function settings(state = initialState, action) {
@@ -11,12 +11,12 @@ export default function settings(state = initialState, action) {
         case TOGGLE_SAVE_WORLD_FILE:
             return {
                 ...state,
-                saveWorldFile: !state.saveWorldFile,
+                saveWorldFile: !state.saveWorldFile
             };
         case CHANGE_DATE:
             return {
                 ...state,
-                date: action.date,
+                date: action.date
             };
         default:
             return state;

@@ -1,8 +1,12 @@
-import React, { PropTypes } from "react";
+import React, {PropTypes} from "react";
 import HtmlOverlay from "react-map-gl/dist/overlays/html.react";
-import { mapSelectionToZoom, mapSelectionToTileScale, mapSelectionToPixelSize } from "../utils/geom-utils";
+import {
+    mapSelectionToZoom,
+    mapSelectionToTileScale,
+    mapSelectionToPixelSize
+} from "../utils/geom-utils";
 
-const redraw = mapSelection => () => (
+const redraw = (mapSelection) => () => (
     <div
         style={{
             position: "absolute",
@@ -10,31 +14,30 @@ const redraw = mapSelection => () => (
             left: 20,
             width: "calc(100% - 20px)",
             color: "white",
-            fontWeight: 200,
-        }}
-    >
-        Zoom&nbsp;{mapSelectionToZoom(mapSelection).toFixed(3)},
-        Scale&nbsp;{mapSelectionToTileScale(mapSelection).toFixed(3)},
-        &nbsp;{mapSelectionToPixelSize(mapSelection).join(" x ")} px
+            fontWeight: 200
+        }}>
+        Zoom&nbsp;{mapSelectionToZoom(mapSelection).toFixed(3)}, Scale&nbsp;
+        {mapSelectionToTileScale(mapSelection).toFixed(3)}, &nbsp;
+        {mapSelectionToPixelSize(mapSelection).join(" x ")} px
     </div>
 );
 
-
-const DebugOverlay = ({ viewport, width, height, mapSelection }) => (
+const DebugOverlay = ({viewport, width, height, mapSelection}) => (
     <HtmlOverlay
         {...viewport}
         width={width}
         height={height}
         project={() => {}}
         redraw={redraw(mapSelection)}
-    />);
+    />
+);
 
 DebugOverlay.propTypes = {
     viewport: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-    }).isRequired,
+        zoom: PropTypes.number.isRequired
+    }).isRequired
 };
 
 export default DebugOverlay;

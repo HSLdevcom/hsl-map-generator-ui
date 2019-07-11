@@ -1,4 +1,4 @@
-import { fromJS } from "immutable";
+import {fromJS} from "immutable";
 import {
     SET_BUILD,
     SET_POSTER_NAME,
@@ -13,7 +13,7 @@ import {
     SET_TERMINUS_FONT_SIZE,
     SET_TERMINUS_MAX_WIDTH,
     SET_STATION_NAME_FONT_SIZE,
-    TOGGLE_ONLY_NEAR_BUSES,
+    TOGGLE_ONLY_NEAR_BUSES
 } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
@@ -30,7 +30,7 @@ const initialState = fromJS({
     terminusFontSize: 13,
     terminusWidth: 170,
     stationFontSize: 12,
-    onlyNearBuses: false,
+    onlyNearBuses: false
 });
 
 export default function routeMapConfiguration(state = initialState, action) {
@@ -46,7 +46,10 @@ export default function routeMapConfiguration(state = initialState, action) {
         case SET_MAX_ANCHOR_LINE_LENGTH:
             return state.set("maxAnchorLineLength", action.data);
         case SET_CLUSTER_DIFFERENT_ROUTE_POINTS_DISTANCE:
-            return state.set("clusterDifferentRoutePointsDistance", action.data);
+            return state.set(
+                "clusterDifferentRoutePointsDistance",
+                action.data
+            );
         case SET_CLUSTER_SAME_ROUTE_POINTS_DISTANCE:
             return state.set("clusterSameRoutePointsDistance", action.data);
         case SET_POINT_MIN_DISTANCE_FROM_TERMINUS:

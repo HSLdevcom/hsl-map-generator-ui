@@ -1,4 +1,4 @@
 export default {
     MAP: "Karttageneraattori",
-    ROUTEMAP: "Linjakarttageneraattori",
+    ROUTEMAP: "Linjakarttageneraattori"
 };

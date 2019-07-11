@@ -1,30 +1,28 @@
 module.exports = {
     parserOptions: {
-        "ecmaFeatures": {
-            "jsx": true,
-            "experimentalObjectRestSpread": true
+        ecmaFeatures: {
+            jsx: true,
+            experimentalObjectRestSpread: true
         }
     },
-    extends: "airbnb",
+    extends: ["airbnb", "plugin:prettier/recommended"],
     rules: {
-        "indent": ["error", 4, {"SwitchCase": 1}],
         "no-plusplus": ["off"],
-        "quotes": ["error", "double", {"avoidEscape": true}],
         "react/prop-types": ["off"],
-        "react/jsx-indent": ["error", 4],
-        "react/jsx-indent-props": ["error", 4],
-        "react/jsx-filename-extension": ["error", {"extensions": [".js"]}],
-        "react/jsx-space-before-closing": ["error", "never"]
+        "react/jsx-filename-extension": ["error", {extensions: [".js"]}],
+        "react/jsx-indent": "off",
+        "react/jsx-indent-props": "off",
+        "react/jsx-closing-bracket-location": 0,
+        "import/first": 0,
+        "prettier/prettier": 1
     },
     settings: {
         "import/resolver": "webpack"
     },
     env: {
-        "browser": true,
-        "node": true,
-        "es6": true
+        browser: true,
+        node: true,
+        es6: true
     },
-    "plugins": [
-        "react"
-    ]
+    plugins: ["react"]
 };

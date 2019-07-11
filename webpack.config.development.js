@@ -11,11 +11,11 @@ const config = {
 
     entry: [
         "webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr",
-        "./app/index",
+        "./app/index"
     ],
 
     output: {
-        ...baseConfig.output,
+        ...baseConfig.output
     },
 
     module: {
@@ -25,20 +25,17 @@ const config = {
 
             {
                 test: /(node_modules.+|\.global)\.css$/,
-                loaders: [
-                    "style-loader",
-                    "css-loader?sourceMap",
-                ],
+                loaders: ["style-loader", "css-loader?sourceMap"]
             },
 
             {
                 test: /^((?!(node_modules|\.global)).)*\.css$/,
                 loaders: [
                     "style-loader",
-                    "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
-                ],
-            },
-        ],
+                    "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
+                ]
+            }
+        ]
     },
 
     plugins: [
@@ -49,11 +46,10 @@ const config = {
             "process.env": {
                 NODE_ENV: JSON.stringify("development"),
                 API_URL: JSON.stringify("http://localhost:4000"),
-                GLYPH_URL: JSON.stringify("https://dev-kartat.hsldev.com/"),
-            },
-        }),
-    ],
-
+                GLYPH_URL: JSON.stringify("https://kartat.hsl.fi/")
+            }
+        })
+    ]
 };
 
 module.exports = config;

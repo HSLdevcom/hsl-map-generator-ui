@@ -13,7 +13,7 @@ import {
     GET_POINT_CONFIG_SUCCESS,
     SET_POINT_CONFIG,
     SET_POINT_CONFIG_ERROR,
-    SET_POINT_CONFIG_SUCCESS,
+    SET_POINT_CONFIG_SUCCESS
 } from "../actions/publisherRequests";
 
 const initialState = {
@@ -28,13 +28,13 @@ const initialState = {
     addBuildErrorMessage: "",
     pointConfigLoading: false,
     pointConfig: null,
-    pointConfigErrorMessage: "",
+    pointConfigErrorMessage: ""
 };
 
 export const PointStatus = Object.freeze({
     PENDING: "PENDING",
     DONE: "READY",
-    ERROR: "ERROR",
+    ERROR: "ERROR"
 });
 
 export default function publisherRequests(state = initialState, action) {
@@ -44,21 +44,21 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 buildsAreLoading: true,
                 buildsAreInitialized: true,
-                builds: [],
+                builds: []
             };
         }
         case GET_BUILDS_SUCCESS: {
             return {
                 ...state,
                 buildsAreLoading: false,
-                builds: action.data,
+                builds: action.data
             };
         }
         case GET_BUILDS_ERROR: {
             return {
                 ...state,
                 buildsAreLoading: false,
-                builds: [],
+                builds: []
             };
         }
         case GET_BUILD_REQUEST: {
@@ -66,7 +66,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 buildDataIsLoading: true,
                 buildData: null,
-                buildDataError: false,
+                buildDataError: false
             };
         }
         case GET_BUILD_SUCCESS: {
@@ -74,7 +74,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 buildDataIsLoading: false,
                 buildData: action.data,
-                buildDataError: false,
+                buildDataError: false
             };
         }
         case GET_BUILD_ERROR: {
@@ -82,28 +82,28 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 buildDataIsLoading: false,
                 buildData: null,
-                buildDataError: true,
+                buildDataError: true
             };
         }
         case ADD_BUILD_REQUEST: {
             return {
                 ...state,
                 addBuildIsLoading: true,
-                addBuildErrorMessage: "",
+                addBuildErrorMessage: ""
             };
         }
         case ADD_BUILD_SUCCESS: {
             return {
                 ...state,
                 addBuildIsLoading: false,
-                addBuildErrorMessage: "",
+                addBuildErrorMessage: ""
             };
         }
         case ADD_BUILD_ERROR: {
             return {
                 ...state,
                 addBuildIsLoading: false,
-                addBuildErrorMessage: action.data,
+                addBuildErrorMessage: action.data
             };
         }
         case GET_POINT_CONFIG: {
@@ -111,7 +111,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 pointConfigLoading: true,
                 pointConfig: null,
-                pointConfigErrorMessage: "",
+                pointConfigErrorMessage: ""
             };
         }
         case GET_POINT_CONFIG_SUCCESS: {
@@ -119,7 +119,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 pointConfigLoading: false,
                 pointConfig: action.data,
-                pointConfigErrorMessage: "",
+                pointConfigErrorMessage: ""
             };
         }
         case GET_POINT_CONFIG_ERROR: {
@@ -127,7 +127,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 pointConfigLoading: false,
                 pointConfig: null,
-                pointConfigErrorMessage: action.data,
+                pointConfigErrorMessage: action.data
             };
         }
         case SET_POINT_CONFIG: {
@@ -135,7 +135,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 pointConfigLoading: true,
                 pointConfig: null,
-                pointConfigErrorMessage: "",
+                pointConfigErrorMessage: ""
             };
         }
         case SET_POINT_CONFIG_SUCCESS: {
@@ -143,7 +143,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 pointConfigLoading: false,
                 pointConfig: action.data,
-                pointConfigErrorMessage: "",
+                pointConfigErrorMessage: ""
             };
         }
         case SET_POINT_CONFIG_ERROR: {
@@ -151,7 +151,7 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 pointConfigLoading: false,
                 pointConfig: null,
-                pointConfigErrorMessage: action.data,
+                pointConfigErrorMessage: action.data
             };
         }
         default: {

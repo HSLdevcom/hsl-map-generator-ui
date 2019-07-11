@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, {PropTypes} from "react";
 import moment from "moment";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
@@ -16,51 +16,64 @@ const style = {
     background: "#555",
     border: "none",
     borderBottom: "1px solid #666",
-    outlineWidth: 0,
+    outlineWidth: 0
 };
 
 const disabledStyle = {
     ...style,
-    color: "#878585",
+    color: "#878585"
 };
 
 const dayPickerProps = {
     firstDayOfWeek: 1,
     weekdaysShort: ["Su", "Ma", "Ti", "Ke", "To", "Pe", "La"],
-    months: ["Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu",
-        "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"],
+    months: [
+        "Tammikuu",
+        "Helmikuu",
+        "Maaliskuu",
+        "Huhtikuu",
+        "Toukokuu",
+        "Kesäkuu",
+        "Heinäkuu",
+        "Elokuu",
+        "Syyskuu",
+        "Lokakuu",
+        "Marraskuu",
+        "Joulukuu"
+    ]
 };
 
-const DayPicker = props => (
+const DayPicker = (props) => (
     <div className={styles.container}>
-        { props.disabled &&
+        {props.disabled && (
             <input
                 style={disabledStyle}
                 value={moment(props.value, valueFormat).format(displayFormat)}
                 disabled
             />
-        }
-        {
-            !props.disabled &&
+        )}
+        {!props.disabled && (
             <DayPickerInput
-                inputProps={{ style }}
+                inputProps={{style}}
                 format={displayFormat}
                 value={moment(props.value, valueFormat).format(displayFormat)}
                 dayPickerProps={dayPickerProps}
-                onDayChange={date => props.onChange(moment(date).format(valueFormat))}
+                onDayChange={(date) =>
+                    props.onChange(moment(date).format(valueFormat))
+                }
             />
-        }
+        )}
     </div>
 );
 
 DayPicker.defaultProps = {
-    disabled: false,
+    disabled: false
 };
 
 DayPicker.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
 };
 
 export default DayPicker;

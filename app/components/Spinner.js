@@ -10,34 +10,33 @@ const overlayStyle = (containerWidth, containerHeight) => ({
     backgroundColor: "black",
     opacity: 0.6,
     top: "0px",
-    left: "0px",
+    left: "0px"
 });
 
 const spinnerStyle = (containerWidth, containerHeight) => ({
     position: "absolute",
     top: containerHeight / 2,
     left: containerWidth / 2,
-    transform: "translate(-50%, -50%)",
+    transform: "translate(-50%, -50%)"
 });
 
-const Spinner = ({ width, height, isLoading, generateImageCancelAll }) => (
+const Spinner = ({width, height, isLoading, generateImageCancelAll}) => (
     <div>
-        {isLoading ?
+        {isLoading ? (
             <div>
-                <div style={overlayStyle(width, height)}/>
+                <div style={overlayStyle(width, height)} />
                 <div
                     style={spinnerStyle(width, height)}
-                    className={styles.container}
-                >
-                    <Loader color="lightgray" size="120px"/>
+                    className={styles.container}>
+                    <Loader color="lightgray" size="120px" />
                     <Button
                         styleClass="lightWithBorder"
-                        onClick={generateImageCancelAll}
-                    >Peruuta</Button>
+                        onClick={generateImageCancelAll}>
+                        Peruuta
+                    </Button>
                 </div>
             </div>
-            : null
-        }
+        ) : null}
     </div>
 );
 

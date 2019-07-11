@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import version from "./version";
 import settings from "./settings";
 import layers from "./layers";
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
     apiRequests,
     layout,
     publisherRequests,
-    routeMapConfiguration,
+    routeMapConfiguration
 });
 
 export default rootReducer;

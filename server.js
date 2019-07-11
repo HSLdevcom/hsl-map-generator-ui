@@ -12,8 +12,8 @@ const compiler = webpack(config);
 const wdm = webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     stats: {
-        colors: true,
-    },
+        colors: true
+    }
 });
 
 app.use(wdm);

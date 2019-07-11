@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { ModalContainer, ModalDialog } from "react-modal-dialog";
+import React, {Component} from "react";
+import {ModalContainer, ModalDialog} from "react-modal-dialog";
 import moment from "moment";
 import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
-import DayPicker from "./DayPicker";
 import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
-import { PointStatus } from "../reducers/publisherRequests";
+import {PointStatus} from "../reducers/publisherRequests";
+import get from "lodash/get";
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export default class RouteMapConfigurator extends Component {
             sent: false,
             success: false,
             advancedSettingsOpen: false,
-            error: "",
+            error: ""
         };
         this.generate = this.generate.bind(this);
         this.closeDone = this.closeDone.bind(this);
@@ -22,34 +22,43 @@ export default class RouteMapConfigurator extends Component {
         this.closeAdvancedSettings = this.closeAdvancedSettings.bind(this);
         this.toggleOnlyNearBuses = this.toggleOnlyNearBuses.bind(this);
 
-        this.routesLayer = this.props.layers.find(layer => layer.id === "routes");
-        this.regularRoutesLayer = this.props.layers.find(layer => layer.id === "regular_routes");
-        this.nearBusRoutesLayer = this.props.layers.find(layer => layer.id === "near_bus_routes");
+        this.routesLayer = this.props.layers.find(
+            (layer) => layer.id === "routes"
+        );
+        this.regularRoutesLayer = this.props.layers.find(
+            (layer) => layer.id === "regular_routes"
+        );
+        this.nearBusRoutesLayer = this.props.layers.find(
+            (layer) => layer.id === "near_bus_routes"
+        );
         this.setDefaultLayers();
     }
 
     setDefaultLayers() {
-        if (this.routesLayer.enabled) this.props.toggleLayer(this.routesLayer.id);
-        if (!this.regularRoutesLayer.enabled) this.props.toggleLayer(this.regularRoutesLayer.id);
-        if (this.nearBusRoutesLayer.enabled) this.props.toggleLayer(this.nearBusRoutesLayer.id);
+        if (this.routesLayer.enabled)
+            this.props.toggleLayer(this.routesLayer.id);
+        if (!get(this, "regularRoutesLayer.enabled", true))
+            this.props.toggleLayer(this.regularRoutesLayer.id);
+        if (get(this, "nearBusRoutesLayer.enabled", false))
+            this.props.toggleLayer(this.nearBusRoutesLayer.id);
         if (this.props.showOnlyNearBuses) this.props.toggleOnlyNearBuses();
     }
 
     openAdvancedSettings() {
         this.setState({
-            advancedSettingsOpen: true,
+            advancedSettingsOpen: true
         });
     }
 
     closeAdvancedSettings() {
         this.setState({
-            advancedSettingsOpen: false,
+            advancedSettingsOpen: false
         });
     }
 
     closeDone() {
         this.setState({
-            sent: false,
+            sent: false
         });
     }
 
@@ -62,24 +71,20 @@ export default class RouteMapConfigurator extends Component {
     generate() {
         this.props.generateRouteMap(
             () => {
-                this.setState({ sent: true });
+                this.setState({sent: true});
             },
             () => {
-                this.setState({ success: true, error: "" });
+                this.setState({success: true, error: ""});
             },
             (error) => {
-                this.setState({ success: false, error });
-            },
+                this.setState({success: false, error});
+            }
         );
     }
 
     render() {
         let input = null;
-        const {
-            build,
-            setPosterName,
-            posterName,
-        } = this.props;
+        const {build, setPosterName, posterName} = this.props;
 
         return (
             <div className={style.container}>
@@ -88,15 +93,17 @@ export default class RouteMapConfigurator extends Component {
                     <div className={style.element}>
                         <div className={style.title}>Lista</div>
                         <div className={style.value}>
-                            { build && build.title }
-                            { (!build || !build.title) && "-" }
+                            {build && build.title}
+                            {(!build || !build.title) && "-"}
                         </div>
                     </div>
                     <div className={style.element}>
                         <div className={style.title}>Tunnus</div>
                         <div className={style.value}>
                             <input
-                                ref={(el) => { (input) = el; }}
+                                ref={(el) => {
+                                    input = el;
+                                }}
                                 className={style.input}
                                 value={posterName}
                                 onChange={() => setPosterName(input.value)}
@@ -118,28 +125,29 @@ export default class RouteMapConfigurator extends Component {
                     <div className={style.element}>
                         <div className={style.title}>Päivämäärä</div>
                         <div className={style.value}>
-                            { this.props.config &&
-                                <DayPicker
-                                    value={moment(this.props.config.target_date)}
-                                    disabled
-                                />
-                            }
+                            {this.props.pointConfig &&
+                                this.props.pointConfig.target_date && (
+                                    <span>
+                                        {moment(
+                                            this.props.pointConfig.target_date
+                                        ).format("DD.MM.YYYY")}
+                                    </span>
+                                )}
                         </div>
                     </div>
                 </div>
                 <Button
                     styleClass="lightWithBorder"
-                    onClick={this.openAdvancedSettings}
-                >
+                    onClick={this.openAdvancedSettings}>
                     Avaa lisäasetukset
                 </Button>
-                { this.state.advancedSettingsOpen &&
+                {this.state.advancedSettingsOpen && (
                     <ModalContainer onClose={this.closeAdvancedSettings}>
                         <ModalDialog onClose={this.closeAdvancedSettings}>
-                            <AdvancedRouteMapOptions/>
+                            <AdvancedRouteMapOptions />
                         </ModalDialog>
                     </ModalContainer>
-                }
+                )}
                 <Button
                     styleClass="lightWithBorder"
                     disabled={
@@ -149,34 +157,33 @@ export default class RouteMapConfigurator extends Component {
                         !this.props.pointConfig ||
                         this.props.pointConfig.status !== PointStatus.DONE
                     }
-                    onClick={this.generate}
-                >
+                    onClick={this.generate}>
                     Generoi
                 </Button>
-                { this.state.sent &&
+                {this.state.sent && (
                     <ModalContainer onClose={this.closeDone}>
                         <ModalDialog onClose={this.closeDone}>
-                            { this.state.success &&
+                            {this.state.success && (
                                 <div>
                                     <h1>Info</h1>
                                     <p>
-                                        Linjakartta {posterName} on nyt rakentamassa.
-                                        <br/>
-                                        Voit seurata linjakartan rakennusprosessi
-                                        listan info näkymässä.
+                                        Linjakartta {posterName} on nyt
+                                        rakentamassa.
+                                        <br />
+                                        Voit seurata linjakartan
+                                        rakennusprosessi listan info näkymässä.
                                     </p>
                                 </div>
-                            } { this.state.error &&
+                            )}{" "}
+                            {this.state.error && (
                                 <div>
                                     <h3>Virhe</h3>
-                                    <p>
-                                        {this.state.error}
-                                    </p>
+                                    <p>{this.state.error}</p>
                                 </div>
-                            }
+                            )}
                         </ModalDialog>
                     </ModalContainer>
-                }
+                )}
             </div>
         );
     }

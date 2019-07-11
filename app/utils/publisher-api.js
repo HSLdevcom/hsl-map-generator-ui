@@ -5,17 +5,17 @@ function getJson(path) {
 }
 
 function postJson(path, body) {
-    const options = { method: "POST", body: JSON.stringify(body) };
+    const options = {method: "POST", body: JSON.stringify(body)};
     return fetch(`${API_URL}/${path}`, options);
 }
 
 function putJson(path, body) {
-    const options = { method: "PUT", body: JSON.stringify(body) };
+    const options = {method: "PUT", body: JSON.stringify(body)};
     return fetch(`${API_URL}/${path}`, options);
 }
 
 function deleteJson(path) {
-    const options = { method: "DELETE" };
+    const options = {method: "DELETE"};
     return fetch(`${API_URL}/${path}`, options);
 }
 
@@ -27,35 +27,35 @@ function getBuilds() {
     return getJson("builds");
 }
 
-function getBuild({ id }) {
+function getBuild({id}) {
     return getJson(`builds/${id}`);
 }
 
-function addBuild({ title }) {
-    return postJson("builds", { title });
+function addBuild({title}) {
+    return postJson("builds", {title});
 }
 
-function updateBuild({ id, status }) {
-    return putJson(`builds/${id}`, { status });
+function updateBuild({id, status}) {
+    return putJson(`builds/${id}`, {status});
 }
 
-function removeBuild({ id }) {
+function removeBuild({id}) {
     return deleteJson(`builds/${id}`);
 }
 
-function addPosters({ buildId, component, props }) {
-    return postJson("posters", { buildId, props, component });
+function addPosters({buildId, component, props}) {
+    return postJson("posters", {buildId, props, component});
 }
 
-function removePoster({ id }) {
+function removePoster({id}) {
     return deleteJson(`posters/${id}`);
 }
 
-function downloadPoster({ id }) {
+function downloadPoster({id}) {
     window.open(`${API_URL}/downloadPoster/${id}`, "_blank");
 }
 
-function downloadBuild({ id }) {
+function downloadBuild({id}) {
     window.open(`${API_URL}/downloadBuild/${id}`, "_blank");
 }
 
@@ -66,8 +66,8 @@ function getPointConfig() {
 function setPointConfig(targetDate) {
     return postJson(
         `import?targetDate=${encodeURIComponent(
-            targetDate.format("YYYY-MM-DD"),
-        )}`,
+            targetDate.format("YYYY-MM-DD")
+        )}`
     );
 }
 
@@ -83,5 +83,5 @@ export {
     downloadPoster,
     downloadBuild,
     getPointConfig,
-    setPointConfig,
+    setPointConfig
 };

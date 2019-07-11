@@ -1,5 +1,5 @@
-import { TOGGLE_TAB } from "../actions/tabName";
-import { LOAD_STATE } from "../actions/fileOperations";
+import {TOGGLE_TAB} from "../actions/tabName";
+import {LOAD_STATE} from "../actions/fileOperations";
 
 export default function viewport(state = {}, action) {
     switch (action.type) {
