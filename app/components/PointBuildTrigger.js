@@ -99,7 +99,7 @@ export default class RouteMapConfigurator extends Component {
                 </div>
                 <div className={s.content}>
                     <DayPicker
-                        value={moment(this.state.date).format("DD.MM.YYYY")}
+                        value={this.state.date}
                         onChange={(value) => this.setPointDate(value)}
                         disabled={this.isDisabled()}
                     />
