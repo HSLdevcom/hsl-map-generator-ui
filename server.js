@@ -19,12 +19,14 @@ const wdm = webpackDevMiddleware(compiler, {
 app.use(wdm);
 app.use(webpackHotMiddleware(compiler));
 
-const server = app.listen(process.env.PORT || 3000, "localhost", (err) => {
+const port = process.env.PORT || 3000;
+
+const server = app.listen(port, "localhost", (err) => {
     if (err) {
         console.error(err);
         return;
     }
-    console.log(`Listening at http://localhost:${process.env.PORT || 3000}`);
+    console.log(`Listening at http://localhost:${port}`);
 });
 
 process.on("SIGTERM", () => {
