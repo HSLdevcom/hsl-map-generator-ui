@@ -13,8 +13,10 @@ RUN yarn install
 
 # Bundle app source
 COPY . ${WORK}
-RUN yarn build
 
-EXPOSE 3000
+ARG BUILD_ENV=production
+COPY .env.${BUILD_ENV} ${WORK}/.env
+
+RUN yarn build
 
 CMD yarn serve

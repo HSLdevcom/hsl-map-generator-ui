@@ -2,6 +2,7 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 const config = {
     module: {
@@ -51,7 +52,7 @@ const config = {
     resolveLoader: {
         fallback: path.join(__dirname, "node_modules")
     },
-    plugins: [new HtmlWebpackPlugin({template: "index.ejs"})],
+    plugins: [new HtmlWebpackPlugin({template: "index.ejs"}), new Dotenv()],
     externals: []
 };
 
