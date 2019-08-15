@@ -42,12 +42,13 @@ export default class RouteMapConfigurator extends Component {
     }
 
     isDisabled() {
-        return !this.props.config || this.props.config.status === "PENDING";
+        return this.props.config.status === "PENDING";
     }
 
     render() {
         let statusColor = "#DDD";
         let statusText = "Hakee";
+
         if (this.props.config) {
             switch (this.props.config.status) {
                 case PointStatus.DONE:
@@ -65,6 +66,8 @@ export default class RouteMapConfigurator extends Component {
                 default:
                     break;
             }
+        } else {
+            statusText = "Ei löydetty";
         }
 
         return (
