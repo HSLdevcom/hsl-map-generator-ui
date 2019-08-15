@@ -42,7 +42,7 @@ export default class RouteMapConfigurator extends Component {
     }
 
     isDisabled() {
-        return this.props.config.status === "PENDING";
+        return this.props.config && this.props.config.status === "PENDING";
     }
 
     render() {
