@@ -3,7 +3,6 @@ import {persistState} from "redux-devtools"; // eslint-disable-line import/no-ex
 import createLogger from "redux-logger"; // eslint-disable-line import/no-extraneous-dependencies
 import thunk from "redux-thunk";
 import rootReducer from "../reducers";
-import DevTools from "../containers/DevTools";
 
 const logger = createLogger({
     level: "info",
@@ -12,7 +11,7 @@ const logger = createLogger({
 
 const enhancer = compose(
     applyMiddleware(thunk, logger),
-    DevTools.instrument(),
+    // DevTools.instrument(),
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 );
 
