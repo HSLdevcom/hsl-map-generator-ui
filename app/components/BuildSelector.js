@@ -8,6 +8,8 @@ import AddListModal from "../containers/AddListModal";
 export default class BuildSelector extends Component {
     constructor() {
         super();
+        
+        
         this.setBuild = this.setBuild.bind(this);
         this.state = {
             showingNewList: false,
@@ -67,7 +69,7 @@ export default class BuildSelector extends Component {
                     className={styles.buildSelect}
                     onChange={this.setBuild}
                     value={this.state.buildId || ""}>
-                    <option disabled value="empty">
+                    <option disabled value="">
                         {" "}
                         -- Valitse listan --{" "}
                     </option>

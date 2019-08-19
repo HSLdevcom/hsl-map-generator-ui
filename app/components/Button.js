@@ -6,10 +6,12 @@ const Button = ({
     children,
     onClick,
     styleClass = "light",
+    className,
     disabled = false
 }) => (
     <button
         className={classnames(
+            className,
             styles.button,
             styles[styleClass],
             disabled ? styles.disabled : null

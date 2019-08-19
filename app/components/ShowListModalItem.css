@@ -5,6 +5,7 @@
     border-width: 1px;
     border-color: #ddd;
     padding: 5px 0;
+    color: black;
 }
 
 .container button {
@@ -34,6 +35,7 @@
 
 .log {
     width: 500px;
+    color: black;
 }
 
 .log p {

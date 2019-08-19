@@ -39,14 +39,14 @@ class AddListModal extends Component {
             <div className={styles.container}>
                 {!this.state.done && (
                     <div>
-                        <h1>Lisää listan</h1>
+                        <h1>Uusi lista</h1>
                         <input
                             placeholder="Nimi"
                             className={styles.input}
                             value={this.state.title}
                             onChange={this.handleChange}
                         />
-                        <Button onClick={() => this.addList()}>Lisää</Button>
+                        <Button className={styles.button} onClick={() => this.addList()}>Lisää</Button>
                     </div>
                 )}
                 {this.state.done && (
