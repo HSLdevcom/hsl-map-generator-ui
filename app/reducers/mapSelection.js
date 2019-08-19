@@ -19,7 +19,6 @@ const initialState = fromJS({
 export default function mapSelection(state = initialState, action) {
     switch (action.type) {
         case UPDATE_CENTER:
-            console.log(action);
             return state.set("center", fromJS(action.center.lngLat));
         case UPDATE_SIZE:
             return state.set("size", fromJS(action.size));

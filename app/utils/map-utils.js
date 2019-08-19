@@ -1,4 +1,3 @@
-import {fromJS, Iterable} from "immutable";
 import memoize from "memoizee";
 import moment from "moment";
 import hslMapStyle from "hsl-map-style";
@@ -8,7 +7,6 @@ import {
     mapSelectionToZoom,
     mapSelectionToMeterPerPixelRatio
 } from "./geom-utils";
-import {mapValues} from "lodash";
 
 const components = hslMapStyle.components;
 const sourcesWithDate = ["stops", "routes"];
