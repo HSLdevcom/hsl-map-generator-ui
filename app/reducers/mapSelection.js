@@ -21,7 +21,7 @@ export default function mapSelection(state = initialState, action) {
         case UPDATE_CENTER:
             return state.setIn(
                 ["center", 0, "location"],
-                fromJS(action.center.location)
+                fromJS(action.center.lngLat)
             );
         case UPDATE_SIZE:
             return state.set("size", fromJS(action.size));

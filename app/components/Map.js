@@ -1,5 +1,5 @@
 import React, {PropTypes} from "react";
-import MapGL from "react-map-gl/dist";
+import MapGL from "react-map-gl";
 import CenterMarker from "../containers/CenterMarker";
 import SelectionWindow from "../containers/SelectionWindow";
 import DebugOverlay from "../containers/DebugOverlay";

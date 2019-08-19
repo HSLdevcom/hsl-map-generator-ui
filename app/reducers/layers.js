@@ -1,4 +1,4 @@
-import update from "react/lib/update";
+import update from "react-addons-update";
 import {findIndex} from "lodash";
 import {TOGGLE_LAYER} from "../actions/layers";
 import {LOAD_STATE} from "../actions/fileOperations";

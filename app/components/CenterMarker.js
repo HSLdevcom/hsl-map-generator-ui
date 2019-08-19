@@ -1,8 +1,8 @@
 import React, {PropTypes} from "react";
-import DraggablePoints from "react-map-gl/dist/overlays/draggable-points.react";
+import {Marker} from "react-map-gl";
 
 const CenterMarker = ({viewport, width, height, center, updateCenter}) => (
-    <DraggablePoints
+    <Marker
         {...viewport}
         width={width}
         height={height}

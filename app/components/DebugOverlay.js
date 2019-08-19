@@ -1,5 +1,6 @@
 import React, {PropTypes} from "react";
-import HtmlOverlay from "react-map-gl/dist/overlays/html.react";
+import {HTMLOverlay} from "react-map-gl";
+
 import {
     mapSelectionToZoom,
     mapSelectionToTileScale,
@@ -23,7 +24,7 @@ const redraw = (mapSelection) => () => (
 );
 
 const DebugOverlay = ({viewport, width, height, mapSelection}) => (
-    <HtmlOverlay
+    <HTMLOverlay
         {...viewport}
         width={width}
         height={height}

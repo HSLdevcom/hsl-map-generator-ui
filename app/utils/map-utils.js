@@ -8,9 +8,9 @@ import {
     mapSelectionToZoom,
     mapSelectionToMeterPerPixelRatio
 } from "./geom-utils";
+import {mapValues} from "lodash";
 
 const components = hslMapStyle.components;
-const sourcesWithDate = ["stops", "routes"];
 
 export const layersFromStyle = () => {
     return components.map((component) => ({
@@ -29,22 +29,20 @@ const mapLayers = (layers) => {
     return ret;
 };
 
-export const styleFromLayers = memoize((layers, date) => {
+export const styleFromLayers = (layers, date) => {
     const style = hslMapStyle.generateStyle({
         glyphsUrl: process.env.GLYPH_URL,
-        components: mapLayers(layers)
+        components: layers
     });
 
-    sourcesWithDate.forEach((key) => {
-        if (style.sources[key] && style.sources[key].url) {
-            style.sources[key].url += `?date=${date}`;
-        }
+    style.sources = mapValues(style.sources, (value) => {
+        // eslint-disable-next-line no-param-reassign
+        value.url += `?date=${date}`;
+        return value;
     });
-    return fromJS(style, (key, value) => {
-        const isIndexed = Iterable.isIndexed(value);
-        return isIndexed ? value.toList() : value.toOrderedMap();
-    });
-});
+
+    return style;
+};
 
 export const createMapOptions = (mapSelection) => {
     const tileScale = mapSelectionToTileScale(mapSelection);
