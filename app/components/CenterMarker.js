@@ -4,12 +4,15 @@ import {Marker} from "react-map-gl";
 import styles from "./Marker.css";
 
 const CenterMarker = ({viewport, center, updateCenter}) => {
+    const latitude = center.get(1);
+    const longitude = center.get(0);
+
     return (
         <Marker
             {...viewport}
             draggable={true}
-            latitude={center.get(1)}
-            longitude={center.get(0)}
+            latitude={latitude}
+            longitude={longitude}
             offsetLeft={-10}
             offsetTop={-10}
             onDrag={updateCenter}>
