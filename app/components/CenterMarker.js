@@ -1,30 +1,24 @@
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import {Marker} from "react-map-gl";
+import styles from "./Marker.css";
 
-const CenterMarker = ({viewport, width, height, center, updateCenter}) => (
-    <Marker
-        {...viewport}
-        width={width}
-        height={height}
-        points={center}
-        onUpdatePoint={updateCenter}
-        renderPoint={(point) => (
-            <g>
-                <circle
-                    key={`${point.id}inner`}
-                    r="4"
-                    style={{fill: "#D91153"}}
-                />
-                <circle
-                    key={`${point.id}outer`}
-                    r="7"
-                    strokeWidth="2"
-                    style={{stroke: "#D91153", fill: "none"}}
-                />
-            </g>
-        )}
-    />
-);
+const CenterMarker = ({viewport, center, updateCenter}) => {
+    return (
+        <Marker
+            {...viewport}
+            draggable={true}
+            latitude={center.get(1)}
+            longitude={center.get(0)}
+            offsetLeft={-10}
+            offsetTop={-10}
+            onDrag={updateCenter}>
+            <div className={styles.marker}>
+                <div className={styles.markerDot} />
+            </div>
+        </Marker>
+    );
+};
 
 CenterMarker.propTypes = {
     viewport: PropTypes.shape({

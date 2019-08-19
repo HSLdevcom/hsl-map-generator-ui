@@ -1,4 +1,5 @@
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import {CanvasOverlay} from "react-map-gl";
 import {mapSelectionToBbox} from "../utils/geom-utils";
 

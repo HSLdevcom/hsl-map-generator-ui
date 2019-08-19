@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ModalContainer, ModalDialog} from "react-modal-dialog";
+import Modal from "react-modal";
 import Button from "./Button";
 import styles from "./BuildSelector.css";
 import ShowListModal from "../containers/ShowListModal";
@@ -89,26 +89,22 @@ export default class BuildSelector extends Component {
                         onClick={this.showNewListModal}>
                         Uusi lista
                     </Button>
-                    {this.state.showingNewList && (
-                        <ModalContainer onClose={this.hideNewListModal}>
-                            <ModalDialog onClose={this.hideNewListModal}>
-                                <AddListModal hide={this.hideNewListModal} />
-                            </ModalDialog>
-                        </ModalContainer>
-                    )}
+                    <Modal
+                        isOpen={this.state.showingNewList}
+                        onRequestClose={this.hideNewListModal}>
+                        <AddListModal hide={this.hideNewListModal} />
+                    </Modal>
                     <Button
                         styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
                         onClick={this.showShowListModal}>
                         Näytä lista
                     </Button>
-                    {this.state.showingShowList && (
-                        <ModalContainer onClose={this.hideShowListModal}>
-                            <ModalDialog onClose={this.hideShowListModal}>
-                                <ShowListModal buildId={this.state.buildId} />
-                            </ModalDialog>
-                        </ModalContainer>
-                    )}
+                    <Modal
+                        isOpen={this.state.showingShowList}
+                        onRequestClose={this.hideShowListModal}>
+                        <ShowListModal buildId={this.state.buildId} />
+                    </Modal>
                 </div>
             </div>
         );

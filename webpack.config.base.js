@@ -2,7 +2,7 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require("dotenv-webpack");
 
 const config = {
     module: {
@@ -44,9 +44,9 @@ const config = {
             ["jam", "main"],
             "main"
         ],
-        alias: {
+        /* alias: {
             "mapbox-gl$": "mapbox-gl/dist/mapbox-gl"
-        },
+        }, */
         fallback: path.join(__dirname, "node_modules")
     },
     resolveLoader: {

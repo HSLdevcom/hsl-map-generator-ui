@@ -1,4 +1,5 @@
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import MapGL from "react-map-gl";
 import CenterMarker from "../containers/CenterMarker";
 import SelectionWindow from "../containers/SelectionWindow";
@@ -18,18 +19,18 @@ const MapComponent = ({
             width={mapWidth}
             height={mapHeight}
             mapStyle={style}
-            onChangeViewport={updateViewport}>
-            <CenterMarker
-                viewport={viewport}
-                width={mapWidth}
-                height={mapHeight}
-            />
+            onViewportChange={updateViewport}>
             <SelectionWindow
                 viewport={viewport}
                 width={mapWidth}
                 height={mapHeight}
             />
             <DebugOverlay
+                viewport={viewport}
+                width={mapWidth}
+                height={mapHeight}
+            />
+            <CenterMarker
                 viewport={viewport}
                 width={mapWidth}
                 height={mapHeight}

@@ -13,6 +13,7 @@ module.exports = {
         "react/jsx-indent": "off",
         "react/jsx-indent-props": "off",
         "react/jsx-closing-bracket-location": 0,
+        "react/jsx-boolean-value": 0,
         "import/first": 0,
         "prettier/prettier": 1
     },

@@ -7,7 +7,6 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => (
         title="Sijainti"
         value={center
             .toArray()
-            .map((integer) => integer.toFixed(5))
             .reverse()
             .join(", ")}
         toggleTab={toggleTab}

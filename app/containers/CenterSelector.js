@@ -6,7 +6,7 @@ import {toggleTab} from "../actions/tabName";
 
 function mapStateToProps(state) {
     return {
-        center: state.mapSelection.getIn(["center", 0, "location"]),
+        center: state.mapSelection.get("center"),
         selected: state.tabName === "center"
     };
 }

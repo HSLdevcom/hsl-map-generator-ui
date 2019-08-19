@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import {ModalContainer, ModalDialog} from "react-modal-dialog";
+import Modal from "react-modal";
 
 import styles from "./ShowListModalItem.css";
 import {downloadPoster} from "../utils/publisher-api";
@@ -44,18 +44,16 @@ const ShowListModalItem = ({item, openLogId, openLog, closeLog}) => (
                 Lataa
             </Button>
             <Button onClick={() => openLog(item.id)}>Log</Button>
-            {openLogId && openLogId === item.id && (
-                <ModalContainer onClose={closeLog}>
-                    <ModalDialog onClose={closeLog}>
-                        <div className={styles.log}>
-                            <h3>Log</h3>
-                            {item.events.map((event) => (
-                                <p key={event.createdAt}>{event.message}</p>
-                            ))}
-                        </div>
-                    </ModalDialog>
-                </ModalContainer>
-            )}
+            <Modal
+                isOpen={openLogId && openLogId === item.id}
+                onClose={closeLog}>
+                <div className={styles.log}>
+                    <h3>Log</h3>
+                    {item.events.map((event) => (
+                        <p key={event.createdAt}>{event.message}</p>
+                    ))}
+                </div>
+            </Modal>
         </div>
     </div>
 );

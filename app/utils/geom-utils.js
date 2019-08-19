@@ -43,7 +43,7 @@ export const mapSelectionToPixelSize = (mapSelection) =>
 
 export const mapSelectionToZoom = (mapSelection) =>
     calculateZoom(
-        mapSelection.getIn(["center", 0, "location"]).toArray(),
+        mapSelection.get("center").toArray(),
         mapSelection
             .get("size")
             .toArray()
@@ -54,7 +54,7 @@ export const mapSelectionToZoom = (mapSelection) =>
     );
 
 export const mapSelectionToBbox = (mapSelection) => {
-    const center = mapSelection.getIn(["center", 0, "location"]).toArray();
+    const center = mapSelection.get("center").toArray();
     const size = mapSelection
         .get("size")
         .toArray()

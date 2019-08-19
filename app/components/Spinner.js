@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "halogen/ClipLoader";
 import styles from "./Spinner.css";
 import Button from "./Button";
 
@@ -28,7 +27,6 @@ const Spinner = ({width, height, isLoading, generateImageCancelAll}) => (
                 <div
                     style={spinnerStyle(width, height)}
                     className={styles.container}>
-                    <Loader color="lightgray" size="120px" />
                     <Button
                         styleClass="lightWithBorder"
                         onClick={generateImageCancelAll}>

@@ -11,6 +11,7 @@ import {
 import {mapValues} from "lodash";
 
 const components = hslMapStyle.components;
+const sourcesWithDate = ["stops", "routes"];
 
 export const layersFromStyle = () => {
     return components.map((component) => ({
@@ -29,26 +30,26 @@ const mapLayers = (layers) => {
     return ret;
 };
 
-export const styleFromLayers = (layers, date) => {
+export const styleFromLayers = memoize((layers, date) => {
     const style = hslMapStyle.generateStyle({
-        glyphsUrl: process.env.GLYPH_URL,
-        components: layers
+        glyphsUrl: process.env.GLYPH_URL || "https://kartat.hsl.fi",
+        components: mapLayers(layers)
     });
 
-    style.sources = mapValues(style.sources, (value) => {
-        // eslint-disable-next-line no-param-reassign
-        value.url += `?date=${date}`;
-        return value;
+    sourcesWithDate.forEach((key) => {
+        if (style.sources[key] && style.sources[key].url) {
+            style.sources[key].url += `?date=${date}`;
+        }
     });
 
     return style;
-};
+});
 
 export const createMapOptions = (mapSelection) => {
     const tileScale = mapSelectionToTileScale(mapSelection);
 
     return {
-        center: mapSelection.getIn(["center", 0, "location"]).toArray(),
+        center: mapSelection.get("center").toArray(),
         width: Math.round(mapSelectionToPixelSize(mapSelection)[0] / tileScale),
         height: Math.round(
             mapSelectionToPixelSize(mapSelection)[1] / tileScale

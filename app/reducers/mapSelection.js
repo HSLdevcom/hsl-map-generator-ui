@@ -9,7 +9,7 @@ import {
 import {LOAD_STATE} from "../actions/fileOperations";
 
 const initialState = fromJS({
-    center: [{location: [24.9, 60.2], id: 0}],
+    center: [24.9, 60.2],
     size: [300, 300],
     dpi: 300,
     mapScale: 10000,
@@ -19,10 +19,8 @@ const initialState = fromJS({
 export default function mapSelection(state = initialState, action) {
     switch (action.type) {
         case UPDATE_CENTER:
-            return state.setIn(
-                ["center", 0, "location"],
-                fromJS(action.center.lngLat)
-            );
+            console.log(action);
+            return state.set("center", fromJS(action.center.lngLat));
         case UPDATE_SIZE:
             return state.set("size", fromJS(action.size));
         case UPDATE_DPI:

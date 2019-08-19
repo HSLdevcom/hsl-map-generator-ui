@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {ModalContainer, ModalDialog} from "react-modal-dialog";
+import Modal from "react-modal";
 import moment from "moment";
 import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
@@ -141,13 +141,11 @@ export default class RouteMapConfigurator extends Component {
                     onClick={this.openAdvancedSettings}>
                     Avaa lisäasetukset
                 </Button>
-                {this.state.advancedSettingsOpen && (
-                    <ModalContainer onClose={this.closeAdvancedSettings}>
-                        <ModalDialog onClose={this.closeAdvancedSettings}>
-                            <AdvancedRouteMapOptions />
-                        </ModalDialog>
-                    </ModalContainer>
-                )}
+                <Modal
+                    isOpen={this.state.advancedSettingsOpen}
+                    onRequestClose={this.closeAdvancedSettings}>
+                    <AdvancedRouteMapOptions />
+                </Modal>
                 <Button
                     styleClass="lightWithBorder"
                     disabled={
@@ -160,30 +158,25 @@ export default class RouteMapConfigurator extends Component {
                     onClick={this.generate}>
                     Generoi
                 </Button>
-                {this.state.sent && (
-                    <ModalContainer onClose={this.closeDone}>
-                        <ModalDialog onClose={this.closeDone}>
-                            {this.state.success && (
-                                <div>
-                                    <h1>Info</h1>
-                                    <p>
-                                        Linjakartta {posterName} on nyt
-                                        rakentamassa.
-                                        <br />
-                                        Voit seurata linjakartan
-                                        rakennusprosessi listan info näkymässä.
-                                    </p>
-                                </div>
-                            )}{" "}
-                            {this.state.error && (
-                                <div>
-                                    <h3>Virhe</h3>
-                                    <p>{this.state.error}</p>
-                                </div>
-                            )}
-                        </ModalDialog>
-                    </ModalContainer>
-                )}
+                <Modal isOpen={this.state.sent} onRequestClose={this.closeDone}>
+                    {this.state.success && (
+                        <div>
+                            <h1>Info</h1>
+                            <p>
+                                Linjakartta {posterName} on nyt rakentamassa.
+                                <br />
+                                Voit seurata linjakartan rakennusprosessi listan
+                                info näkymässä.
+                            </p>
+                        </div>
+                    )}{" "}
+                    {this.state.error && (
+                        <div>
+                            <h3>Virhe</h3>
+                            <p>{this.state.error}</p>
+                        </div>
+                    )}
+                </Modal>
             </div>
         );
     }

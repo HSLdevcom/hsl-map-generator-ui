@@ -1,4 +1,5 @@
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import DayPicker from "./DayPicker";
 import Layer from "./Layer";
 import styles from "./LayerSelector.css";
