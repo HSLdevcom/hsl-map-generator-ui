@@ -23,7 +23,7 @@ export const generateImage = () => (dispatch, getState) => {
 
     const cancelablePromise = new CancelablePromise((resolve) => {
         resolve(
-            fetch(urljoin(process.env.API_URL, "generateImage"), {
+            fetch(urljoin(process.env.GENERATE_API_URL, "generateImage"), {
                 method: "POST",
                 mode: "cors",
                 headers: new Headers({
