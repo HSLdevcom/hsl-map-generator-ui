@@ -46,12 +46,13 @@ const ShowListModalItem = ({item, openLogId, openLog, closeLog}) => (
             <Button onClick={() => openLog(item.id)}>Log</Button>
             <Modal
                 isOpen={openLogId && openLogId === item.id}
-                onClose={closeLog}>
+                onRequestClose={closeLog}>
                 <div className={styles.log}>
                     <h3>Log</h3>
                     {item.events.map((event) => (
                         <p key={event.createdAt}>{event.message}</p>
                     ))}
+                    <Button onClick={closeLog}>Sulje</Button>
                 </div>
             </Modal>
         </div>

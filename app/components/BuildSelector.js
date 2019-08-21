@@ -8,8 +8,7 @@ import AddListModal from "../containers/AddListModal";
 export default class BuildSelector extends Component {
     constructor() {
         super();
-        
-        
+
         this.setBuild = this.setBuild.bind(this);
         this.state = {
             showingNewList: false,
@@ -105,7 +104,10 @@ export default class BuildSelector extends Component {
                     <Modal
                         isOpen={this.state.showingShowList}
                         onRequestClose={this.hideShowListModal}>
-                        <ShowListModal buildId={this.state.buildId} />
+                        <ShowListModal
+                            onClose={this.hideShowListModal}
+                            buildId={this.state.buildId}
+                        />
                     </Modal>
                 </div>
             </div>

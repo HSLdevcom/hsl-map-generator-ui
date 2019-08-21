@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
+import Button from "./Button";
 
 class ShowListModal extends Component {
     constructor(props) {
@@ -89,6 +90,7 @@ class ShowListModal extends Component {
                         ))}
                         {!otherPosters.length && <span>-</span>}
                     </div>
+                    <Button onClick={this.props.onClose}>Sulje</Button>
                 </div>
             );
         }

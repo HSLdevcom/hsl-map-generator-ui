@@ -160,7 +160,7 @@ export default class RouteMapConfigurator extends Component {
                 </Button>
                 <Modal isOpen={this.state.sent} onRequestClose={this.closeDone}>
                     {this.state.success && (
-                        <div>
+                        <div style={{color: "black"}}>
                             <h1>Info</h1>
                             <p>
                                 Linjakartta {posterName} on nyt rakentamassa.
