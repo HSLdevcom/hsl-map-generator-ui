@@ -30,7 +30,6 @@ const mapLayers = (layers) => {
 
 export const styleFromLayers = memoize((layers, date) => {
     const style = hslMapStyle.generateStyle({
-        glyphsUrl: process.env.GLYPH_URL || "https://kartat.hsl.fi",
         components: mapLayers(layers)
     });
 
