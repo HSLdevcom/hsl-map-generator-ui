@@ -59,10 +59,6 @@ export default class RouteMapConfigurator extends Component {
                     statusColor = "yellow";
                     statusText = "Päivitys käynnissä";
                     break;
-                case PointStatus.ERROR:
-                    statusColor = "red";
-                    statusText = "Virhe";
-                    break;
                 default:
                     break;
             }

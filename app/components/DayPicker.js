@@ -57,7 +57,7 @@ const DayPicker = (props) => (
             <DayPickerInput
                 inputProps={{style}}
                 format={displayFormat}
-                value={moment(props.value, valueFormat).format(displayFormat)}
+                value={moment(props.value).format(valueFormat)}
                 dayPickerProps={dayPickerProps}
                 onDayChange={(date) =>
                     props.onChange(moment(date).format(valueFormat))
@@ -72,7 +72,8 @@ DayPicker.defaultProps = {
 };
 
 DayPicker.propTypes = {
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+        .isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool
 };

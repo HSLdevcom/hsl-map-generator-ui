@@ -34,7 +34,7 @@ const initialState = {
 export const PointStatus = Object.freeze({
     PENDING: "PENDING",
     DONE: "READY",
-    ERROR: "ERROR"
+    EMPTY: "EMPTY"
 });
 
 export default function publisherRequests(state = initialState, action) {
