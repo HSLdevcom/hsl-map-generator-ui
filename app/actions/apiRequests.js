@@ -20,6 +20,7 @@ export const generateImageCancelAll = () => (dispatch) => {
 
 export const generateImage = () => (dispatch, getState) => {
     const state = getState();
+    const style = styleFromLayers(state.layers, state.settings.date);
 
     const cancelablePromise = new CancelablePromise((resolve) => {
         resolve(
@@ -31,10 +32,7 @@ export const generateImage = () => (dispatch, getState) => {
                 }),
                 body: JSON.stringify({
                     options: createMapOptions(state.mapSelection),
-                    style: styleFromLayers(
-                        state.layers,
-                        state.settings.date
-                    ).toJS()
+                    style
                 })
             })
         );
