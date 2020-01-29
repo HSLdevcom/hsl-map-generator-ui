@@ -14,12 +14,14 @@ const PixelScaleSelector = ({
             title="Tekstin skaalaus"
             value={`${pixelScale}x`}
             toggleTab={toggleTab}
-            selected={selected}>
+            selected={selected}
+            type="pixel-scale-selector">
             <div className={styles.inputRow}>
                 <input
                     ref={(el) => {
                         input = el;
                     }}
+                    data-cy="pixel-scale-selector-input"
                     className={styles.input}
                     defaultValue={pixelScale}
                     onBlur={() =>

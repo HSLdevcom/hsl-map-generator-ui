@@ -7,9 +7,11 @@ const DpiSelector = ({dpi, toggleTab, selected, updateDpi}) => (
         title="Tarkkuus"
         value={`${dpi} dpi`}
         toggleTab={toggleTab}
-        selected={selected}>
+        selected={selected}
+        type="dpi-selector">
         <div className={styles.inputRow}>
             <input
+                data-cy="dpi-selector-input"
                 className={styles.input}
                 value={dpi}
                 onChange={(event) => updateDpi(Number(event.target.value))}

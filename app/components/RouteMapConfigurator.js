@@ -92,7 +92,9 @@ export default class RouteMapConfigurator extends Component {
                     <div className={style.header}>Valinnat</div>
                     <div className={style.element}>
                         <div className={style.title}>Lista</div>
-                        <div className={style.value}>
+                        <div
+                            className={style.value}
+                            data-cy="selected-poster-name">
                             {build && build.title}
                             {(!build || !build.title) && "-"}
                         </div>
@@ -104,6 +106,7 @@ export default class RouteMapConfigurator extends Component {
                                 ref={(el) => {
                                     input = el;
                                 }}
+                                data-cy="new-poster-name"
                                 className={style.input}
                                 value={posterName}
                                 onChange={() => setPosterName(input.value)}
@@ -148,6 +151,7 @@ export default class RouteMapConfigurator extends Component {
                 </Modal>
                 <Button
                     styleClass="lightWithBorder"
+                    type="generate"
                     disabled={
                         !build ||
                         !build.id ||
@@ -168,6 +172,12 @@ export default class RouteMapConfigurator extends Component {
                                 Voit seurata linjakartan rakennusprosessi listan
                                 info näkymässä.
                             </p>
+                            <Button
+                                onClick={this.closeDone}
+                                styleClass="lightWithBorder"
+                                type="close-generate-prompt">
+                                Sulje
+                            </Button>
                         </div>
                     )}{" "}
                     {this.state.error && (

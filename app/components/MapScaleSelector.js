@@ -7,10 +7,12 @@ const MapScaleSelector = ({mapScale, toggleTab, selected, updateMapScale}) => (
         title="Mittakaava"
         value={`1:${mapScale}`}
         toggleTab={toggleTab}
-        selected={selected}>
+        selected={selected}
+        type="map-scale-selector">
         <div className={styles.inputRow}>
             <div className={styles.inputUnit}>1 :</div>
             <input
+                data-cy="map-scale-selector-input"
                 className={styles.input}
                 value={mapScale}
                 onChange={(event) => updateMapScale(Number(event.target.value))}

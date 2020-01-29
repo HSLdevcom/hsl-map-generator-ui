@@ -52,7 +52,7 @@ class ShowListModal extends Component {
                     poster.status !== "READY" && poster.status !== "PENDING"
             );
             return (
-                <div className={styles.container}>
+                <div className={styles.container} data-cy="show-list-container">
                     <h1>{this.props.build.title}</h1>
                     <h3>Valmiina</h3>
                     <div>
@@ -62,6 +62,7 @@ class ShowListModal extends Component {
                                 openLog={this.openLog}
                                 closeLog={this.closeLog}
                                 openLogId={this.state.openLogId}
+                                key={poster.id}
                             />
                         ))}
                         {!readyPosters.length && <span>-</span>}
@@ -74,6 +75,7 @@ class ShowListModal extends Component {
                                 openLog={this.openLog}
                                 closeLog={this.closeLog}
                                 openLogId={this.state.openLogId}
+                                key={poster.id}
                             />
                         ))}
                         {!pendingPosters.length && <span>-</span>}
@@ -86,11 +88,16 @@ class ShowListModal extends Component {
                                 openLog={this.openLog}
                                 closeLog={this.closeLog}
                                 openLogId={this.state.openLogId}
+                                key={poster.id}
                             />
                         ))}
                         {!otherPosters.length && <span>-</span>}
                     </div>
-                    <Button onClick={this.props.onClose}>Sulje</Button>
+                    <Button
+                        type="close-list-modal"
+                        onClick={this.props.onClose}>
+                        Sulje
+                    </Button>
                 </div>
             );
         }
