@@ -1,7 +1,8 @@
 const uuidv4 = require("uuid/v4");
 
 // TODO: Envify here and cypress.json properly
-const API_URL = process.env.API_URL || "https://dev.kartat.hsl.fi/routemap-api";
+const API_URL = Cypress.config().apiUrl;
+const TEST_PREFIX = "CY-TEST";
 
 describe("Basic functionalities", () => {
     beforeEach(() => {
@@ -9,7 +10,7 @@ describe("Basic functionalities", () => {
     });
 
     it("Add list, select it for use and show it", () => {
-        const uuid = uuidv4();
+        const uuid = `${TEST_PREFIX}-${uuidv4()}`;
         cy.server();
         cy.route("POST", `${API_URL}/builds`).as("postBuild");
 
@@ -98,7 +99,7 @@ describe("Basic functionalities", () => {
     });
 
     it("Generate poster", () => {
-        const uuid = uuidv4();
+        const uuid = `${TEST_PREFIX}-${uuidv4()}`;
         const posterName = uuid.substr(0, 5);
         cy.server();
         cy.route("POST", `${API_URL}/builds`).as("postBuild");
