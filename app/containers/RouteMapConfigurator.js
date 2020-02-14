@@ -4,7 +4,8 @@ import {generateRouteMapAction} from "../actions/publisherRequests";
 import {
     setDate,
     setPosterName,
-    toggleOnlyNearBuses
+    toggleOnlyNearBuses,
+    toggleZoneLabels
 } from "../actions/routeMapConfiguration";
 import RouteMapConfigurator from "../components/RouteMapConfigurator";
 import {toggleLayer} from "../actions/layers";
@@ -17,6 +18,7 @@ function mapStateToProps(state) {
         layers: state.layers,
         posterName: state.routeMapConfiguration.get("posterName"),
         showOnlyNearBuses: state.routeMapConfiguration.get("onlyNearBuses"),
+        showZoneLabels: state.routeMapConfiguration.get("zoneLabels"),
         pointConfig: state.publisherRequests.pointConfig
     };
 }
@@ -28,7 +30,8 @@ function mapDispatchToProps(dispatch) {
             setDate,
             setPosterName,
             toggleLayer,
-            toggleOnlyNearBuses
+            toggleOnlyNearBuses,
+            toggleZoneLabels
         },
         dispatch
     );
