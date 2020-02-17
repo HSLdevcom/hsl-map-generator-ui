@@ -5,6 +5,25 @@ const API_URL = Cypress.config().apiUrl;
 const TEST_PREFIX = "CY-TEST";
 
 describe("Basic functionalities", () => {
+    before(() => {
+        cy.request("GET", `${API_URL}/builds`)
+            .its("body")
+            .then((buildArr) => {
+                const testBuilds = buildArr.filter((build) =>
+                    build.title.includes("CY-TEST")
+                );
+                if (testBuilds.length > 0) {
+                    console.log(
+                        "Removing test builds. This indicates that some tests are probably failing."
+                    );
+                }
+                testBuilds.forEach((testBuild) => {
+                    cy.request("DELETE", `${API_URL}/builds/${testBuild.id}`);
+                    console.log(`Deleting ${testBuild.id}.`);
+                });
+            });
+    });
+
     beforeEach(() => {
         cy.visit("/");
     });
