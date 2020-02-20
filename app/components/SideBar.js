@@ -11,7 +11,10 @@ import Button from "./Button";
 const SideBar = ({currentMode, toggleMode}) => (
     <div className={styles.sideBar}>
         <div className={styles.modeSelector}>
-            <Button onClick={toggleMode} styleClass="lightWithBorder">
+            <Button
+                onClick={toggleMode}
+                styleClass="lightWithBorder"
+                type="toggle-mode">
                 Siirry{" "}
                 {currentMode === Modes.MAP
                     ? "Linjakarttageneraatoriin"
