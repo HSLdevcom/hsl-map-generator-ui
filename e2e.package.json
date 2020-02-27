@@ -4,7 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "start": "./run_cypress.sh",
+        "start": "run cypress open",
         "cypress": "cypress"
     },
     "dependencies": {
