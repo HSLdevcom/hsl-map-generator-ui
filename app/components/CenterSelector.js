@@ -10,7 +10,8 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => (
             .reverse()
             .join(", ")}
         toggleTab={toggleTab}
-        selected={selected}>
+        selected={selected}
+        type="center-selector">
         <div className={styles.inputRow}>
             <input
                 className={styles.input}

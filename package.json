@@ -53,6 +53,7 @@
         "chromedriver": "^2.21.2",
         "cross-env": "^1.0.8",
         "css-loader": "^0.25.0",
+        "cypress": "^3.8.3",
         "eslint": "^3.9.1",
         "eslint-config-airbnb": "^13.0.0",
         "eslint-config-prettier": "^6.0.0",

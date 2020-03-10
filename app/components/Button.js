@@ -7,9 +7,11 @@ const Button = ({
     onClick,
     styleClass = "light",
     className,
-    disabled = false
+    disabled = false,
+    type
 }) => (
     <button
+        data-cy={`${type}-button`}
         className={classnames(
             className,
             styles.button,
