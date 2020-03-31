@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "name": "hsl-zone-symbols-publisher-v8",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "Zone": "A" },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [[24.927603, 60.197496]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Zone": "B" },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [24.923492, 60.261591],
+          [25.08638, 60.204907],
+          [25.036682, 60.245032],
+          [24.821017, 60.237846],
+          [24.773359, 60.188698]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Zone": "C" },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [24.803065, 60.326584],
+          [25.066353, 60.314247],
+          [24.625777, 60.239222],
+          [24.693126, 60.294544],
+          [24.642452, 60.177149],
+          [24.939859, 60.330696],
+          [25.161859, 60.278397]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "Zone": "D" },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [24.957076, 60.391165],
+          [25.069788, 60.415303],
+          [24.421674, 60.239045],
+          [25.198054, 60.400496],
+          [25.280701, 60.353084],
+          [25.347663, 60.29006],
+          [24.45333, 60.169798],
+          [24.543216, 60.11093]
+        ]
+      }
+    }
+  ]
+}

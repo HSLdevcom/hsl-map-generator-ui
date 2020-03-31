@@ -46,7 +46,11 @@ class AddListModal extends Component {
                             value={this.state.title}
                             onChange={this.handleChange}
                         />
-                        <Button className={styles.button} onClick={() => this.addList()}>Lisää</Button>
+                        <Button
+                            className={styles.button}
+                            onClick={() => this.addList()}>
+                            Lisää
+                        </Button>
                     </div>
                 )}
                 {this.state.done && (

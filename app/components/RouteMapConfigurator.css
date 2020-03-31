@@ -43,3 +43,8 @@
 .element {
     margin-bottom: 5px;
 }
+
+.errorMessage {
+    color: #ff7575;
+    font-size: 15px;
+}

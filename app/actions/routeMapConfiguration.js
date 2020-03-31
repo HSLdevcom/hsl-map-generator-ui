@@ -17,7 +17,8 @@ export const SET_TERMINUS_FONT_SIZE = "SET_TERMINUS_FONT_SIZE";
 export const SET_TERMINUS_MAX_WIDTH = "SET_TERMINUS_MAX_WIDTH";
 export const SET_STATION_NAME_FONT_SIZE = "SET_STATION_NAME_FONT_SIZE";
 export const TOGGLE_ONLY_NEAR_BUSES = "TOGGLE_ONLY_NEAR_BUSES";
-export const TOGGLE_ZONE_LABELS = "TOGGLE_ZONE_LABELS";
+export const TOGGLE_ZONE_SYMBOLS = "TOGGLE_ZONE_SYMBOLS";
+export const SET_SYMBOL_SIZE = "SET_SYMBOL_SIZE";
 
 export function setBuild(id) {
     return {
@@ -116,8 +117,15 @@ export function toggleOnlyNearBuses() {
     };
 }
 
-export function toggleZoneLabels() {
+export function toggleZoneSymbols() {
     return {
-        type: "TOGGLE_ZONE_LABELS"
+        type: TOGGLE_ZONE_SYMBOLS
+    };
+}
+
+export function setSymbolSize(size) {
+    return {
+        type: SET_SYMBOL_SIZE,
+        data: size
     };
 }

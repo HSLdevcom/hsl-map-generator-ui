@@ -14,7 +14,8 @@ import {
     SET_TERMINUS_MAX_WIDTH,
     SET_STATION_NAME_FONT_SIZE,
     TOGGLE_ONLY_NEAR_BUSES,
-    TOGGLE_ZONE_LABELS
+    TOGGLE_ZONE_SYMBOLS,
+    SET_SYMBOL_SIZE
 } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
@@ -32,7 +33,8 @@ const initialState = fromJS({
     terminusWidth: 170,
     stationFontSize: 12,
     onlyNearBuses: false,
-    zoneLabels: false
+    zoneSymbols: false,
+    symbolSize: "30px"
 });
 
 export default function routeMapConfiguration(state = initialState, action) {
@@ -68,8 +70,10 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("stationFontSize", action.data);
         case TOGGLE_ONLY_NEAR_BUSES:
             return state.set("onlyNearBuses", !state.get("onlyNearBuses"));
-        case TOGGLE_ZONE_LABELS:
-            return state.set("zoneLabels", !state.get("zoneLabels"));
+        case TOGGLE_ZONE_SYMBOLS:
+            return state.set("zoneSymbols", !state.get("zoneSymbols"));
+        case SET_SYMBOL_SIZE:
+            return state.set("symbolSize", action.data);
         default:
             return state;
     }

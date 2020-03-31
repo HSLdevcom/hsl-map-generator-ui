@@ -3,6 +3,7 @@ export const UPDATE_SIZE = "UPDATE_SIZE";
 export const UPDATE_DPI = "UPDATE_DPI";
 export const UPDATE_MAP_SCALE = "UPDATE_MAP_SCALE";
 export const UPDATE_PIXEL_SCALE = "UPDATE_PIXEL_SCALE";
+export const UPDATE_SYMBOL = "UPDATE_SYMBOL";
 
 export function updateCenter(center) {
     return {

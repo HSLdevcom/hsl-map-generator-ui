@@ -9,7 +9,9 @@ function mapStateToProps(state) {
         viewport: state.viewport,
         style: styleFromLayers(state.layers, state.settings.date),
         mapWidth: state.layout.mapWidth,
-        mapHeight: state.layout.mapHeight
+        mapHeight: state.layout.mapHeight,
+        zoneSymbols: state.mapSelection.get("zoneSymbols"),
+        showZoneSymbols: state.routeMapConfiguration.get("zoneSymbols")
     };
 }
 
@@ -17,7 +19,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(ViewportActions, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

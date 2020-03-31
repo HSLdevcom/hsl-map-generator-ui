@@ -70,7 +70,7 @@ export default class BuildSelector extends Component {
                     value={this.state.buildId || ""}>
                     <option disabled value="">
                         {" "}
-                        -- Valitse listan --{" "}
+                        -- Valitse lista --{" "}
                     </option>
                     {this.props.builds.map((build) => (
                         <option key={build.id} value={build.id}>

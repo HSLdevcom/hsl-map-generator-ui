@@ -7,6 +7,8 @@ import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
 import get from "lodash/get";
 
+const PIXEL_SUFFIX = /([0-9]*\.?[0-9]+)(px)$/;
+
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +23,8 @@ export default class RouteMapConfigurator extends Component {
         this.openAdvancedSettings = this.openAdvancedSettings.bind(this);
         this.closeAdvancedSettings = this.closeAdvancedSettings.bind(this);
         this.toggleOnlyNearBuses = this.toggleOnlyNearBuses.bind(this);
-        this.toggleZones = this.toggleZones.bind(this);
+        this.toggleZoneSymbols = this.toggleZoneSymbols.bind(this);
+        this.setSymbolSize = this.setSymbolSize.bind(this);
 
         this.routesLayer = this.props.layers.find(
             (layer) => layer.id === "routes"
@@ -37,10 +40,18 @@ export default class RouteMapConfigurator extends Component {
             (layer) => layer.id === "ticket_zones"
         );
 
-        this.ticketZoneLabelsLayer = this.props.layers.find(
-            (layer) => layer.id === "ticket_zone_labels"
-        );
         this.setDefaultLayers();
+    }
+
+    setSymbolSize(e) {
+        const hasPixelSuffix = PIXEL_SUFFIX.test(e.target.value);
+        if (!hasPixelSuffix) {
+            this.setState({errorMessage: 'Tarkista formaatti. Esim. "30px"'});
+        } else {
+            this.setState({errorMessage: null});
+        }
+
+        this.props.setSymbolSize(e.target.value);
     }
 
     setDefaultLayers() {
@@ -51,12 +62,6 @@ export default class RouteMapConfigurator extends Component {
         if (get(this, "nearBusRoutesLayer.enabled", false))
             this.props.toggleLayer(this.nearBusRoutesLayer.id);
         if (this.props.showOnlyNearBuses) this.props.toggleOnlyNearBuses();
-    }
-
-    openAdvancedSettings() {
-        this.setState({
-            advancedSettingsOpen: true
-        });
     }
 
     closeAdvancedSettings() {
@@ -77,8 +82,14 @@ export default class RouteMapConfigurator extends Component {
         this.props.toggleOnlyNearBuses();
     }
 
-    toggleZones() {
-        this.props.toggleZoneLabels();
+    toggleZoneSymbols() {
+        this.props.toggleZoneSymbols();
+    }
+
+    openAdvancedSettings() {
+        this.setState({
+            advancedSettingsOpen: true
+        });
     }
 
     generate() {
@@ -141,11 +152,31 @@ export default class RouteMapConfigurator extends Component {
                             <input
                                 className={style.checkbox}
                                 type="checkbox"
-                                onChange={this.toggleZones}
-                                value={this.props.showZoneLabels}
+                                onChange={this.toggleZoneSymbols}
                             />
                         </div>
                     </div>
+                    {this.props.showzoneSymbols && (
+                        <div className={style.element}>
+                            <div className={style.title}>
+                                Vyöhykesymbolien koko (pikseliä)
+                            </div>
+                            <div className={style.value}>
+                                <input
+                                    className={style.input}
+                                    defaultValue={"30px"}
+                                    onChange={(e) => {
+                                        this.setSymbolSize(e);
+                                    }}
+                                />
+                            </div>
+                            {this.state.errorMessage && (
+                                <div className={style.errorMessage}>
+                                    {this.state.errorMessage}
+                                </div>
+                            )}
+                        </div>
+                    )}
                     <div className={style.element}>
                         <div className={style.title}>Päivämäärä</div>
                         <div className={style.value}>
@@ -177,7 +208,8 @@ export default class RouteMapConfigurator extends Component {
                         !build.id ||
                         !posterName ||
                         !this.props.pointConfig ||
-                        this.props.pointConfig.status !== PointStatus.DONE
+                        this.props.pointConfig.status !== PointStatus.DONE ||
+                        this.state.errorMessage
                     }
                     onClick={this.generate}>
                     Generoi
