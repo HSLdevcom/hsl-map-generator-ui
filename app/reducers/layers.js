@@ -1,6 +1,7 @@
 import update from "react-addons-update";
+import get from "lodash/get";
 import {findIndex} from "lodash";
-import {TOGGLE_LAYER} from "../actions/layers";
+import {TOGGLE_LAYER, SET_LAYER} from "../actions/layers";
 import {LOAD_STATE} from "../actions/fileOperations";
 import {layersFromStyle} from "../utils/map-utils";
 
@@ -32,6 +33,14 @@ export default function layers(state = initialState, action) {
                 });
             }
             return update(state, query);
+        }
+        case SET_LAYER: {
+            return state.map((layer) => {
+                if (layer.id === action.layer) {
+                    return {...layer, enabled: action.boolean};
+                }
+                return {...layer};
+            });
         }
         case LOAD_STATE: {
             if (action.state.version < 3) {

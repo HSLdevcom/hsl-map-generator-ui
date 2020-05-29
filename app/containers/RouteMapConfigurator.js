@@ -4,10 +4,11 @@ import {generateRouteMapAction} from "../actions/publisherRequests";
 import {
     setDate,
     setPosterName,
-    toggleOnlyNearBuses
+    toggleOnlyNearBuses,
+    setOnlyNearBuses
 } from "../actions/routeMapConfiguration";
 import RouteMapConfigurator from "../components/RouteMapConfigurator";
-import {toggleLayer} from "../actions/layers";
+import {toggleLayer, setLayer} from "../actions/layers";
 
 function mapStateToProps(state) {
     return {
@@ -28,7 +29,9 @@ function mapDispatchToProps(dispatch) {
             setDate,
             setPosterName,
             toggleLayer,
-            toggleOnlyNearBuses
+            toggleOnlyNearBuses,
+            setLayer,
+            setOnlyNearBuses
         },
         dispatch
     );
