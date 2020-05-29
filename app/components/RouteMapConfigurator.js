@@ -21,7 +21,6 @@ export default class RouteMapConfigurator extends Component {
         this.openAdvancedSettings = this.openAdvancedSettings.bind(this);
         this.closeAdvancedSettings = this.closeAdvancedSettings.bind(this);
         this.toggleOnlyNearBuses = this.toggleOnlyNearBuses.bind(this);
-        this.toggleZones = this.toggleZones.bind(this);
 
         this.routesLayer = this.props.layers.find(
             (layer) => layer.id === "routes"
@@ -31,14 +30,6 @@ export default class RouteMapConfigurator extends Component {
         );
         this.nearBusRoutesLayer = this.props.layers.find(
             (layer) => layer.id === "near_bus_routes"
-        );
-
-        this.ticketZonesLayer = this.props.layers.find(
-            (layer) => layer.id === "ticket_zones"
-        );
-
-        this.ticketZoneLabelsLayer = this.props.layers.find(
-            (layer) => layer.id === "ticket_zone_labels"
         );
         this.setDefaultLayers();
     }
@@ -75,10 +66,6 @@ export default class RouteMapConfigurator extends Component {
         this.props.toggleLayer(this.regularRoutesLayer.id);
         this.props.toggleLayer(this.nearBusRoutesLayer.id);
         this.props.toggleOnlyNearBuses();
-    }
-
-    toggleZones() {
-        this.props.toggleZoneLabels();
     }
 
     generate() {
@@ -135,17 +122,6 @@ export default class RouteMapConfigurator extends Component {
                                 type="checkbox"
                                 onChange={this.toggleOnlyNearBuses}
                                 value={this.props.showOnlyNearBuses}
-                            />
-                        </div>
-                    </div>
-                    <div className={style.element}>
-                        <div className={style.title}>Vyöhykesymbolit</div>
-                        <div className={style.value}>
-                            <input
-                                className={style.checkbox}
-                                type="checkbox"
-                                onChange={this.toggleZones}
-                                value={this.props.showZoneLabels}
                             />
                         </div>
                     </div>
