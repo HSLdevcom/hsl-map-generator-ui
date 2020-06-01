@@ -82,17 +82,6 @@ export default class RouteMapConfigurator extends Component {
         );
     }
 
-    componentDidUpdate() {
-        if (this.props.showOnlyNearBuses) {
-            this.props.setOnlyNearBuses(true);
-            if (!this.nearBusRoutesLayer.enabled)
-                this.props.setLayer(this.nearBusRoutesLayer.id, true);
-        }
-        this.nearBusRoutesLayer = this.props.layers.find(
-            (layer) => layer.id === "near_bus_routes"
-        );
-    }
-
     render() {
         let input = null;
         const {build, setPosterName, posterName} = this.props;

@@ -4,8 +4,7 @@ import {generateRouteMapAction} from "../actions/publisherRequests";
 import {
     setDate,
     setPosterName,
-    toggleOnlyNearBuses,
-    setOnlyNearBuses
+    toggleOnlyNearBuses
 } from "../actions/routeMapConfiguration";
 import RouteMapConfigurator from "../components/RouteMapConfigurator";
 import {toggleLayer, setLayer} from "../actions/layers";
@@ -30,8 +29,7 @@ function mapDispatchToProps(dispatch) {
             setPosterName,
             toggleLayer,
             toggleOnlyNearBuses,
-            setLayer,
-            setOnlyNearBuses
+            setLayer
         },
         dispatch
     );
