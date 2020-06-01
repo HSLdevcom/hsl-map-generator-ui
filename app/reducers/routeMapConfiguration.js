@@ -68,14 +68,16 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("stationFontSize", action.data);
         case TOGGLE_ONLY_NEAR_BUSES:
             return state.set("onlyNearBuses", !state.get("onlyNearBuses"));
-        case LOAD_STATE:
+        case LOAD_STATE: {
             const routeConfig = createRoutemapConfigurationOptions(
                 action.state.routeMapConfiguration
             );
+            let newState = state;
             Object.keys(routeConfig).forEach((key) => {
-                state = state.set(key, routeConfig[key]);
+                newState = newState.set(key, routeConfig[key]);
             });
-            return state;
+            return newState;
+        }
         default:
             return state;
     }
