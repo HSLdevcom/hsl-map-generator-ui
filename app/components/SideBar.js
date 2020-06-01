@@ -26,6 +26,9 @@ const SideBar = ({currentMode, toggleMode}) => (
             <PointBuildTrigger key="PointBuildTrigger" />,
             <BuildSelector key="BuildSelector" />,
             <RouteMapConfigurator key="RouteMapConfigurator" />,
+            <div className={styles.configSubtitle}>
+                Asetusten lataus/tallennus
+            </div>,
             <FileOperations key="FileOperations" />
         ]}
     </div>
