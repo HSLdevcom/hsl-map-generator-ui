@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import Map from "../containers/Map";
 import CenterSelector from "../containers/CenterSelector";

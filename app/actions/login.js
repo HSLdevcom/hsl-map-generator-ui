@@ -15,5 +15,5 @@ export function logout() {
 }
 
 export const setUser = (user) => (dispatch) => {
-    dispatch({type: SET_USER, user: user});
+    dispatch({type: SET_USER, user});
 };

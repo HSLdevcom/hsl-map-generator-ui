@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+/* eslint-disable jsx-a11y/no-static-element-interactions*/
+
+import React from "react";
 import styles from "./Login.css";
-const {REACT_APP_CLIENT_ID, REACT_APP_REDIRECT_URI} = process.env;
 
 const LoginIcon = () => (
     <div className={styles.loginIcon}>
@@ -25,10 +26,10 @@ const LoginIcon = () => (
 
 const openLoginForm = () => {
     window.location.replace(
-        `https://hslid-uat.cinfra.fi/openid/auth?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URI}&response_type=code&scope=email+https://oneportal.trivore.com/scope/groups.readonly`
+        `https://hslid-uat.cinfra.fi/openid/auth?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code&scope=email+https://oneportal.trivore.com/scope/groups.readonly`
     );
 };
-const LoginComponent = ({user}) => {
+const LoginComponent = () => {
     return (
         <div>
             <div className={styles.root}>

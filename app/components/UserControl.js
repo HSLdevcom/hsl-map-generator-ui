@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions*/
+
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -11,17 +13,16 @@ class UserControl extends Component {
         this.state = {
             loading: true
         };
+        this.logout = this.logout.bind(this);
     }
 
-    componentDidMount() {}
-
-    logout = () => {
+    logout() {
         logout().then((response) => {
             if (response.status === 200) {
                 this.props.setUser(null);
             }
         });
-    };
+    }
 
     render() {
         return (

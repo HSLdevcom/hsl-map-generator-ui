@@ -167,10 +167,10 @@ export default class RouteMapConfigurator extends Component {
                         <div style={{color: "black"}}>
                             <h1>Info</h1>
                             <p>
-                                Linjakartta {posterName} on nyt rakentamassa.
+                                Linjakartta {posterName} on nyt generoitumassa.
                                 <br />
-                                Voit seurata linjakartan rakennusprosessi listan
-                                info näkymässä.
+                                Voit seurata linjakartan rakennusprosessia
+                                listan infonäkymästä.
                             </p>
                             <Button
                                 onClick={this.closeDone}

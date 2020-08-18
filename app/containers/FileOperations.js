@@ -6,7 +6,6 @@ import FileOperations from "../components/FileOperations";
 import {generateImage} from "../actions/apiRequests";
 import {toggleSaveWorldFile} from "../actions/settings";
 import {loadState} from "../actions/fileOperations";
-import {version} from "os";
 
 function mapStateToProps(state) {
     return {

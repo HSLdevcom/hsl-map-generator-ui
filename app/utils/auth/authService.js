@@ -1,3 +1,5 @@
+import regeneratorRuntime from "regenerator-runtime"; // eslint-disable-line
+
 const RequestMethod = {
     GET: "GET",
     POST: "POST",
@@ -12,12 +14,7 @@ const Endpoint = {
 };
 
 const BACKEND_API_URL =
-    process.env.API_URL || "https://dev.kartat.hsl.fi/routemap-api";
-
-export const authorizeUsingCode = async (code) => {
-    const requestBody = {code};
-    return sendRequest(RequestMethod.POST, requestBody);
-};
+    process.env.API_URL || "https://kartat.hsl.fi/routemap-api";
 
 const sendRequest = async (method, requestBody) => {
     try {
@@ -32,9 +29,14 @@ const sendRequest = async (method, requestBody) => {
         });
         return await response.json();
     } catch (e) {
-        console.log(e);
+        console.info(e);
         return {error: e};
     }
+};
+
+export const authorizeUsingCode = async (code) => {
+    const requestBody = {code};
+    return sendRequest(RequestMethod.POST, requestBody);
 };
 
 export const checkExistingSession = async () => {
@@ -48,7 +50,7 @@ export const checkExistingSession = async () => {
         });
         return await response.json();
     } catch (e) {
-        console.log(e);
+        console.info(e);
         return {error: e};
     }
 };
@@ -64,7 +66,7 @@ export const logout = async () => {
         });
         return response;
     } catch (e) {
-        console.log(e);
+        console.info(e);
         return {error: e};
     }
 };
