@@ -1,0 +1,72 @@
+.root {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../public/background.jpg");
+}
+
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 30px 90px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 3px 14px rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    text-align: center;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    background-color: #007ac9a6;
+}
+
+.header {
+    padding: 10px 0px 10px 0px;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.loginButton {
+    display: flex;
+    flex-basis: 50px;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+    width: 400px;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: #ffffffe6;
+    color: #3e3e3e;
+    padding: 15px;
+    width: 225px;
+}
+
+.loginButton:hover {
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.loginText {
+    margin-left: 10px;
+}
+.logo {
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    vertical-align: middle;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../public/hsl-logo.png");
+}
+
+.title {
+    margin: 10px 0px 10px 0px;
+}

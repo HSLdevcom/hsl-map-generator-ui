@@ -8,6 +8,7 @@ import tabName from "./tabName";
 import viewport from "./viewport";
 import apiRequests from "./apiRequests";
 import layout from "./layout";
+import login from "./login";
 import publisherRequests from "./publisherRequests";
 import routeMapConfiguration from "./routeMapConfiguration";
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     viewport,
     apiRequests,
     layout,
+    login,
     publisherRequests,
     routeMapConfiguration
 });
