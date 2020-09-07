@@ -11,21 +11,28 @@ import Button from "./Button";
 const SideBar = ({currentMode, toggleMode}) => (
     <div className={styles.sideBar}>
         <div className={styles.modeSelector}>
-            <Button onClick={toggleMode} styleClass="lightWithBorder">
+            <Button
+                onClick={toggleMode}
+                styleClass="lightWithBorder"
+                type="toggle-mode">
                 Siirry{" "}
                 {currentMode === Modes.MAP
                     ? "Linjakarttageneraatoriin"
-                    : "Karttageneratoriin"}
+                    : "Karttageneraattoriin"}
             </Button>
         </div>
         {currentMode === Modes.MAP && [
             <LayerSelector key="LayerSelector" />,
-            <FileOperations key="FileOperations" />
+            <FileOperations showGenerateButton={true} key="FileOperations" />
         ]}
         {currentMode === Modes.ROUTEMAP && [
             <PointBuildTrigger key="PointBuildTrigger" />,
             <BuildSelector key="BuildSelector" />,
-            <RouteMapConfigurator key="RouteMapConfigurator" />
+            <RouteMapConfigurator key="RouteMapConfigurator" />,
+            <div className={styles.configSubtitle}>
+                Asetusten lataus/tallennus
+            </div>,
+            <FileOperations key="FileOperations" />
         ]}
     </div>
 );

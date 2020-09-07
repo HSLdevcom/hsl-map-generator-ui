@@ -41,12 +41,14 @@ class AddListModal extends Component {
                     <div>
                         <h1>Uusi lista</h1>
                         <input
+                            data-cy="new-list-name-input"
                             placeholder="Nimi"
                             className={styles.input}
                             value={this.state.title}
                             onChange={this.handleChange}
                         />
                         <Button
+                            type="add-list"
                             className={styles.button}
                             onClick={() => this.addList()}>
                             Lisää
@@ -57,7 +59,11 @@ class AddListModal extends Component {
                     <div>
                         <h1>Lista on lisätty</h1>
                         <h3>Listan nimi: {this.state.title}</h3>
-                        <Button onClick={() => this.reset()}>Sulje</Button>
+                        <Button
+                            type="close-new-list"
+                            onClick={() => this.reset()}>
+                            Sulje
+                        </Button>
                     </div>
                 )}
             </div>

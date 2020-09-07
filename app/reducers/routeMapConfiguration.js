@@ -1,4 +1,5 @@
 import {fromJS} from "immutable";
+import {createRoutemapConfigurationOptions} from "../utils/map-utils";
 import {
     SET_BUILD,
     SET_POSTER_NAME,
@@ -15,7 +16,8 @@ import {
     SET_STATION_NAME_FONT_SIZE,
     TOGGLE_ONLY_NEAR_BUSES,
     TOGGLE_ZONE_SYMBOLS,
-    SET_SYMBOL_SIZE
+    SET_SYMBOL_SIZE,
+    LOAD_STATE
 } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
@@ -74,6 +76,16 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("zoneSymbols", !state.get("zoneSymbols"));
         case SET_SYMBOL_SIZE:
             return state.set("symbolSize", action.data);
+        case LOAD_STATE: {
+            const routeConfig = createRoutemapConfigurationOptions(
+                action.state.routeMapConfiguration
+            );
+            let newState = state;
+            Object.keys(routeConfig).forEach((key) => {
+                newState = newState.set(key, routeConfig[key]);
+            });
+            return newState;
+        }
         default:
             return state;
     }

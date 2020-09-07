@@ -21,7 +21,7 @@ function getColorFromStatus(status) {
 
 const ShowListModalItem = ({item, openLogId, openLog, closeLog}) => (
     <div className={styles.container}>
-        <div className={styles.text}>
+        <div className={styles.text} data-cy={item.props.configuration.name}>
             <span className={styles.itemName}>
                 {item.props.configuration.name && item.props.configuration.name}
                 {!item.props.configuration.name && "- Nimetön -"}

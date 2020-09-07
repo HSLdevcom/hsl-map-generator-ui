@@ -11,8 +11,23 @@ function mapStateToProps(state) {
     return {
         ...state.settings,
         onSaveState: () => {
+            const config = {};
+            Object.keys(state).forEach((attribute) => {
+                if (attribute === "viewport") {
+                    config[attribute] = {
+                        altitude: state.viewport.altitude,
+                        bearing: state.viewport.bearing,
+                        height: state.viewport.height,
+                        latitude: state.viewport.latitude,
+                        longitude: state.viewport.longitude,
+                        zoom: state.viewport.zoom
+                    };
+                    return;
+                }
+                config[attribute] = state[attribute];
+            });
             saveAs(
-                new Blob([toJSON(state)], {type: "application/json"}),
+                new Blob([toJSON(config)], {type: "application/json"}),
                 "map.json"
             );
         }

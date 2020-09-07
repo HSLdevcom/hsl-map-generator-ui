@@ -9,7 +9,7 @@ import {
     setSymbolSize
 } from "../actions/routeMapConfiguration";
 import RouteMapConfigurator from "../components/RouteMapConfigurator";
-import {toggleLayer} from "../actions/layers";
+import {toggleLayer, setLayer} from "../actions/layers";
 
 function mapStateToProps(state) {
     return {
@@ -34,7 +34,8 @@ function mapDispatchToProps(dispatch) {
             toggleLayer,
             toggleOnlyNearBuses,
             toggleZoneSymbols,
-            setSymbolSize
+            setSymbolSize,
+            setLayer
         },
         dispatch
     );

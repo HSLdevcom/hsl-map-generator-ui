@@ -19,6 +19,10 @@ const config = {
             {
                 test: /\.json$/,
                 loader: "json-loader"
+            },
+            {
+                test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                loader: "url-loader"
             }
         ],
         postLoaders: [

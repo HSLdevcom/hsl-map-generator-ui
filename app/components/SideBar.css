@@ -17,3 +17,8 @@
     width: 100%;
     cursor: pointer;
 }
+
+.configSubtitle {
+    padding: 0.5em 0.5em 0 0.5em;
+    background-color: #333;
+}

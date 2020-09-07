@@ -24,7 +24,9 @@ const FileOperations = (props) => (
         <Button onClick={props.onSaveState} styleClass="darkWithBorder">
             Tallenna
         </Button>
-        <Button onClick={props.generateImage}>Generoi Kartta</Button>
+        {props.showGenerateButton && (
+            <Button onClick={props.generateImage}>Generoi Kartta</Button>
+        )}
         <div className={styles.row}>
             <label htmlFor="checkbox_saveWorldFile">
                 <input

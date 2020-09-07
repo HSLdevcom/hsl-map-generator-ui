@@ -7,6 +7,7 @@ module.exports = {
     },
     extends: ["airbnb", "plugin:prettier/recommended"],
     rules: {
+        "no-console": "off",
         "no-plusplus": ["off"],
         "react/prop-types": ["off"],
         "react/jsx-filename-extension": ["error", {extensions: [".js"]}],

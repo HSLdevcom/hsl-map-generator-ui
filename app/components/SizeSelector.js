@@ -7,10 +7,12 @@ const SizeSelector = ({size, toggleTab, selected, updateSize}) => (
         title="Fyysinen koko"
         value={`${size.toArray().join(" x ")} mm`}
         toggleTab={toggleTab}
-        selected={selected}>
+        selected={selected}
+        type="size-selector">
         <div className={styles.inputRow}>
             <div className={styles.inputLabel}>Leveys</div>
             <input
+                data-cy="size-selector-width-input"
                 className={styles.input}
                 value={size.get(0)}
                 onChange={(event) =>
@@ -22,6 +24,7 @@ const SizeSelector = ({size, toggleTab, selected, updateSize}) => (
         <div className={styles.inputRow}>
             <div className={styles.inputLabel}>Korkeus</div>
             <input
+                data-cy="size-selector-height-input"
                 className={styles.input}
                 value={size.get(1)}
                 onChange={(event) =>

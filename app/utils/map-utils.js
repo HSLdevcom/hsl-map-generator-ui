@@ -119,3 +119,24 @@ export const pointsWithinBbox = (points, bbox) => {
     });
     return pointsInBbox;
 };
+export const createRoutemapConfigurationOptions = (configuration) => ({
+    posterName: configuration.get("posterName"),
+    scaleFontSize: configuration.get("scaleFontSize"),
+    scaleLength: configuration.get("scaleLength"),
+    maxAnchorLineLength: configuration.get("maxAnchorLineLength"),
+    clusterDifferentRoutePointsDistance: configuration.get(
+        "clusterDifferentRoutePointsDistance"
+    ),
+    clusterSameRoutePointsDistance: configuration.get(
+        "clusterSameRoutePointsDistance"
+    ),
+    pointMinDistanceFromTerminus: configuration.get(
+        "pointMinDistanceFromTerminus"
+    ),
+    intermediatePointFontSize: configuration.get("intermediatePointFontSize"),
+    intermediatePointWidth: configuration.get("intermediatePointWidth"),
+    terminusFontSize: configuration.get("terminusFontSize"),
+    terminusWidth: configuration.get("terminusWidth"),
+    stationFontSize: configuration.get("stationFontSize"),
+    onlyNearBuses: configuration.get("onlyNearBuses")
+});

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import Map from "../containers/Map";
 import CenterSelector from "../containers/CenterSelector";
@@ -5,6 +7,7 @@ import SizeSelector from "../containers/SizeSelector";
 import DpiSelector from "../containers/DpiSelector";
 import MapScaleSelector from "../containers/MapScaleSelector";
 import PixelScaleSelector from "../containers/PixelScaleSelector";
+import UserControl from "../components/UserControl";
 import SideBar from "../containers/SideBar";
 import ModeSelector from "../containers/ModeSelector";
 import styles from "./Home.css";
@@ -18,6 +21,7 @@ const Home = () => (
             <DpiSelector />
             <MapScaleSelector />
             <PixelScaleSelector />
+            <UserControl />
         </div>
         <div className={styles.main}>
             <div className={styles.sideBar}>

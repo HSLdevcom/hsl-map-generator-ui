@@ -109,14 +109,15 @@ export default class RouteMapConfigurator extends Component {
     render() {
         let input = null;
         const {build, setPosterName, posterName} = this.props;
-
         return (
             <div className={style.container}>
                 <div>
                     <div className={style.header}>Valinnat</div>
                     <div className={style.element}>
                         <div className={style.title}>Lista</div>
-                        <div className={style.value}>
+                        <div
+                            className={style.value}
+                            data-cy="selected-poster-name">
                             {build && build.title}
                             {(!build || !build.title) && "-"}
                         </div>
@@ -128,6 +129,7 @@ export default class RouteMapConfigurator extends Component {
                                 ref={(el) => {
                                     input = el;
                                 }}
+                                data-cy="new-poster-name"
                                 className={style.input}
                                 value={posterName}
                                 onChange={() => setPosterName(input.value)}
@@ -143,6 +145,7 @@ export default class RouteMapConfigurator extends Component {
                                 type="checkbox"
                                 onChange={this.toggleOnlyNearBuses}
                                 value={this.props.showOnlyNearBuses}
+                                checked={this.props.showOnlyNearBuses}
                             />
                         </div>
                     </div>
@@ -203,6 +206,7 @@ export default class RouteMapConfigurator extends Component {
                 </Modal>
                 <Button
                     styleClass="lightWithBorder"
+                    type="generate"
                     disabled={
                         !build ||
                         !build.id ||
@@ -219,11 +223,17 @@ export default class RouteMapConfigurator extends Component {
                         <div style={{color: "black"}}>
                             <h1>Info</h1>
                             <p>
-                                Linjakartta {posterName} on nyt rakentamassa.
+                                Linjakartta {posterName} on nyt generoitumassa.
                                 <br />
-                                Voit seurata linjakartan rakennusprosessi listan
-                                info näkymässä.
+                                Voit seurata linjakartan rakennusprosessia
+                                listan infonäkymästä.
                             </p>
+                            <Button
+                                onClick={this.closeDone}
+                                styleClass="lightWithBorder"
+                                type="close-generate-prompt">
+                                Sulje
+                            </Button>
                         </div>
                     )}{" "}
                     {this.state.error && (

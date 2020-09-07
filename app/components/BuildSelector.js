@@ -65,6 +65,7 @@ export default class BuildSelector extends Component {
             <div className={styles.container}>
                 <div className={styles.title}>Valitse lista</div>
                 <select
+                    data-cy="build-selector"
                     className={styles.buildSelect}
                     onChange={this.setBuild}
                     value={this.state.buildId || ""}>
@@ -80,12 +81,14 @@ export default class BuildSelector extends Component {
                 </select>
                 <div className={styles.buttonContainer}>
                     <Button
+                        type="select-list"
                         styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
                         onClick={this.useBuildId}>
                         Käytä tätä listaa
                     </Button>
                     <Button
+                        type="new-list"
                         styleClass="lightWithBorder"
                         onClick={this.showNewListModal}>
                         Uusi lista
@@ -96,6 +99,7 @@ export default class BuildSelector extends Component {
                         <AddListModal hide={this.hideNewListModal} />
                     </Modal>
                     <Button
+                        type="show-list"
                         styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
                         onClick={this.showShowListModal}>
