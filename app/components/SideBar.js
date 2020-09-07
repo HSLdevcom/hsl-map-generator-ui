@@ -23,12 +23,16 @@ const SideBar = ({currentMode, toggleMode}) => (
         </div>
         {currentMode === Modes.MAP && [
             <LayerSelector key="LayerSelector" />,
-            <FileOperations key="FileOperations" />
+            <FileOperations showGenerateButton={true} key="FileOperations" />
         ]}
         {currentMode === Modes.ROUTEMAP && [
             <PointBuildTrigger key="PointBuildTrigger" />,
             <BuildSelector key="BuildSelector" />,
-            <RouteMapConfigurator key="RouteMapConfigurator" />
+            <RouteMapConfigurator key="RouteMapConfigurator" />,
+            <div className={styles.configSubtitle}>
+                Asetusten lataus/tallennus
+            </div>,
+            <FileOperations key="FileOperations" />
         ]}
     </div>
 );

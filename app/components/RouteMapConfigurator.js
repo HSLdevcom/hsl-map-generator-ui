@@ -85,7 +85,6 @@ export default class RouteMapConfigurator extends Component {
     render() {
         let input = null;
         const {build, setPosterName, posterName} = this.props;
-
         return (
             <div className={style.container}>
                 <div>
@@ -122,6 +121,7 @@ export default class RouteMapConfigurator extends Component {
                                 type="checkbox"
                                 onChange={this.toggleOnlyNearBuses}
                                 value={this.props.showOnlyNearBuses}
+                                checked={this.props.showOnlyNearBuses}
                             />
                         </div>
                     </div>

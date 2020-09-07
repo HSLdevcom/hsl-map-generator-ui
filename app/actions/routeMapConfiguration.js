@@ -17,6 +17,7 @@ export const SET_TERMINUS_FONT_SIZE = "SET_TERMINUS_FONT_SIZE";
 export const SET_TERMINUS_MAX_WIDTH = "SET_TERMINUS_MAX_WIDTH";
 export const SET_STATION_NAME_FONT_SIZE = "SET_STATION_NAME_FONT_SIZE";
 export const TOGGLE_ONLY_NEAR_BUSES = "TOGGLE_ONLY_NEAR_BUSES";
+export const LOAD_STATE = "LOAD_STATE";
 
 export function setBuild(id) {
     return {

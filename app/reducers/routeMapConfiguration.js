@@ -1,4 +1,5 @@
 import {fromJS} from "immutable";
+import {createRoutemapConfigurationOptions} from "../utils/map-utils";
 import {
     SET_BUILD,
     SET_POSTER_NAME,
@@ -13,7 +14,8 @@ import {
     SET_TERMINUS_FONT_SIZE,
     SET_TERMINUS_MAX_WIDTH,
     SET_STATION_NAME_FONT_SIZE,
-    TOGGLE_ONLY_NEAR_BUSES
+    TOGGLE_ONLY_NEAR_BUSES,
+    LOAD_STATE
 } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
@@ -66,6 +68,16 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("stationFontSize", action.data);
         case TOGGLE_ONLY_NEAR_BUSES:
             return state.set("onlyNearBuses", !state.get("onlyNearBuses"));
+        case LOAD_STATE: {
+            const routeConfig = createRoutemapConfigurationOptions(
+                action.state.routeMapConfiguration
+            );
+            let newState = state;
+            Object.keys(routeConfig).forEach((key) => {
+                newState = newState.set(key, routeConfig[key]);
+            });
+            return newState;
+        }
         default:
             return state;
     }
