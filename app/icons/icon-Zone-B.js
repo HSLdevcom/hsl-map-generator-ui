@@ -1,10 +1,10 @@
 import React from "react";
 
-const BZone = () => (
+const BZone = (props) => (
     <div>
         <svg
-            width="30px"
-            height="30px"
+            width={`${props.size}px`}
+            height={`${props.size}px`}
             viewBox="0 0 36 36"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"

@@ -11,19 +11,33 @@ import BZone from "../icons/icon-Zone-B";
 import CZone from "../icons/icon-Zone-C";
 import DZone from "../icons/icon-Zone-D";
 
-const getZoneIcon = (zone) => {
+// Same scaling used in backend for sizing the posters.
+const SCALE = 96 / 72;
+
+const getZoneIcon = (zone, svgSize) => {
     switch (zone) {
         case "A":
-            return <AZone />;
+            return <AZone size={svgSize} />;
         case "B":
-            return <BZone />;
+            return <BZone size={svgSize} />;
         case "C":
-            return <CZone />;
+            return <CZone size={svgSize} />;
         case "D":
-            return <DZone />;
+            return <DZone size={svgSize} />;
         default:
             return <div />;
     }
+};
+
+const getSymbolSize = (symbolSize, mapWidth, mapHeight, mapSelectionSize) => {
+    if (!mapSelectionSize) return 0;
+    const symbolSizeNum = parseInt(symbolSize.replace("px", ""), 10);
+    const mapSizeDiameter = (mapWidth + mapHeight) / 2;
+    const symbolToMapRatio = mapSizeDiameter / symbolSizeNum;
+    const mapSelectionSizeDiameter =
+        (mapSelectionSize[0] + mapSelectionSize[1]) / 2;
+
+    return (mapSelectionSizeDiameter / symbolToMapRatio) * SCALE;
 };
 
 const MapComponent = ({
@@ -34,8 +48,16 @@ const MapComponent = ({
     mapHeight,
     zoneSymbols,
     updateSymbol,
-    showZoneSymbols
+    showZoneSymbols,
+    symbolSize,
+    mapSelectionSize
 }) => {
+    const svgSize = getSymbolSize(
+        symbolSize,
+        mapWidth,
+        mapHeight,
+        mapSelectionSize
+    );
     return (
         <div>
             <MapGL
@@ -67,12 +89,12 @@ const MapComponent = ({
                                 draggable={true}
                                 latitude={symbol.get("latitude")}
                                 longitude={symbol.get("longitude")}
-                                offsetLeft={-10}
-                                offsetTop={-10}
                                 onDrag={(e) => {
                                     updateSymbol(symbol, e);
                                 }}>
-                                <div>{getZoneIcon(symbol.get("zone"))}</div>
+                                <div>
+                                    {getZoneIcon(symbol.get("zone"), svgSize)}
+                                </div>
                             </Marker>
                         );
                     })}

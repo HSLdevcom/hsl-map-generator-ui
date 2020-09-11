@@ -98,7 +98,8 @@ export const createConfigurationOptions = (configuration, pointConfig) => ({
     terminusWidth: configuration.get("terminusWidth"),
     stationFontSize: configuration.get("stationFontSize"),
     nearBuses: configuration.get("onlyNearBuses"),
-    zoneSymbols: configuration.get("zoneSymbols")
+    zoneSymbols: configuration.get("zoneSymbols"),
+    symbolSize: configuration.get("symbolSize")
 });
 
 export const pointsWithinBbox = (points, bbox) => {
@@ -138,5 +139,7 @@ export const createRoutemapConfigurationOptions = (configuration) => ({
     terminusFontSize: configuration.get("terminusFontSize"),
     terminusWidth: configuration.get("terminusWidth"),
     stationFontSize: configuration.get("stationFontSize"),
-    onlyNearBuses: configuration.get("onlyNearBuses")
+    onlyNearBuses: configuration.get("onlyNearBuses"),
+    zoneSymbols: configuration.get("zoneSymbols"),
+    symbolSize: configuration.get("symbolSize")
 });

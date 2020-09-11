@@ -1,11 +1,14 @@
 import {fromJS} from "immutable";
+import {cloneDeep} from "lodash";
 import {
     UPDATE_CENTER,
     UPDATE_SIZE,
     UPDATE_DPI,
     UPDATE_MAP_SCALE,
     UPDATE_PIXEL_SCALE,
-    UPDATE_SYMBOL
+    UPDATE_SYMBOL,
+    ADD_SYMBOL,
+    UPDATE_SELECTION_SIZE
 } from "../actions/mapSelection";
 import {LOAD_STATE} from "../actions/fileOperations";
 import ZoneSymbols from "../components/hsl-zones-publisher-v6.json";
@@ -57,6 +60,38 @@ export default function mapSelection(state = initialState, action) {
                 return symbol;
             });
             return state.set("zoneSymbols", newZoneSymbols);
+        }
+        case ADD_SYMBOL: {
+            const longitude = state.get("center").get(0);
+            const latitude = state.get("center").get(1);
+            const zoneSymbols = state.get("zoneSymbols");
+            const newZoneSymbols = [];
+            const zoneSymbolsArray = zoneSymbols._tail
+                ? zoneSymbols._tail.array
+                : zoneSymbols;
+
+            zoneSymbols.forEach((symbol) => {
+                newZoneSymbols.push(symbol);
+            });
+
+            const newSymbol = cloneDeep(zoneSymbolsArray[0]);
+            newSymbol._root.entries[0] = ["latitude", latitude];
+            newSymbol._root.entries[1] = ["longitude", longitude];
+            newSymbol._root.entries[2] = ["zone", action.zone];
+            newSymbol._root.entries[3] = ["id", zoneSymbolsArray.length + 1];
+            newZoneSymbols.push(newSymbol);
+
+            return state.set("zoneSymbols", newZoneSymbols);
+        }
+        case UPDATE_SELECTION_SIZE: {
+            const selectionSize = state.get("selectionSize");
+            if (!selectionSize) return state.set("selectionSize", action.size);
+            const newState =
+                selectionSize[0] === action.size[0] &&
+                selectionSize[1] === action.size[1]
+                    ? state
+                    : state.set("selectionSize", action.size);
+            return newState;
         }
         default:
             return state;

@@ -36,7 +36,7 @@ const initialState = fromJS({
     stationFontSize: 12,
     onlyNearBuses: false,
     zoneSymbols: false,
-    symbolSize: "30px"
+    symbolSize: "200px"
 });
 
 export default function routeMapConfiguration(state = initialState, action) {

@@ -7,7 +7,7 @@ import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
 import get from "lodash/get";
 
-const PIXEL_SUFFIX = /([0-9]*\.?[0-9]+)(px)$/;
+const ZONE_SYMBOLS = [{value: "A"}, {value: "B"}, {value: "C"}, {value: "D"}];
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
@@ -16,7 +16,8 @@ export default class RouteMapConfigurator extends Component {
             sent: false,
             success: false,
             advancedSettingsOpen: false,
-            error: ""
+            error: "",
+            selectedSymbol: ""
         };
         this.generate = this.generate.bind(this);
         this.closeDone = this.closeDone.bind(this);
@@ -25,6 +26,8 @@ export default class RouteMapConfigurator extends Component {
         this.toggleOnlyNearBuses = this.toggleOnlyNearBuses.bind(this);
         this.toggleZoneSymbols = this.toggleZoneSymbols.bind(this);
         this.setSymbolSize = this.setSymbolSize.bind(this);
+        this.selectSymbol = this.selectSymbol.bind(this);
+        this.addSymbol = this.addSymbol.bind(this);
 
         this.routesLayer = this.props.layers.find(
             (layer) => layer.id === "routes"
@@ -44,13 +47,6 @@ export default class RouteMapConfigurator extends Component {
     }
 
     setSymbolSize(e) {
-        const hasPixelSuffix = PIXEL_SUFFIX.test(e.target.value);
-        if (!hasPixelSuffix) {
-            this.setState({errorMessage: 'Tarkista formaatti. Esim. "30px"'});
-        } else {
-            this.setState({errorMessage: null});
-        }
-
         this.props.setSymbolSize(e.target.value);
     }
 
@@ -62,6 +58,16 @@ export default class RouteMapConfigurator extends Component {
         if (get(this, "nearBusRoutesLayer.enabled", false))
             this.props.toggleLayer(this.nearBusRoutesLayer.id);
         if (this.props.showOnlyNearBuses) this.props.toggleOnlyNearBuses();
+    }
+
+    addSymbol() {
+        this.props.addSymbol(this.state.selectedSymbol);
+    }
+
+    selectSymbol(event) {
+        this.setState({
+            selectedSymbol: event.target.value
+        });
     }
 
     closeAdvancedSettings() {
@@ -156,23 +162,50 @@ export default class RouteMapConfigurator extends Component {
                                 className={style.checkbox}
                                 type="checkbox"
                                 onChange={this.toggleZoneSymbols}
+                                value={this.props.showZoneSymbols}
+                                checked={this.props.showZoneSymbols}
                             />
                         </div>
                     </div>
-                    {this.props.showzoneSymbols && (
-                        <div className={style.element}>
+                    {this.props.showZoneSymbols && (
+                        <div className={style.symbolOptionsContainer}>
                             <div className={style.title}>
                                 Vyöhykesymbolien koko (pikseliä)
                             </div>
                             <div className={style.value}>
                                 <input
                                     className={style.input}
-                                    defaultValue={"30px"}
                                     onChange={(e) => {
                                         this.setSymbolSize(e);
                                     }}
+                                    value={this.props.symbolSize}
                                 />
                             </div>
+                            <div className={style.symbolAdd}>
+                                Lisää symboli kartalle
+                            </div>
+                            <select
+                                data-cy=""
+                                className={style.buildSelect}
+                                onChange={this.selectSymbol}
+                                value={this.state.selectedSymbol || ""}>
+                                <option disabled value="">
+                                    {" "}
+                                    -- Valitse vyöhyke --{" "}
+                                </option>
+                                {ZONE_SYMBOLS.map((symbol) => (
+                                    <option
+                                        key={symbol.value}
+                                        value={symbol.value}>
+                                        {symbol.value}
+                                    </option>
+                                ))}
+                            </select>
+                            <Button
+                                styleClass="lightWithBorder"
+                                onClick={this.addSymbol}>
+                                Lisää symboli
+                            </Button>
                             {this.state.errorMessage && (
                                 <div className={style.errorMessage}>
                                     {this.state.errorMessage}

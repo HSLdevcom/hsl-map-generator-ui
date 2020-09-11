@@ -11,7 +11,10 @@ function mapStateToProps(state) {
         mapWidth: state.layout.mapWidth,
         mapHeight: state.layout.mapHeight,
         zoneSymbols: state.mapSelection.get("zoneSymbols"),
-        showZoneSymbols: state.routeMapConfiguration.get("zoneSymbols")
+        showZoneSymbols: state.routeMapConfiguration.get("zoneSymbols"),
+        mapSelection: state.mapSelection,
+        symbolSize: state.routeMapConfiguration.get("symbolSize"),
+        mapSelectionSize: state.mapSelection.get("selectionSize")
     };
 }
 
@@ -19,4 +22,7 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(ViewportActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Map);
