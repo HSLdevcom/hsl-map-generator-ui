@@ -17,7 +17,7 @@ const SideBar = ({currentMode, toggleMode}) => (
                 type="toggle-mode">
                 Siirry{" "}
                 {currentMode === Modes.MAP
-                    ? "Linjakarttageneraatoriin"
+                    ? "Linjakarttageneraattoriin"
                     : "Karttageneraattoriin"}
             </Button>
         </div>
