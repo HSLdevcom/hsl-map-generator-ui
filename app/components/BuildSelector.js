@@ -4,7 +4,7 @@ import Button from "./Button";
 import styles from "./BuildSelector.css";
 import ShowListModal from "../containers/ShowListModal";
 import AddListModal from "../containers/AddListModal";
-import {modalStyles} from "../utils/ui-utils";
+import modalStyles from "../utils/ui-utils";
 
 export default class BuildSelector extends Component {
     constructor() {

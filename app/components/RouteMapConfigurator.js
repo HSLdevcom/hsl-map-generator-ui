@@ -7,7 +7,7 @@ import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
 import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
-import {modalStyles} from "../utils/ui-utils";
+import modalStyles from "../utils/ui-utils";
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
