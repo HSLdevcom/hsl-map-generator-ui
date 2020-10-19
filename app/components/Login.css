@@ -40,7 +40,6 @@
     flex-direction: row;
     align-items: center;
     user-select: none;
-    width: 400px;
     cursor: pointer;
     border-radius: 2px;
     background-color: #ffffffe6;
@@ -69,4 +68,10 @@
 
 .title {
     margin: 10px 0px 10px 0px;
+}
+
+.infoWrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
