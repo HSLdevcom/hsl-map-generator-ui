@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import Modal from "react-modal";
 import moment from "moment";
+import get from "lodash/get";
+
 import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
 import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
-import get from "lodash/get";
+import {modalStyles} from "../utils/ui-utils";
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
@@ -146,7 +148,8 @@ export default class RouteMapConfigurator extends Component {
                 </Button>
                 <Modal
                     isOpen={this.state.advancedSettingsOpen}
-                    onRequestClose={this.closeAdvancedSettings}>
+                    onRequestClose={this.closeAdvancedSettings}
+                    style={modalStyles}>
                     <AdvancedRouteMapOptions />
                 </Modal>
                 <Button
@@ -159,10 +162,14 @@ export default class RouteMapConfigurator extends Component {
                         !this.props.pointConfig ||
                         this.props.pointConfig.status !== PointStatus.DONE
                     }
-                    onClick={this.generate}>
+                    onClick={this.generate}
+                    style={modalStyles}>
                     Generoi
                 </Button>
-                <Modal isOpen={this.state.sent} onRequestClose={this.closeDone}>
+                <Modal
+                    isOpen={this.state.sent}
+                    onRequestClose={this.closeDone}
+                    style={modalStyles}>
                     {this.state.success && (
                         <div style={{color: "black"}}>
                             <h1>Info</h1>
