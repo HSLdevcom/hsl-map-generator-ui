@@ -93,7 +93,7 @@
         "hsl-map-style": "github:hsldevcom/hsl-map-style#no-zone-symbols",
         "immutable": "^3.7.6",
         "inline-style-prefixer": "^4.0.2",
-        "lodash": "^4.16.6",
+        "lodash": "^4.17.19",
         "memoizee": "^0.4.11",
         "moment": "^2.19.4",
         "prop-types": "^15.7.2",
