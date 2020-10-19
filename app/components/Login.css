@@ -40,7 +40,6 @@
     flex-direction: row;
     align-items: center;
     user-select: none;
-    width: 400px;
     cursor: pointer;
     border-radius: 2px;
     background-color: #ffffffe6;
