@@ -11,3 +11,4 @@ DOCKER_IMAGE=$ORG/hsl-map-generator-ui:${DOCKER_TAG}
 
 docker build --build-arg BUILD_ENV=${TAG:-production} -t $DOCKER_IMAGE .
 docker push $DOCKER_IMAGE
+
