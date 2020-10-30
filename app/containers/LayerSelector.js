@@ -16,7 +16,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({toggleLayer, changeDate}, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(LayerSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(LayerSelector);

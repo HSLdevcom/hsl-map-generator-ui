@@ -43,3 +43,28 @@
 .element {
     margin-bottom: 5px;
 }
+
+.errorMessage {
+    color: #ff7575;
+    font-size: 15px;
+}
+
+.buildSelect {
+    height: 35px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.symbolAdd {
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.symbolOptionsContainer {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(102, 102, 102);
+    margin-bottom: 10px;
+}
