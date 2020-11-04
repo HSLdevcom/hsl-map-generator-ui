@@ -4,7 +4,7 @@ import {
     getBuild,
     addBuild,
     // updateBuild,
-    removeBuild,
+    // removeBuild,
     addPosters,
     // removePoster,
     // downloadPoster,
@@ -30,9 +30,6 @@ export const ADD_BUILD_REQUEST = "ADD_BUILD_REQUEST";
 export const ADD_BUILD_SUCCESS = "ADD_BUILD_SUCCESS";
 export const ADD_BUILD_ERROR = "ADD_BUILD_ERROR";
 export const ADD_BUILD_RESET = "ADD_BUILD_RESET";
-export const REMOVE_BUILD_REQUEST = "REMOVE_BUILD_REQUEST";
-export const REMOVE_BUILD_SUCCESS = "REMOVE_BUILD_SUCCESS";
-export const REMOVE_BUILD_ERROR = "REMOVE_BUILD_ERROR";
 export const GET_POINT_CONFIG = "GET_POINT_CONFIG";
 export const GET_POINT_CONFIG_SUCCESS = "GET_POINT_CONFIG_SUCCESS";
 export const GET_POINT_CONFIG_ERROR = "GET_POINT_CONFIG_ERROR";
@@ -118,19 +115,6 @@ export const addList = (title, successCallback) => (dispatch) => {
             successCallback();
         },
         onError: (err) => dispatch({type: ADD_BUILD_ERROR, data: err})
-    });
-};
-
-export const deleteList = (id, successCallback) => (dispatch) => {
-    fetchDispatcher({
-        action: removeBuild({id}),
-        onFetching: () => dispatch({type: REMOVE_BUILD_REQUEST}),
-        onSuccess: (data) => {
-            dispatch({type: REMOVE_BUILD_SUCCESS, data});
-            getBuildsAction()(dispatch);
-            successCallback();
-        },
-        onError: (err) => dispatch({type: REMOVE_BUILD_ERROR, data: err})
     });
 };
 
