@@ -115,6 +115,13 @@ export default class RouteMapConfigurator extends Component {
     render() {
         let input = null;
         const {build, setPosterName, posterName} = this.props;
+        const isDisabled =
+            !build ||
+            !build.id ||
+            !posterName ||
+            !this.props.pointConfig ||
+            this.props.pointConfig.status !== PointStatus.DONE ||
+            this.state.errorMessage;
         return (
             <div className={style.container}>
                 <div>
@@ -238,16 +245,13 @@ export default class RouteMapConfigurator extends Component {
                     <AdvancedRouteMapOptions />
                 </Modal>
                 <Button
-                    styleClass="lightWithBorder"
-                    type="generate"
-                    disabled={
-                        !build ||
-                        !build.id ||
-                        !posterName ||
-                        !this.props.pointConfig ||
-                        this.props.pointConfig.status !== PointStatus.DONE ||
-                        this.state.errorMessage
+                    styleClass={
+                        isDisabled
+                            ? "lightWithBorderDisabled"
+                            : "lightWithBorder"
                     }
+                    type="generate"
+                    disabled={isDisabled}
                     onClick={this.generate}>
                     Generoi
                 </Button>
