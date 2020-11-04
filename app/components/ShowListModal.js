@@ -4,6 +4,10 @@ import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
 import Button from "./Button";
 
+const sortByDate = (posters) => {
+    return posters.sort((a, b) => moment(b.createdAt) - moment(a.createdAt));
+};
+
 class ShowListModal extends Component {
     constructor(props) {
         super();
@@ -14,7 +18,6 @@ class ShowListModal extends Component {
         this.openLog = this.openLog.bind(this);
         this.closeLog = this.closeLog.bind(this);
         this.update = this.update.bind(this);
-        this.sortByDate = this.sortByDate.bind(this);
     }
 
     componentDidMount() {
@@ -37,29 +40,23 @@ class ShowListModal extends Component {
         this.setState({openLogId: null});
     }
 
-    sortByDate(posters) {
-        return posters.sort(
-            (a, b) => moment(a.createdAt) - moment(b.createdAt)
-        );
-    }
-
     render() {
         if (
             !this.props.loading &&
             this.props.build &&
             this.props.build.posters
         ) {
-            const readyPosters = this.sortByDate(
+            const readyPosters = sortByDate(
                 this.props.build.posters.filter(
                     (poster) => poster.status === "READY"
                 )
             );
-            const pendingPosters = this.sortByDate(
+            const pendingPosters = sortByDate(
                 this.props.build.posters.filter(
                     (poster) => poster.status === "PENDING"
                 )
             );
-            const otherPosters = this.sortByDate(
+            const otherPosters = sortByDate(
                 this.props.build.posters.filter(
                     (poster) =>
                         poster.status !== "READY" && poster.status !== "PENDING"
