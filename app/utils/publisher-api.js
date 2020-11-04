@@ -5,7 +5,11 @@ function getJson(path) {
 }
 
 function postJson(path, body) {
-    const options = {method: "POST", body: JSON.stringify(body)};
+    const options = {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(body)
+    };
     return fetch(`${API_URL}/${path}`, options);
 }
 
