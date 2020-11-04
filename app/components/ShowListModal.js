@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {sortByDate} from "../utils/common-utils";
 import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
 import Button from "./Button";
@@ -42,15 +43,21 @@ class ShowListModal extends Component {
             this.props.build &&
             this.props.build.posters
         ) {
-            const readyPosters = this.props.build.posters.filter(
-                (poster) => poster.status === "READY"
+            const readyPosters = sortByDate(
+                this.props.build.posters.filter(
+                    (poster) => poster.status === "READY"
+                )
             );
-            const pendingPosters = this.props.build.posters.filter(
-                (poster) => poster.status === "PENDING"
+            const pendingPosters = sortByDate(
+                this.props.build.posters.filter(
+                    (poster) => poster.status === "PENDING"
+                )
             );
-            const otherPosters = this.props.build.posters.filter(
-                (poster) =>
-                    poster.status !== "READY" && poster.status !== "PENDING"
+            const otherPosters = sortByDate(
+                this.props.build.posters.filter(
+                    (poster) =>
+                        poster.status !== "READY" && poster.status !== "PENDING"
+                )
             );
             return (
                 <div className={styles.container} data-cy="show-list-container">

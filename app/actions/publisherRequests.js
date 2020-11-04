@@ -43,7 +43,7 @@ export const SET_POINT_CONFIG_ERROR = "SET_POINT_CONFIG_ERROR";
 const fetchDispatcher = ({action, onFetching, onSuccess, onError}) => {
     action.then((response) => {
         if (!response.ok) {
-            return onError();
+            return onError(`${response.status}: ${response.statusText}`);
         }
         return response
             .json()
@@ -95,7 +95,7 @@ export const generateRouteMapAction = (onSending, onSuccess, onError) => (
         }),
         onFetching: () => onSending(),
         onSuccess: () => onSuccess(),
-        onError: () => onError()
+        onError: (err) => onError(err)
     });
 };
 
