@@ -34,6 +34,12 @@ export default class BuildSelector extends Component {
         }
     }
 
+    getBuild() {
+        return this.props.builds.find(
+            (build) => build.id === this.state.buildId
+        );
+    }
+
     setBuild(event) {
         this.setState({
             buildId: event.target.value
@@ -72,13 +78,6 @@ export default class BuildSelector extends Component {
 
     hideDeleteListModal() {
         this.setState({showingDeleteList: false});
-    }
-
-    getBuild() {
-        const build = this.props.builds.find(
-            (build) => build.id === this.state.buildId
-        );
-        return build;
     }
 
     resetBuildSelection() {
