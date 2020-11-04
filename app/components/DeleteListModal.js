@@ -4,14 +4,10 @@ import Button from "./Button";
 import styles from "./DeleteListModal.css";
 
 class DeleteListModal extends Component {
-    constructor() {
+    constructor(props) {
         super();
-        this.state = {title: null, done: false};
+        this.state = {title: props.build.title, done: false};
         this.deleteList = this.deleteList.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState({title: this.props.build.title});
     }
 
     deleteList() {
