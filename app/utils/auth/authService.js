@@ -34,8 +34,8 @@ const sendRequest = async (method, requestBody) => {
     }
 };
 
-export const authorizeUsingCode = async (code) => {
-    const requestBody = {code};
+export const authorizeUsingCode = async (code, isTesting) => {
+    const requestBody = {code, isTesting};
     return sendRequest(RequestMethod.POST, requestBody);
 };
 
