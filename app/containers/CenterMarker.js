@@ -13,7 +13,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(MapSelectionActions, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CenterMarker);
+export default connect(mapStateToProps, mapDispatchToProps)(CenterMarker);

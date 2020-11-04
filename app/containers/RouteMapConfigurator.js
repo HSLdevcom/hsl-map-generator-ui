@@ -4,8 +4,11 @@ import {generateRouteMapAction} from "../actions/publisherRequests";
 import {
     setDate,
     setPosterName,
-    toggleOnlyNearBuses
+    toggleOnlyNearBuses,
+    toggleZoneSymbols,
+    setSymbolSize
 } from "../actions/routeMapConfiguration";
+import {addSymbol} from "../actions/viewport";
 import RouteMapConfigurator from "../components/RouteMapConfigurator";
 import {toggleLayer, setLayer} from "../actions/layers";
 
@@ -17,7 +20,9 @@ function mapStateToProps(state) {
         layers: state.layers,
         posterName: state.routeMapConfiguration.get("posterName"),
         showOnlyNearBuses: state.routeMapConfiguration.get("onlyNearBuses"),
-        pointConfig: state.publisherRequests.pointConfig
+        showZoneSymbols: state.routeMapConfiguration.get("zoneSymbols"),
+        pointConfig: state.publisherRequests.pointConfig,
+        symbolSize: state.routeMapConfiguration.get("symbolSize")
     };
 }
 
@@ -29,7 +34,10 @@ function mapDispatchToProps(dispatch) {
             setPosterName,
             toggleLayer,
             toggleOnlyNearBuses,
-            setLayer
+            toggleZoneSymbols,
+            setSymbolSize,
+            setLayer,
+            addSymbol
         },
         dispatch
     );
