@@ -12,7 +12,13 @@ import {
     getPointConfig,
     setPointConfig
 } from "../utils/publisher-api";
-import {createMapOptions, createConfigurationOptions} from "../utils/map-utils";
+import {
+    createMapOptions,
+    createConfigurationOptions,
+    pointsWithinBbox
+} from "../utils/map-utils";
+
+import {mapSelectionToBbox} from "../utils/geom-utils";
 
 export const GET_BUILDS_REQUEST = "GET_BUILDS_REQUEST";
 export const GET_BUILDS_SUCCESS = "GET_BUILDS_SUCCESS";
@@ -34,7 +40,7 @@ export const SET_POINT_CONFIG_ERROR = "SET_POINT_CONFIG_ERROR";
 const fetchDispatcher = ({action, onFetching, onSuccess, onError}) => {
     action.then((response) => {
         if (!response.ok) {
-            return onError();
+            return onError(`${response.status}: ${response.statusText}`);
         }
         return response
             .json()
@@ -59,6 +65,17 @@ export const generateRouteMapAction = (onSending, onSuccess, onError) => (
 ) => {
     const state = getState();
     const {routeMapConfiguration, mapSelection, publisherRequests} = state;
+
+    if (routeMapConfiguration.get("zoneSymbols")) {
+        const bbox = mapSelectionToBbox(mapSelection);
+
+        const symbolsInBbox = pointsWithinBbox(
+            mapSelection.get("zoneSymbols"),
+            bbox
+        );
+        mapSelection.zoneSymbols = symbolsInBbox;
+        mapSelection.zoneSymbolSize = routeMapConfiguration.get("symbolSize");
+    }
     const props = {
         mapOptions: createMapOptions(mapSelection),
         configuration: createConfigurationOptions(
@@ -75,7 +92,7 @@ export const generateRouteMapAction = (onSending, onSuccess, onError) => (
         }),
         onFetching: () => onSending(),
         onSuccess: () => onSuccess(),
-        onError: () => onError()
+        onError: (err) => onError(err)
     });
 };
 

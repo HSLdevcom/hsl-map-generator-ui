@@ -16,7 +16,8 @@ module.exports = {
         "react/jsx-closing-bracket-location": 0,
         "react/jsx-boolean-value": 0,
         "import/first": 0,
-        "prettier/prettier": 1
+        "prettier/prettier": 1,
+        "no-underscore-dangle": 0
     },
     settings: {
         "import/resolver": "webpack"

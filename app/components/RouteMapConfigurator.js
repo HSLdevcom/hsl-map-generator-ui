@@ -7,6 +7,8 @@ import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
 import get from "lodash/get";
 
+const ZONE_SYMBOLS = [{value: "A"}, {value: "B"}, {value: "C"}, {value: "D"}];
+
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
         super(props);
@@ -14,13 +16,18 @@ export default class RouteMapConfigurator extends Component {
             sent: false,
             success: false,
             advancedSettingsOpen: false,
-            error: ""
+            error: "",
+            selectedSymbol: ""
         };
         this.generate = this.generate.bind(this);
         this.closeDone = this.closeDone.bind(this);
         this.openAdvancedSettings = this.openAdvancedSettings.bind(this);
         this.closeAdvancedSettings = this.closeAdvancedSettings.bind(this);
         this.toggleOnlyNearBuses = this.toggleOnlyNearBuses.bind(this);
+        this.toggleZoneSymbols = this.toggleZoneSymbols.bind(this);
+        this.setSymbolSize = this.setSymbolSize.bind(this);
+        this.selectSymbol = this.selectSymbol.bind(this);
+        this.addSymbol = this.addSymbol.bind(this);
 
         this.routesLayer = this.props.layers.find(
             (layer) => layer.id === "routes"
@@ -31,7 +38,16 @@ export default class RouteMapConfigurator extends Component {
         this.nearBusRoutesLayer = this.props.layers.find(
             (layer) => layer.id === "near_bus_routes"
         );
+
+        this.ticketZonesLayer = this.props.layers.find(
+            (layer) => layer.id === "ticket_zones"
+        );
+
         this.setDefaultLayers();
+    }
+
+    setSymbolSize(e) {
+        this.props.setSymbolSize(e.target.value);
     }
 
     setDefaultLayers() {
@@ -44,9 +60,13 @@ export default class RouteMapConfigurator extends Component {
         if (this.props.showOnlyNearBuses) this.props.toggleOnlyNearBuses();
     }
 
-    openAdvancedSettings() {
+    addSymbol() {
+        this.props.addSymbol(this.state.selectedSymbol);
+    }
+
+    selectSymbol(event) {
         this.setState({
-            advancedSettingsOpen: true
+            selectedSymbol: event.target.value
         });
     }
 
@@ -66,6 +86,16 @@ export default class RouteMapConfigurator extends Component {
         this.props.toggleLayer(this.regularRoutesLayer.id);
         this.props.toggleLayer(this.nearBusRoutesLayer.id);
         this.props.toggleOnlyNearBuses();
+    }
+
+    toggleZoneSymbols() {
+        this.props.toggleZoneSymbols();
+    }
+
+    openAdvancedSettings() {
+        this.setState({
+            advancedSettingsOpen: true
+        });
     }
 
     generate() {
@@ -126,6 +156,64 @@ export default class RouteMapConfigurator extends Component {
                         </div>
                     </div>
                     <div className={style.element}>
+                        <div className={style.title}>Vyöhykesymbolit</div>
+                        <div className={style.value}>
+                            <input
+                                className={style.checkbox}
+                                type="checkbox"
+                                onChange={this.toggleZoneSymbols}
+                                value={this.props.showZoneSymbols}
+                                checked={this.props.showZoneSymbols}
+                            />
+                        </div>
+                    </div>
+                    {this.props.showZoneSymbols && (
+                        <div className={style.symbolOptionsContainer}>
+                            <div className={style.title}>
+                                Vyöhykesymbolien koko (pikseliä)
+                            </div>
+                            <div className={style.value}>
+                                <input
+                                    className={style.input}
+                                    onChange={(e) => {
+                                        this.setSymbolSize(e);
+                                    }}
+                                    value={this.props.symbolSize}
+                                />
+                            </div>
+                            <div className={style.symbolAdd}>
+                                Lisää symboli kartalle
+                            </div>
+                            <select
+                                data-cy=""
+                                className={style.buildSelect}
+                                onChange={this.selectSymbol}
+                                value={this.state.selectedSymbol || ""}>
+                                <option disabled value="">
+                                    {" "}
+                                    -- Valitse vyöhyke --{" "}
+                                </option>
+                                {ZONE_SYMBOLS.map((symbol) => (
+                                    <option
+                                        key={symbol.value}
+                                        value={symbol.value}>
+                                        {symbol.value}
+                                    </option>
+                                ))}
+                            </select>
+                            <Button
+                                styleClass="lightWithBorder"
+                                onClick={this.addSymbol}>
+                                Lisää symboli
+                            </Button>
+                            {this.state.errorMessage && (
+                                <div className={style.errorMessage}>
+                                    {this.state.errorMessage}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    <div className={style.element}>
                         <div className={style.title}>Päivämäärä</div>
                         <div className={style.value}>
                             {this.props.pointConfig &&
@@ -157,7 +245,8 @@ export default class RouteMapConfigurator extends Component {
                         !build.id ||
                         !posterName ||
                         !this.props.pointConfig ||
-                        this.props.pointConfig.status !== PointStatus.DONE
+                        this.props.pointConfig.status !== PointStatus.DONE ||
+                        this.state.errorMessage
                     }
                     onClick={this.generate}>
                     Generoi
