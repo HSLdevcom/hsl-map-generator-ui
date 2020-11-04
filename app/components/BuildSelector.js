@@ -4,7 +4,6 @@ import Button from "./Button";
 import styles from "./BuildSelector.css";
 import ShowListModal from "../containers/ShowListModal";
 import AddListModal from "../containers/AddListModal";
-import DeleteListModal from "../containers/DeleteListModal";
 
 export default class BuildSelector extends Component {
     constructor() {
@@ -14,18 +13,13 @@ export default class BuildSelector extends Component {
         this.state = {
             showingNewList: false,
             showingShowList: false,
-            showingDeleteList: false,
             buildId: null
         };
         this.showNewListModal = this.showNewListModal.bind(this);
         this.hideNewListModal = this.hideNewListModal.bind(this);
         this.showShowListModal = this.showShowListModal.bind(this);
         this.hideShowListModal = this.hideShowListModal.bind(this);
-        this.showDeleteListModal = this.showDeleteListModal.bind(this);
-        this.hideDeleteListModal = this.hideDeleteListModal.bind(this);
         this.useBuildId = this.useBuildId.bind(this);
-        this.getBuild = this.getBuild.bind(this);
-        this.resetBuildSelection = this.resetBuildSelection.bind(this);
     }
 
     componentWillMount() {
@@ -66,26 +60,6 @@ export default class BuildSelector extends Component {
         this.setState({showingShowList: false});
     }
 
-    showDeleteListModal() {
-        this.setState({showingDeleteList: true});
-    }
-
-    hideDeleteListModal() {
-        this.setState({showingDeleteList: false});
-    }
-
-    getBuild() {
-        const build = this.props.builds.find(
-            (build) => build.id === this.state.buildId
-        );
-        return build;
-    }
-
-    resetBuildSelection() {
-        this.setState({buildId: null});
-        this.props.setBuild(null);
-    }
-
     render() {
         return (
             <div className={styles.container}>
@@ -108,11 +82,7 @@ export default class BuildSelector extends Component {
                 <div className={styles.buttonContainer}>
                     <Button
                         type="select-list"
-                        styleClass={
-                            this.state.buildId
-                                ? "lightWithBorder"
-                                : "lightWithBorderDisabled"
-                        }
+                        styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
                         onClick={this.useBuildId}>
                         Käytä tätä listaa
@@ -130,11 +100,7 @@ export default class BuildSelector extends Component {
                     </Modal>
                     <Button
                         type="show-list"
-                        styleClass={
-                            this.state.buildId
-                                ? "lightWithBorder"
-                                : "lightWithBorderDisabled"
-                        }
+                        styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
                         onClick={this.showShowListModal}>
                         Näytä lista
@@ -145,26 +111,6 @@ export default class BuildSelector extends Component {
                         <ShowListModal
                             onClose={this.hideShowListModal}
                             buildId={this.state.buildId}
-                        />
-                    </Modal>
-                    <Button
-                        type="show-list"
-                        styleClass={
-                            this.state.buildId
-                                ? "lightRedWithBorder"
-                                : "lightWithBorderDisabled"
-                        }
-                        disabled={!this.state.buildId}
-                        onClick={this.showDeleteListModal}>
-                        Poista lista
-                    </Button>
-                    <Modal
-                        isOpen={this.state.showingDeleteList}
-                        onRequestClose={this.hideDeleteListModal}>
-                        <DeleteListModal
-                            build={this.getBuild()}
-                            hide={this.hideDeleteListModal}
-                            resetBuildSelection={this.resetBuildSelection}
                         />
                     </Modal>
                 </div>

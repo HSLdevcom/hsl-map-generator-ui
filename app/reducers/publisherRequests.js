@@ -8,8 +8,6 @@ import {
     ADD_BUILD_REQUEST,
     ADD_BUILD_SUCCESS,
     ADD_BUILD_ERROR,
-    REMOVE_BUILD_SUCCESS,
-    REMOVE_BUILD_ERROR,
     GET_POINT_CONFIG,
     GET_POINT_CONFIG_ERROR,
     GET_POINT_CONFIG_SUCCESS,
@@ -28,7 +26,6 @@ const initialState = {
     buildDataError: false,
     addBuildIsLoading: false,
     addBuildErrorMessage: "",
-    deleteBuildErrorMessage: "",
     pointConfigLoading: false,
     pointConfig: null,
     pointConfigErrorMessage: ""
@@ -107,18 +104,6 @@ export default function publisherRequests(state = initialState, action) {
                 ...state,
                 addBuildIsLoading: false,
                 addBuildErrorMessage: action.data
-            };
-        }
-        case REMOVE_BUILD_SUCCESS: {
-            return {
-                ...state,
-                addBuildErrorMessage: ""
-            };
-        }
-        case REMOVE_BUILD_ERROR: {
-            return {
-                ...state,
-                deleteBuildErrorMessage: action.data
             };
         }
         case GET_POINT_CONFIG: {

@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
 import Button from "./Button";
@@ -68,7 +67,7 @@ class ShowListModal extends Component {
                         ))}
                         {!readyPosters.length && <span>-</span>}
                     </div>
-                    <h3>Rakentumassa</h3>
+                    <h3>Rakentamassa</h3>
                     <div>
                         {pendingPosters.map((poster) => (
                             <ShowListModalItem
@@ -105,9 +104,5 @@ class ShowListModal extends Component {
         return <div className={styles.container}>Loading..</div>;
     }
 }
-
-ShowListModal.propTypes = {
-    isOpen: PropTypes.func
-};
 
 export default ShowListModal;
