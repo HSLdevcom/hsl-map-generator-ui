@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import moment from "moment";
 import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
 import Button from "./Button";
@@ -13,6 +14,7 @@ class ShowListModal extends Component {
         this.openLog = this.openLog.bind(this);
         this.closeLog = this.closeLog.bind(this);
         this.update = this.update.bind(this);
+        this.sortByDate = this.sortByDate.bind(this);
     }
 
     componentDidMount() {
@@ -35,21 +37,33 @@ class ShowListModal extends Component {
         this.setState({openLogId: null});
     }
 
+    sortByDate(posters) {
+        return posters.sort(
+            (a, b) => moment(a.createdAt) - moment(b.createdAt)
+        );
+    }
+
     render() {
         if (
             !this.props.loading &&
             this.props.build &&
             this.props.build.posters
         ) {
-            const readyPosters = this.props.build.posters.filter(
-                (poster) => poster.status === "READY"
+            const readyPosters = this.sortByDate(
+                this.props.build.posters.filter(
+                    (poster) => poster.status === "READY"
+                )
             );
-            const pendingPosters = this.props.build.posters.filter(
-                (poster) => poster.status === "PENDING"
+            const pendingPosters = this.sortByDate(
+                this.props.build.posters.filter(
+                    (poster) => poster.status === "PENDING"
+                )
             );
-            const otherPosters = this.props.build.posters.filter(
-                (poster) =>
-                    poster.status !== "READY" && poster.status !== "PENDING"
+            const otherPosters = this.sortByDate(
+                this.props.build.posters.filter(
+                    (poster) =>
+                        poster.status !== "READY" && poster.status !== "PENDING"
+                )
             );
             return (
                 <div className={styles.container} data-cy="show-list-container">
