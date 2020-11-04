@@ -73,7 +73,8 @@ class AddListModal extends Component {
 
 AddListModal.propTypes = {
     addList: PropTypes.func,
-    hide: PropTypes.func
+    hide: PropTypes.func,
+    isOpen: PropTypes.func
 };
 
 export default AddListModal;

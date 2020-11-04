@@ -57,7 +57,7 @@ describe("Basic functionalities", () => {
         cy.get("[data-cy=show-list-button]").click();
         cy.get("[data-cy=show-list-container]").contains("Muut");
         cy.get("[data-cy=show-list-container]").contains("Valmiina");
-        cy.get("[data-cy=show-list-container]").contains("Rakentamassa");
+        cy.get("[data-cy=show-list-container]").contains("Rakentumassa");
         cy.get("[data-cy=close-list-modal-button]").click();
 
         // Deleting build so the list won't balloon.
