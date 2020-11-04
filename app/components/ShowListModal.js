@@ -1,12 +1,8 @@
 import React, {Component} from "react";
-import moment from "moment";
+import {sortByDate} from "../utils/common-utils";
 import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
 import Button from "./Button";
-
-const sortByDate = (posters) => {
-    return posters.sort((a, b) => moment(b.createdAt) - moment(a.createdAt));
-};
 
 class ShowListModal extends Component {
     constructor(props) {
