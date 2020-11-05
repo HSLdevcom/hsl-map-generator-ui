@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {sortByDate} from "../utils/common-utils";
+import sortByDate from "../utils/common-utils";
 import styles from "./ShowListModal.css";
 import ShowListModalItem from "./ShowListModalItem";
 import Button from "./Button";
