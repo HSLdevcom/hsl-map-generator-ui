@@ -16,10 +16,10 @@
 }
 
 .button {
-    width: auto;
-    margin-right: 50px;
+    width: 10rem;
 }
 
 .row {
     display: flex;
+    justify-content: space-between;
 }

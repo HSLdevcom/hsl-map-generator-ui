@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import Modal from "react-modal";
 import moment from "moment";
+import get from "lodash/get";
+
 import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
 import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
-import get from "lodash/get";
+import {listModalStyles} from "../utils/ui-utils";
 
 const ZONE_SYMBOLS = [{value: "A"}, {value: "B"}, {value: "C"}, {value: "D"}];
 
@@ -241,7 +243,8 @@ export default class RouteMapConfigurator extends Component {
                 </Button>
                 <Modal
                     isOpen={this.state.advancedSettingsOpen}
-                    onRequestClose={this.closeAdvancedSettings}>
+                    onRequestClose={this.closeAdvancedSettings}
+                    style={listModalStyles}>
                     <AdvancedRouteMapOptions />
                 </Modal>
                 <Button
@@ -252,10 +255,14 @@ export default class RouteMapConfigurator extends Component {
                     }
                     type="generate"
                     disabled={isDisabled}
-                    onClick={this.generate}>
+                    onClick={this.generate}
+                    style={listModalStyles}>
                     Generoi
                 </Button>
-                <Modal isOpen={this.state.sent} onRequestClose={this.closeDone}>
+                <Modal
+                    isOpen={this.state.sent}
+                    onRequestClose={this.closeDone}
+                    style={listModalStyles}>
                     {this.state.success && (
                         <div style={{color: "black"}}>
                             <h1>Info</h1>

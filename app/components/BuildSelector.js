@@ -5,6 +5,7 @@ import styles from "./BuildSelector.css";
 import ShowListModal from "../containers/ShowListModal";
 import AddListModal from "../containers/AddListModal";
 import DeleteListModal from "../containers/DeleteListModal";
+import {listModalStyles, deleteModalStyles} from "../utils/ui-utils";
 
 export default class BuildSelector extends Component {
     constructor() {
@@ -124,7 +125,8 @@ export default class BuildSelector extends Component {
                     </Button>
                     <Modal
                         isOpen={this.state.showingNewList}
-                        onRequestClose={this.hideNewListModal}>
+                        onRequestClose={this.hideNewListModal}
+                        style={listModalStyles}>
                         <AddListModal hide={this.hideNewListModal} />
                     </Modal>
                     <Button
@@ -140,7 +142,8 @@ export default class BuildSelector extends Component {
                     </Button>
                     <Modal
                         isOpen={this.state.showingShowList}
-                        onRequestClose={this.hideShowListModal}>
+                        onRequestClose={this.hideShowListModal}
+                        style={listModalStyles}>
                         <ShowListModal
                             onClose={this.hideShowListModal}
                             buildId={this.state.buildId}
@@ -159,7 +162,8 @@ export default class BuildSelector extends Component {
                     </Button>
                     <Modal
                         isOpen={this.state.showingDeleteList}
-                        onRequestClose={this.hideDeleteListModal}>
+                        onRequestClose={this.hideDeleteListModal}
+                        style={deleteModalStyles}>
                         <DeleteListModal
                             build={this.getBuild()}
                             hide={this.hideDeleteListModal}
