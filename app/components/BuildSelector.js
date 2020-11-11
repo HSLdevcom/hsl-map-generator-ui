@@ -150,7 +150,7 @@ export default class BuildSelector extends Component {
                         />
                     </Modal>
                     <Button
-                        type="show-list"
+                        type="delete-list"
                         styleClass={
                             this.state.buildId
                                 ? "lightRedWithBorder"
