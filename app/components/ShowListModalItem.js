@@ -22,7 +22,7 @@ function getColorFromStatus(status) {
 }
 
 function getBuildTime(item) {
-    if (item.status != "READY") return;
+    if (item.status !== "READY") return null;
     const finishedEvent = item.events.filter(
         (event) => event.message === FINISHED_MESSAGE
     );
@@ -38,10 +38,10 @@ function getBuildTime(item) {
 }
 
 function getTime(buildTime) {
-    if (!buildTime) return;
-    const hours = buildTime.hours != 0 ? `${buildTime.hours}h ` : "";
-    const minutes = buildTime.minutes != 0 ? `${buildTime.minutes}min ` : "";
-    const seconds = buildTime.seconds != 0 ? `${buildTime.seconds}s ` : "";
+    if (!buildTime) return null;
+    const hours = buildTime.hours !== 0 ? `${buildTime.hours}h ` : "";
+    const minutes = buildTime.minutes !== 0 ? `${buildTime.minutes}min ` : "";
+    const seconds = buildTime.seconds !== 0 ? `${buildTime.seconds}s ` : "";
     return `${hours}${minutes}${seconds}`;
 }
 
