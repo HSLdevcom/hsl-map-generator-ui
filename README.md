@@ -1,5 +1,4 @@
-HSL Map Generator UI
-====================
+# HSL Map Generator UI
 
 ## Install
 
@@ -22,6 +21,7 @@ $ cd hsl-map-generator-ui && yarn install
 ```bash
 $ yarn start
 ```
+
 Runs at http://localhost:3000/
 
 ### Build and run in production mode without Docker
@@ -30,6 +30,7 @@ Runs at http://localhost:3000/
 $ yarn build
 $ yarn serve
 ```
+
 Runs at http://localhost:3000/
 
 ### Build and run in Docker container
@@ -39,9 +40,24 @@ $ docker build -t hsl-map-generator-ui .
 $ docker run -d -p 3000:3000 hsl-map-generator-ui
 ```
 
-*Note: requires a node version >= 8.6.0
+\*Note: requires a node version >= 8.6.0
 
 Uses REST APIs from [hsl-map-generator-server](https://github.com/HSLdevcom/hsl-map-generator-server) (kartat.hsl.fi).
 
+### Run cypress tests
+
+To run cypress tests use
+
+```
+./node_modules/.bin/cypress run
+```
+
+If you want to use the cypress ui for running tests use
+
+```
+./node_modules/.bin/cypress open
+```
+
 ## License
+
 MIT © [HSL](https://github.com/HSLdevcom)
