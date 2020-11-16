@@ -4,5 +4,6 @@
     "baseUrl": "http://localhost:3000",
     "apiUrl": "http://localhost:4000",
     "numTestsKeptInMemory": 1,
-    "projectId": "rax4es"
+    "projectId": "rax4es",
+    "video": false
 }

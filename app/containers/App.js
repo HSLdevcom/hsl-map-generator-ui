@@ -23,9 +23,7 @@ class App extends Component {
     componentDidMount() {
         window.addEventListener("resize", this.onWindowResize);
         const code = new URL(window.location.href).searchParams.get("code");
-        const isTesting = new URL(window.location.href).searchParams.get(
-            "testing"
-        );
+
         checkExistingSession().then((json) => {
             if (json && json.isOk && json.email) {
                 this.props.setUser(json.email);
@@ -34,7 +32,7 @@ class App extends Component {
                 this.props.setUser(null);
                 if (code) {
                     removeAuthParams();
-                    authorizeUsingCode(code, isTesting).then((res) => {
+                    authorizeUsingCode(code).then((res) => {
                         if (res && res.isOk && res.email)
                             this.props.setUser(res.email);
                         this.setState({loading: false});
@@ -83,7 +81,10 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({windowResize, setUser}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
 
 App.propTypes = {
     children: PropTypes.element.isRequired

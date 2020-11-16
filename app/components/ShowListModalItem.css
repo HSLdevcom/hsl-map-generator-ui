@@ -26,10 +26,6 @@
     font-weight: 600;
 }
 
-.buttons {
-    align-self: center;
-}
-
 .buttons button {
     height: 30px;
     line-height: 30px;
