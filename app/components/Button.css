@@ -15,13 +15,44 @@
     background-color: #555;
 }
 
+.light:hover {
+    background-color: #484848;
+}
+
 .darkWithBorder {
     background-color: #333;
     border: solid 1px #555;
 }
 
+.darkWithBorder:hover {
+    background-color: #2f2f2f;
+    border: solid 1px #555;
+}
+
 .lightWithBorder {
     background-color: #555;
+    border: solid 1px #999;
+}
+
+.lightWithBorder:hover {
+    background-color: #484848;
+    border: solid 1px #999;
+}
+
+.lightWithBorderDisabled {
+    background-color: #555;
+    border: solid 1px #999;
+}
+
+.lightRedWithBorder {
+    color: #b97878;
+    background-color: #555;
+    border: solid 1px #999;
+}
+
+.lightRedWithBorder:hover {
+    color: #b97878;
+    background-color: #484848;
     border: solid 1px #999;
 }
 
