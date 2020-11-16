@@ -6,8 +6,6 @@ const TEST_PREFIX = "CY-TEST";
 
 describe("Basic functionalities", () => {
     before(() => {
-        cy.hslLogin();
-        cy.wait(3000);
         cy.request("GET", `${API_URL}/builds`)
             .its("body")
             .then((buildArr) => {
@@ -28,8 +26,6 @@ describe("Basic functionalities", () => {
 
     beforeEach(() => {
         cy.visit("/");
-        cy.hslLogin();
-        cy.wait(3000);
     });
 
     it("Add list, select it for use and show it", () => {
@@ -57,7 +53,7 @@ describe("Basic functionalities", () => {
         cy.get("[data-cy=show-list-button]").click();
         cy.get("[data-cy=show-list-container]").contains("Muut");
         cy.get("[data-cy=show-list-container]").contains("Valmiina");
-        cy.get("[data-cy=show-list-container]").contains("Rakentumassa");
+        cy.get("[data-cy=show-list-container]").contains("Rakentamassa");
         cy.get("[data-cy=close-list-modal-button]").click();
 
         // Deleting build so the list won't balloon.

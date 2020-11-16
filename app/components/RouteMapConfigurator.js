@@ -1,13 +1,11 @@
 import React, {Component} from "react";
 import Modal from "react-modal";
 import moment from "moment";
-import get from "lodash/get";
-
 import Button from "./Button";
 import style from "./RouteMapConfigurator.css";
 import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
-import {listModalStyles} from "../utils/ui-utils";
+import get from "lodash/get";
 
 const ZONE_SYMBOLS = [{value: "A"}, {value: "B"}, {value: "C"}, {value: "D"}];
 
@@ -117,13 +115,6 @@ export default class RouteMapConfigurator extends Component {
     render() {
         let input = null;
         const {build, setPosterName, posterName} = this.props;
-        const isDisabled =
-            !build ||
-            !build.id ||
-            !posterName ||
-            !this.props.pointConfig ||
-            this.props.pointConfig.status !== PointStatus.DONE ||
-            this.state.errorMessage;
         return (
             <div className={style.container}>
                 <div>
@@ -243,26 +234,24 @@ export default class RouteMapConfigurator extends Component {
                 </Button>
                 <Modal
                     isOpen={this.state.advancedSettingsOpen}
-                    onRequestClose={this.closeAdvancedSettings}
-                    style={listModalStyles}>
+                    onRequestClose={this.closeAdvancedSettings}>
                     <AdvancedRouteMapOptions />
                 </Modal>
                 <Button
-                    styleClass={
-                        isDisabled
-                            ? "lightWithBorderDisabled"
-                            : "lightWithBorder"
-                    }
+                    styleClass="lightWithBorder"
                     type="generate"
-                    disabled={isDisabled}
-                    onClick={this.generate}
-                    style={listModalStyles}>
+                    disabled={
+                        !build ||
+                        !build.id ||
+                        !posterName ||
+                        !this.props.pointConfig ||
+                        this.props.pointConfig.status !== PointStatus.DONE ||
+                        this.state.errorMessage
+                    }
+                    onClick={this.generate}>
                     Generoi
                 </Button>
-                <Modal
-                    isOpen={this.state.sent}
-                    onRequestClose={this.closeDone}
-                    style={listModalStyles}>
+                <Modal isOpen={this.state.sent} onRequestClose={this.closeDone}>
                     {this.state.success && (
                         <div style={{color: "black"}}>
                             <h1>Info</h1>
