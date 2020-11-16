@@ -15,18 +15,13 @@ export default class BuildSelector extends Component {
         this.state = {
             showingNewList: false,
             showingShowList: false,
-            showingDeleteList: false,
             buildId: null
         };
         this.showNewListModal = this.showNewListModal.bind(this);
         this.hideNewListModal = this.hideNewListModal.bind(this);
         this.showShowListModal = this.showShowListModal.bind(this);
         this.hideShowListModal = this.hideShowListModal.bind(this);
-        this.showDeleteListModal = this.showDeleteListModal.bind(this);
-        this.hideDeleteListModal = this.hideDeleteListModal.bind(this);
         this.useBuildId = this.useBuildId.bind(this);
-        this.getBuild = this.getBuild.bind(this);
-        this.resetBuildSelection = this.resetBuildSelection.bind(this);
     }
 
     componentWillMount() {
@@ -108,11 +103,7 @@ export default class BuildSelector extends Component {
                 <div className={styles.buttonContainer}>
                     <Button
                         type="select-list"
-                        styleClass={
-                            this.state.buildId
-                                ? "lightWithBorder"
-                                : "lightWithBorderDisabled"
-                        }
+                        styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
                         onClick={this.useBuildId}>
                         Käytä tätä listaa
@@ -131,11 +122,7 @@ export default class BuildSelector extends Component {
                     </Modal>
                     <Button
                         type="show-list"
-                        styleClass={
-                            this.state.buildId
-                                ? "lightWithBorder"
-                                : "lightWithBorderDisabled"
-                        }
+                        styleClass="lightWithBorder"
                         disabled={!this.state.buildId}
                         onClick={this.showShowListModal}>
                         Näytä lista

@@ -248,11 +248,7 @@ export default class RouteMapConfigurator extends Component {
                     <AdvancedRouteMapOptions />
                 </Modal>
                 <Button
-                    styleClass={
-                        isDisabled
-                            ? "lightWithBorderDisabled"
-                            : "lightWithBorder"
-                    }
+                    styleClass="lightWithBorder"
                     type="generate"
                     disabled={isDisabled}
                     onClick={this.generate}

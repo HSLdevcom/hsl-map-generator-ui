@@ -74,7 +74,7 @@ class ShowListModal extends Component {
                         ))}
                         {!readyPosters.length && <span>-</span>}
                     </div>
-                    <h3>Rakentumassa</h3>
+                    <h3>Rakentamassa</h3>
                     <div>
                         {pendingPosters.map((poster) => (
                             <ShowListModalItem
