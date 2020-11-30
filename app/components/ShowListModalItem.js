@@ -3,7 +3,11 @@ import moment from "moment";
 import Modal from "react-modal";
 
 import styles from "./ShowListModalItem.css";
-import {downloadPoster, removePoster} from "../utils/publisher-api";
+import {
+    downloadPoster,
+    removePoster,
+    cancelPoster
+} from "../utils/publisher-api";
 import Button from "./Button";
 
 const FINISHED_MESSAGE = "Rendered successfully";
@@ -74,15 +78,26 @@ const ShowListModalItem = ({item, openLogId, openLog, closeLog}) => {
             <div className={styles.buttons}>
                 <Button
                     onClick={() => downloadPoster({id: item.id})}
-                    disabled={item.status !== "READY"}>
+                    disabled={item.status !== "READY"}
+                    styleClass={"small"}>
                     Lataa
                 </Button>
-                <Button onClick={() => openLog(item.id)}>Log</Button>
+                <Button onClick={() => openLog(item.id)} styleClass={"small"}>
+                    Log
+                </Button>
                 {item.status === "PENDING" && (
-                    <Button onClick={() => removePoster(item)}>Keskeytä</Button>
+                    <Button
+                        onClick={() => cancelPoster(item)}
+                        styleClass={"small"}>
+                        Keskeytä
+                    </Button>
                 )}
                 {item.status === "FAILED" && (
-                    <Button onClick={() => removePoster(item)}>Poista</Button>
+                    <Button
+                        onClick={() => removePoster(item)}
+                        styleClass={"small"}>
+                        Poista
+                    </Button>
                 )}
                 <Modal
                     isOpen={openLogId && openLogId === item.id}
@@ -92,7 +107,9 @@ const ShowListModalItem = ({item, openLogId, openLog, closeLog}) => {
                         {item.events.map((event) => (
                             <p key={event.createdAt}>{event.message}</p>
                         ))}
-                        <Button onClick={closeLog}>Sulje</Button>
+                        <Button onClick={closeLog} styleClass={"small"}>
+                            Sulje
+                        </Button>
                     </div>
                 </Modal>
             </div>
