@@ -9,7 +9,6 @@ const valueFormat = "YYYY-MM-DD";
 const displayFormat = "D.M.YYYY";
 
 const style = {
-    padding: "5px 10px",
     fontSize: 15,
     fontFamily: "Nunito, Arial, Helvetica, Helvetica Neue, sans-serif",
     fontWeight: 200,
@@ -44,6 +43,17 @@ const dayPickerProps = {
     ]
 };
 
+const CustomOverlay = ({classNames, children, ...props}) => {
+    return (
+        <div
+            className={classNames.overlayWrapper}
+            style={{marginLeft: -45}}
+            {...props}>
+            <div className={classNames.overlay}>{children}</div>
+        </div>
+    );
+};
+
 const DayPicker = (props) => (
     <div className={styles.container}>
         {props.disabled && (
@@ -55,6 +65,7 @@ const DayPicker = (props) => (
         )}
         {!props.disabled && (
             <DayPickerInput
+                overlayComponent={CustomOverlay}
                 inputProps={{style}}
                 format={displayFormat}
                 value={moment(props.value).format(valueFormat)}

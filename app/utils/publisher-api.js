@@ -51,8 +51,8 @@ function addPosters({buildId, component, props}) {
     return postJson("posters", {buildId, props, component});
 }
 
-function removePoster({id}) {
-    return deleteJson(`posters/${id}`);
+function removePoster(item) {
+    return postJson("removePosters", {item});
 }
 
 function downloadPoster({id}) {

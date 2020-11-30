@@ -3,7 +3,7 @@ import moment from "moment";
 import Modal from "react-modal";
 
 import styles from "./ShowListModalItem.css";
-import {downloadPoster} from "../utils/publisher-api";
+import {downloadPoster, removePoster} from "../utils/publisher-api";
 import Button from "./Button";
 
 const FINISHED_MESSAGE = "Rendered successfully";
@@ -78,6 +78,12 @@ const ShowListModalItem = ({item, openLogId, openLog, closeLog}) => {
                     Lataa
                 </Button>
                 <Button onClick={() => openLog(item.id)}>Log</Button>
+                {item.status === "PENDING" && (
+                    <Button onClick={() => removePoster(item)}>Keskeytä</Button>
+                )}
+                {item.status === "FAILED" && (
+                    <Button onClick={() => removePoster(item)}>Poista</Button>
+                )}
                 <Modal
                     isOpen={openLogId && openLogId === item.id}
                     onRequestClose={closeLog}>
