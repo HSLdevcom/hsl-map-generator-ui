@@ -28,6 +28,9 @@
 
 .buttons {
     align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
 }
 
 .buttons button {
