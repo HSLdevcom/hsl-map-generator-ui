@@ -122,6 +122,7 @@ export const pointsWithinBbox = (points, bbox) => {
 };
 export const createRoutemapConfigurationOptions = (configuration) => ({
     posterName: configuration.get("posterName"),
+    routeFilter: configuration.get("routeFilter"),
     scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
     maxAnchorLineLength: configuration.get("maxAnchorLineLength"),

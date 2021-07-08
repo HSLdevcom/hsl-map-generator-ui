@@ -4,6 +4,7 @@ import {generateRouteMapAction} from "../actions/publisherRequests";
 import {
     setDate,
     setPosterName,
+    setRouteFilter,
     toggleOnlyNearBuses,
     toggleZoneSymbols,
     setSymbolSize
@@ -19,6 +20,7 @@ function mapStateToProps(state) {
         date: state.routeMapConfiguration.get("date"),
         layers: state.layers,
         posterName: state.routeMapConfiguration.get("posterName"),
+        routeFilter: state.routeMapConfiguration.get("routeFilter"),
         showOnlyNearBuses: state.routeMapConfiguration.get("onlyNearBuses"),
         showZoneSymbols: state.routeMapConfiguration.get("zoneSymbols"),
         pointConfig: state.publisherRequests.pointConfig,
@@ -32,6 +34,7 @@ function mapDispatchToProps(dispatch) {
             generateRouteMap: generateRouteMapAction,
             setDate,
             setPosterName,
+            setRouteFilter,
             toggleLayer,
             toggleOnlyNearBuses,
             toggleZoneSymbols,

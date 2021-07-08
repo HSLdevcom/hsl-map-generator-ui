@@ -115,8 +115,13 @@ export default class RouteMapConfigurator extends Component {
     }
 
     render() {
-        let input = null;
-        const {build, setPosterName, posterName} = this.props;
+        const {
+            build,
+            setPosterName,
+            posterName,
+            setRouteFilter,
+            routeFilter
+        } = this.props;
         const isDisabled =
             !build ||
             !build.id ||
@@ -141,14 +146,25 @@ export default class RouteMapConfigurator extends Component {
                         <div className={style.title}>Tunnus</div>
                         <div className={style.value}>
                             <input
-                                ref={(el) => {
-                                    input = el;
-                                }}
+                                name="new-poster-name"
                                 data-cy="new-poster-name"
                                 className={style.input}
                                 value={posterName}
-                                onChange={() => setPosterName(input.value)}
+                                onChange={(e) => setPosterName(e.target.value)}
                                 placeholder="nimi/tunnus"
+                            />
+                        </div>
+                    </div>
+                    <div className={style.element}>
+                        <div className={style.title}>Linjavalitsin</div>
+                        <div className={style.value}>
+                            <input
+                                name="route-filter"
+                                data-cy="route-filter"
+                                className={style.input}
+                                value={routeFilter}
+                                onChange={(e) => setRouteFilter(e.target.value)}
+                                placeholder="JORE-tunnus"
                             />
                         </div>
                     </div>
