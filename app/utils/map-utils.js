@@ -80,6 +80,7 @@ export const createMapOptions = (mapSelection) => {
 export const createConfigurationOptions = (configuration, pointConfig) => ({
     date: moment(pointConfig.target_date).format("YYYY-MM-DD"),
     name: configuration.get("posterName"),
+    routeFilter: configuration.get("routeFilter"),
     scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
     maxAnchorLength: configuration.get("maxAnchorLineLength"),
