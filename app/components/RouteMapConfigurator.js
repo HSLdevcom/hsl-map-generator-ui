@@ -162,9 +162,15 @@ export default class RouteMapConfigurator extends Component {
                                 name="route-filter"
                                 data-cy="route-filter"
                                 className={style.input}
-                                value={routeFilter}
-                                onChange={(e) => setRouteFilter(e.target.value)}
-                                placeholder="JORE-tunnus"
+                                value={routeFilter.join(",")}
+                                onChange={(e) =>
+                                    setRouteFilter(
+                                        e.target.value
+                                            .split(",")
+                                            .map((id) => id.trim())
+                                    )
+                                }
+                                placeholder="joreId1,joreId2"
                             />
                         </div>
                     </div>

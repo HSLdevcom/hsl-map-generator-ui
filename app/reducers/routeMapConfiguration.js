@@ -24,7 +24,7 @@ import {
 const initialState = fromJS({
     build: null,
     posterName: "",
-    routeFilter: "",
+    routeFilter: [],
     scaleLength: 200,
     scaleFontSize: 12,
     maxAnchorLineLength: 60,
