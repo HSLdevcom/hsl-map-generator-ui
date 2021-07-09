@@ -7,7 +7,11 @@ import * as ViewportActions from "../actions/viewport";
 function mapStateToProps(state) {
     return {
         viewport: state.viewport,
-        style: styleFromLayers(state.layers, state.settings.date),
+        style: styleFromLayers(
+            state.layers,
+            state.settings.date,
+            state.routeMapConfiguration.get("routeFilter")
+        ),
         mapWidth: state.layout.mapWidth,
         mapHeight: state.layout.mapHeight,
         zoneSymbols: state.mapSelection.get("zoneSymbols"),
@@ -22,7 +26,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(ViewportActions, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

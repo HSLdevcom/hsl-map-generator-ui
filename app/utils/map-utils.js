@@ -28,9 +28,10 @@ const mapLayers = (layers) => {
     return ret;
 };
 
-export const styleFromLayers = memoize((layers, date) => {
+export const styleFromLayers = memoize((layers, date, routeFilter) => {
     const style = hslMapStyle.generateStyle({
-        components: mapLayers(layers)
+        components: mapLayers(layers),
+        routeFilter
     });
 
     sourcesWithDate.forEach((key) => {
