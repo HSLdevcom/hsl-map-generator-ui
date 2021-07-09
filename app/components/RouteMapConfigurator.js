@@ -165,9 +165,11 @@ export default class RouteMapConfigurator extends Component {
                                 value={routeFilter.join(",")}
                                 onChange={(e) =>
                                     setRouteFilter(
-                                        e.target.value
-                                            .split(",")
-                                            .map((id) => id.trim())
+                                        e.target.value !== ""
+                                            ? e.target.value
+                                                  .split(",")
+                                                  .map((id) => id.trim())
+                                            : []
                                     )
                                 }
                                 placeholder="joreId1,joreId2"
