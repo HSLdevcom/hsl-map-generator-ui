@@ -1,5 +1,6 @@
 export const SET_BUILD = "SET_BUILD";
 export const SET_POSTER_NAME = "SET_POSTER_NAME";
+export const SET_ROUTE_FILTER = "SET_ROUTE_FILTER";
 export const SET_SCALE_FONT_SIZE = "SET_SCALE_FONT_SIZE";
 export const SET_SCALE_LENGTH = "SET_SCALE_LENGTH";
 export const SET_MAX_ANCHOR_LINE_LENGTH = "SET_MAX_ANCHOR_LINE_LENGTH";
@@ -32,6 +33,13 @@ export function setPosterName(name) {
     return {
         type: SET_POSTER_NAME,
         data: name
+    };
+}
+
+export function setRouteFilter(route) {
+    return {
+        type: SET_ROUTE_FILTER,
+        data: route
     };
 }
 
