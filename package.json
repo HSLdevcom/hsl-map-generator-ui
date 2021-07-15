@@ -16,7 +16,7 @@
         "build": "yarn clean && yarn lint && yarn bundle",
         "build:dev": "yarn clean && yarn lint && yarn bundle:dev",
         "start": "cross-env NODE_ENV=development node server.js",
-        "serve": "serve --port=3000 dist"
+        "serve": "serve -l 3000 dist"
     },
     "repository": {
         "type": "git",
@@ -76,7 +76,7 @@
         "redux-logger": "^2.6.1",
         "rimraf": "^2.5.4",
         "selenium-webdriver": "^2.53.2",
-        "serve": "^6.4.2",
+        "serve": "^11.3.2",
         "sinon": "^1.17.4",
         "style-loader": "^0.13.2",
         "webpack": "^1.13.1",
