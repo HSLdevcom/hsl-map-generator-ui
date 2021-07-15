@@ -1,15 +1,25 @@
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import moment from "moment";
 import {styleFromLayers} from "../utils/map-utils";
 import Map from "../components/Map";
 import * as ViewportActions from "../actions/viewport";
+import Modes from "../enums/Modes";
 
 function mapStateToProps(state) {
+    // Visualized date is either the one in user input, or, in RouteMap mode, the generated one if it exists.
+    const date =
+        state.modeSelection.get("mode") === Modes.ROUTEMAP &&
+        state.publisherRequests.pointConfig
+            ? moment(state.publisherRequests.pointConfig.target_date).format(
+                  "YYYY-MM-DD"
+              )
+            : state.settings.date;
     return {
         viewport: state.viewport,
         style: styleFromLayers(
             state.layers,
-            state.settings.date,
+            date,
             state.routeMapConfiguration.get("routeFilter")
         ),
         mapWidth: state.layout.mapWidth,
