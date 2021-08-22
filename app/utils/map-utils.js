@@ -28,9 +28,10 @@ const mapLayers = (layers) => {
     return ret;
 };
 
-export const styleFromLayers = memoize((layers, date) => {
+export const styleFromLayers = memoize((layers, date, routeFilter) => {
     const style = hslMapStyle.generateStyle({
-        components: mapLayers(layers)
+        components: mapLayers(layers),
+        routeFilter
     });
 
     sourcesWithDate.forEach((key) => {
@@ -80,6 +81,7 @@ export const createMapOptions = (mapSelection) => {
 export const createConfigurationOptions = (configuration, pointConfig) => ({
     date: moment(pointConfig.target_date).format("YYYY-MM-DD"),
     name: configuration.get("posterName"),
+    routeFilter: configuration.get("routeFilter"),
     scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
     maxAnchorLength: configuration.get("maxAnchorLineLength"),
@@ -122,6 +124,7 @@ export const pointsWithinBbox = (points, bbox) => {
 };
 export const createRoutemapConfigurationOptions = (configuration) => ({
     posterName: configuration.get("posterName"),
+    routeFilter: configuration.get("routeFilter"),
     scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
     maxAnchorLineLength: configuration.get("maxAnchorLineLength"),

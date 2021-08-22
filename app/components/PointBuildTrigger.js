@@ -9,13 +9,9 @@ import {PointStatus} from "../reducers/publisherRequests";
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            date: new Date()
-        };
 
         this.update = this.update.bind(this);
         this.sendDate = this.sendDate.bind(this);
-        this.setPointDate = this.setPointDate.bind(this);
     }
 
     componentDidMount() {
@@ -27,14 +23,8 @@ export default class RouteMapConfigurator extends Component {
         clearInterval(this.interval);
     }
 
-    setPointDate(date) {
-        this.setState({
-            date
-        });
-    }
-
     sendDate() {
-        this.props.setConfig(moment(this.state.date));
+        this.props.setConfig(moment(this.props.date));
     }
 
     update(supressInfo) {
@@ -98,8 +88,8 @@ export default class RouteMapConfigurator extends Component {
                 </div>
                 <div className={s.content}>
                     <DayPicker
-                        value={this.state.date}
-                        onChange={(value) => this.setPointDate(value)}
+                        value={this.props.date}
+                        onChange={(value) => this.props.changeDate(value)}
                         disabled={this.isDisabled()}
                     />
                     <Button
