@@ -18,7 +18,7 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => (
                 defaultValue={center.get(1)}
                 onChange={(event) =>
                     updateCenter({
-                        location: [center.get(0), Number(event.target.value)]
+                        lngLat: [center.get(0), Number(event.target.value)]
                     })
                 }
             />
@@ -30,7 +30,7 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => (
                 defaultValue={center.get(0)}
                 onChange={(event) =>
                     updateCenter({
-                        location: [Number(event.target.value), center.get(1)]
+                        lngLat: [Number(event.target.value), center.get(1)]
                     })
                 }
             />
