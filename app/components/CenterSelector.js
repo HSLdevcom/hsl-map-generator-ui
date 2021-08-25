@@ -16,9 +16,10 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => (
             <input
                 className={styles.input}
                 defaultValue={center.get(1)}
+                data-cy="manual-coords-lng-selector-input"
                 onChange={(event) =>
                     updateCenter({
-                        location: [center.get(0), Number(event.target.value)]
+                        lngLat: [center.get(0), Number(event.target.value)]
                     })
                 }
             />
@@ -28,9 +29,10 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => (
             <input
                 className={styles.input}
                 defaultValue={center.get(0)}
+                data-cy="manual-coords-lat-selector-input"
                 onChange={(event) =>
                     updateCenter({
-                        location: [Number(event.target.value), center.get(1)]
+                        lngLat: [Number(event.target.value), center.get(1)]
                     })
                 }
             />
