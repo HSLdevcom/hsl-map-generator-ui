@@ -45,6 +45,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          push: true
           tags: hsldevcom/hsl-map-generator-ui:dev
           build-args: |
             BUILD_ENV=dev
