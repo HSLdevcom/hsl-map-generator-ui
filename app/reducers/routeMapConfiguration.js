@@ -3,6 +3,7 @@ import {createRoutemapConfigurationOptions} from "../utils/map-utils";
 import {
     SET_BUILD,
     SET_POSTER_NAME,
+    SET_ROUTE_FILTER,
     SET_SCALE_FONT_SIZE,
     SET_SCALE_LENGTH,
     SET_MAX_ANCHOR_LINE_LENGTH,
@@ -23,6 +24,7 @@ import {
 const initialState = fromJS({
     build: null,
     posterName: "",
+    routeFilter: [],
     scaleLength: 200,
     scaleFontSize: 12,
     maxAnchorLineLength: 60,
@@ -45,6 +47,8 @@ export default function routeMapConfiguration(state = initialState, action) {
             return state.set("build", action.data);
         case SET_POSTER_NAME:
             return state.set("posterName", action.data);
+        case SET_ROUTE_FILTER:
+            return state.set("routeFilter", action.data);
         case SET_SCALE_LENGTH:
             return state.set("scaleLength", action.data);
         case SET_SCALE_FONT_SIZE:

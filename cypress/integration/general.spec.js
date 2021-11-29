@@ -121,6 +121,35 @@ describe("Basic functionalities", () => {
         );
     });
 
+    it("Test manual coordinate input", () => {
+        cy.get("[data-cy=center-selector-button]").click();
+
+        cy.get("[data-cy=manual-coords-lng-selector-input]")
+            .click()
+            .clear()
+            .type("60.a4b");
+
+        cy.get("[data-cy=manual-coords-lat-selector-input]")
+            .click()
+            .clear()
+            .type("2f,9i7");
+
+        cy.get("[data-cy=manual-coords-lng-selector-input]")
+            .click()
+            .clear()
+            .type("60,345");
+
+        cy.get("[data-cy=manual-coords-lng-selector-input]")
+            .click()
+            .clear()
+            .type(60.246);
+
+        cy.get("[data-cy=manual-coords-lat-selector-input]")
+            .click()
+            .clear()
+            .type(24.987);
+    });
+
     it("Generate poster", () => {
         const uuid = `${TEST_PREFIX}-${uuidv4()}`;
         const posterName = uuid.substr(0, 5);
