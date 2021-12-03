@@ -127,21 +127,6 @@ describe("Basic functionalities", () => {
         cy.get("[data-cy=manual-coords-lng-selector-input]")
             .click()
             .clear()
-            .type("60.a4b");
-
-        cy.get("[data-cy=manual-coords-lat-selector-input]")
-            .click()
-            .clear()
-            .type("2f,9i7");
-
-        cy.get("[data-cy=manual-coords-lng-selector-input]")
-            .click()
-            .clear()
-            .type("60,345");
-
-        cy.get("[data-cy=manual-coords-lng-selector-input]")
-            .click()
-            .clear()
             .type(60.246);
 
         cy.get("[data-cy=manual-coords-lat-selector-input]")

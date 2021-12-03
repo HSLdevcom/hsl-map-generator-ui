@@ -8,7 +8,7 @@ const Button = ({
     styleClass = "light",
     className,
     disabled = false,
-    type,
+    type
 }) => (
     <button
         data-cy={`${type}-button`}

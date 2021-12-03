@@ -15,16 +15,6 @@
     background-color: #555;
 }
 
-.small {
-    max-width: 100px;
-    background-color: #555;
-    padding: 0px;
-}
-
-.small:hover {
-    background-color: #484848;
-}
-
 .light:hover {
     background-color: #484848;
 }
