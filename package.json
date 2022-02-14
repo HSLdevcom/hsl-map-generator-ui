@@ -90,7 +90,7 @@
         "dotenv-webpack": "^1.7.0",
         "file-saver": "^1.3.2",
         "history": "^5.0.0",
-        "hsl-map-style": "hsldevcom/hsl-map-style#development",
+        "hsl-map-style": "hsldevcom/hsl-map-style#master",
         "immutable": "^3.7.6",
         "inline-style-prefixer": "^4.0.2",
         "lodash": "^4.17.19",
