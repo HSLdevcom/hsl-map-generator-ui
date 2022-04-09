@@ -95,7 +95,7 @@
         "inline-style-prefixer": "^4.0.2",
         "lodash": "^4.17.19",
         "memoizee": "^0.4.11",
-        "moment": "^2.19.4",
+        "moment": "^2.29.2",
         "prop-types": "^15.7.2",
         "r-dom": "^2.1.0",
         "react": "16.8.6",
