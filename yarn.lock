@@ -4006,7 +4006,7 @@ hosted-git-info@^2.1.4:
 
 hsl-map-style@hsldevcom/hsl-map-style#master:
   version "1.0.0"
-  resolved "https://codeload.github.com/hsldevcom/hsl-map-style/tar.gz/63c56624a4232d082db66b161b45f4f247d6605f"
+  resolved "https://codeload.github.com/hsldevcom/hsl-map-style/tar.gz/8a6d36d76d24226f083baad62e04f857a904dd65"
   dependencies:
     lodash "^4.17.4"
 
