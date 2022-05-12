@@ -8,13 +8,20 @@ import {
     mapSelectionToMeterPerPixelRatio
 } from "./geom-utils";
 
+// Override defaults of enabled layers from hsl-map-style
+const overrideDefaults = {
+    routes_with_departures_only: {enabled: false}
+};
+
 const components = hslMapStyle.components;
 const sourcesWithDate = ["stops", "routes"];
 
 export const layersFromStyle = () => {
     return components.map((component) => ({
         id: component.id,
-        enabled: component.enabled,
+        enabled: overrideDefaults[component.id]
+            ? overrideDefaults[component.id].enabled
+            : component.enabled,
         description: component.description,
         dependencies: component.dependencies
     }));
