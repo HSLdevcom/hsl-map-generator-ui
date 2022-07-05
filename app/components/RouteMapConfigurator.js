@@ -45,7 +45,7 @@ export default class RouteMapConfigurator extends Component {
             (layer) => layer.id === "ticket_zones"
         );
 
-        this.setDefaultLayers();
+        // this.setDefaultLayers();
     }
 
     setSymbolSize(e) {
@@ -53,18 +53,18 @@ export default class RouteMapConfigurator extends Component {
     }
 
     setDefaultLayers() {
-        // if (this.routesLayer.enabled) {
-        //     this.props.toggleLayer(this.routesLayer.id);
-        // }
-        // if (!get(this, "regularRoutesLayer.enabled", true)) {
-        //     // this.props.toggleLayer(this.regularRoutesLayer.id);
-        // }
-        // if (get(this, "nearBusRoutesLayer.enabled", false)) {
-        //     this.props.toggleLayer(this.nearBusRoutesLayer.id);
-        // }
-        // if (this.props.showOnlyNearBuses) {
-        //     this.props.toggleOnlyNearBuses();
-        // }
+        if (this.routesLayer.enabled) {
+            this.props.toggleLayer(this.routesLayer.id);
+        }
+        if (!get(this, "regularRoutesLayer.enabled", true)) {
+            this.props.toggleLayer(this.regularRoutesLayer.id);
+        }
+        if (get(this, "nearBusRoutesLayer.enabled", false)) {
+            this.props.toggleLayer(this.nearBusRoutesLayer.id);
+        }
+        if (this.props.showOnlyNearBuses) {
+            this.props.toggleOnlyNearBuses();
+        }
     }
 
     addSymbol() {
