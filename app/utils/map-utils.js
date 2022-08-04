@@ -78,10 +78,26 @@ export const createMapOptions = (mapSelection) => {
     return mapOptions;
 };
 
+const parseRouteFilterIds = (routeFilter, useJoreId) => {
+    if (routeFilter.length >= 0) {
+        if (!useJoreId) {
+            const mappedFilter = routeFilter.map((filter) => {
+                return {idParsed: filter};
+            });
+            return mappedFilter;
+        }
+        return routeFilter;
+    }
+    return [];
+};
+
 export const createConfigurationOptions = (configuration, pointConfig) => ({
     date: moment(pointConfig.target_date).format("YYYY-MM-DD"),
     name: configuration.get("posterName"),
-    routeFilter: configuration.get("routeFilter"),
+    routeFilter: parseRouteFilterIds(
+        configuration.get("routeFilter"),
+        configuration.get("useJoreId")
+    ),
     scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
     maxAnchorLength: configuration.get("maxAnchorLineLength"),

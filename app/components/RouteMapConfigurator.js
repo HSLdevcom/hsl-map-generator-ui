@@ -30,6 +30,7 @@ export default class RouteMapConfigurator extends Component {
         this.setSymbolSize = this.setSymbolSize.bind(this);
         this.selectSymbol = this.selectSymbol.bind(this);
         this.addSymbol = this.addSymbol.bind(this);
+        this.toggleJoreIdFiltering = this.toggleJoreIdFiltering.bind(this);
 
         this.routesLayer = this.props.layers.find(
             (layer) => layer.id === "routes"
@@ -92,6 +93,10 @@ export default class RouteMapConfigurator extends Component {
 
     toggleZoneSymbols() {
         this.props.toggleZoneSymbols();
+    }
+
+    toggleJoreIdFiltering() {
+        this.props.toggleJoreIdFiltering();
     }
 
     openAdvancedSettings() {
@@ -173,6 +178,18 @@ export default class RouteMapConfigurator extends Component {
                                     )
                                 }
                                 placeholder="joreId1,joreId2"
+                            />
+                        </div>
+                    </div>
+                    <div className={style.element}>
+                        <div className={style.title}>Käytä jore-id:tä</div>
+                        <div className={style.value}>
+                            <input
+                                className={style.checkbox}
+                                type="checkbox"
+                                onChange={this.toggleJoreIdFiltering}
+                                value={this.props.useJoreId}
+                                checked={this.props.useJoreId}
                             />
                         </div>
                     </div>
