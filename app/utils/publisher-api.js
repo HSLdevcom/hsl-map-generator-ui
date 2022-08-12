@@ -1,7 +1,8 @@
 const API_URL = process.env.API_URL;
 
 function getJson(path) {
-    return fetch(`${API_URL}/${path}`);
+    const options = {credentials: "include"};
+    return fetch(`${API_URL}/${path}`, options);
 }
 
 function postJson(path, body) {
@@ -14,12 +15,16 @@ function postJson(path, body) {
 }
 
 function putJson(path, body) {
-    const options = {method: "PUT", body: JSON.stringify(body)};
+    const options = {
+        method: "PUT",
+        credentials: "include",
+        body: JSON.stringify(body)
+    };
     return fetch(`${API_URL}/${path}`, options);
 }
 
 function deleteJson(path) {
-    const options = {method: "DELETE"};
+    const options = {method: "DELETE", credentials: "include"};
     return fetch(`${API_URL}/${path}`, options);
 }
 
