@@ -39,3 +39,20 @@
 .marginTop {
     margin-top: 20px;
 }
+
+.prompt {
+    display: flex;
+    flex-direction: column;
+}
+
+.promptButtonContainer {
+    height: 125px;
+    justify-content: space-between;
+    align-items: end;
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    width: 150px;
+}
