@@ -7,7 +7,8 @@ import {
     setRouteFilter,
     toggleOnlyNearBuses,
     toggleZoneSymbols,
-    setSymbolSize
+    setSymbolSize,
+    toggleJoreIdFiltering
 } from "../actions/routeMapConfiguration";
 import {addSymbol} from "../actions/viewport";
 import RouteMapConfigurator from "../components/RouteMapConfigurator";
@@ -24,7 +25,8 @@ function mapStateToProps(state) {
         showOnlyNearBuses: state.routeMapConfiguration.get("onlyNearBuses"),
         showZoneSymbols: state.routeMapConfiguration.get("zoneSymbols"),
         pointConfig: state.publisherRequests.pointConfig,
-        symbolSize: state.routeMapConfiguration.get("symbolSize")
+        symbolSize: state.routeMapConfiguration.get("symbolSize"),
+        useJoreId: state.routeMapConfiguration.get("useJoreId")
     };
 }
 
@@ -40,7 +42,8 @@ function mapDispatchToProps(dispatch) {
             toggleZoneSymbols,
             setSymbolSize,
             setLayer,
-            addSymbol
+            addSymbol,
+            toggleJoreIdFiltering
         },
         dispatch
     );

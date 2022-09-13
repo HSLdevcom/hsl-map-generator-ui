@@ -20,7 +20,8 @@ function mapStateToProps(state) {
         style: styleFromLayers(
             state.layers,
             date,
-            state.routeMapConfiguration.get("routeFilter")
+            state.routeMapConfiguration.get("routeFilter"),
+            state.routeMapConfiguration.get("useJoreId")
         ),
         mapWidth: state.layout.mapWidth,
         mapHeight: state.layout.mapHeight,

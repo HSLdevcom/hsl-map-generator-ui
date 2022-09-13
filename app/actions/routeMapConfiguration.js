@@ -21,6 +21,7 @@ export const TOGGLE_ONLY_NEAR_BUSES = "TOGGLE_ONLY_NEAR_BUSES";
 export const TOGGLE_ZONE_SYMBOLS = "TOGGLE_ZONE_SYMBOLS";
 export const SET_SYMBOL_SIZE = "SET_SYMBOL_SIZE";
 export const LOAD_STATE = "LOAD_STATE";
+export const TOGGLE_JORE_ID_FILTERING = "TOGGLE_JORE_ID_FILTERING";
 
 export function setBuild(id) {
     return {
@@ -136,5 +137,11 @@ export function setSymbolSize(size) {
     return {
         type: SET_SYMBOL_SIZE,
         data: size
+    };
+}
+
+export function toggleJoreIdFiltering() {
+    return {
+        type: TOGGLE_JORE_ID_FILTERING
     };
 }
