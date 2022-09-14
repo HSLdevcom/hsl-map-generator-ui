@@ -53,13 +53,7 @@ export const styleFromLayers = memoize(
         const style = hslMapStyle.generateStyle({
             components: mapLayers(layers),
             routeFilter: parseRouteFilterIds(routeFilter, useJoreId),
-            joreDate: date,
-        });
-
-        sourcesWithDate.forEach((key) => {
-            if (style.sources[key] && style.sources[key].url) {
-                style.sources[key].url += `?date=${date}`;
-            }
+            joreDate: date
         });
 
         return style;

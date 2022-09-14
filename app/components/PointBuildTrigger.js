@@ -40,13 +40,13 @@ export default class RouteMapConfigurator extends Component {
         return this.props.config && this.props.config.status === "PENDING";
     }
 
-    showPrompt = () => {
+    showPrompt() {
         this.setState({showPrompt: true});
-    };
+    }
 
-    hidePrompt = () => {
+    hidePrompt() {
         this.setState({showPrompt: false});
-    };
+    }
 
     render() {
         let statusColor = "#DDD";
