@@ -35,7 +35,7 @@ const mapLayers = (layers) => {
 };
 
 const parseRouteFilterIds = (routeFilter, useJoreId) => {
-    if (routeFilter.length >= 0) {
+    if (routeFilter && routeFilter.length >= 0) {
         if (!useJoreId) {
             const mappedFilter = routeFilter.map((filter) => {
                 return {idParsed: filter};
