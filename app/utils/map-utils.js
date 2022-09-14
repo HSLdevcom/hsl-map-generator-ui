@@ -34,15 +34,37 @@ const mapLayers = (layers) => {
     return ret;
 };
 
-export const styleFromLayers = memoize((layers, date, routeFilter) => {
-    const style = hslMapStyle.generateStyle({
-        components: mapLayers(layers),
-        routeFilter,
-        joreDate: date
-    });
+const parseRouteFilterIds = (routeFilter, useJoreId) => {
+    if (routeFilter.length >= 0) {
+        if (!useJoreId) {
+            const mappedFilter = routeFilter.map((filter) => {
+                return {idParsed: filter};
+            });
+            return mappedFilter;
+        }
+        return routeFilter;
+    }
+    return [];
+};
 
-    return style;
-});
+export const styleFromLayers = memoize(
+    (layers, date, routeFilter, useJoreId) => {
+        console.log(useJoreId);
+        const style = hslMapStyle.generateStyle({
+            components: mapLayers(layers),
+            routeFilter: parseRouteFilterIds(routeFilter, useJoreId),
+            joreDate: date,
+        });
+
+        sourcesWithDate.forEach((key) => {
+            if (style.sources[key] && style.sources[key].url) {
+                style.sources[key].url += `?date=${date}`;
+            }
+        });
+
+        return style;
+    }
+);
 
 export const createMapOptions = (mapSelection) => {
     const tileScale = mapSelectionToTileScale(mapSelection);
@@ -82,7 +104,10 @@ export const createMapOptions = (mapSelection) => {
 export const createConfigurationOptions = (configuration, pointConfig) => ({
     date: moment(pointConfig.target_date).format("YYYY-MM-DD"),
     name: configuration.get("posterName"),
-    routeFilter: configuration.get("routeFilter"),
+    routeFilter: parseRouteFilterIds(
+        configuration.get("routeFilter"),
+        configuration.get("useJoreId")
+    ),
     scaleFontSize: configuration.get("scaleFontSize"),
     scaleLength: configuration.get("scaleLength"),
     maxAnchorLength: configuration.get("maxAnchorLineLength"),
