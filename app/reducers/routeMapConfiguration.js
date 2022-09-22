@@ -18,7 +18,8 @@ import {
     TOGGLE_ONLY_NEAR_BUSES,
     TOGGLE_ZONE_SYMBOLS,
     SET_SYMBOL_SIZE,
-    LOAD_STATE
+    LOAD_STATE,
+    TOGGLE_JORE_ID_FILTERING
 } from "../actions/routeMapConfiguration";
 
 const initialState = fromJS({
@@ -38,7 +39,8 @@ const initialState = fromJS({
     stationFontSize: 12,
     onlyNearBuses: false,
     zoneSymbols: false,
-    symbolSize: "200px"
+    symbolSize: "200px",
+    useJoreId: false
 });
 
 export default function routeMapConfiguration(state = initialState, action) {
@@ -89,6 +91,9 @@ export default function routeMapConfiguration(state = initialState, action) {
                 newState = newState.set(key, routeConfig[key]);
             });
             return newState;
+        }
+        case TOGGLE_JORE_ID_FILTERING: {
+            return state.set("useJoreId", !state.get("useJoreId"));
         }
         default:
             return state;

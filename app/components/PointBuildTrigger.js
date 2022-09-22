@@ -1,15 +1,19 @@
 import React, {Component} from "react";
 import moment from "moment";
+import Modal from "react-modal";
 import classNames from "classnames";
 import DayPicker from "./DayPicker";
 import Button from "./Button";
 import s from "./pointBuildTrigger.css";
 import {PointStatus} from "../reducers/publisherRequests";
+import {promptStyles} from "../utils/ui-utils";
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            showPrompt: false
+        };
         this.update = this.update.bind(this);
         this.sendDate = this.sendDate.bind(this);
     }
@@ -24,6 +28,7 @@ export default class RouteMapConfigurator extends Component {
     }
 
     sendDate() {
+        this.setState({showPrompt: false});
         this.props.setConfig(moment(this.props.date));
     }
 
@@ -33,6 +38,14 @@ export default class RouteMapConfigurator extends Component {
 
     isDisabled() {
         return this.props.config && this.props.config.status === "PENDING";
+    }
+
+    showPrompt() {
+        this.setState({showPrompt: true});
+    }
+
+    hidePrompt() {
+        this.setState({showPrompt: false});
     }
 
     render() {
@@ -94,11 +107,37 @@ export default class RouteMapConfigurator extends Component {
                     />
                     <Button
                         styleClass="lightWithBorder"
-                        onClick={this.sendDate}
+                        onClick={() => this.showPrompt()}
                         disabled={this.isDisabled()}>
                         Päivitä
                     </Button>
                 </div>
+                <Modal
+                    isOpen={this.state.showPrompt}
+                    onRequestClose={() => this.hidePrompt}
+                    style={promptStyles}>
+                    <div className={s.prompt}>
+                        Generoidaan uusi poikkileikkauspäivä?
+                        <div className={s.promptButtonContainer}>
+                            <div className={s.button}>
+                                <Button
+                                    styleClass="lightWithBorder"
+                                    onClick={this.sendDate}
+                                    disabled={this.isDisabled()}>
+                                    Kyllä
+                                </Button>
+                            </div>
+                            <div className={s.button}>
+                                <Button
+                                    styleClass="lightWithBorder"
+                                    onClick={() => this.hidePrompt()}
+                                    disabled={this.isDisabled()}>
+                                    Ei
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </Modal>
             </div>
         );
     }
