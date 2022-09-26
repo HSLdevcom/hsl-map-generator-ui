@@ -53,7 +53,8 @@ class ShowListModalItem extends Component {
     constructor(props) {
         super();
         this.state = {
-            deleteLoading: null
+            deleteLoading: false,
+            cancelLoading: false
         };
     }
 
@@ -62,6 +63,13 @@ class ShowListModalItem extends Component {
             deleteLoading: true
         });
         removePoster(item);
+    };
+
+    handleCancel = async (item) => {
+        this.setState({
+            cancelLoading: true
+        });
+        cancelPoster(item);
     };
 
     render() {
@@ -107,8 +115,9 @@ class ShowListModalItem extends Component {
                     </Button>
                     {item.status === "PENDING" && (
                         <Button
-                            onClick={() => cancelPoster(item)}
-                            styleClass={"small"}>
+                            onClick={() => this.handleCancel(item)}
+                            styleClass={"small"}
+                            loading={this.state.cancelLoading}>
                             Keskeytä
                         </Button>
                     )}
