@@ -24,7 +24,7 @@ const Button = ({
             children
         ) : (
             <div className={styles.loaderContainer}>
-                <div className={styles.loader}></div>
+                <div className={styles.loader} />
             </div>
         )}
     </button>

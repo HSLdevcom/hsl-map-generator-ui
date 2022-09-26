@@ -50,7 +50,7 @@ function getTime(buildTime) {
 }
 
 class ShowListModalItem extends Component {
-    constructor(props) {
+    constructor() {
         super();
         this.state = {
             deleteLoading: false,
@@ -58,19 +58,19 @@ class ShowListModalItem extends Component {
         };
     }
 
-    handleRemove = async (item) => {
+    async handleRemove(item) {
         this.setState({
             deleteLoading: true
         });
         removePoster(item);
-    };
+    }
 
-    handleCancel = async (item) => {
+    async handleCancel(item) {
         this.setState({
             cancelLoading: true
         });
         cancelPoster(item);
-    };
+    }
 
     render() {
         const {item, openLogId, openLog, closeLog} = this.props;
