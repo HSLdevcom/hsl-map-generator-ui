@@ -14,7 +14,6 @@ const overrideDefaults = {
 };
 
 const components = hslMapStyle.components;
-const sourcesWithDate = ["stops", "routes"];
 
 export const layersFromStyle = () => {
     return components.map((component) => ({
@@ -53,13 +52,8 @@ export const styleFromLayers = memoize(
         console.log(useJoreId);
         const style = hslMapStyle.generateStyle({
             components: mapLayers(layers),
-            routeFilter: parseRouteFilterIds(routeFilter, useJoreId)
-        });
-
-        sourcesWithDate.forEach((key) => {
-            if (style.sources[key] && style.sources[key].url) {
-                style.sources[key].url += `?date=${date}`;
-            }
+            routeFilter: parseRouteFilterIds(routeFilter, useJoreId),
+            joreDate: date
         });
 
         return style;
