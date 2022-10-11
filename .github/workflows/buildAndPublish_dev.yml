@@ -37,9 +37,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: 
-            - ${{ format('hsldevcom/hsl-map-generator-ui:dev-{0}-{1}', steps.timestamp.outputs.timestamp, steps.commit_hash.outputs.hash) }}
-            - hsldevcom/hsl-map-generator-ui:dev
+          tags: |
+            ${{ format('hsldevcom/hsl-map-generator-ui:dev-{0}-{1}', steps.timestamp.outputs.timestamp, steps.commit_hash.outputs.hash) }}
+            hsldevcom/hsl-map-generator-ui:dev
           build-args: |
             BUILD_ENV=dev
             DIGITRANSIT_APIKEY=${{ secrets.KARTAT_DIGITRANSITAPIKEY_DEV }}
