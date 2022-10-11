@@ -49,8 +49,15 @@ const parseRouteFilterIds = (routeFilter, useJoreId) => {
 
 export const styleFromLayers = memoize(
     (layers, date, routeFilter, useJoreId) => {
-        console.log(useJoreId);
         const style = hslMapStyle.generateStyle({
+            sourcesUrl: process.env.DIGITRANSIT_URL,
+            queryParams: [
+                {
+                    url: process.env.DIGITRANSIT_URL,
+                    name: "digitransit-subscription-key",
+                    value: process.env.DIGITRANSIT_APIKEY
+                }
+            ],
             components: mapLayers(layers),
             routeFilter: parseRouteFilterIds(routeFilter, useJoreId),
             joreDate: date

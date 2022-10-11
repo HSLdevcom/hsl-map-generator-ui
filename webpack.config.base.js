@@ -1,6 +1,7 @@
 /* eslint-disable no-console, import/no-extraneous-dependencies */
 
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
@@ -56,7 +57,11 @@ const config = {
     resolveLoader: {
         fallback: path.join(__dirname, "node_modules")
     },
-    plugins: [new HtmlWebpackPlugin({template: "index.ejs"}), new Dotenv()],
+    plugins: [
+        new HtmlWebpackPlugin({template: "index.ejs"}),
+        new webpack.EnvironmentPlugin(["DIGITRANSIT_APIKEY"]),
+        new Dotenv()
+    ],
     externals: []
 };
 
