@@ -93,7 +93,7 @@
         "hsl-map-style": "hsldevcom/hsl-map-style#master",
         "immutable": "^3.7.6",
         "inline-style-prefixer": "^4.0.2",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "memoizee": "^0.4.11",
         "moment": "^2.19.4",
         "prop-types": "^15.7.2",
