@@ -14,7 +14,6 @@ const overrideDefaults = {
 };
 
 const components = hslMapStyle.components;
-const sourcesWithDate = ["stops", "routes"];
 
 export const layersFromStyle = () => {
     return components.map((component) => ({
@@ -50,16 +49,18 @@ const parseRouteFilterIds = (routeFilter, useJoreId) => {
 
 export const styleFromLayers = memoize(
     (layers, date, routeFilter, useJoreId) => {
-        console.log(useJoreId);
         const style = hslMapStyle.generateStyle({
+            sourcesUrl: process.env.DIGITRANSIT_URL,
+            queryParams: [
+                {
+                    url: process.env.DIGITRANSIT_URL,
+                    name: "digitransit-subscription-key",
+                    value: process.env.DIGITRANSIT_APIKEY
+                }
+            ],
             components: mapLayers(layers),
-            routeFilter: parseRouteFilterIds(routeFilter, useJoreId)
-        });
-
-        sourcesWithDate.forEach((key) => {
-            if (style.sources[key] && style.sources[key].url) {
-                style.sources[key].url += `?date=${date}`;
-            }
+            routeFilter: parseRouteFilterIds(routeFilter, useJoreId),
+            joreDate: date
         });
 
         return style;
