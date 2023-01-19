@@ -16,10 +16,6 @@ const wdm = webpackDevMiddleware(compiler, {
     }
 });
 
-app.get("/health", (req, res) => {
-    res.sendStatus(200);
-});
-
 app.use(wdm);
 app.use(webpackHotMiddleware(compiler));
 
