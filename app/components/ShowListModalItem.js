@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import moment from "moment";
 import Modal from "react-modal";
 
@@ -49,72 +49,103 @@ function getTime(buildTime) {
     return `${hours}${minutes}${seconds}`;
 }
 
-const ShowListModalItem = ({item, openLogId, openLog, closeLog}) => {
-    const buildTime = getBuildTime(item);
-    const time = getTime(buildTime);
-    return (
-        <div className={styles.container}>
-            <div
-                className={styles.text}
-                data-cy={item.props.configuration.name}>
-                <span className={styles.itemName}>
-                    {item.props.configuration.name &&
-                        item.props.configuration.name}
-                    {!item.props.configuration.name && "- Nimetön -"}
-                </span>
-                <span
-                    className={styles.pill}
-                    style={{backgroundColor: getColorFromStatus(item.status)}}>
-                    {item.status}
-                </span>
-                <br />
-                Lisätty: {moment(item.createdAt).format("D.M.YYYY HH:mm")}
-                <br />
-                Kohde päivämäärä:{" "}
-                {moment(item.props.configuration.date).format("D.M.YYYY")}
-                {time ? <br /> : ""}
-                {time ? `Generointiaika: ${time}` : ""}
-            </div>
-            <div className={styles.buttons}>
-                <Button
-                    onClick={() => downloadPoster({id: item.id})}
-                    disabled={item.status !== "READY"}
-                    styleClass={"small"}>
-                    Lataa
-                </Button>
-                <Button onClick={() => openLog(item.id)} styleClass={"small"}>
-                    Log
-                </Button>
-                {item.status === "PENDING" && (
+class ShowListModalItem extends Component {
+    constructor() {
+        super();
+        this.state = {
+            deleteLoading: false,
+            cancelLoading: false
+        };
+    }
+
+    async handleRemove(item) {
+        this.setState({
+            deleteLoading: true
+        });
+        removePoster(item);
+    }
+
+    async handleCancel(item) {
+        this.setState({
+            cancelLoading: true
+        });
+        cancelPoster(item);
+    }
+
+    render() {
+        const {item, openLogId, openLog, closeLog} = this.props;
+        const buildTime = getBuildTime(item);
+        const time = getTime(buildTime);
+        return (
+            <div className={styles.container}>
+                <div
+                    className={styles.text}
+                    data-cy={item.props.configuration.name}>
+                    <span className={styles.itemName}>
+                        {item.props.configuration.name &&
+                            item.props.configuration.name}
+                        {!item.props.configuration.name && "- Nimetön -"}
+                    </span>
+                    <span
+                        className={styles.pill}
+                        style={{
+                            backgroundColor: getColorFromStatus(item.status)
+                        }}>
+                        {item.status}
+                    </span>
+                    <br />
+                    Lisätty: {moment(item.createdAt).format("D.M.YYYY HH:mm")}
+                    <br />
+                    Kohde päivämäärä:{" "}
+                    {moment(item.props.configuration.date).format("D.M.YYYY")}
+                    {time ? <br /> : ""}
+                    {time ? `Generointiaika: ${time}` : ""}
+                </div>
+                <div className={styles.buttons}>
                     <Button
-                        onClick={() => cancelPoster(item)}
+                        onClick={() => downloadPoster({id: item.id})}
+                        disabled={item.status !== "READY"}
                         styleClass={"small"}>
-                        Keskeytä
+                        Lataa
                     </Button>
-                )}
-                {item.status === "FAILED" && (
                     <Button
-                        onClick={() => removePoster(item)}
+                        onClick={() => openLog(item.id)}
                         styleClass={"small"}>
-                        Poista
+                        Log
                     </Button>
-                )}
-                <Modal
-                    isOpen={openLogId && openLogId === item.id}
-                    onRequestClose={closeLog}>
-                    <div className={styles.log}>
-                        <h3>Log</h3>
-                        {item.events.map((event) => (
-                            <p key={event.createdAt}>{event.message}</p>
-                        ))}
-                        <Button onClick={closeLog} styleClass={"small"}>
-                            Sulje
+                    {item.status === "PENDING" && (
+                        <Button
+                            onClick={() => this.handleCancel(item)}
+                            styleClass={"small"}
+                            loading={this.state.cancelLoading}>
+                            Keskeytä
                         </Button>
-                    </div>
-                </Modal>
+                    )}
+                    {item.status === "FAILED" && (
+                        <Button
+                            onClick={() => this.handleRemove(item)}
+                            styleClass={"small"}
+                            loading={this.state.deleteLoading}>
+                            Poista
+                        </Button>
+                    )}
+                    <Modal
+                        isOpen={openLogId && openLogId === item.id}
+                        onRequestClose={closeLog}>
+                        <div className={styles.log}>
+                            <h3>Log</h3>
+                            {item.events.map((event) => (
+                                <p key={event.createdAt}>{event.message}</p>
+                            ))}
+                            <Button onClick={closeLog} styleClass={"small"}>
+                                Sulje
+                            </Button>
+                        </div>
+                    </Modal>
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default ShowListModalItem;

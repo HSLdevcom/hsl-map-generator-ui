@@ -8,7 +8,8 @@ const Button = ({
     styleClass = "light",
     className,
     disabled = false,
-    type,
+    loading = null,
+    type
 }) => (
     <button
         data-cy={`${type}-button`}
@@ -19,7 +20,13 @@ const Button = ({
             disabled ? styles.disabled : null
         )}
         onClick={(e) => !disabled && onClick(e)}>
-        {children}
+        {!loading ? (
+            children
+        ) : (
+            <div className={styles.loaderContainer}>
+                <div className={styles.loader} />
+            </div>
+        )}
     </button>
 );
 

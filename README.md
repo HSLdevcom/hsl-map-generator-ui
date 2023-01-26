@@ -16,6 +16,10 @@ $ cd hsl-map-generator-ui && yarn install
 
 ## Run
 
+### Pre-step: Create Digitransit apikey
+
+Create .env file and place your Digitransit apikey there. If you still don't have your own, generate one on https://portal-dev.digitransit.fi or https://portal.digitransit.fi (dev / prod). Without apikey the map won't work and generation will fail.
+
 ### Start in development mode
 
 ```bash
