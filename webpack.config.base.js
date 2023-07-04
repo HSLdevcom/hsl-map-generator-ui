@@ -1,7 +1,6 @@
 /* eslint-disable no-console, import/no-extraneous-dependencies */
 
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
@@ -57,8 +56,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({template: "index.ejs"}),
-        new Dotenv({ allowEmptyValues: false }),
-        new webpack.EnvironmentPlugin(["DIGITRANSIT_APIKEY"]),
+        new Dotenv({systemvars: true}),
     ],
     externals: []
 };
