@@ -18,7 +18,4 @@ function mapDispatchToProps(dispatch) {
     );
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MapScaleSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(MapScaleSelector);

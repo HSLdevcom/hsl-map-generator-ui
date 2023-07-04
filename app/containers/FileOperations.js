@@ -45,7 +45,4 @@ function mapDispatchToProps(dispatch) {
     );
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FileOperations);
+export default connect(mapStateToProps, mapDispatchToProps)(FileOperations);

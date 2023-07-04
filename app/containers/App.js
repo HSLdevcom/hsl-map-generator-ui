@@ -55,7 +55,7 @@ class App extends Component {
     }
 
     render() {
-        const user = this.props.user;
+        const {user} = this.props;
 
         return (
             <div>

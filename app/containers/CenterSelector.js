@@ -18,7 +18,4 @@ function mapDispatchToProps(dispatch) {
     );
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CenterSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(CenterSelector);

@@ -15,7 +15,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({fetchBuild}, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ShowListModal);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowListModal);

@@ -35,4 +35,8 @@ LayerSelector.propTypes = {
     changeDate: PropTypes.func.isRequired
 };
 
+LayerSelector.defaultProps = {
+    date: undefined
+};
+
 export default LayerSelector;

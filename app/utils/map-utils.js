@@ -13,7 +13,7 @@ const overrideDefaults = {
     routes_with_departures_only: {enabled: false}
 };
 
-const components = hslMapStyle.components;
+const {components} = hslMapStyle;
 
 export const layersFromStyle = () => {
     return components.map((component) => ({

@@ -12,6 +12,7 @@ const Button = ({
     type
 }) => (
     <button
+        type="button"
         data-cy={`${type}-button`}
         className={classnames(
             className,

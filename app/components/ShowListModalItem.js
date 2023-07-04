@@ -105,18 +105,16 @@ class ShowListModalItem extends Component {
                     <Button
                         onClick={() => downloadPoster({id: item.id})}
                         disabled={item.status !== "READY"}
-                        styleClass={"small"}>
+                        styleClass="small">
                         Lataa
                     </Button>
-                    <Button
-                        onClick={() => openLog(item.id)}
-                        styleClass={"small"}>
+                    <Button onClick={() => openLog(item.id)} styleClass="small">
                         Log
                     </Button>
                     {item.status === "PENDING" && (
                         <Button
                             onClick={() => this.handleCancel(item)}
-                            styleClass={"small"}
+                            styleClass="small"
                             loading={this.state.cancelLoading}>
                             Keskeytä
                         </Button>
@@ -124,7 +122,7 @@ class ShowListModalItem extends Component {
                     {item.status === "FAILED" && (
                         <Button
                             onClick={() => this.handleRemove(item)}
-                            styleClass={"small"}
+                            styleClass="small"
                             loading={this.state.deleteLoading}>
                             Poista
                         </Button>
@@ -137,7 +135,7 @@ class ShowListModalItem extends Component {
                             {item.events.map((event) => (
                                 <p key={event.createdAt}>{event.message}</p>
                             ))}
-                            <Button onClick={closeLog} styleClass={"small"}>
+                            <Button onClick={closeLog} styleClass="small">
                                 Sulje
                             </Button>
                         </div>
