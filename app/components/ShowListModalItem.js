@@ -128,7 +128,7 @@ class ShowListModalItem extends Component {
                         </Button>
                     )}
                     <Modal
-                        isOpen={openLogId && openLogId === item.id}
+                        isOpen={Boolean(openLogId && openLogId === item.id)}
                         onRequestClose={closeLog}>
                         <div className={styles.log}>
                             <h3>Log</h3>
