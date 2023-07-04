@@ -57,7 +57,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({template: "index.ejs"}),
-        new Dotenv(),
+        new Dotenv({ allowEmptyValues: false }),
         new webpack.EnvironmentPlugin(["DIGITRANSIT_APIKEY"]),
     ],
     externals: []
