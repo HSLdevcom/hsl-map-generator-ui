@@ -18,19 +18,17 @@ const config = {
                 ]
             },
             {
+                test: /\.js$/,
+                loader: "babel-loader",
+                include: path.resolve(__dirname, "node_modules/hsl-map-style")
+            },
+            {
                 test: /\.json$/,
                 loader: "json-loader"
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
                 loader: "url-loader"
-            }
-        ],
-        postLoaders: [
-            {
-                test: /\.js$/,
-                loader: "transform?brfs",
-                include: path.join(__dirname, "node_modules", "hsl-map-style")
             }
         ]
     },
@@ -59,8 +57,8 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({template: "index.ejs"}),
+        new Dotenv(),
         new webpack.EnvironmentPlugin(["DIGITRANSIT_APIKEY"]),
-        new Dotenv()
     ],
     externals: []
 };
