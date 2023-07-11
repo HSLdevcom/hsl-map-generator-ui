@@ -2,7 +2,6 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {generateRouteMapAction} from "../actions/publisherRequests";
 import {
-    setDate,
     setPosterName,
     setRouteFilter,
     toggleOnlyNearBuses,
@@ -34,7 +33,6 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
             generateRouteMap: generateRouteMapAction,
-            setDate,
             setPosterName,
             setRouteFilter,
             toggleLayer,

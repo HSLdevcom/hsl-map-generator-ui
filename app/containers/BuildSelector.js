@@ -17,7 +17,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({getBuildsAction, setBuild}, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(BuildSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(BuildSelector);

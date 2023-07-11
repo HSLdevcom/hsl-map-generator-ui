@@ -14,7 +14,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({generateImageCancelAll}, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Spinner);
+export default connect(mapStateToProps, mapDispatchToProps)(Spinner);

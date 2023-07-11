@@ -1,4 +1,4 @@
-FROM node:16-alpine as builder
+FROM node:18-alpine as builder
 
 ENV WORK /opt/mapgenerator
 
@@ -23,7 +23,7 @@ RUN yarn build
 
 
 # The actual image comes here
-FROM node:16-alpine
+FROM node:18-alpine
 
 ENV WORK /opt/mapgenerator
 
@@ -32,7 +32,7 @@ RUN mkdir -p ${WORK}
 WORKDIR ${WORK}
 
 # Install serve
-RUN yarn global add serve@^13.0.2
+RUN yarn global add serve@^14.2.0
 
 # Copy builded files from builder
 COPY --from=builder /opt/mapgenerator/dist dist/

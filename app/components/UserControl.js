@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions*/
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React, {Component} from "react";
 import {connect} from "react-redux";
@@ -10,9 +10,6 @@ import styles from "./UserControl.css";
 class UserControl extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            loading: true
-        };
         this.logout = this.logout.bind(this);
     }
 
@@ -26,10 +23,13 @@ class UserControl extends Component {
 
     render() {
         return (
-            <div className={styles.container} onClick={this.logout}>
+            <button
+                type="button"
+                className={styles.container}
+                onClick={this.logout}>
                 <div>Kirjaudu Ulos</div>
                 <div className={styles.userName}>{this.props.user}</div>
-            </div>
+            </button>
         );
     }
 }
@@ -44,7 +44,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({setUser}, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UserControl);
+export default connect(mapStateToProps, mapDispatchToProps)(UserControl);

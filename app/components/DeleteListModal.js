@@ -55,7 +55,7 @@ class DeleteListModal extends Component {
 }
 
 DeleteListModal.propTypes = {
-    hide: PropTypes.func
+    hide: PropTypes.func.isRequired
 };
 
 export default DeleteListModal;

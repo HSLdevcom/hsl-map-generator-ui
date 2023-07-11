@@ -1,4 +1,4 @@
-import update from "react-addons-update";
+import update from "immutability-helper";
 import {findIndex} from "lodash";
 import {TOGGLE_LAYER, SET_LAYER} from "../actions/layers";
 import {LOAD_STATE} from "../actions/fileOperations";

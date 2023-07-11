@@ -13,7 +13,7 @@ const DropdownSelector = ({
     <div
         data-cy={`${type}-button`}
         className={classnames(styles.component, selected && styles.selected)}>
-        <button className={styles.selector} onClick={toggleTab}>
+        <button type="button" className={styles.selector} onClick={toggleTab}>
             <div className={styles.title}>{title}</div>
             <div className={styles.value}>{value}</div>
         </button>

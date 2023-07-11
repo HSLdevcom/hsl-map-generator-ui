@@ -13,7 +13,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({updateSelectionSize}, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SelectionWindow);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectionWindow);

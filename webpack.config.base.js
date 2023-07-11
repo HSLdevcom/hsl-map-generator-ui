@@ -1,7 +1,6 @@
 /* eslint-disable no-console, import/no-extraneous-dependencies */
 
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
@@ -18,19 +17,17 @@ const config = {
                 ]
             },
             {
+                test: /\.js$/,
+                loader: "babel-loader",
+                include: path.resolve(__dirname, "node_modules/hsl-map-style")
+            },
+            {
                 test: /\.json$/,
                 loader: "json-loader"
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
                 loader: "url-loader"
-            }
-        ],
-        postLoaders: [
-            {
-                test: /\.js$/,
-                loader: "transform?brfs",
-                include: path.join(__dirname, "node_modules", "hsl-map-style")
             }
         ]
     },
@@ -59,8 +56,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({template: "index.ejs"}),
-        new webpack.EnvironmentPlugin(["DIGITRANSIT_APIKEY"]),
-        new Dotenv()
+        new Dotenv({systemvars: true}),
     ],
     externals: []
 };

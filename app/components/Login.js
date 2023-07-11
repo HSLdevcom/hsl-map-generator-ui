@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions*/
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React from "react";
 import {withStyles} from "@material-ui/core/styles";
@@ -45,10 +45,13 @@ const LoginComponent = () => {
                     <div className={styles.logo} alt="HSL Logo" />
                     <div className={styles.title}>HSL Karttageneraattori</div>
                 </div>
-                <div className={styles.loginButton} onClick={openLoginForm}>
+                <button
+                    type="button"
+                    className={styles.loginButton}
+                    onClick={openLoginForm}>
                     <LoginIcon />
                     <div className={styles.loginText}>Kirjaudu (HSL ID)</div>
-                </div>
+                </button>
             </div>
         </div>
     );
