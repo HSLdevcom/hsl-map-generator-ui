@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useRef, useState } from 'react';
-import maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import ZoneSymbolMarkers from './ZoneSymbolMarkers';
-import SelectionMarker from '../containers/SelectionMarker'
+import React, {useEffect, useRef, useState} from "react";
+import maplibregl from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
+import ZoneSymbolMarkers from "./ZoneSymbolMarkers";
+import SelectionMarker from "../containers/SelectionMarker";
 
 const MapComponent = ({
     viewport,
@@ -22,7 +22,7 @@ const MapComponent = ({
     useEffect(() => {
         const newMap = new maplibregl.Map({
             container: mapContainerRef.current,
-            style: style,
+            style,
             center: [viewport.longitude, viewport.latitude],
             zoom: viewport.zoom
         });
@@ -43,32 +43,32 @@ const MapComponent = ({
             });
         };
 
-        map.on('zoomend', onChange);
-        map.on('moveend', onChange);
+        map.on("zoomend", onChange);
+        map.on("moveend", onChange);
 
         return () => {
-            map.off('zoomend', onChange);
-            map.off('moveend', onChange);
+            map.off("zoomend", onChange);
+            map.off("moveend", onChange);
         };
-    }, [symbolSize, map, mapWidth, mapHeight, mapSelectionSize]);
+    }, [map]);
     return (
-        <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }}>
-                <SelectionMarker
+        <div ref={mapContainerRef} style={{width: "100%", height: "100%"}}>
+            <SelectionMarker
+                map={map}
+                center={[viewport.longitude, viewport.latitude]}
+                mapSelectionSize={mapSelectionSize}
+            />
+            {showZoneSymbols && (
+                <ZoneSymbolMarkers
                     map={map}
-                    center={[viewport.longitude, viewport.latitude]}
+                    zoneSymbols={zoneSymbols}
+                    updateSymbol={updateSymbol}
+                    symbolSize={symbolSize}
+                    mapWidth={mapWidth}
+                    mapHeight={mapHeight}
                     mapSelectionSize={mapSelectionSize}
                 />
-                {showZoneSymbols &&                 
-                    <ZoneSymbolMarkers
-                        map={map}
-                        zoneSymbols={zoneSymbols}
-                        updateSymbol={updateSymbol}
-                        symbolSize={symbolSize}
-                        mapWidth={mapWidth}
-                        mapHeight={mapHeight}
-                        mapSelectionSize={mapSelectionSize}
-                    />
-                }
+            )}
         </div>
     );
 };

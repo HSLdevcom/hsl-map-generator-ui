@@ -9,8 +9,8 @@ export function updateViewport(viewport) {
 
 export function updateSymbol(symbol, e) {
     const newSymbol = symbol
-        .set('latitude', +e.lat.toFixed(6))
-        .set('longitude', +e.lng.toFixed(6));
+        .set("latitude", +e.lat.toFixed(6))
+        .set("longitude", +e.lng.toFixed(6));
 
     return {
         type: "UPDATE_SYMBOL",

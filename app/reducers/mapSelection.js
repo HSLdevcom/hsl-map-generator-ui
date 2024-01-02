@@ -74,8 +74,8 @@ export default function mapSelection(state = initialState, action) {
             });
 
             const newSymbol = fromJS({
-                latitude: latitude,
-                longitude: longitude,
+                latitude,
+                longitude,
                 zone: action.zone,
                 id: zoneSymbolsArray.length + 1
             });

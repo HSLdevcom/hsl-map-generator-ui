@@ -4,13 +4,13 @@
     height: 20px;
     border-radius: 50%;
     border-width: 2px;
-    border-color: #D91153;
+    border-color: #d91153;
     border-style: solid;
     padding: 3px;
 }
 
 .markerDot {
-    background: #D91153;
+    background: #d91153;
     width: 100%;
     height: 100%;
     border-radius: 50%;

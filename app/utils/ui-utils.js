@@ -16,7 +16,7 @@ export const listModalStyles = {
             "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px 3px 14px"
     },
     overlay: {
-        zIndex: 500,
+        zIndex: 500
     }
 };
 
@@ -38,7 +38,7 @@ export const deleteModalStyles = {
             "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px 3px 14px"
     },
     overlay: {
-        zIndex: 500,
+        zIndex: 500
     }
 };
 
@@ -60,6 +60,6 @@ export const promptStyles = {
             "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px 3px 14px"
     },
     overlay: {
-        zIndex: 500,
+        zIndex: 500
     }
 };
