@@ -7,7 +7,9 @@ import styles from "./Marker.css";
 function redrawSelectionWindow(map, canvas, mapSelection) {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
+    // eslint-disable-next-line no-param-reassign
     canvas.width = map.getCanvas().width;
+    // eslint-disable-next-line no-param-reassign
     canvas.height = map.getCanvas().height;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -31,13 +33,15 @@ const SelectionMarker = ({
     const canvasRef = useRef(null);
 
     useEffect(() => {
-        if (!map) return;
+        if (!map) {
+            return () => {};
+        }
 
         if (!mapSelectionSize) {
             const newCenter = List([24.9, 60.2]);
             const updatedMapSelection = mapSelection.set("center", newCenter);
             updateSelectionSize(updatedMapSelection);
-            return;
+            return () => {};
         }
 
         const markerElement = document.createElement("div");

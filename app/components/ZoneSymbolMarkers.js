@@ -45,7 +45,9 @@ const ZoneSymbolMarkers = ({
     const markersRef = useRef([]);
 
     useEffect(() => {
-        if (!map || !zoneSymbols) return;
+        if (!map || !zoneSymbols) {
+            return () => {};
+        }
 
         markersRef.current.forEach((marker) => marker.remove());
         markersRef.current = [];
@@ -82,7 +84,9 @@ const ZoneSymbolMarkers = ({
     }, [map, zoneSymbols, updateSymbol, symbolSize]);
 
     useEffect(() => {
-        if (!map) return;
+        if (!map) {
+            return () => {};
+        }
 
         const resizeMarkers = () => {
             const newSvgSize = getSymbolSize(

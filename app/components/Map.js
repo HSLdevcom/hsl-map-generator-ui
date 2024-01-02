@@ -33,7 +33,9 @@ const MapComponent = ({
     }, []);
 
     useEffect(() => {
-        if (!map) return;
+        if (!map) {
+            return () => {};
+        }
 
         const onChange = () => {
             updateViewport({
