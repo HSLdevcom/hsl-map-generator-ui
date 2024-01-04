@@ -3,6 +3,7 @@ import moment from "moment";
 import Modal from "react-modal";
 
 import styles from "./ShowListModalItem.css";
+import {listModalStyles} from "../utils/ui-utils";
 import {
     downloadPoster,
     removePoster,
@@ -129,7 +130,8 @@ class ShowListModalItem extends Component {
                     )}
                     <Modal
                         isOpen={Boolean(openLogId && openLogId === item.id)}
-                        onRequestClose={closeLog}>
+                        onRequestClose={closeLog}
+                        style={listModalStyles}>
                         <div className={styles.log}>
                             <h3>Log</h3>
                             {item.events.map((event) => (
