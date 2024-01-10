@@ -24,13 +24,21 @@ const getZoneIcon = (zone, svgSize) => {
 };
 
 const getSymbolSize = (symbolSize, mapWidth, mapHeight, mapSelectionSize) => {
-    // This is not the correct way to calculate this. Using mapSelectionSize here doesnt make sense
     const symbolSizeNum = parseInt(symbolSize.replace("px", ""), 10);
-    const mapSizeDiameter = (mapWidth + mapHeight) / 2;
-    const symbolToMapRatio = mapSizeDiameter / symbolSizeNum;
-    const mapSelectionSizeDiameter = (mapSelectionSize[0] + mapSelectionSize[1]) / 2;
 
-    return (mapSelectionSizeDiameter / symbolToMapRatio) * SCALE;
+    // Calculate the average of map width and height
+    const mapSizeDiameter = (mapWidth + mapHeight) / 2;
+
+    // Calculate the ratio of the symbol size to the map size
+    const symbolToMapRatio = (symbolSizeNum / mapSizeDiameter) * SCALE;
+
+    const selectionDiameter = Math.sqrt(
+        mapSelectionSize[0] ** 2 + mapSelectionSize[1] ** 2
+    );
+
+    const correctedSymbolSize = selectionDiameter * symbolToMapRatio;
+
+    return correctedSymbolSize;
 };
 
 const ZoneSymbolMarkers = ({
