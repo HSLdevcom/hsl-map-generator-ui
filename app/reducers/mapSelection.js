@@ -1,5 +1,4 @@
 import {fromJS} from "immutable";
-import {cloneDeep} from "lodash";
 import {
     UPDATE_CENTER,
     UPDATE_SIZE,
@@ -40,7 +39,7 @@ const initialState = fromJS({
 export default function mapSelection(state = initialState, action) {
     switch (action.type) {
         case UPDATE_CENTER:
-            return state.set("center", fromJS(action.center.lngLat));
+            return state.set("center", fromJS(action.center));
         case UPDATE_SIZE:
             return state.set("size", fromJS(action.size));
         case UPDATE_DPI:
@@ -74,11 +73,12 @@ export default function mapSelection(state = initialState, action) {
                 newZoneSymbols.push(symbol);
             });
 
-            const newSymbol = cloneDeep(zoneSymbolsArray[0]);
-            newSymbol._root.entries[0] = ["latitude", latitude];
-            newSymbol._root.entries[1] = ["longitude", longitude];
-            newSymbol._root.entries[2] = ["zone", action.zone];
-            newSymbol._root.entries[3] = ["id", zoneSymbolsArray.length + 1];
+            const newSymbol = fromJS({
+                latitude,
+                longitude,
+                zone: action.zone,
+                id: zoneSymbolsArray.length + 1
+            });
             newZoneSymbols.push(newSymbol);
 
             return state.set("zoneSymbols", newZoneSymbols);

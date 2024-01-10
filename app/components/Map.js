@@ -1,44 +1,8 @@
 import PropTypes from "prop-types";
-import React from "react";
-import MapGL, {Marker} from "react-map-gl";
-import CenterMarker from "../containers/CenterMarker";
-import SelectionWindow from "../containers/SelectionWindow";
-import DebugOverlay from "../containers/DebugOverlay";
-import Spinner from "../containers/Spinner";
-
-import AZone from "../icons/icon-Zone-A";
-import BZone from "../icons/icon-Zone-B";
-import CZone from "../icons/icon-Zone-C";
-import DZone from "../icons/icon-Zone-D";
-
-// Same scaling used in backend for sizing the posters.
-const SCALE = 96 / 72;
-
-const getZoneIcon = (zone, svgSize) => {
-    switch (zone) {
-        case "A":
-            return <AZone size={svgSize} />;
-        case "B":
-            return <BZone size={svgSize} />;
-        case "C":
-            return <CZone size={svgSize} />;
-        case "D":
-            return <DZone size={svgSize} />;
-        default:
-            return <div />;
-    }
-};
-
-const getSymbolSize = (symbolSize, mapWidth, mapHeight, mapSelectionSize) => {
-    if (!mapSelectionSize) return 0;
-    const symbolSizeNum = parseInt(symbolSize.replace("px", ""), 10);
-    const mapSizeDiameter = (mapWidth + mapHeight) / 2;
-    const symbolToMapRatio = mapSizeDiameter / symbolSizeNum;
-    const mapSelectionSizeDiameter =
-        (mapSelectionSize[0] + mapSelectionSize[1]) / 2;
-
-    return (mapSelectionSizeDiameter / symbolToMapRatio) * SCALE;
-};
+import React, {useEffect, useRef, useState} from "react";
+import maplibregl from "maplibre-gl";
+import ZoneSymbolMarkers from "./ZoneSymbolMarkers";
+import SelectionMarker from "../containers/SelectionMarker";
 
 const MapComponent = ({
     viewport,
@@ -52,58 +16,63 @@ const MapComponent = ({
     symbolSize,
     mapSelectionSize
 }) => {
-    const svgSize = getSymbolSize(
-        symbolSize,
-        mapWidth,
-        mapHeight,
-        mapSelectionSize
-    );
+    const mapContainerRef = useRef(null);
+    const [map, setMap] = useState(null);
+    useEffect(() => {
+        const newMap = new maplibregl.Map({
+            container: mapContainerRef.current,
+            style,
+            center: [viewport.longitude, viewport.latitude],
+            zoom: viewport.zoom
+        });
+
+        setMap(newMap);
+
+        return () => newMap.remove();
+    }, []);
+
+    useEffect(() => {
+        if (!map) {
+            return () => {};
+        }
+
+        const onChange = () => {
+            updateViewport({
+                longitude: map.getCenter().lng,
+                latitude: map.getCenter().lat,
+                zoom: map.getZoom()
+            });
+        };
+
+        map.on("zoomend", onChange);
+        map.on("moveend", onChange);
+
+        return () => {
+            map.off("zoomend", onChange);
+            map.off("moveend", onChange);
+        };
+    }, [map]);
     return (
-        <div>
-            <MapGL
-                {...viewport}
-                width={mapWidth}
-                height={mapHeight}
-                mapStyle={style}
-                onViewportChange={updateViewport}>
-                <SelectionWindow
-                    viewport={viewport}
-                    width={mapWidth}
-                    height={mapHeight}
+        <div ref={mapContainerRef} style={{width: "100%", height: "100%"}}>
+            <SelectionMarker
+                map={map}
+                center={[viewport.longitude, viewport.latitude]}
+                mapSelectionSize={mapSelectionSize}
+            />
+            {showZoneSymbols && (
+                <ZoneSymbolMarkers
+                    map={map}
+                    zoneSymbols={zoneSymbols}
+                    updateSymbol={updateSymbol}
+                    symbolSize={symbolSize}
+                    mapWidth={mapWidth}
+                    mapHeight={mapHeight}
+                    mapSelectionSize={mapSelectionSize}
                 />
-                <DebugOverlay
-                    viewport={viewport}
-                    width={mapWidth}
-                    height={mapHeight}
-                />
-                <CenterMarker
-                    viewport={viewport}
-                    width={mapWidth}
-                    height={mapHeight}
-                />
-                {showZoneSymbols &&
-                    zoneSymbols.map((symbol) => {
-                        return (
-                            <Marker
-                                key={symbol.get("id")}
-                                draggable={true}
-                                latitude={symbol.get("latitude")}
-                                longitude={symbol.get("longitude")}
-                                onDrag={(e) => {
-                                    updateSymbol(symbol, e);
-                                }}>
-                                <div>
-                                    {getZoneIcon(symbol.get("zone"), svgSize)}
-                                </div>
-                            </Marker>
-                        );
-                    })}
-            </MapGL>
-            <Spinner width={mapWidth} height={mapHeight} />
+            )}
         </div>
     );
 };
-
 MapComponent.propTypes = {
     viewport: PropTypes.shape({
         latitude: PropTypes.number.isRequired,

@@ -14,6 +14,9 @@ export const listModalStyles = {
         right: "auto",
         boxShadow:
             "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px 3px 14px"
+    },
+    overlay: {
+        zIndex: 500
     }
 };
 
@@ -33,6 +36,9 @@ export const deleteModalStyles = {
         transform: "translate(-40%, 0%)",
         boxShadow:
             "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px 3px 14px"
+    },
+    overlay: {
+        zIndex: 500
     }
 };
 
@@ -52,5 +58,8 @@ export const promptStyles = {
         right: "auto",
         boxShadow:
             "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px 3px 14px"
+    },
+    overlay: {
+        zIndex: 500
     }
 };
