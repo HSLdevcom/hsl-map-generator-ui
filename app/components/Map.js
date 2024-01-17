@@ -8,13 +8,12 @@ const MapComponent = ({
     viewport,
     updateViewport,
     style,
-    mapWidth,
-    mapHeight,
     zoneSymbols,
     updateSymbol,
     showZoneSymbols,
     symbolSize,
-    mapSelectionSize
+    mapSelectionSize,
+    mapSelection
 }) => {
     const mapContainerRef = useRef(null);
     const [map, setMap] = useState(null);
@@ -65,9 +64,7 @@ const MapComponent = ({
                     zoneSymbols={zoneSymbols}
                     updateSymbol={updateSymbol}
                     symbolSize={symbolSize}
-                    mapWidth={mapWidth}
-                    mapHeight={mapHeight}
-                    mapSelectionSize={mapSelectionSize}
+                    mapSelection={mapSelection}
                 />
             )}
         </div>
