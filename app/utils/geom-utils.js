@@ -82,3 +82,20 @@ export const mapSelectionToMeterPerPixelRatio = (mapSelection) => {
         mapSelection.get("mapScale");
     return Math.round(widthIRLMeters / widthInPixels);
 };
+
+export const bboxDiameterInMeters = (bbox) => {
+    if (!bbox || bbox.length !== 2) return 0;
+
+    const [lng1, lat1] = bbox[0];
+    const [lng2, lat2] = bbox[1];
+
+    const latDiff = lat2 - lat1;
+    const lngDiff = lng2 - lng1;
+
+    const latDiffMeters = latDiff * DEG_LAT_PER_M;
+    const lngDiffMeters = lngDiff * degLonPerM((lat1 + lat2) / 2);
+
+    const diameter = Math.sqrt(Math.pow(latDiffMeters, 2) + Math.pow(lngDiffMeters, 2));
+
+    return diameter;
+};

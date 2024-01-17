@@ -5,6 +5,11 @@ import AZone from "../icons/icon-Zone-A";
 import BZone from "../icons/icon-Zone-B";
 import CZone from "../icons/icon-Zone-C";
 import DZone from "../icons/icon-Zone-D";
+import {
+    mapSelectionToBbox,
+    bboxDiameterInMeters,
+    mapSelectionToMeterPerPixelRatio
+} from "../utils/geom-utils";
 
 const SCALE = 96 / 72;
 
@@ -23,22 +28,32 @@ const getZoneIcon = (zone, svgSize) => {
     }
 };
 
-const getSymbolSize = (symbolSize, mapWidth, mapHeight, mapSelectionSize) => {
-    const symbolSizeNum = parseInt(symbolSize.replace("px", ""), 10);
+const getSymbolSize = (symbolSize, mapSelection, map) => {
+    const matchValues = symbolSize.match(/\d+/);
+    const symbolSizeNumber = matchValues ? parseInt(matchValues[0], 10) : null;
 
-    // Calculate the average of map width and height
-    const mapSizeDiameter = (mapWidth + mapHeight) / 2;
+    // We know the symbol's size in pixels in the poster so we can calculate its diameter in meters
+    const pixelToMeterRatio = mapSelectionToMeterPerPixelRatio(mapSelection);
+    const symbolDiameterInMeters = symbolSizeNumber * pixelToMeterRatio;
 
-    // Calculate the ratio of the symbol size to the map size
-    const symbolToMapRatio = (symbolSizeNum / mapSizeDiameter) * SCALE;
+    // We can calculate the ratio of the symbol's diameter to the mapSelection's diameter
+    const mapSelectionBbox = mapSelectionToBbox(mapSelection);
+    const bboxInMeters = bboxDiameterInMeters(mapSelectionBbox)
+    const symbolToMapSelectionRatio = symbolDiameterInMeters / bboxInMeters
+    
+    // Get mapSelection coordinates in pixel coordinates
+    const bboxNw = map.project(mapSelectionBbox[0]);
+    const bboxSe = map.project(mapSelectionBbox[1]);
 
-    const selectionDiameter = Math.sqrt(
-        mapSelectionSize[0] ** 2 + mapSelectionSize[1] ** 2
-    );
+    // Calculate mapSelection diameter in pixels
+    const widthInPixels = Math.abs(bboxSe.x - bboxNw.x);
+    const heightInPixels = Math.abs(bboxSe.y - bboxNw.y);
+    const bboxDiameter = Math.sqrt(widthInPixels * widthInPixels + heightInPixels * heightInPixels);
 
-    const correctedSymbolSize = selectionDiameter * symbolToMapRatio;
+    // Finally get the symbol's diameter in pixels relative to the map
+    const symbolSizeToMapScale = bboxDiameter * symbolToMapSelectionRatio;
 
-    return correctedSymbolSize;
+    return symbolSizeToMapScale;
 };
 
 const ZoneSymbolMarkers = ({
@@ -46,9 +61,7 @@ const ZoneSymbolMarkers = ({
     zoneSymbols,
     updateSymbol,
     symbolSize,
-    mapWidth,
-    mapHeight,
-    mapSelectionSize
+    mapSelection,
 }) => {
     const markersRef = useRef([]);
 
@@ -62,9 +75,8 @@ const ZoneSymbolMarkers = ({
 
         const svgSize = getSymbolSize(
             symbolSize,
-            mapWidth,
-            mapHeight,
-            mapSelectionSize
+            mapSelection,
+            map
         );
         zoneSymbols.forEach((symbol) => {
             const markerElement = document.createElement("div");
@@ -99,9 +111,8 @@ const ZoneSymbolMarkers = ({
         const resizeMarkers = () => {
             const newSvgSize = getSymbolSize(
                 symbolSize,
-                mapWidth,
-                mapHeight,
-                mapSelectionSize
+                mapSelection,
+                map
             );
             markersRef.current.forEach((marker) => {
                 const element = marker.getElement();
@@ -117,7 +128,7 @@ const ZoneSymbolMarkers = ({
         map.on("zoomend", resizeMarkers);
 
         return () => map.off("zoomend", resizeMarkers);
-    }, [mapSelectionSize]);
+    }, [symbolSize]);
 
     return null;
 };
