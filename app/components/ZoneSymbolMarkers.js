@@ -117,9 +117,9 @@ const ZoneSymbolMarkers = ({
             });
         };
 
-        map.on("zoomend", resizeMarkers);
+        map.on("zoom", resizeMarkers);
 
-        return () => map.off("zoomend", resizeMarkers);
+        return () => map.off("zoom", resizeMarkers);
     }, [symbolSize]);
 
     return null;
