@@ -95,7 +95,7 @@ export const bboxDiameterInMeters = (bbox) => {
     const latDiffMeters = latDiff * DEG_LAT_PER_M;
     const lngDiffMeters = lngDiff * degLonPerM((lat1 + lat2) / 2);
 
-    const diameter = Math.sqrt(Math.pow(latDiffMeters, 2) + Math.pow(lngDiffMeters, 2));
+    const diameter = Math.sqrt(latDiffMeters ** 2 + lngDiffMeters ** 2);
 
     return diameter;
 };

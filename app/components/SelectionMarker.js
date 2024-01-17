@@ -4,7 +4,12 @@ import {List} from "immutable";
 import {mapSelectionToBbox} from "../utils/geom-utils";
 import styles from "./Marker.css";
 
-function redrawSelectionWindow({map, canvas, mapSelection, updateSelectionSize}) {
+function redrawSelectionWindow({
+    map,
+    canvas,
+    mapSelection,
+    updateSelectionSize
+}) {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     // eslint-disable-next-line no-param-reassign
@@ -19,7 +24,7 @@ function redrawSelectionWindow({map, canvas, mapSelection, updateSelectionSize})
     ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.clearRect(nw.x, nw.y, se.x - nw.x, se.y - nw.y);
-    const selectionWidth = Math.abs(nw.x - se.x);	
+    const selectionWidth = Math.abs(nw.x - se.x);
     const selectionHeight = Math.abs(nw.y - se.y);
     if (updateSelectionSize) {
         updateSelectionSize([selectionWidth, selectionHeight]);
@@ -45,7 +50,10 @@ const SelectionMarker = ({
         if (!mapSelectionSize) {
             const newCenter = List([24.9, 60.2]);
             const updatedMapSelection = mapSelection.set("center", newCenter);
-            updateSelectionSize([updatedMapSelection.get("size").get(0), updatedMapSelection.get("size").get(1)]);
+            updateSelectionSize([
+                updatedMapSelection.get("size").get(0),
+                updatedMapSelection.get("size").get(1)
+            ]);
             return () => {};
         }
 
@@ -65,23 +73,41 @@ const SelectionMarker = ({
             const lngLat = e.target.getLngLat();
             const newCenter = List([lngLat.lng, lngLat.lat]);
             const updatedMapSelection = mapSelection.set("center", newCenter);
-            redrawSelectionWindow({map, canvas: canvasRef.current, mapSelection: updatedMapSelection});
+            redrawSelectionWindow({
+                map,
+                canvas: canvasRef.current,
+                mapSelection: updatedMapSelection
+            });
         };
 
         const handleDragEnd = (e) => {
             const lngLat = e.target.getLngLat();
             const newCenter = List([lngLat.lng, lngLat.lat]);
             const updatedMapSelection = mapSelection.set("center", newCenter);
-            redrawSelectionWindow({map, canvas: canvasRef.current, mapSelection: updatedMapSelection, updateSelectionSize});
+            redrawSelectionWindow({
+                map,
+                canvas: canvasRef.current,
+                mapSelection: updatedMapSelection,
+                updateSelectionSize
+            });
             updateCenter(newCenter);
         };
 
         const handleMapMove = () => {
-            redrawSelectionWindow({map, canvas: canvasRef.current, mapSelection});
+            redrawSelectionWindow({
+                map,
+                canvas: canvasRef.current,
+                mapSelection
+            });
         };
 
         const handleZoomEnd = () => {
-            redrawSelectionWindow({map, canvas: canvasRef.current, mapSelection, updateSelectionSize});
+            redrawSelectionWindow({
+                map,
+                canvas: canvasRef.current,
+                mapSelection,
+                updateSelectionSize
+            });
         };
 
         marker.on("drag", handleDrag);
@@ -96,7 +122,12 @@ const SelectionMarker = ({
         canvas.style.pointerEvents = "none";
         map.getContainer().appendChild(canvas);
         canvasRef.current = canvas;
-        redrawSelectionWindow({map, canvas: canvasRef.current, mapSelection, updateSelectionSize});
+        redrawSelectionWindow({
+            map,
+            canvas: canvasRef.current,
+            mapSelection,
+            updateSelectionSize
+        });
 
         return () => {
             marker.off("drag", handleDrag);

@@ -11,8 +11,6 @@ import {
     mapSelectionToMeterPerPixelRatio
 } from "../utils/geom-utils";
 
-const SCALE = 96 / 72;
-
 const getZoneIcon = (zone, svgSize) => {
     switch (zone) {
         case "A":
@@ -38,9 +36,9 @@ const getSymbolSize = (symbolSize, mapSelection, map) => {
 
     // We can calculate the ratio of the symbol's diameter to the mapSelection's diameter
     const mapSelectionBbox = mapSelectionToBbox(mapSelection);
-    const bboxInMeters = bboxDiameterInMeters(mapSelectionBbox)
-    const symbolToMapSelectionRatio = symbolDiameterInMeters / bboxInMeters
-    
+    const bboxInMeters = bboxDiameterInMeters(mapSelectionBbox);
+    const symbolToMapSelectionRatio = symbolDiameterInMeters / bboxInMeters;
+
     // Get mapSelection coordinates in pixel coordinates
     const bboxNw = map.project(mapSelectionBbox[0]);
     const bboxSe = map.project(mapSelectionBbox[1]);
@@ -48,7 +46,9 @@ const getSymbolSize = (symbolSize, mapSelection, map) => {
     // Calculate mapSelection diameter in pixels
     const widthInPixels = Math.abs(bboxSe.x - bboxNw.x);
     const heightInPixels = Math.abs(bboxSe.y - bboxNw.y);
-    const bboxDiameter = Math.sqrt(widthInPixels * widthInPixels + heightInPixels * heightInPixels);
+    const bboxDiameter = Math.sqrt(
+        widthInPixels * widthInPixels + heightInPixels * heightInPixels
+    );
 
     // Finally get the symbol's diameter in pixels relative to the map
     const symbolSizeToMapScale = bboxDiameter * symbolToMapSelectionRatio;
@@ -61,7 +61,7 @@ const ZoneSymbolMarkers = ({
     zoneSymbols,
     updateSymbol,
     symbolSize,
-    mapSelection,
+    mapSelection
 }) => {
     const markersRef = useRef([]);
 
@@ -73,11 +73,7 @@ const ZoneSymbolMarkers = ({
         markersRef.current.forEach((marker) => marker.remove());
         markersRef.current = [];
 
-        const svgSize = getSymbolSize(
-            symbolSize,
-            mapSelection,
-            map
-        );
+        const svgSize = getSymbolSize(symbolSize, mapSelection, map);
         zoneSymbols.forEach((symbol) => {
             const markerElement = document.createElement("div");
             ReactDOM.render(
@@ -109,11 +105,7 @@ const ZoneSymbolMarkers = ({
         }
 
         const resizeMarkers = () => {
-            const newSvgSize = getSymbolSize(
-                symbolSize,
-                mapSelection,
-                map
-            );
+            const newSvgSize = getSymbolSize(symbolSize, mapSelection, map);
             markersRef.current.forEach((marker) => {
                 const element = marker.getElement();
                 if (marker.symbol) {
