@@ -1,6 +1,5 @@
 import React, {useEffect, useRef} from "react";
-import { createRoot } from 'react-dom/client';
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import maplibregl from "maplibre-gl";
 import AZone from "../icons/icon-Zone-A";
 import BZone from "../icons/icon-Zone-B";
@@ -77,22 +76,22 @@ const ZoneSymbolMarkers = ({
         const svgSize = getSymbolSize(symbolSize, mapSelection, map);
         zoneSymbols.forEach((symbol) => {
             const markerElement = document.createElement("div");
-            const root = createRoot(markerElement); 
+            const root = createRoot(markerElement);
             root.render(getZoneIcon(symbol.get("zone"), svgSize));
-        
+
             const marker = new maplibregl.Marker({
                 element: markerElement,
                 draggable: true
             })
                 .setLngLat([symbol.get("longitude"), symbol.get("latitude")])
                 .addTo(map);
-        
+
             marker.on("dragend", (e) => {
                 const lngLat = e.target.getLngLat();
                 updateSymbol(symbol, {lng: lngLat.lng, lat: lngLat.lat});
             });
             marker.symbol = symbol;
-            marker.reactRoot = root; 
+            marker.reactRoot = root;
             markersRef.current.push(marker);
         });
 
@@ -109,7 +108,13 @@ const ZoneSymbolMarkers = ({
             markersRef.current.forEach((marker) => {
                 const element = marker.getElement();
                 if (marker.symbol && marker.reactRoot) {
-                    marker.reactRoot.render(getZoneIcon(marker.symbol.get("zone"), newSvgSize));
+                    marker.reactRoot.render(
+                        getZoneIcon(
+                            marker.symbol.get("zone"),
+                            newSvgSize,
+                            element
+                        )
+                    );
                 }
             });
         };
