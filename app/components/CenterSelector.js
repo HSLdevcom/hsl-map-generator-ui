@@ -1,4 +1,5 @@
 import React from "react";
+import {List} from "immutable";
 import DropdownSelector from "./DropdownSelector";
 import styles from "./DropdownSelector.css";
 
@@ -25,12 +26,12 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => {
                     data-cy="manual-coords-lng-selector-input"
                     onChange={(event) => {
                         if (validateCoordInput(event.target.value)) {
-                            updateCenter({
-                                lngLat: [
+                            updateCenter(
+                                List([
                                     center.get(0),
                                     Number(event.target.value)
-                                ]
-                            });
+                                ])
+                            );
                         }
                     }}
                 />
@@ -43,12 +44,12 @@ const CenterSelector = ({center, toggleTab, selected, updateCenter}) => {
                     data-cy="manual-coords-lat-selector-input"
                     onChange={(event) => {
                         if (validateCoordInput(event.target.value)) {
-                            updateCenter({
-                                lngLat: [
+                            updateCenter(
+                                List([
                                     Number(event.target.value),
                                     center.get(1)
-                                ]
-                            });
+                                ])
+                            );
                         }
                     }}
                 />
