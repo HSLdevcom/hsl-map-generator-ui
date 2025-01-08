@@ -83,6 +83,7 @@ const SelectionMarker = ({
         const handleDragEnd = (e) => {
             const lngLat = e.target.getLngLat();
             const newCenter = List([lngLat.lng, lngLat.lat]);
+            updateCenter(newCenter);
             const updatedMapSelection = mapSelection.set("center", newCenter);
             redrawSelectionWindow({
                 map,
@@ -90,7 +91,6 @@ const SelectionMarker = ({
                 mapSelection: updatedMapSelection,
                 updateSelectionSize
             });
-            updateCenter(newCenter);
         };
 
         const handleMapMove = () => {
