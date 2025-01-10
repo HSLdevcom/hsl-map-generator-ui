@@ -87,6 +87,7 @@
         "immutability-helper": "^3.1.1",
         "immutable": "^3.7.6",
         "lodash": "^4.17.19",
+        "maplibre-gl": "^1.14.0",
         "memoizee": "^0.4.11",
         "moment": "^2.19.4",
         "prop-types": "^15.7.2",
