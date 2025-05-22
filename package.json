@@ -1,7 +1,7 @@
 {
     "name": "hsl-map-generator-ui",
     "productName": "MapGenerator",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Map Generator application based on React, Webpack, React Hot Loader for rapid application development",
     "main": "index.js",
     "scripts": {
