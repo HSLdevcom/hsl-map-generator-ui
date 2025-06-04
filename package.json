@@ -24,7 +24,7 @@
         "email": "hannes.junnila@gmail.com",
         "url": "https://github.com/hannesj"
     },
-    "license": "MIT",
+    "license": "AGPL-3.0-only",
     "bugs": {
         "url": "https://github.com/HSLdevcom/hsl-map-generator-ui/issues"
     },

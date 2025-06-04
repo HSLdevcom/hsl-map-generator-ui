@@ -64,4 +64,4 @@ If you want to use the cypress ui for running tests use
 
 ## License
 
-MIT © [HSL](https://github.com/HSLdevcom)
+AGPL-3.0-only © [HSL](https://github.com/HSLdevcom)
