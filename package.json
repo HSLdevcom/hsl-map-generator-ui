@@ -81,7 +81,7 @@
         "cancelable-promise": "^2.2.0",
         "classnames": "^2.2.3",
         "dotenv-webpack": "^1.7.0",
-        "file-saver": "^1.3.2",
+        "file-saver": "^2.0.5",
         "history": "^5.0.0",
         "hsl-map-style": "hsldevcom/hsl-map-style#master",
         "immutability-helper": "^3.1.1",
