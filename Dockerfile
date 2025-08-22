@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:20-alpine as builder
 
 ENV WORK /opt/mapgenerator
 
@@ -23,7 +23,7 @@ RUN yarn build
 
 
 # The actual image comes here
-FROM node:18-alpine
+FROM node:20-alpine
 
 ENV WORK /opt/mapgenerator
 
