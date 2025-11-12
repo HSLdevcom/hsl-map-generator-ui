@@ -22,13 +22,13 @@ jobs:
           CYPRESS_TESTING_HSLID_USERNAME: ${{ secrets.CYPRESS_TESTING_HSLID_USERNAME }}
           CYPRESS_TESTING_HSLID_PASSWORD: ${{ secrets.CYPRESS_TESTING_HSLID_PASSWORD }}
       - name: Upload screenshot artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
       - name: Upload video artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-videos
