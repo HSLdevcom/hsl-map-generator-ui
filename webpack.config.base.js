@@ -1,64 +1,55 @@
-/* eslint-disable no-console, import/no-extraneous-dependencies */
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
-const config = {
+module.exports = {
+    context: __dirname,
+
+    entry: {
+        app: path.resolve(__dirname, "app/index"),
+    },
+
+    output: {
+        path: path.join(__dirname, "dist"),
+        publicPath: "/",
+        filename: "bundle.js",
+        clean: true,
+    },
+
+    resolve: {
+        extensions: [".js", ".jsx"],
+        mainFields: ["browser", "module", "main"],
+    },
+
     module: {
-        noParse: /json-schema\/lib\/validate\.js/,
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
-                loaders: ["babel-loader"],
                 include: [
                     path.resolve(__dirname, "app"),
-                    path.resolve(__dirname, "node_modules/mapbox-gl/js")
-                ]
+                    path.resolve(__dirname, "node_modules/mapbox-gl/js"),
+                ],
+                use: {
+                    loader: "babel-loader",
+                },
             },
             {
                 test: /\.js$/,
-                loader: "babel-loader",
-                include: path.resolve(__dirname, "node_modules/hsl-map-style")
-            },
-            {
-                test: /\.json$/,
-                loader: "json-loader"
+                include: path.resolve(__dirname, "node_modules/hsl-map-style"),
+                use: {
+                    loader: "babel-loader",
+                },
             },
             {
                 test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                loader: "url-loader"
-            }
-        ]
-    },
-    output: {
-        path: path.join(__dirname, "dist"),
-        publicPath: "",
-        filename: "bundle.js"
-    },
-    resolve: {
-        extensions: ["", ".js", ".jsx"],
-        packageMains: [
-            "webpack",
-            "browser",
-            "web",
-            "browserify",
-            ["jam", "main"],
-            "main"
+                type: "asset",
+            },
         ],
-        /* alias: {
-            "mapbox-gl$": "mapbox-gl/dist/mapbox-gl"
-        }, */
-        fallback: path.join(__dirname, "node_modules")
     },
-    resolveLoader: {
-        fallback: path.join(__dirname, "node_modules")
-    },
-    plugins: [
-        new HtmlWebpackPlugin({template: "index.ejs"}),
-        new Dotenv({systemvars: true}),
-    ],
-    externals: []
-};
 
-module.exports = config;
+    plugins: [
+        new HtmlWebpackPlugin({ template: "index.ejs" }),
+        new Dotenv({ systemvars: true }),
+    ],
+};

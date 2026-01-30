@@ -1,7 +1,7 @@
-const uuidv4 = require("uuid/v4");
+const { v4: uuidv4 } = require("uuid");
 
 // TODO: Envify here and cypress.json properly
-const API_URL = Cypress.config().apiUrl;
+const API_URL = Cypress.env("API_URL");
 const TEST_PREFIX = "CY-TEST";
 
 describe("Basic functionalities", () => {
@@ -34,8 +34,7 @@ describe("Basic functionalities", () => {
 
     it("Add list, select it for use and show it", () => {
         const uuid = `${TEST_PREFIX}-${uuidv4()}`;
-        cy.server();
-        cy.route("POST", `${API_URL}/builds`).as("postBuild");
+        cy.intercept("POST", `${API_URL}/builds`).as("postBuild");
 
         cy.get("[data-cy=toggle-mode-button]").click();
         cy.get("[data-cy=new-list-button").click();
@@ -153,14 +152,12 @@ describe("Basic functionalities", () => {
     it("Generate poster", () => {
         const uuid = `${TEST_PREFIX}-${uuidv4()}`;
         const posterName = uuid.substr(0, 5);
-        cy.server();
-        cy.route("POST", `${API_URL}/builds`).as("postBuild");
+
+        cy.intercept("POST", `${API_URL}/builds`).as("postBuild");
 
         cy.get("[data-cy=toggle-mode-button]").click();
-        cy.get("[data-cy=new-list-button").click();
-        cy.get("[data-cy=new-list-name-input]")
-            .click()
-            .type(uuid);
+        cy.get("[data-cy=new-list-button]").click();
+        cy.get("[data-cy=new-list-name-input]").click().type(uuid);
 
         cy.get("[data-cy=new-list-name-input]").should("have.value", uuid);
         cy.get("[data-cy=add-list-button]").click();
@@ -170,33 +167,25 @@ describe("Basic functionalities", () => {
         cy.get("[data-cy=select-list-button]").click();
 
         cy.get("[data-cy=size-selector-button]").click();
-        cy.get("[data-cy=size-selector-width-input]")
-            .click()
-            .clear()
-            .type(200);
-        cy.get("[data-cy=size-selector-height-input]")
-            .click()
-            .clear()
-            .type(200);
+        cy.get("[data-cy=size-selector-width-input]").click().clear().type(200);
+        cy.get("[data-cy=size-selector-height-input]").click().clear().type(200);
 
         cy.get("[data-cy=new-poster-name]").type(posterName);
-        cy.get("[data-cy=generate-button").click();
-        cy.get("[data-cy=close-generate-prompt-button").click();
+        cy.get("[data-cy=generate-button]").click();
+        cy.get("[data-cy=close-generate-prompt-button]").click();
         cy.get("[data-cy=show-list-button]").click();
 
-        // 60 seconds should be more than enough for 200x200 poster.
-        // Better implementation would be to somehow stop waiting after
-        // polling for build status returns "pending: 0".
         cy.wait(60000);
         cy.get(`[data-cy=${posterName}]`).contains("READY");
 
-        // Remove build
         cy.request("GET", `${API_URL}/builds`)
             .its("body")
             .then((buildArr) => {
-                const build = buildArr.find((build) => build.title === uuid);
-                cy.request("DELETE", `${API_URL}/builds/${build.id}`);
-            });
+                const build = buildArr.find((b) => b.title === uuid);
+                if (build) {
+                    cy.request("DELETE", `${API_URL}/builds/${build.id}`);
+                }
+        });
 
         cy.get("[data-cy=close-list-modal-button]").click();
     });

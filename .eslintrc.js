@@ -1,10 +1,12 @@
 module.exports = {
+    parser: "@babel/eslint-parser",
     parserOptions: {
-        ecmaVersion: 2018,
-        ecmaFeatures: {
-            jsx: true
-        }
+       requireConfigFile: false,
+        babelOptions: {
+            presets: ["@babel/preset-env"],
+        },
     },
+
     extends: ["airbnb", "plugin:prettier/recommended"],
     rules: {
         "no-console": "off",

@@ -1,48 +1,62 @@
-/* eslint-disable import/no-extraneous-dependencies */
+const path = require("path");
 const webpack = require("webpack");
 const baseConfig = require("./webpack.config.base");
 
-const config = {
+module.exports = {
     ...baseConfig,
-
-    debug: true,
-
-    devtool: "cheap-module-eval-source-map",
-
-    entry: [
-        "webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr",
-        "./app/index"
-    ],
-
-    output: {
-        ...baseConfig.output
-    },
-
+    mode: "development",
+    devtool: "eval-cheap-module-source-map",
+    entry: baseConfig.entry,
     module: {
         ...baseConfig.module,
-        loaders: [
-            ...baseConfig.module.loaders,
-
+        rules: [
+            ...baseConfig.module.rules,
             {
-                test: /(node_modules.+|\.global)\.css$/,
-                loaders: ["style-loader", "css-loader?sourceMap"]
+                test: /\.css$/,
+                include: /node_modules/,
+                use: ["style-loader", "css-loader"],
             },
-
             {
-                test: /^((?!(node_modules|\.global)).)*\.css$/,
-                loaders: [
+                test: /\.css$/,
+                include: path.resolve(__dirname, "app"),
+                exclude: /\.global\.css$/,
+                use: [
                     "style-loader",
-                    "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
-                ]
-            }
+                    {
+                    loader: "css-loader",
+                    options: {
+                        sourceMap: true,
+                        esModule: false, 
+                        modules: {
+                        localIdentName: "[name]__[local]___[hash:base64:5]",
+                        },
+                    },
+                    },
+                ],
+            },
+            {
+                test: /\.global\.css$/,
+                include: path.resolve(__dirname, "app"),
+                use: ["style-loader", { loader: "css-loader", options: { sourceMap: true } }],
+            },
         ]
     },
-
     plugins: [
         ...baseConfig.plugins,
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ]
+        new webpack.NoEmitOnErrorsPlugin(),
+    ],
+    devServer: {
+        port: 3000,
+        host: "localhost",
+        hot: true,
+        historyApiFallback: true,
+        static: {
+        directory: path.join(__dirname, "dist"),
+            publicPath: "/",
+        },
+        client: {
+            overlay: true,
+        },
+    },
 };
-
-module.exports = config;
