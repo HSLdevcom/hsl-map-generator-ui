@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 
 // TODO: Envify here and cypress.json properly
-const API_URL = Cypress.config().apiUrl;
+const API_URL = Cypress.env("API_URL");
 const TEST_PREFIX = "CY-TEST";
 
 describe("Basic functionalities", () => {
@@ -34,8 +34,7 @@ describe("Basic functionalities", () => {
 
     it("Add list, select it for use and show it", () => {
         const uuid = `${TEST_PREFIX}-${uuidv4()}`;
-        cy.server();
-        cy.route("POST", `${API_URL}/builds`).as("postBuild");
+        cy.intercept("POST", `${API_URL}/builds`).as("postBuild");
 
         cy.get("[data-cy=toggle-mode-button]").click();
         cy.get("[data-cy=new-list-button").click();
