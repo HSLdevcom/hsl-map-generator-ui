@@ -3,10 +3,14 @@ Cypress.Commands.add("hslLogin", () => {
     const AUTH_SCOPE =
         "email https://oneportal.trivore.com/scope/groups.readonly";
 
-    const CLIENT_ID = Cypress.env("CYPRESS_HSLID_CLIENT_ID");
-    const CLIENT_SECRET = Cypress.env("CYPRESS_HSLID_CLIENT_SECRET");
-    const HSLID_USERNAME = Cypress.env("CYPRESS_TESTING_HSLID_USERNAME");
-    const HSLID_PASSWORD = Cypress.env("CYPRESS_TESTING_HSLID_PASSWORD");
+    const CLIENT_ID = Cypress.env("HSLID_CLIENT_ID");
+    const CLIENT_SECRET = Cypress.env("HSLID_CLIENT_SECRET");
+    const HSLID_USERNAME = Cypress.env("TESTING_HSLID_USERNAME");
+    const HSLID_PASSWORD = Cypress.env("TESTING_HSLID_PASSWORD");
+
+    if (!CLIENT_ID || !CLIENT_SECRET) {
+        throw new Error("Missing HSLID envs");
+    }
 
     const authHeader = `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`;
 
@@ -26,7 +30,10 @@ Cypress.Commands.add("hslLogin", () => {
         }
     };
 
-    cy.request(options).then((response) => {
+    cy.request({ ...options, failOnStatusCode: false }).then((response) => {
+        if (response.status !== 200) {
+            throw new Error(`Auth failed: ${response.status} ${JSON.stringify(response.body)}`);
+        }
         const {access_token} = response.body;
         cy.log(access_token);
         expect(response.status).to.eq(200);
