@@ -14,7 +14,7 @@ module.exports = {
     output: {
         ...baseConfig.output,
         path: path.join(__dirname, "dist"),
-        publicPath: "/",
+        publicPath: "auto",
         filename: "bundle.[contenthash].js",
         assetModuleFilename: "assets/[hash][ext][query]",
         clean: true,
