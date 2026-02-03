@@ -22,8 +22,8 @@ const getZoneIcon = (zone, svgSize) => {
             return <CZone size={svgSize} />;
         case "D":
             return <DZone size={svgSize} />;
-        case "E":
-            return <EZone size={svgSize} />;
+//        case "E":
+//            return <EZone size={svgSize} />;
         default:
             return <div />;
     }
