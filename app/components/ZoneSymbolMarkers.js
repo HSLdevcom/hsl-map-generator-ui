@@ -5,7 +5,7 @@ import AZone from "../icons/icon-Zone-A";
 import BZone from "../icons/icon-Zone-B";
 import CZone from "../icons/icon-Zone-C";
 import DZone from "../icons/icon-Zone-D";
-import EZone from "../icons/icon-Zone-E";
+// import EZone from "../icons/icon-Zone-E";
 import {
     mapSelectionToBbox,
     bboxDiameterInMeters,
@@ -22,8 +22,8 @@ const getZoneIcon = (zone, svgSize) => {
             return <CZone size={svgSize} />;
         case "D":
             return <DZone size={svgSize} />;
-//        case "E":
-//            return <EZone size={svgSize} />;
+        // case "E":
+        // return <EZone size={svgSize} />;
         default:
             return <div />;
     }
