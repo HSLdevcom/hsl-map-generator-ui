@@ -1,9 +1,0 @@
-{
-    "viewportWidth": 1200,
-    "viewportHeight": 1300,
-    "baseUrl": "https://dev.kartat.hsl.fi/kartta",
-    "apiUrl": "https://dev.kartat.hsl.fi/routemap-api",
-    "numTestsKeptInMemory": 1,
-    "projectId": "rax4es",
-    "video": true
-}

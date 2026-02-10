@@ -1,53 +1,72 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const baseConfig = require("./webpack.config.base");
 
-const config = {
-    bail: true,
-
+module.exports = {
     ...baseConfig,
 
+    mode: "production",
     devtool: "source-map",
+    bail: true,
 
-    entry: "./app/index",
+    entry: baseConfig.entry,
 
     output: {
-        ...baseConfig.output
+        ...baseConfig.output,
+        path: path.join(__dirname, "dist"),
+        publicPath: "auto",
+        filename: "bundle.[contenthash].js",
+        assetModuleFilename: "assets/[hash][ext][query]",
+        clean: true,
     },
 
     module: {
         ...baseConfig.module,
-
-        loaders: [
-            ...baseConfig.module.loaders,
+        rules: [
+            ...baseConfig.module.rules,
 
             {
-                test: /(node_modules.+|\.global)\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+                test: /\.css$/,
+                include: /node_modules/,
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
             },
 
             {
-                test: /^((?!(node_modules|\.global)).)*\.css$/,
-                loader: ExtractTextPlugin.extract(
-                    "style-loader",
-                    "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
-                )
-            }
-        ]
+                test: /\.css$/,
+                include: path.resolve(__dirname, "app"),
+                exclude: /\.global\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            esModule: false,
+                            modules: {
+                                localIdentName: "[name]__[local]___[hash:base64:5]",
+                            },
+                            importLoaders: 1,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.global\.css$/,
+                include: path.resolve(__dirname, "app"),
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+        ],  
     },
 
     plugins: [
         ...baseConfig.plugins,
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                screw_ie8: true,
-                warnings: false
-            }
+        new MiniCssExtractPlugin({
+            filename: "style.[contenthash].css",
         }),
-        new ExtractTextPlugin("style.css", {allChunks: true})
-    ]
-};
+    ],  
 
-module.exports = config;
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
+    },
+};
