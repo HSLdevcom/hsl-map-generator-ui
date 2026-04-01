@@ -9,8 +9,7 @@ import AdvancedRouteMapOptions from "../containers/AdvancedRouteMapOptions";
 import {PointStatus} from "../reducers/publisherRequests";
 import {listModalStyles} from "../utils/ui-utils";
 
-// const ZONE_SYMBOLS = [{value: "A"}, {value: "B"}, {value: "C"}, {value: "D"}, {value: "E"}];
-const ZONE_SYMBOLS = [{value: "A"}, {value: "B"}, {value: "C"}, {value: "D"}];
+const ZONE_SYMBOLS = [{value: "A"}, {value: "B"}, {value: "C"}, {value: "D"}, {value: "E"}];
 
 export default class RouteMapConfigurator extends Component {
     constructor(props) {
