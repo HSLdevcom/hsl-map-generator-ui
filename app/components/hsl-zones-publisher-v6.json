@@ -60,6 +60,16 @@
                     [24.543216, 60.11093]
                 ]
             }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Zone": "E"
+            },
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            }
         }
     ]
 }
