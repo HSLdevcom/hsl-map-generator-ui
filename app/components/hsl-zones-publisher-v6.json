@@ -68,7 +68,7 @@
             },
             "geometry": {
                 "type": "MultiPoint",
-                "coordinates": [25.02, 60.53]
+                "coordinates": [[25.02, 60.53]]
             }
         }
     ]
