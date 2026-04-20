@@ -31,6 +31,11 @@ const MapComponent = ({
     }, []);
 
     useEffect(() => {
+        if (!map) return;
+        map.setStyle(style);
+    }, [map, style]);
+
+    useEffect(() => {
         if (!map) {
             return () => {};
         }
@@ -50,7 +55,8 @@ const MapComponent = ({
             map.off("zoomend", onChange);
             map.off("moveend", onChange);
         };
-    }, [map]);
+    }, [map, updateViewport]);
+
     return (
         <div ref={mapContainerRef} style={{width: "100%", height: "100%"}}>
             <SelectionMarker
