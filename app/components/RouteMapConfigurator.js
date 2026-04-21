@@ -13,8 +13,8 @@ const ZONE_SYMBOLS = [
     {value: "A"},
     {value: "B"},
     {value: "C"},
-    {value: "D"}
-    // {value: "E"}
+    {value: "D"},
+    {value: "E"}
 ];
 
 export default class RouteMapConfigurator extends Component {
