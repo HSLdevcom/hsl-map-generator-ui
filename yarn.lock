@@ -4259,11 +4259,11 @@ hpack.js@^2.1.6:
     readable-stream "^2.0.1"
     wbuf "^1.1.0"
 
-hsl-map-style@hsldevcom/hsl-map-style#zone_e_map_styles:
+hsl-map-style@hsldevcom/hsl-map-style#master:
   version "1.2.3"
-  resolved "https://codeload.github.com/hsldevcom/hsl-map-style/tar.gz/15c993d80e1af9d80bb07566b75a48c9bef15001"
+  resolved "https://codeload.github.com/hsldevcom/hsl-map-style/tar.gz/2e247924dde50d3e229ab5cb2650d0d2a56ff66e"
   dependencies:
-    lodash "^4.18.1"
+    lodash "^4.17.4"
 
 html-minifier-terser@^6.0.2:
   version "6.1.0"
@@ -5169,7 +5169,7 @@ lodash.restparam@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
   integrity sha512-L4/arjjuq4noiUJpt3yS6KIKDtJwNe2fIYgMqyYYKoeIfV1iEqvPwhCx23o+R9dzouGihDAPN1dTIRWa7zk8tw==
 
-lodash@4.18.1, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.23, lodash@^4.18.1:
+lodash@4.18.1, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.23, lodash@^4.17.4, lodash@^4.18.1:
   version "4.18.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.18.1.tgz#ff2b66c1f6326d59513de2407bf881439812771c"
   integrity sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==
