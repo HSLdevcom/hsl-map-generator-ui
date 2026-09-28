@@ -27,7 +27,11 @@ module.exports = {
         "no-underscore-dangle": 0
     },
     settings: {
-        "import/resolver": "webpack"
+        "import/resolver": {
+            webpack: {
+                config: "webpack.config.base.js"
+            }
+        }
     },
     env: {
         browser: true,

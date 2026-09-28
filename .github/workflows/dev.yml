@@ -11,8 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - name: Cypress run
         uses: cypress-io/github-action@v4
+        with:
+          # Electron is deprecated and its headless build cannot initialize WebGL
+          browser: chrome
         env:
           CYPRESS_BASE_URL: https://dev.kartat.hsl.fi/kartta
           CYPRESS_API_URL: https://dev.kartat.hsl.fi/routemap-api

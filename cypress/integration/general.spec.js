@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 
 // TODO: Envify here and cypress.json properly
-const API_URL = Cypress.env("API_URL");
+const API_URL = Cypress.expose("API_URL");
 const TEST_PREFIX = "CY-TEST";
 
 describe("Basic functionalities", () => {
