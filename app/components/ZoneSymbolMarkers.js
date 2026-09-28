@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import {createRoot} from "react-dom/client";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
 import AZone from "../icons/icon-Zone-A";
 import BZone from "../icons/icon-Zone-B";
 import CZone from "../icons/icon-Zone-C";

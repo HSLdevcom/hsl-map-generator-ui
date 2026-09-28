@@ -2,6 +2,10 @@ import React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
 import webfontloader from "webfontloader";
+import * as maplibregl from "maplibre-gl";
+import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs";
+
+maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 import App from "./containers/App";
 import Home from "./components/Home";
