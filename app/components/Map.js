@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, {useEffect, useRef, useState} from "react";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
 import ZoneSymbolMarkers from "./ZoneSymbolMarkers";
 import SelectionMarker from "../containers/SelectionMarker";
 

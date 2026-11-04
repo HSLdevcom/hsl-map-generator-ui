@@ -1,5 +1,5 @@
 import {useEffect, useRef} from "react";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
 import {List} from "immutable";
 import {mapSelectionToBbox} from "../utils/geom-utils";
 import styles from "./Marker.css";
